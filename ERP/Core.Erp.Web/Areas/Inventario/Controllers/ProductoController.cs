@@ -75,6 +75,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+
+
+
+
+        public ActionResult CmbSucursal_det()
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            return PartialView("_CmbSucursal_det", model);
+        }
+        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
         #endregion
 
         #region vistas
@@ -671,18 +689,31 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew_pro_x_bod([ModelBinder(typeof(DevExpressEditorsBinder))] in_producto_x_tb_bodega_Info info_det )
         {
-            in_Producto_Info model = new in_Producto_Info();
-            if (ModelState.IsValid)
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            if(info_det!= null)
             {
+                var suc = bus_sucursal.get_info(IdEmpresa, info_det.IdSucursal);
+                var bod = bus_bodega.get_info(IdEmpresa, info_det.IdSucursal, info_det.IdBodega);
+                if(suc!= null && bod !=null)
+                {
+                    info_det.IdSucursal = info_det.IdSucursal;
+                    info_det.Su_Descripcion = info_det.Su_Descripcion;
+                    info_det.IdBodega = info_det.IdBodega;
+                }
+            }
+            if (ModelState.IsValid)
+           /* {
                 in_producto_x_tb_bodega_Info info_pro_x_bode = new in_producto_x_tb_bodega_Info();
                 info_pro_x_bode.IdSucursal = info_det.IdSucursal;
+                info_pro_x_bode.Su_Descripcion = info_det.Su_Descripcion;
                 info_pro_x_bode.IdBodega = info_det.IdBodega;
                 var lista = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                if(lista.Where(v=>v.IdSucursal==info_det.IdSucursal && v.IdBodega==info_det.IdBodega).Count()==0)                  
                 Lis_in_producto_x_tb_bodega_Info_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            }
+            }*/
             cargar_combos_detalle();
+            in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_producto_por_bodega", model);
         }
@@ -1099,6 +1130,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List<in_producto_x_tb_bodega_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdProducto = info_det.IdProducto;
+            info_det.IdBodega = info_det.IdBodega;
+            info_det.IdSucursal = info_det.IdSucursal;
+            info_det.Stock_minimo = info_det.Stock_minimo;
             list.Add(info_det);
         }
 

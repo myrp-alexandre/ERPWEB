@@ -9832,6 +9832,7 @@
     <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_CmbCuenta_PlanCta.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_Recosteo_x_Sucursal.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_MovimientosSinCont.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_CmbSucursal_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
