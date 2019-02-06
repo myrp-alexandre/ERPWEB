@@ -48,6 +48,8 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.lbl_empleado = new DevExpress.XtraReports.UI.XRLabel();
+            this.SubRpte_Egresos = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubRpteIngresos = new DevExpress.XtraReports.UI.XRSubreport();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -79,8 +81,6 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.SubRpte_Egresos = new DevExpress.XtraReports.UI.XRSubreport();
-            this.SubRpteIngresos = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
@@ -113,12 +113,12 @@
             // 
             // xrTable1
             // 
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(175.3146F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(116F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(575.6855F, 62.41665F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(635.0001F, 62.41665F);
             this.xrTable1.StylePriority.UsePadding = false;
             // 
             // xrTableRow1
@@ -173,7 +173,7 @@
             // xrTable7
             // 
             this.xrTable7.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(505.9999F, 23.625F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(505.9999F, 31.625F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
@@ -202,7 +202,7 @@
             // 
             // lb_liquido
             // 
-            this.lb_liquido.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.lb_liquido.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.lb_liquido.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.lb_liquido.Name = "lb_liquido";
             this.lb_liquido.SnapLineMargin = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -216,7 +216,7 @@
             // xrTable9
             // 
             this.xrTable9.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 23.625F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 31.625F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
@@ -274,11 +274,27 @@
             this.lbl_empleado.Text = "lbl_empleado";
             this.lbl_empleado.Visible = false;
             // 
+            // SubRpte_Egresos
+            // 
+            this.SubRpte_Egresos.LocationFloat = new DevExpress.Utils.PointFloat(416F, 135.5833F);
+            this.SubRpte_Egresos.Name = "SubRpte_Egresos";
+            this.SubRpte_Egresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Egresos();
+            this.SubRpte_Egresos.SizeF = new System.Drawing.SizeF(325F, 20F);
+            this.SubRpte_Egresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpte_Egresos_BeforePrint);
+            // 
+            // SubRpteIngresos
+            // 
+            this.SubRpteIngresos.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 135.5833F);
+            this.SubRpteIngresos.Name = "SubRpteIngresos";
+            this.SubRpteIngresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Ingresos();
+            this.SubRpteIngresos.SizeF = new System.Drawing.SizeF(325F, 20F);
+            this.SubRpteIngresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpteIngresos_BeforePrint);
+            // 
             // lbl_imagen
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(175.3146F, 62.41665F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(116F, 62.41665F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable3
@@ -426,7 +442,7 @@
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7,
             this.xrTable9});
-            this.GroupFooter2.HeightF = 48.625F;
+            this.GroupFooter2.HeightF = 56.625F;
             this.GroupFooter2.Name = "GroupFooter2";
             // 
             // p_IdEmpresa
@@ -475,7 +491,7 @@
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable6});
-            this.ReportFooter.HeightF = 20F;
+            this.ReportFooter.HeightF = 39.00001F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable6
@@ -484,11 +500,11 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1.000061F, 0F);
+            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1.000023F, 19.00001F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
-            this.xrTable6.SizeF = new System.Drawing.SizeF(749.9998F, 20F);
+            this.xrTable6.SizeF = new System.Drawing.SizeF(750F, 20F);
             this.xrTable6.StylePriority.UseBorders = false;
             this.xrTable6.StylePriority.UseFont = false;
             this.xrTable6.StylePriority.UseTextAlignment = false;
@@ -557,22 +573,6 @@
             this.xrPageInfo2.StylePriority.UseTextAlignment = false;
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
-            // 
-            // SubRpte_Egresos
-            // 
-            this.SubRpte_Egresos.LocationFloat = new DevExpress.Utils.PointFloat(416F, 135.5833F);
-            this.SubRpte_Egresos.Name = "SubRpte_Egresos";
-            this.SubRpte_Egresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Egresos();
-            this.SubRpte_Egresos.SizeF = new System.Drawing.SizeF(325F, 20F);
-            this.SubRpte_Egresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpte_Egresos_BeforePrint);
-            // 
-            // SubRpteIngresos
-            // 
-            this.SubRpteIngresos.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 135.5833F);
-            this.SubRpteIngresos.Name = "SubRpteIngresos";
-            this.SubRpteIngresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Ingresos();
-            this.SubRpteIngresos.SizeF = new System.Drawing.SizeF(325F, 20F);
-            this.SubRpteIngresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpteIngresos_BeforePrint);
             // 
             // ROL_002_RolPago
             // 
@@ -654,6 +654,7 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
         private DevExpress.XtraReports.UI.XRLabel lbl_empleado;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable6;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow13;
@@ -661,6 +662,5 @@
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
     }
 }

@@ -39,7 +39,6 @@ namespace Core.Erp.Web.Reportes.RRHH
 
             ROL_002_Bus bus_rpt = new ROL_002_Bus();
             List<ROL_002_Info> lst_rpt = bus_rpt.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
-
             this.DataSource = lst_rpt;
         }
 
