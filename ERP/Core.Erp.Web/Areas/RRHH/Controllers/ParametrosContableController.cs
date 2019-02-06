@@ -97,9 +97,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            if (model.lst_cta_x_rubros.Count() == 0)
+            if (model.lst_cta_x_rubros.Count() != 0)
             {
-                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
+                model.lst_cta_x_rubros = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
                 lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
 
             }
@@ -187,17 +187,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
     {
         public List<ro_Config_Param_contable_Info> get_list_cta_rubros()
         {
-            if (HttpContext.Current.Session["lst_cta_rubro"] == null)
+            if (HttpContext.Current.Session["ro_Config_Param_contable_Info"] == null)
             {
                 List<ro_Config_Param_contable_Info> list = new List<ro_Config_Param_contable_Info>();
 
-                HttpContext.Current.Session["lst_cta_rubro"] = list;
+                HttpContext.Current.Session["ro_Config_Param_contable_Info"] = list;
             }
-            return (List<ro_Config_Param_contable_Info>)HttpContext.Current.Session["lst_cta_rubro"];
+            return (List<ro_Config_Param_contable_Info>)HttpContext.Current.Session["ro_Config_Param_contable_Info"];
         }
         public void set_list_cta_rubros(List<ro_Config_Param_contable_Info> list)
         {
-            HttpContext.Current.Session["lst_cta_rubro"] = list;
+            HttpContext.Current.Session["ro_Config_Param_contable_Info"] = list;
         }      
         public void UpdateRow_cta_rubros(ro_Config_Param_contable_Info info_det)
         {

@@ -28,10 +28,40 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
 
-        settings.Columns.Add("DescripcionDiv", "División").Width = Unit.Percentage(15);
-        settings.Columns.Add("DescripcionArea", "Área").Width = Unit.Percentage(15);
-        settings.Columns.Add("de_descripcion", "Departamento").Width = Unit.Percentage(15);
-        settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DescripcionDiv";
+            column.Caption = "División";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DescripcionArea";
+            column.Caption = "Área";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "de_descripcion";
+            column.Caption = "Departamento";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ru_descripcion";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
@@ -76,6 +106,8 @@
                 p.DataSource = ViewBag.lst_catalogo;
                 p.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
     });
     if (ViewData["EditError"] != null)
