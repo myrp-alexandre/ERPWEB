@@ -621,6 +621,87 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public bool ReContabilizar(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi, string Observacion, DateTime Fecha)
+        {
+            try
+            {
+                EliminarContabilizacion(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+                Contabilizar(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, Observacion, Fecha);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool EliminarContabilizacion(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
+        {
+            Entities_inventario db_i = new Entities_inventario();
+            Entities_contabilidad db_ct = new Entities_contabilidad();
+            try
+            {
+                var lst_det = db_i.in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdMovi_inven_tipo == IdMovi_inven_tipo && q.IdNumMovi == IdNumMovi).ToList();
+                if (lst_det.Where(q => q.IdNumMovi_inv == null).Count() == 0)
+                {
+                    var PK_movi = new
+                    {
+                        lst_det.First().IdEmpresa_inv,
+                        lst_det.First().IdSucursal_inv,
+                        lst_det.First().IdBodega_inv,
+                        lst_det.First().IdMovi_inven_tipo_inv,
+                        lst_det.First().IdNumMovi_inv
+                    };
+
+                    #region Obtengo relacion contable y la elimino
+                    var PK_conta = db_i.in_movi_inve_x_ct_cbteCble.Where(q => q.IdEmpresa == PK_movi.IdEmpresa_inv
+                                    && q.IdSucursal == PK_movi.IdSucursal_inv
+                                    && q.IdBodega == PK_movi.IdBodega_inv
+                                    && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
+                                    && q.IdNumMovi == PK_movi.IdNumMovi_inv
+                                    ).FirstOrDefault();
+
+                    #endregion
+                    if (PK_conta != null)
+                    {
+                        #region Elimino diario contable
+                        var lst_rel_det = db_i.in_movi_inve_detalle_x_ct_cbtecble_det.Where(q => q.IdEmpresa_inv == PK_movi.IdEmpresa_inv
+                                    && q.IdSucursal_inv == PK_movi.IdSucursal_inv
+                                    && q.IdBodega_inv == PK_movi.IdBodega_inv
+                                    && q.IdMovi_inven_tipo_inv == PK_movi.IdMovi_inven_tipo_inv
+                                    && q.IdNumMovi_inv == PK_movi.IdNumMovi_inv).ToList();
+                        db_i.in_movi_inve_detalle_x_ct_cbtecble_det.RemoveRange(lst_rel_det);
+
+                        var lst_conta = db_ct.ct_cbtecble_det.Where(q => q.IdEmpresa == PK_conta.IdEmpresa_ct
+                                        && q.IdTipoCbte == PK_conta.IdTipoCbte
+                                        && q.IdCbteCble == PK_conta.IdCbteCble
+                                        ).ToList();
+                        db_ct.ct_cbtecble_det.RemoveRange(lst_conta);
+
+                        var Conta = db_ct.ct_cbtecble.Where(q => q.IdEmpresa == PK_conta.IdEmpresa
+                                    && q.IdTipoCbte == PK_conta.IdTipoCbte
+                                    && q.IdCbteCble == PK_conta.IdCbteCble
+                                    ).FirstOrDefault();
+                        db_ct.ct_cbtecble.Remove(Conta);
+                        #endregion
+                        db_i.in_movi_inve_x_ct_cbteCble.Remove(PK_conta);
+                    }
+                }
+
+                db_i.SaveChanges();
+                db_ct.SaveChanges();
+
+                db_ct.Dispose();
+                db_i.Dispose();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                db_ct.Dispose();
+                db_i.Dispose();
+                throw;
+            }
+        }
 
         public List<in_Ing_Egr_Inven_Info> BuscarMovimientos(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, string TipoMovimiento)
         {

@@ -367,6 +367,7 @@
     function ContabilizarMovimientos() {
         var datos = {
             IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',

@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.25" PointY="18.375" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
-        <EntityTypeShape EntityType="Model_contabilidad.vwct_RevisionContableFacturas" Width="1.5" PointX="12.375" PointY="3.75" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_plancta" Width="1.5" PointX="3.75" PointY="22.75" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_grupocble" />
@@ -41,6 +40,7 @@
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
         <EntityTypeShape EntityType="Model_contabilidad.vwct_cbtecble" Width="1.5" PointX="12.375" PointY="8.75" />
         <EntityTypeShape EntityType="Model_contabilidad.vwct_cbtecble_det" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_contabilidad.vwct_RevisionContableFacturas" Width="1.5" PointX="12.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
