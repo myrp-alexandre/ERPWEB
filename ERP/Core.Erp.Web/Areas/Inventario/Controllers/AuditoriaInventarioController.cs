@@ -164,23 +164,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ContabilizarMovimientos(string Ids = "")
+        public JsonResult ContabilizarMovimientos(string Ids = "", decimal IdTransaccionSession = 0)
         {
-            string[] array = Ids.Split(',');
-            var IdEmpresa = 0;
-            var IdSucursal = 0;
-            var IdMovi_inven_tipo = 0;
-            var IdNumMovi = 0;
-
-            foreach (var item in array)
+            var lista = ListaIngEgrInvMovimientos.get_list(IdTransaccionSession);
+            string[] arreglo = Ids.Split(',');
+            foreach (var item in arreglo)
             {
-                IdEmpresa = Convert.ToInt32(item.Substring(0, 2));
-                IdSucursal = Convert.ToInt32(item.Substring(2, 2));
-                IdMovi_inven_tipo = Convert.ToInt32(item.Substring(4, 4));
-                IdNumMovi = Convert.ToInt32(item.Substring(8, 8));
+                var movi = lista.Where(q => q.CodMoviInven == item).FirstOrDefault();
+                if(movi != null)
+                {
+                    bus_ing_egr_Inven.ReContabilizar(movi.IdEmpresa, movi.IdSucursal, movi.IdMovi_inven_tipo, movi.IdNumMovi, movi.cm_observacion, movi.cm_fecha);
+                }
             }
 
-            return Json(array, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
 

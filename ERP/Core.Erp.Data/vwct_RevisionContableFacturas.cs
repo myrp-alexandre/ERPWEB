@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public string Nombres { get; set; }
         public string Referencia { get; set; }
         public System.DateTime vt_fecha { get; set; }
-        public Nullable<double> TotalModulo { get; set; }
+        public decimal TotalModulo { get; set; }
         public double TotalContabilidad { get; set; }
         public Nullable<double> Diferencia { get; set; }
     }

@@ -85,7 +85,17 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-
+        public bool ReContabilizar(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi, string Observacion, DateTime Fecha)
+        {
+            try
+            {
+                return odata.ReContabilizar(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, Observacion, Fecha);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<in_Ing_Egr_Inven_Info> BuscarMovimientos(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, string TipoMovimiento)
         {
             try

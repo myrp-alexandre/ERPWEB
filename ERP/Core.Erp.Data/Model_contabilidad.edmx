@@ -417,6 +417,7 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <PropertyRef Name="ct_IdCbteCble" />
             <PropertyRef Name="Nombres" />
             <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="TotalModulo" />
             <PropertyRef Name="TotalContabilidad" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
@@ -429,7 +430,7 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Referencia" Type="varchar" MaxLength="49" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
-          <Property Name="TotalModulo" Type="float" />
+          <Property Name="TotalModulo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalContabilidad" Type="float" Nullable="false" />
           <Property Name="Diferencia" Type="float" />
         </EntityType>
@@ -1133,7 +1134,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_parametro" EntitySet="ct_parametro" />
           </AssociationSet>
-          <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Model_contabilidad.vwct_RevisionContableFacturas" />
           <EntitySet Name="ct_plancta" EntityType="Model_contabilidad.ct_plancta" />
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
             <End Role="ct_plancta" EntitySet="ct_plancta" />
@@ -1183,6 +1183,7 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           </AssociationSet>
           <EntitySet Name="vwct_cbtecble" EntityType="Model_contabilidad.vwct_cbtecble" />
           <EntitySet Name="vwct_cbtecble_det" EntityType="Model_contabilidad.vwct_cbtecble_det" />
+          <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Model_contabilidad.vwct_RevisionContableFacturas" />
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1246,33 +1247,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwct_RevisionContableFacturas">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="ct_IdEmpresa" />
-            <PropertyRef Name="ct_IdTipoCbte" />
-            <PropertyRef Name="ct_IdCbteCble" />
-            <PropertyRef Name="Nombres" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="TotalContabilidad" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="ct_IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Referencia" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TotalModulo" Type="Double" />
-          <Property Name="TotalContabilidad" Type="Double" Nullable="false" />
-          <Property Name="Diferencia" Type="Double" />
-        </EntityType>
         <EntityType Name="ct_plancta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1557,6 +1531,34 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <Property Name="dc_para_conciliar" Type="Boolean" />
           <Property Name="IdGrupoPresupuesto" Type="Int32" />
           <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="523" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwct_RevisionContableFacturas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="TotalModulo" />
+            <PropertyRef Name="TotalContabilidad" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ct_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalModulo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalContabilidad" Type="Double" Nullable="false" />
+          <Property Name="Diferencia" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1865,25 +1867,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwct_RevisionContableFacturas">
-            <EntityTypeMapping TypeName="Model_contabilidad.vwct_RevisionContableFacturas">
-              <MappingFragment StoreEntitySet="vwct_RevisionContableFacturas">
-                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
-                <ScalarProperty Name="TotalContabilidad" ColumnName="TotalContabilidad" />
-                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
-                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
-                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ct_plancta">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta">
               <MappingFragment StoreEntitySet="ct_plancta">
@@ -1975,6 +1958,25 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
                 <ScalarProperty Name="secuencia" ColumnName="secuencia" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_RevisionContableFacturas">
+            <EntityTypeMapping TypeName="Model_contabilidad.vwct_RevisionContableFacturas">
+              <MappingFragment StoreEntitySet="vwct_RevisionContableFacturas">
+                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
+                <ScalarProperty Name="TotalContabilidad" ColumnName="TotalContabilidad" />
+                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
