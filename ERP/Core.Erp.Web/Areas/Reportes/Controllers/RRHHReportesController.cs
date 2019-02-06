@@ -164,6 +164,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult ROL_002(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdSucursal = 0)
         {
+
             ROL_002_Rpt model = new ROL_002_Rpt();
             #region Cargo diseño desde base
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -181,6 +182,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdPeriodo.Value = IdPeriodo;
             model.p_IdSucursal.Value = IdSucursal;
             model.empresa = SessionFixed.NomEmpresa;
+
             return View(model);
         }
         public ActionResult ROL_003(decimal IdEmpleado=0, decimal IdNovedad=0)
