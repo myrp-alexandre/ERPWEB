@@ -25,7 +25,9 @@ namespace Core.Erp.Info.Inventario
         public double Stock_minimo { get; set; }
         public int Secuencia { get; set; }
 
-
+        #region Campos que no existen
+        public string Su_Descripcion { get; set; }
+        #endregion
 
     }
 }
