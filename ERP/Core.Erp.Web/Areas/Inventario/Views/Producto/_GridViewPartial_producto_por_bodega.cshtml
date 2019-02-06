@@ -35,23 +35,9 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdSucursal";
-        //    column.Caption = "Sucursal";
-        //    column.Width = Unit.Percentage(35);
-        //    column.EditorProperties().ComboBox(p =>
-        //    {
-        //        p.Columns.Add("IdSucursal", "ID").Width = Unit.Percentage(20);
-        //        p.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(70);
-        //        p.ValueField = "IdSucursal";
-        //        p.ValueType = typeof(int);
-        //        p.DataSource = ViewBag.lst_susucrsal;
-        //        p.Width = Unit.Percentage(100);
-        //    });
-        //});
         settings.Columns.Add(column =>
         {
+            column.FieldName = "Su_Descripcion";
             column.Caption = "Sucursal";
             column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -73,14 +59,17 @@
             column.FieldName = "IdBodega";
             column.Caption = "Bodega";
             column.Width = Unit.Percentage(35);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("IdBodega", "ID").Width = Unit.Percentage(20);
-                p.Columns.Add("bo_Descripcion", "Bodega").Width = Unit.Percentage(70);
+                p.CallbackRouteValues = new { Controller = "Producto", Action = "CargarBodega", Area = "Inventario" };
+                p.TextField = "bo_Descripcion";
                 p.ValueField = "IdBodega";
                 p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_bodega;
-                p.Width = Unit.Percentage(100);
+                //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
+                p.BindList(ViewBag.lst_bodega);
+                p.ClientSideEvents.BeginCallback = "BodegaComboBox_BeginCallback";
+                p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
         settings.Columns.Add(column =>
@@ -90,6 +79,8 @@
             column.Width = Unit.Percentage(15);
 
         });
+
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

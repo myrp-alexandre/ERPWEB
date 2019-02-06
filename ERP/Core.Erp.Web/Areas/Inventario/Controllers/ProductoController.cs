@@ -249,7 +249,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 model.list_producto_x_fa_NivelDescuento = bus_producto_x_NivelDescuento.get_list(model.IdEmpresa, model.IdProducto);
                 model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
-                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
+                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(model.IdEmpresa, model.IdProducto);
                 Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
                 list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
@@ -342,7 +342,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 model.list_producto_x_fa_NivelDescuento = bus_producto_x_NivelDescuento.get_list(model.IdEmpresa, model.IdProducto);
                 model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
-                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
+                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(model.IdEmpresa, model.IdProducto);
                 Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
                 list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
@@ -565,6 +565,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_NivelDescuento = lst_NivelDescuento;
 
         }
+
+        public ActionResult CargarBodega()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);        
+            int IdSucursal = Request.Params["IdSucursal"] != null ? Convert.ToInt32(Request.Params["IdSucursal"].ToString()) : 0;
+            return GridViewExtension.GetComboBoxCallbackResult(p =>
+            {
+                p.TextField = "bo_Descripcion";
+                p.ValueField = "IdBodega";
+                p.ValueType = typeof(int);
+                p.BindList(bus_bodega.get_list(IdEmpresa, IdSucursal, false));
+            });
+        }
         #endregion
 
         #region funciones del detalle producto por nivel de descuento
@@ -698,12 +711,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if(suc!= null && bod !=null)
                 {
                     info_det.IdSucursal = info_det.IdSucursal;
-                    info_det.Su_Descripcion = info_det.Su_Descripcion;
+                    info_det.Su_Descripcion = suc.Su_Descripcion;
                     info_det.IdBodega = info_det.IdBodega;
+                    info_det.bo_Descripcion = bod.bo_Descripcion;
                 }
             }
             if (ModelState.IsValid)
-           /* {
+            {
                 in_producto_x_tb_bodega_Info info_pro_x_bode = new in_producto_x_tb_bodega_Info();
                 info_pro_x_bode.IdSucursal = info_det.IdSucursal;
                 info_pro_x_bode.Su_Descripcion = info_det.Su_Descripcion;
@@ -711,7 +725,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 var lista = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 Lis_in_producto_x_tb_bodega_Info_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            }*/
+            }
             cargar_combos_detalle();
             in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -722,9 +736,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult EditingUpdate_pro_x_bod([ModelBinder(typeof(DevExpressEditorsBinder))] in_producto_x_tb_bodega_Info info_det)
         {
             in_Producto_Info model = new in_Producto_Info();
-            if (ModelState.IsValid)
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
+            if (info_det != null)
             {
-               
+                var suc = bus_sucursal.get_info(IdEmpresa, info_det.IdSucursal);
+                var bod = bus_bodega.get_info(IdEmpresa, info_det.IdSucursal, info_det.IdBodega);
+                if (suc != null && bod != null)
+                {
+                    info_det.IdSucursal = info_det.IdSucursal;
+                    info_det.Su_Descripcion = suc.Su_Descripcion;
+                    info_det.IdBodega = info_det.IdBodega;
+                    info_det.bo_Descripcion = bod.bo_Descripcion;
+                }
+            }
+
+            if (ModelState.IsValid)
+            {               
                 Lis_in_producto_x_tb_bodega_Info_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -1128,13 +1156,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public void AddRow(in_producto_x_tb_bodega_Info info_det, decimal IdTransaccionSession)
         {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+
             List<in_producto_x_tb_bodega_Info> list = get_list(IdTransaccionSession);
-            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdProducto = info_det.IdProducto;
-            info_det.IdBodega = info_det.IdBodega;
-            info_det.IdSucursal = info_det.IdSucursal;
-            info_det.Stock_minimo = info_det.Stock_minimo;
-            list.Add(info_det);
+
+            if (list.Where(q => q.IdSucursal == info_det.IdSucursal && q.IdBodega == info_det.IdBodega).Count() == 0)
+            {
+                info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+                info_det.IdProducto = info_det.IdProducto;
+                info_det.IdBodega = info_det.IdBodega;
+                info_det.IdSucursal = info_det.IdSucursal;
+                info_det.Stock_minimo = info_det.Stock_minimo;
+                info_det.Su_Descripcion = info_det.Su_Descripcion;
+                info_det.bo_Descripcion = info_det.bo_Descripcion;
+
+                list.Add(info_det);
+            }
+
         }
 
         public void UpdateRow(in_producto_x_tb_bodega_Info info_det, decimal IdTransaccionSession)
@@ -1144,6 +1183,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             edited_info.IdBodega = info_det.IdBodega;
             edited_info.IdSucursal = info_det.IdSucursal;
             edited_info.Stock_minimo = info_det.Stock_minimo;
+            edited_info.Su_Descripcion = info_det.Su_Descripcion;
+            edited_info.bo_Descripcion = info_det.bo_Descripcion;
 
         }
 

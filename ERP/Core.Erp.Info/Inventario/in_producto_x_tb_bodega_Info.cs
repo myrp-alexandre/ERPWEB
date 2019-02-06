@@ -27,6 +27,7 @@ namespace Core.Erp.Info.Inventario
 
         #region Campos que no existen
         public string Su_Descripcion { get; set; }
+        public string bo_Descripcion { get; set; }
         #endregion
 
     }

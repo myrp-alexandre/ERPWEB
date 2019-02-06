@@ -477,4 +477,10 @@
         }
     }
 
+    function OnSelectedSucursalChanged() {
+        GridViewPartial_producto_por_bodega.GetEditor("IdBodega").PerformCallback();
+    }
+    function BodegaComboBox_BeginCallback(s, e) {
+        e.customArgs["IdSucursal"] = IdSucursal.GetValue();
+    }
 </script>
