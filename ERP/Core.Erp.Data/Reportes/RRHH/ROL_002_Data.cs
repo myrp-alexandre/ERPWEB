@@ -120,7 +120,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_apellido = q.pe_apellido,
                                  pe_nombre = q.pe_nombre,
                                  ru_tipo = q.ru_tipo,
-                                 IdRubro = q.IdRubro
+                                 IdRubro = q.IdRubro,
+                                 NomNomina = q.NomNomina,
+                                 NomNominaTipo = q.NomNominaTipo
 
                              }).ToList();
                 }

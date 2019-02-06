@@ -25,6 +25,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         ro_nomina_tipo_Bus bus_tiponomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodo_x_nominas = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
+
+        tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
+
         #region Metodos ComboBox bajo demanda empleado
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_RRHH()
@@ -161,6 +165,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ROL_002(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdSucursal = 0)
         {
             ROL_002_Rpt model = new ROL_002_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ROL_002");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdNomina.Value = IdNomina_Tipo;
             model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
