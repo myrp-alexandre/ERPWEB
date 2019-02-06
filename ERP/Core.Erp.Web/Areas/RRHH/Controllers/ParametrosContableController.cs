@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model = bus_parametros.get_info(IdEmpresa);
            
             model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
+
             lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
             cargar_combos();
             cargar_combos_detalle();
@@ -81,11 +82,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
+            var lst= lst_cta_rubro.get_list_cta_rubros();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            if (model.lst_cta_x_rubros.Count() == 0)
+            if (model.lst_cta_x_rubros.Count() != 0)
             {
                 model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
-                lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
 
             }
             cargar_combos_detalle();

@@ -25,8 +25,11 @@ namespace Core.Erp.Data.RRHH
                         v.Secuencia = secuencia++;
                         if (v.IdCtaCble == null | v.IdCtaCble == "")
                             v.IdCtaCble = v.rub_ctacon;
-
-                        });
+                        if (v.IdCtaCble == "NULL")
+                            v.IdCtaCble = "";
+                        if (v.IdCtaCble_Haber == "NULL")
+                            v.IdCtaCble_Haber = "";
+                    });
 
                 }
 
