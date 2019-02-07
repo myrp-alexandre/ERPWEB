@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Reportes.Banco
                 List<BAN_009_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = Context.SPBAN_009(IdEmpresa, IdBanco, fecha_ini, fecha_fin).Select(q => new BAN_009_Info
+                    Lista = Context.SPBAN_009(IdEmpresa, IdBanco, fecha_fin).Select(q => new BAN_009_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdBanco = q.IdBanco,
