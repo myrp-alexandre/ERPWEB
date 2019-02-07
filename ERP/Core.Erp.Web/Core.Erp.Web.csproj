@@ -9833,6 +9833,7 @@
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_Recosteo_x_Sucursal.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_MovimientosSinCont.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_CmbSucursal_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_rubros_x_sueldo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
