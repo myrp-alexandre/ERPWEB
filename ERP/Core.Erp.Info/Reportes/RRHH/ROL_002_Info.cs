@@ -38,5 +38,9 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public string mes_nom { get; set; }
         public double TotalPagar { get; set; }
+
+
+        public string NomNomina { get; set; }
+        public string NomNominaTipo { get; set; }
     }
 }

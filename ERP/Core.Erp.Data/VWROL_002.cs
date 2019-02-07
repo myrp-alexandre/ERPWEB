@@ -38,5 +38,7 @@ namespace Core.Erp.Data
         public string de_descripcion { get; set; }
         public string Area { get; set; }
         public string IdRubro { get; set; }
+        public string NomNomina { get; set; }
+        public string NomNominaTipo { get; set; }
     }
 }

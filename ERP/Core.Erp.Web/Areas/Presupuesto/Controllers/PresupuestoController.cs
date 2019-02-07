@@ -44,7 +44,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
-                IdPeriodo = info_periodo.IdPeriodo
+                IdPeriodo = info_periodo == null ? 0 : info_periodo.IdPeriodo
             };
 
             cargar_filtros(model.IdEmpresa);

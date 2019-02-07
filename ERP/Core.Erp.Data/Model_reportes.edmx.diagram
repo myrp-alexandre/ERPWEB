@@ -83,7 +83,6 @@
         <EntityTypeShape EntityType="Model_reportes.VWCXC_007_Cobros" Width="1.5" PointX="23.375" PointY="29.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCXC_007_Diario" Width="1.5" PointX="31.375" PointY="19.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_020" Width="1.5" PointX="0.75" PointY="27.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_002" Width="1.5" PointX="15.375" PointY="36.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_003" Width="1.5" PointX="37.375" PointY="6.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="37.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_013" Width="1.5" PointX="25.375" PointY="37.75" />
@@ -91,6 +90,7 @@
         <EntityTypeShape EntityType="Model_reportes.VWINV_015" Width="1.5" PointX="29.375" PointY="36.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_014" Width="1.5" PointX="37.375" PointY="27.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_021" Width="1.5" PointX="17.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_002" Width="1.5" PointX="15.375" PointY="36.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

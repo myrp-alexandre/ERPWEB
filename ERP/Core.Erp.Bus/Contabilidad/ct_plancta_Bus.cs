@@ -22,11 +22,11 @@ namespace Core.Erp.Bus.Contabilidad
                 throw;
             }
         }
-        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarCtaMovimiento)
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarCtaPadre)
         {
             try
             {
-                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarCtaMovimiento);
+                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarCtaPadre);
             }
             catch (Exception)
             {
