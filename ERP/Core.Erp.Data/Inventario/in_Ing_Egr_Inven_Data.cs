@@ -508,12 +508,45 @@ namespace Core.Erp.Data.Inventario
                 if (lst.Count == 0)
                     return false;
 
+                var lst_g = (from q in lst
+                             group q by new
+                             {
+                                 q.IdCtaCble_Motivo,
+                                 q.IdCtaCtble_Costo,
+                                 q.IdCtaCtble_Inve,
+                                 q.P_IdCtaCble_transitoria_transf_inven,
+                                 q.EsTransferencia,
 
-                List<in_movi_inve_detalle_x_ct_cbtecble_det> lst_rel = new List<in_movi_inve_detalle_x_ct_cbtecble_det>();
+                                 q.IdEmpresa_inv,
+                                 q.IdSucursal_inv,
+                                 q.IdMovi_inven_tipo_inv,
+                                 q.IdBodega_inv,
+                                 q.IdNumMovi_inv
+                             }
+                            into g
+                             select new
+                             {
+                                 g.Key.IdCtaCble_Motivo,
+                                 g.Key.IdCtaCtble_Costo,
+                                 g.Key.IdCtaCtble_Inve,
+                                 g.Key.P_IdCtaCble_transitoria_transf_inven,
+                                 g.Key.EsTransferencia,
+
+                                 g.Key.IdEmpresa_inv,
+                                 g.Key.IdSucursal_inv,
+                                 g.Key.IdMovi_inven_tipo_inv,
+                                 g.Key.IdBodega_inv,
+                                 g.Key.IdNumMovi_inv,
+
+                                 Valor = g.Sum(q=>q.Valor)
+                             }).ToList();
+
+                List < in_movi_inve_detalle_x_ct_cbtecble_det > lst_rel = new List<in_movi_inve_detalle_x_ct_cbtecble_det>();
                 List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
                 int Secuencia = 1;
-                foreach (var item in lst)
+                foreach (var item in lst_g)
                 {
+                    /*
                     lst_rel.Add(new in_movi_inve_detalle_x_ct_cbtecble_det
                     {
                         IdEmpresa_inv = (int)item.IdEmpresa_inv,
@@ -526,7 +559,7 @@ namespace Core.Erp.Data.Inventario
                         secuencia_ct = Secuencia,
                         Secuencial_reg = Secuencia,
                         observacion = ""
-                    });
+                    });*/
                     //Debe
                     lst_ct.Add(new ct_cbtecble_det_Info
                     {
@@ -534,6 +567,7 @@ namespace Core.Erp.Data.Inventario
                         IdCtaCble = tipo_movi.cm_tipo_movi == "+" ? item.IdCtaCtble_Inve : ( (bool)item.EsTransferencia ? item.P_IdCtaCble_transitoria_transf_inven : (string.IsNullOrEmpty(item.IdCtaCble_Motivo) ? item.IdCtaCtble_Costo : item.IdCtaCble_Motivo)),
                         dc_Valor = Math.Abs(Math.Round(item.Valor, 2, MidpointRounding.AwayFromZero))
                     });
+                    /*
                     lst_rel.Add(new in_movi_inve_detalle_x_ct_cbtecble_det
                     {
                         IdEmpresa_inv = (int)item.IdEmpresa_inv,
@@ -546,7 +580,7 @@ namespace Core.Erp.Data.Inventario
                         secuencia_ct = Secuencia,
                         Secuencial_reg = Secuencia,
                         observacion = ""
-                    });
+                    });*/
                     //Haber
                     lst_ct.Add(new ct_cbtecble_det_Info
                     {
@@ -584,28 +618,30 @@ namespace Core.Erp.Data.Inventario
 
                 if (odata_ct.guardarDB(diario))
                 {
+                    /*
                     lst_rel.ForEach(q =>
                     {
                         q.IdEmpresa_ct = diario.IdEmpresa;
                         q.IdTipoCbte_ct = diario.IdTipoCbte;
                         q.IdCbteCble_ct = diario.IdCbteCble;
                     });
-                    var First = lst_rel.First();
+                    */
+                    var First = lst_g.First();
                     db_i.in_movi_inve_x_ct_cbteCble.Add(new in_movi_inve_x_ct_cbteCble
                     {
-                        IdEmpresa = First.IdEmpresa_inv,
-                        IdSucursal = First.IdSucursal_inv,
-                        IdBodega = First.IdBodega_inv,
-                        IdMovi_inven_tipo = First.IdMovi_inven_tipo_inv,
-                        IdNumMovi = First.IdNumMovi_inv,
+                        IdEmpresa = (int)First.IdEmpresa_inv,
+                        IdSucursal = (int)First.IdSucursal_inv,
+                        IdBodega = (int)First.IdBodega_inv,
+                        IdMovi_inven_tipo = (int)First.IdMovi_inven_tipo_inv,
+                        IdNumMovi = (decimal)First.IdNumMovi_inv,
 
-                        IdEmpresa_ct = First.IdEmpresa_ct,
-                        IdTipoCbte = First.IdTipoCbte_ct,
-                        IdCbteCble = First.IdCbteCble_ct,
+                        IdEmpresa_ct = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
 
                         Observacion = ""
                     });
-                    db_i.in_movi_inve_detalle_x_ct_cbtecble_det.AddRange(lst_rel);
+                    //db_i.in_movi_inve_detalle_x_ct_cbtecble_det.AddRange(lst_rel);
                     db_i.SaveChanges();
                 }
 
