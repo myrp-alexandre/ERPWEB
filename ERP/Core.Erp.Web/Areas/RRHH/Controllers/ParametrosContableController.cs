@@ -200,7 +200,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingUpdate_provisiones([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Config_Param_contable_Info info_det)
         {
             if (ModelState.IsValid)
-                lst_cta_rubro.UpdateRow_cta_rubros(info_det);
+                lst_cta_rubro.UpdateRow_cta_rubros_x_provision(info_det);
             ro_Parametros_Info model = new ro_Parametros_Info();
             model.lst_cta_x_provisiones = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == true).ToList();
             cargar_combos_detalle();
@@ -262,14 +262,40 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_Config_Param_contable_Info edited_info = get_list_cta_rubros().Where(m => m.Secuencia == info_det.Secuencia).First();
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (cta != null)
+            {
                 info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
-            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+                edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            }
 
             edited_info.IdCtaCble = info_det.IdCtaCble;
-            edited_info.IdCtaCble_Haber = info_det.IdCtaCble_Haber;
+            edited_info.IdCtaCble_prov_credito = info_det.IdCtaCble_prov_credito;
             edited_info.DebCre = info_det.DebCre;
         }
 
+        public void UpdateRow_cta_rubros_x_provision(ro_Config_Param_contable_Info info_det)
+        {
+            var ls = get_list_cta_rubros();
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            ro_Config_Param_contable_Info edited_info = get_list_cta_rubros().Where(m => m.Secuencia == info_det.Secuencia).First();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_prov_credito);
+            if (cta != null)
+            {
+                info_det.pc_Cuenta_prov_credito = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+
+            var cta_deb = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_prov_debito);
+            if (cta_deb != null)
+            {
+                info_det.pc_Cuenta_prov_debito = cta_deb.IdCtaCble + " - " + cta_deb.pc_Cuenta;
+            }
+
+            edited_info.IdCtaCble_prov_credito = info_det.IdCtaCble_prov_credito;
+            edited_info.IdCtaCble_prov_debito = info_det.IdCtaCble_prov_debito;
+
+            edited_info.pc_Cuenta_prov_credito = info_det.pc_Cuenta_prov_credito;
+            edited_info.pc_Cuenta_prov_debito = info_det.pc_Cuenta_prov_debito;
+        }
 
 
         public List<ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info> get_list_sueldo_x_pagar()

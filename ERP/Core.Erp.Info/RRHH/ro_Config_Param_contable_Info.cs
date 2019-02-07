@@ -16,7 +16,9 @@ namespace Core.Erp.Info.RRHH
         public string IdCtaCble { get; set; }
         public string IdCentroCosto { get; set; }
         public string DebCre { get; set; }
-        public string IdCtaCble_Haber { get; set; }
+        public string IdCtaCble_prov_credito { get; set; }
+        public string IdCtaCble_prov_debito { get; set; }
+
         public int Secuencia { get; set; }
 
 
@@ -45,6 +47,9 @@ namespace Core.Erp.Info.RRHH
         public Nullable<bool> rub_antici { get; set; }
         public string rub_gencon { get; set; }
         public string pc_Cuenta { get; set; }
+
+        public string pc_Cuenta_prov_credito { get; set; }
+        public string pc_Cuenta_prov_debito { get; set; }
         public Nullable<bool> rub_Contabiliza_x_empleado { get; set; }
 
 

@@ -27,8 +27,8 @@ namespace Core.Erp.Data.RRHH
                             v.IdCtaCble = v.rub_ctacon;
                         if (v.IdCtaCble == "NULL")
                             v.IdCtaCble = "";
-                        if (v.IdCtaCble_Haber == "NULL")
-                            v.IdCtaCble_Haber = "";
+                        if (v.IdCtaCble_prov_credito == "NULL")
+                            v.IdCtaCble_prov_credito = "";
                     });
 
                 }
@@ -90,7 +90,7 @@ namespace Core.Erp.Data.RRHH
                         IdCentroCosto = Entity.IdCentroCosto,
                         DebCre = Entity.DebCre,
                         IdCtaCble = Entity.IdCtaCble,
-                        IdCtaCble_Haber = Entity.IdCtaCble_Haber
+                        IdCtaCble_prov_credito = Entity.IdCtaCble_Haber
                     };
                 }
 
@@ -120,7 +120,7 @@ namespace Core.Erp.Data.RRHH
                              IdCentroCosto = item.IdCentroCosto,
                              DebCre = item.DebCre,
                              IdCtaCble = (item.IdCtaCble)==""?null: item.IdCtaCble,
-                             IdCtaCble_Haber = (item.IdCtaCble_Haber) == "" ? null : item.IdCtaCble_Haber
+                             IdCtaCble_Haber = (item.IdCtaCble_prov_credito) == "" ? null : item.IdCtaCble_prov_credito
                          };
                         Context. ro_Config_Param_contable.Add(Entity);
                     }
