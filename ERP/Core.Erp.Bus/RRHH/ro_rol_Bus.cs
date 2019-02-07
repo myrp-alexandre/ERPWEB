@@ -328,7 +328,7 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info2.secuencia = secuencia;
                         oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info2.IdTipoCbte = 1;
-                        oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_Haber; 
+                        oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_prov_credito; 
                         oct_cbtecble_det_Info2.dc_Valor = valorTotal * -1;
                         oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal ;
 

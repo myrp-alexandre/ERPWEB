@@ -20,6 +20,9 @@
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -32,7 +35,7 @@
         {
             column.FieldName = "DescripcionDiv";
             column.Caption = "División";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -40,7 +43,7 @@
         {
             column.FieldName = "DescripcionArea";
             column.Caption = "Área";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -57,32 +60,17 @@
         {
             column.FieldName = "ru_descripcion";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdCtaCble";
-        //    column.Caption = "Cta. contable";
-        //    column.Width = Unit.Percentage(35);
-        //    column.EditorProperties().ComboBox(p =>
-        //    {
-        //        p.Columns.Add("IdCtaCble", "Cta. contable").Width = Unit.Percentage(20);
-        //        p.Columns.Add("pc_Cuenta", "cta. contable").Width = Unit.Percentage(70);
-        //        p.ValueField = "IdCtaCble";
-        //        p.ValueType = typeof(string);
-        //        p.DataSource = ViewBag.lst_cta_contable;
-        //        p.Width = Unit.Percentage(100);
-        //    });
-        //});
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";
             column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(35);
+            column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>

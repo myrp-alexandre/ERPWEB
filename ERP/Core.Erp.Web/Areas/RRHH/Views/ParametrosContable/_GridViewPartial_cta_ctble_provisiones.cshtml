@@ -10,6 +10,11 @@
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsBehavior.ConfirmDelete = true;
 
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;
 
@@ -32,7 +37,7 @@
         {
             column.FieldName = "DescripcionDiv";
             column.Caption = "División";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -40,43 +45,26 @@
         {
             column.FieldName = "DescripcionArea";
             column.Caption = "Área";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "de_descripcion";
+            column.Caption = "Departamento";
             column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "de_descripcion";
-            column.Caption = "Departamento";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "ru_descripcion";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
-
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "de_descripcion";
-            column.Caption = "Departamento";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "ru_descripcion";
-            column.Caption = "Rubro";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -85,21 +73,21 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pc_Cuenta";
+            column.FieldName = "pc_Cuenta_prov_credito";
             column.Caption = "Cuenta Credito";
-            column.Width = Unit.Percentage(35);
+            column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
+            column.FieldName = "IdCtaCble_prov_credito";
             column.Caption = "Cuenta";
             column.Width = Unit.Percentage(35);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbCuenta_provisiones_credito", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                Html.RenderPartial("_CmbCuenta_provisiones_credito", DataBinder.Eval(c.DataItem, "IdCtaCble_prov_credito"));
             });
         });
 
@@ -107,21 +95,21 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pc_Cuenta";
-            column.Caption = "Cuenta Credito";
-            column.Width = Unit.Percentage(35);
+            column.FieldName = "pc_Cuenta_prov_debito";
+            column.Caption = "Cuenta Debito";
+            column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
+            column.FieldName = "IdCtaCble_prov_debito";
             column.Caption = "Cuenta";
             column.Width = Unit.Percentage(35);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbCuenta_provisiones_debito", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                Html.RenderPartial("_CmbCuenta_provisiones_debito", DataBinder.Eval(c.DataItem, "IdCtaCble_prov_debito"));
             });
         });
 
