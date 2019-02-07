@@ -613,68 +613,66 @@ namespace Core.Erp.Data.Inventario
                         "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto;
                     int row = Context.Database.ExecuteSqlCommand(SQL);
                     */
-                    var lst_det_producto_x_bodega_costo_hist = Context.in_producto_x_tb_bodega_Costo_Historico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == info.IdProducto).ToList();
-                    var lst_det_producto_x_bodega = Context.in_producto_x_tb_bodega.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == info.IdProducto).ToList();
+                    //var lst_det_producto_x_bodega_costo_hist = Context.in_producto_x_tb_bodega_Costo_Historico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == info.IdProducto).ToList();
 
-                    List<in_producto_x_tb_bodega_Info> Lista_Eliminar = new List<in_producto_x_tb_bodega_Info>();
+                    #region Producto por bodega
+                    info.lst_producto_x_bodega = info.lst_producto_x_bodega ?? new List<in_producto_x_tb_bodega_Info>();
 
-                    foreach (var item in lst_det_producto_x_bodega_costo_hist )
+                    #region Eliminar
+                    var lst_det_producto_x_bodega = Context.in_producto_x_tb_bodega.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == info.IdProducto).Select(q => new in_producto_x_tb_bodega_Info
                     {
-                        foreach (var item2 in info.lst_producto_x_bodega)
-                        {
-                            if (item.IdEmpresa == item2.IdEmpresa && item.IdSucursal == item2.IdSucursal &&
-                                info.IdProducto == item2.IdProducto && item.IdBodega == item2.IdBodega)
-                            {
-                                var prod_x_bos = Context.in_producto_x_tb_bodega.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdSucursal == item.IdSucursal && v.IdBodega == item.IdBodega && v.IdProducto == info.IdProducto).FirstOrDefault();
-                                if (prod_x_bos == null)
-                                {
-                                    Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
-                                    {
-                                        IdEmpresa = info.IdEmpresa,
-                                        IdProducto = info.IdProducto,
-                                        IdSucursal = item.IdSucursal,
-                                        IdBodega = item.IdBodega,
-                                        Stock_minimo = item2.Stock_minimo
-                                    });
-                                }
-                                else
-                                {
-                                    prod_x_bos.Stock_minimo = item2.Stock_minimo;
-                                }
-                            }
-                            else
-                            {
-                                var info_eliminar = Context.in_producto_x_tb_bodega.Where(v => v.IdEmpresa == item2.IdEmpresa && v.IdSucursal == item2.IdSucursal && v.IdBodega == item2.IdBodega && v.IdProducto == info.IdProducto).FirstOrDefault();
+                        IdEmpresa = q.IdEmpresa,
+                        IdSucursal = q.IdSucursal,
+                        IdBodega = q.IdBodega,
+                        IdProducto = q.IdProducto,
+                        Eliminar = true
+                    }).ToList();
 
-                                Context.in_producto_x_tb_bodega.Remove(info_eliminar);
-                            }
+                    foreach (var ant in lst_det_producto_x_bodega)
+                    {
+                        if (info.lst_producto_x_bodega.Where(q => q.IdEmpresa == ant.IdEmpresa && q.IdSucursal == ant.IdSucursal && q.IdBodega == ant.IdBodega && q.IdProducto == ant.IdProducto).Count() > 0)
+                        {
+                            ant.Eliminar = false;
                         }
                     }
-                    //Context.in_producto_x_tb_bodega.RemoveRange(Lista_Eliminar);
 
-                    //foreach (var item in info.lst_producto_x_bodega)
-                    //{
-                    //    var prod_x_bos = Context.in_producto_x_tb_bodega.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdSucursal == item.IdSucursal && v.IdBodega == item.IdBodega && v.IdProducto == info.IdProducto).FirstOrDefault();
-                    //    if (prod_x_bos == null)
-                    //    {
-                    //        Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
-                    //        {
-                    //            IdEmpresa = info.IdEmpresa,
-                    //            IdProducto = info.IdProducto,
-                    //            IdSucursal = item.IdSucursal,
-                    //            IdBodega = item.IdBodega,
-                    //            Stock_minimo = item.Stock_minimo
-                    //        });
-                    //    }else
-                    //    {
-                    //        prod_x_bos.Stock_minimo = item.Stock_minimo;
-                    //    }
-                    //}
+                    foreach (var item in lst_det_producto_x_bodega.Where(q => q.Eliminar == true).ToList())
+                    {
+                        if (Context.in_producto_x_tb_bodega_Costo_Historico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega && q.IdProducto == item.IdProducto).Count() == 0)
+                        {
+                            var pb = Context.in_producto_x_tb_bodega.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega && q.IdProducto == item.IdProducto).FirstOrDefault();
+                            if (pb != null)
+                                Context.in_producto_x_tb_bodega.Remove(pb);
+                        }
+                    }
+                    #endregion
+                    #region Agregar o modificar
+                    foreach (var item in info.lst_producto_x_bodega)
+                    {
+                        var prod_x_bos = lst_det_producto_x_bodega.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdSucursal == item.IdSucursal && v.IdBodega == item.IdBodega && v.IdProducto == info.IdProducto).FirstOrDefault();
+                        if (prod_x_bos == null)
+                        {
+                            Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdProducto = info.IdProducto,
+                                IdSucursal = item.IdSucursal,
+                                IdBodega = item.IdBodega,
+                                Stock_minimo = item.Stock_minimo
+                            });
+                        }
+                        else
+                        {
+                            prod_x_bos.Stock_minimo = item.Stock_minimo;
+                        }
+                    }
+                    #endregion
+                    #endregion
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
