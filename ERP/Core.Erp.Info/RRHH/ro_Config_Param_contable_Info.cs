@@ -44,6 +44,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<int> rub_grupo { get; set; }
         public Nullable<bool> rub_antici { get; set; }
         public string rub_gencon { get; set; }
+        public string pc_Cuenta { get; set; }
         public Nullable<bool> rub_Contabiliza_x_empleado { get; set; }
 
 

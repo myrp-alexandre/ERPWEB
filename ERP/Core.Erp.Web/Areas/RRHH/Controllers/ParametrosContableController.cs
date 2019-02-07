@@ -10,6 +10,8 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -29,15 +31,34 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
         cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
         int IdEmpresa = 0;
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+
         #endregion
+
+
+        #region Metodos ComboBox bajo demanda
+
+        public ActionResult CmbCuenta_rubros_x_sueldo()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_rubros_x_sueldo", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         public ActionResult Index()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             ro_Parametros_Info model = new ro_Parametros_Info();
             model = bus_parametros.get_info(IdEmpresa);
-           
-            model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
 
             lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
             cargar_combos();
@@ -45,7 +66,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index( ro_Parametros_Info model)
+        public ActionResult Index(ro_Parametros_Info model)
         {
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
@@ -64,12 +85,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-       
+
         private void cargar_combos()
         {
-            IdEmpresa =Convert.ToInt32(SessionFixed.IdEmpresa);
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa,false);
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
@@ -82,7 +103,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
-            var lst= lst_cta_rubro.get_list_cta_rubros();
+            var lst = lst_cta_rubro.get_list_cta_rubros();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() != 0)
             {
@@ -100,9 +121,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() != 0)
             {
-                model.lst_cta_x_rubros = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
-                lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
-
+                model.lst_cta_x_provisiones = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
             }
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_provisiones", model);
@@ -124,14 +143,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_cta_contable_sueldo_pagar", model);
         }
 
-        
+
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.lst_catalogo = bus_catalogo.get_list_x_tipo(34);
-            ViewBag.lst_cta_contable = bus_cuenta.get_list(IdEmpresa, false,true);
+            ViewBag.lst_cta_contable = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);      
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Config_Param_contable_Info info_det)
@@ -199,10 +218,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void set_list_cta_rubros(List<ro_Config_Param_contable_Info> list)
         {
             HttpContext.Current.Session["ro_Config_Param_contable_Info"] = list;
-        }      
+        }
         public void UpdateRow_cta_rubros(ro_Config_Param_contable_Info info_det)
         {
+            var ls = get_list_cta_rubros();
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             ro_Config_Param_contable_Info edited_info = get_list_cta_rubros().Where(m => m.Secuencia == info_det.Secuencia).First();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            if (cta != null)
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.IdCtaCble_Haber = info_det.IdCtaCble_Haber;
             edited_info.DebCre = info_det.DebCre;

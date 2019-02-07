@@ -9835,6 +9835,7 @@
     <Content Include="Areas\Inventario\Views\Producto\_CmbSucursal_det.cshtml" />
     <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Cta_Impuesto.cshtml" />
     <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Vta_Impuesto.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_rubros_x_sueldo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
