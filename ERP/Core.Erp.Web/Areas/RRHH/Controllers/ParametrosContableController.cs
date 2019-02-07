@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
 
-        #region Metodos ComboBox bajo demanda
+        #region Metodos ComboBox bajo demanda sueldo por rubros
 
         public ActionResult CmbCuenta_rubros_x_sueldo()
         {
@@ -52,6 +52,41 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
+        #region Metodos ComboBox bajo demanda provisiones debito
+
+        public ActionResult CmbCuenta_provisiones_debito()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_provisiones_debito", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_prov_debito(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_prov_debito(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda provisiones credito
+
+        public ActionResult CmbCuenta_provisiones_credito()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_provisiones_credito", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_prov_credito(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_prov_credito(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
 
         public ActionResult Index()
         {
