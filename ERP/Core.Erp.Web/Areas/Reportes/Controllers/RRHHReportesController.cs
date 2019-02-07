@@ -854,8 +854,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_024_Rpt reporte = new ROL_024_Rpt();
             reporte.p_IdEmpresa.Value = model.IdEmpresa;
             reporte.p_IdSucursal.Value = model.IdSucursal;
-            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
-            reporte.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            reporte.p_IdNominaTipo.Value = model.IdNomina;
+            reporte.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
             reporte.p_IdPeriodo.Value = model.IdPeriodo;
             reporte.usuario = SessionFixed.IdUsuario.ToString();
             reporte.empresa = SessionFixed.NomEmpresa.ToString();
@@ -868,8 +868,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_024_Rpt reporte = new ROL_024_Rpt();
             reporte.p_IdEmpresa.Value = model.IdEmpresa;
             reporte.p_IdSucursal.Value = model.IdSucursal;
-            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
-            reporte.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            reporte.p_IdNominaTipo.Value = model.IdNomina;
+            reporte.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
             reporte.p_IdPeriodo.Value = model.IdPeriodo;
             cargar_combos(model.IdEmpresa);
             reporte.usuario = SessionFixed.IdUsuario.ToString();
