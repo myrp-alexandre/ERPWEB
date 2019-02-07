@@ -258,7 +258,7 @@
             this.xrTable3});
             this.GroupHeader2.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("NombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader2.HeightF = 155.5833F;
+            this.GroupHeader2.HeightF = 170.1667F;
             this.GroupHeader2.Name = "GroupHeader2";
             // 
             // lbl_empleado
@@ -491,7 +491,7 @@
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable6});
-            this.ReportFooter.HeightF = 39.00001F;
+            this.ReportFooter.HeightF = 58.00001F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable6
@@ -500,7 +500,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1.000023F, 19.00001F);
+            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1.000023F, 38.00001F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});

@@ -166,16 +166,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
 
             ROL_002_Rpt model = new ROL_002_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ROL_002");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                model.LoadLayout(RootReporte);
-            }
-            #endregion
-
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdNomina.Value = IdNomina_Tipo;
             model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
