@@ -9833,9 +9833,9 @@
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_Recosteo_x_Sucursal.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_MovimientosSinCont.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_CmbSucursal_det.cshtml" />
-    <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Cta_Impuesto.cshtml" />
-    <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Vta_Impuesto.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_rubros_x_sueldo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_debito.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_credito.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
