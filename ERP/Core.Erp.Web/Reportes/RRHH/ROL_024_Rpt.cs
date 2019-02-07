@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -34,6 +35,15 @@ namespace Core.Erp.Web.Reportes.RRHH
             List<ROL_024_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdSucursal, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
             this.DataSource = lst_rpt;
 
+            double total = Math.Round(lst_rpt.Sum(q => q.Valor),2,MidpointRounding.AwayFromZero);
+            double V1 = Math.Round(total * (20.60 / 100),2,MidpointRounding.AwayFromZero);
+            double V2 = Math.Round(total * (0.005), 2, MidpointRounding.AwayFromZero);
+            double V3 = Math.Round(V1+(V2*2),2,MidpointRounding.AwayFromZero);
+
+            lbl_uno.Text = V1.ToString();
+            lbl_dos.Text = V2.ToString();
+            lbl_dos_dos.Text = V2.ToString();
+            lbl_tres.Text = V3.ToString();
         }
     }
 }
