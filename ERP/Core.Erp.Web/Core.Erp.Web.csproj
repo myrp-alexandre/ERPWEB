@@ -9843,6 +9843,7 @@
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_debito.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_credito.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_024.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_CmbEmpleado_CtaCon.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

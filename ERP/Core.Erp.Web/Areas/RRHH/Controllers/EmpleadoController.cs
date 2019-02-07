@@ -19,13 +19,14 @@ using System.Globalization;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.General.Controllers;
 using static Core.Erp.Web.Areas.RRHH.Controllers.UploadControlSettings_Importacion;
+using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoController : Controller
     {
         #region variables
-
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         int IdEmpresa = 0;
         Bus.RRHH.ro_empleado_Bus bus_empleado = new Bus.RRHH.ro_empleado_Bus();
         tb_Catalogo_Bus bus_catalogo_general = new tb_Catalogo_Bus();
@@ -190,7 +191,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
 
+
+        #region Metodos ComboBox bajo cuenta contable
+
+        public ActionResult CmbEmpleado_CtaCon()
+        {
+            ro_empleado_Info model = new ro_empleado_Info();
+            return PartialView("_CmbEmpleado_CtaCon", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
+
+        #endregion
+
 
         private void cargar_combos_detalle()
         {
