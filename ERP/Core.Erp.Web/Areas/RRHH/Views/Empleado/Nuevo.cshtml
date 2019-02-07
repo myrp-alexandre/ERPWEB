@@ -17,7 +17,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-
+de
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -411,6 +411,18 @@
 
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdCtaCble_Emplea">Cuenta contable*</label>
+                                @Html.Partial("_CmbEmpleado_CtaCon", Model.IdCtaCble_Emplea)
+                                @Html.ValidationMessageFor(q => q.IdCtaCble_Emplea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_info_nomina">
@@ -512,19 +524,15 @@
                                 @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        @*<div class="col-md-2">
+                      
+
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="es_AcreditaHorasExtras"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.Tiene_ingresos_compartidos, settings =>
-                           {
-                               settings.Name = "Tiene_ingresos_compartidos";
-                               settings.Text = "Tiene ingresos compartidos";
-
-                           }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger" })
+                                <label for="IdDepartamento">Cuenta contable*</label>
+                                @Html.Partial("_CmbEmpleado_CtaCon", Model.IdCtaCble_Emplea)
+                                @Html.ValidationMessageFor(q => q.IdCtaCble_Emplea, "", new { @class = "text-danger" })
                             </div>
-                        </div>*@
-
+                        </div>
 
 
                         <div class="col-md-2">
@@ -539,6 +547,11 @@
                                 @Html.ValidationMessageFor(q => q.GozaMasDeQuinceDiasVaciones, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+
+
+
+
                         <div id="Divdias">
                             <div class="col-md-2">
                                 <div class="form-group">

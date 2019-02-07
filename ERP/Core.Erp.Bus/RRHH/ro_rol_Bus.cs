@@ -239,10 +239,10 @@ namespace Core.Erp.Bus.RRHH
                 {
                    
                     double valorTotal = 0;
-                    valorTotal = oListro_rol_detalle_Info.Where(v => /*v.IdDivision == Convert.ToInt32(item.IdDivision)*/
-                                                                //&& v.IdArea == item.IdArea
-                                                                //&& v.IdDepartamento == item.IdDepartamento
-                                                                 v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
+                                                                && v.IdArea == item.IdArea
+                                                                && v.IdDepartamento == item.IdDepartamento
+                                                                && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
                     if (valorTotal < 0)
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
@@ -305,10 +305,10 @@ namespace Core.Erp.Bus.RRHH
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
                     double valorTotal = 0;
-                    valorTotal = oListro_rol_detalle_Info.Where(v => /*v.IdDivision == Convert.ToInt32(item.IdDivision)*/
-                                                                     //&& v.IdArea == item.IdArea
-                                                                     //&& v.IdDepartamento == item.IdDepartamento
-                                                                  v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
+                                                                     && v.IdArea == item.IdArea
+                                                                     && v.IdDepartamento == item.IdDepartamento
+                                                                     && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
                     if (valorTotal > 0)
                     {
                         valorTotal = Math.Round(valorTotal);
