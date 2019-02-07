@@ -1259,6 +1259,12 @@
     <Compile Include="Reportes\RRHH\ROL_023_Rpt.Designer.cs">
       <DependentUpon>ROL_023_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_024_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_024_Rpt.Designer.cs">
+      <DependentUpon>ROL_024_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

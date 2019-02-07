@@ -27,7 +27,7 @@ namespace Core.Erp.Data
         public string IdUnidadMedida_sinConversion { get; set; }
         public string Descripcion { get; set; }
         public double dm_cantidad_sinConversion { get; set; }
-        public Nullable<double> mv_costo_sinConversion { get; set; }
+        public double mv_costo_sinConversion { get; set; }
         public string cm_observacion { get; set; }
         public string CodMoviInven { get; set; }
         public System.DateTime cm_fecha { get; set; }
