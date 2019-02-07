@@ -77,24 +77,7 @@
                 p.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "DebCre";
-            column.Caption = "Credito/Debito";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("CodCatalogo", "Código").Width = Unit.Percentage(20);
-                p.Columns.Add("ca_descripcion", "Descripción").Width = Unit.Percentage(70);
-                p.ValueField = "CodCatalogo";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_catalogo;
-                p.Width = Unit.Percentage(100);
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
-
+      
 
     });
     if (ViewData["EditError"] != null){

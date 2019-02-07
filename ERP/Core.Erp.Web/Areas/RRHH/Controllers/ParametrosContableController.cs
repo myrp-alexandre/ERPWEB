@@ -36,8 +36,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             ro_Parametros_Info model = new ro_Parametros_Info();
             model = bus_parametros.get_info(IdEmpresa);
-           
-            model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
 
             lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
             cargar_combos();
@@ -45,7 +43,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index( ro_Parametros_Info model)
+        public ActionResult Index(ro_Parametros_Info model)
         {
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
@@ -64,12 +62,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-       
+
         private void cargar_combos()
         {
-            IdEmpresa =Convert.ToInt32(SessionFixed.IdEmpresa);
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa,false);
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
@@ -82,7 +80,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
-            var lst= lst_cta_rubro.get_list_cta_rubros();
+            var lst = lst_cta_rubro.get_list_cta_rubros();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() != 0)
             {
@@ -100,9 +98,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() != 0)
             {
-                model.lst_cta_x_rubros = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
-                lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
-
+                model.lst_cta_x_provisiones = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
             }
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_provisiones", model);
@@ -124,14 +120,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_cta_contable_sueldo_pagar", model);
         }
 
-        
+
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.lst_catalogo = bus_catalogo.get_list_x_tipo(34);
-            ViewBag.lst_cta_contable = bus_cuenta.get_list(IdEmpresa, false,true);
+            ViewBag.lst_cta_contable = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);      
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Config_Param_contable_Info info_det)
@@ -199,9 +195,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void set_list_cta_rubros(List<ro_Config_Param_contable_Info> list)
         {
             HttpContext.Current.Session["ro_Config_Param_contable_Info"] = list;
-        }      
+        }
         public void UpdateRow_cta_rubros(ro_Config_Param_contable_Info info_det)
         {
+            var ls = get_list_cta_rubros();
+
             ro_Config_Param_contable_Info edited_info = get_list_cta_rubros().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.IdCtaCble_Haber = info_det.IdCtaCble_Haber;
