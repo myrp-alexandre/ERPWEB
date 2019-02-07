@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_024_Data
     {
-        public List<ROL_024_Info> GetList(int IdEmpresa,  int IdNominaTipo, int IdNominaTipoLiqui, decimal IdPeriodo)
+        public List<ROL_024_Info> GetList(int IdEmpresa, int IdSucursal, int IdNominaTipo, int IdNominaTipoLiqui, decimal IdPeriodo)
         {
             try
             {
@@ -18,6 +18,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = Context.VWROL_024.Where(q => q.IdEmpresa == IdEmpresa
                     && q.IdNominaTipo == IdNominaTipo
+                    && q.IdSucursal == IdSucursal
                     && q.IdNominaTipoLiqui == IdNominaTipoLiqui
                     && q.IdPeriodo == IdPeriodo
                     ).Select(q => new ROL_024_Info

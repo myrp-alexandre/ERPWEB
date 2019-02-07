@@ -9842,6 +9842,7 @@
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_rubros_x_sueldo.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_debito.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_provisiones_credito.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_024.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -10345,6 +10346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_023_Rpt.resx">
       <DependentUpon>ROL_023_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_024_Rpt.resx">
+      <DependentUpon>ROL_024_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

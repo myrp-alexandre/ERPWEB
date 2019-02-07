@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Reportes.RRHH
     public class ROL_024_Bus
     {
         ROL_024_Data odata = new ROL_024_Data();
-        public List<ROL_024_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, decimal IdPeriodo)
+        public List<ROL_024_Info> GetList(int IdEmpresa, int IdSucursal, int IdNominaTipo, int IdNominaTipoLiqui, decimal IdPeriodo)
         {
             try
             {
-                return odata.GetList(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
+                return odata.GetList(IdEmpresa, IdSucursal, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
             }
             catch (Exception)
             {

@@ -842,5 +842,40 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult ROL_024()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+
+            };
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            ROL_024_Rpt reporte = new ROL_024_Rpt();
+            reporte.p_IdEmpresa.Value = model.IdEmpresa;
+            reporte.p_IdSucursal.Value = model.IdSucursal;
+            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
+            reporte.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            reporte.p_IdPeriodo.Value = model.IdPeriodo;
+            reporte.usuario = SessionFixed.IdUsuario.ToString();
+            reporte.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = reporte;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ROL_024(cl_filtros_Info model)
+        {
+            ROL_024_Rpt reporte = new ROL_024_Rpt();
+            reporte.p_IdEmpresa.Value = model.IdEmpresa;
+            reporte.p_IdSucursal.Value = model.IdSucursal;
+            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
+            reporte.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            reporte.p_IdPeriodo.Value = model.IdPeriodo;
+            cargar_combos(model.IdEmpresa);
+            reporte.usuario = SessionFixed.IdUsuario.ToString();
+            reporte.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = reporte;
+            return View(model);
+        }
     }
 }

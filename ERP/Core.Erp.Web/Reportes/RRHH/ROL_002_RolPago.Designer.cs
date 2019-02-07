@@ -173,7 +173,7 @@
             // xrTable7
             // 
             this.xrTable7.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(505.9999F, 31.625F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(505.9999F, 51.625F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
@@ -216,7 +216,7 @@
             // xrTable9
             // 
             this.xrTable9.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 31.625F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 51.625F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
@@ -442,7 +442,7 @@
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7,
             this.xrTable9});
-            this.GroupFooter2.HeightF = 56.625F;
+            this.GroupFooter2.HeightF = 76.625F;
             this.GroupFooter2.Name = "GroupFooter2";
             // 
             // p_IdEmpresa
