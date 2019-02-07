@@ -126,6 +126,7 @@ namespace Core.Erp.Info.Helps
     }
     public class cl_filtros_banco_Info
     {
+        public int[] IntArray { get; set; }
         public int IdEmpresa { get; set; }
         public int IdBanco { get; set; }
         public decimal? IdPersona { get; set; }
