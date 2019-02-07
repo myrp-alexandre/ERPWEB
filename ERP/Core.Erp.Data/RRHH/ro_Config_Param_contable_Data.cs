@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
 
-                    string sql = " select IdEmpresa,IdDivision,IdArea,IdDepartamento,IdRubro,IdCtaCble,IdCentroCosto,DebCre,IdCtaCble_Haber,0 as Secuencia,rub_nocontab,rub_provision,DescripcionDiv,descripcionArea,de_descripcion,ru_descripcion from vwRo_Division_Area_dep_rubro where IdEmpresa=" + IdEmpresa;
+                    string sql = " select IdEmpresa,IdDivision,IdArea,IdDepartamento,IdRubro,IdCtaCble,IdCentroCosto,DebCre,IdCtaCble_Haber,0 as Secuencia,rub_nocontab,rub_provision,DescripcionDiv,descripcionArea,de_descripcion,ru_descripcion,pc_Cuenta_prov_debito,pc_Cuenta from vwRo_Division_Area_dep_rubro where IdEmpresa=" + IdEmpresa;
                     var result = Context.Database.SqlQuery<ro_Config_Param_contable_Info>(sql).ToList();
                     Lista = result;
                     Lista.ForEach(v =>
@@ -110,7 +110,12 @@ namespace Core.Erp.Data.RRHH
                 {
                     foreach (var item in info)
                     {
-                         ro_Config_Param_contable Entity = new  ro_Config_Param_contable
+
+                        if (item.IdCtaCble == "")
+                            item.IdCtaCble = null;
+                        if (item.IdCtaCble_prov_debito == "")
+                            item.IdCtaCble_prov_debito = null;
+                        ro_Config_Param_contable Entity = new  ro_Config_Param_contable
                         {
                              IdEmpresa = item.IdEmpresa,
                              IdDivision = item.IdDivision,
@@ -119,7 +124,7 @@ namespace Core.Erp.Data.RRHH
                              IdRubro = item.IdRubro,
                              IdCentroCosto = item.IdCentroCosto,
                              DebCre = item.DebCre,
-                             IdCtaCble = (item.IdCtaCble)==""?null: item.IdCtaCble,
+                             IdCtaCble = (item.IdCtaCble)==null?item.IdCtaCble_prov_debito: item.IdCtaCble,
                              IdCtaCble_Haber = (item.IdCtaCble_prov_credito) == "" ? null : item.IdCtaCble_prov_credito
                          };
                         Context. ro_Config_Param_contable.Add(Entity);
