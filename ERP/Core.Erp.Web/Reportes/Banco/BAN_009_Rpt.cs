@@ -67,5 +67,21 @@ namespace Core.Erp.Web.Reportes.Banco
                 e.Cancel = true;
             }
         }
+
+        private void GroupHeader1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupFooter1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
