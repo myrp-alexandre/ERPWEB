@@ -375,7 +375,7 @@ namespace Core.Erp.Data.RRHH
             try
             {
 
-           
+
 
                 ro_Parametros Entity_ro_parametros = Context.ro_Parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
                 cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipo_op == Entity_ro_parametros.IdTipo_op_prestamos).FirstOrDefault();
@@ -387,7 +387,7 @@ namespace Core.Erp.Data.RRHH
                 foreach (var item in Lista)
                 {
 
-                    
+
 
                     var IdPrestamo = Convert.ToDecimal(item);
                     ro_prestamo Entity_Prestamo = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
@@ -410,7 +410,7 @@ namespace Core.Erp.Data.RRHH
                             cuenta_x_rubro.rub_ctacon != "" && cuenta_x_rubro.rub_ctacon != null &&
                             Entity_Empleado.IdCtaCble_Emplea != null
                             )
-                      {
+                        {
                             cp_orden_pago op = new cp_orden_pago
                             {
                                 IdEmpresa = IdEmpresa,
@@ -493,16 +493,18 @@ namespace Core.Erp.Data.RRHH
 
                             Context_cxp.cp_orden_pago_det.Add(op_det);
                         }
-                    }
-                  }              
-                    Context_ct.SaveChanges();
-                    Context_cxp.SaveChanges();
-                    Context.SaveChanges();
                     
-                    Context_ct.Dispose();                    
-                    Context_cxp.Dispose();
-                    Context.Dispose();
+                
                 }
+                Context_ct.SaveChanges();
+                Context_cxp.SaveChanges();
+                Context.SaveChanges();
+
+                Context_ct.Dispose();
+                Context_cxp.Dispose();
+                Context.Dispose();
+            }
+            
 
                 return true;
             }
