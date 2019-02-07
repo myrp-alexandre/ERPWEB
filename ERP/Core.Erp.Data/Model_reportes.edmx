@@ -3782,7 +3782,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
         <Function Name="SPBAN_009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdBanco" Type="int" Mode="In" />
-          <Parameter Name="FechaIni" Type="date" Mode="In" />
           <Parameter Name="FechaFin" Type="date" Mode="In" />
         </Function>
         <Function Name="SPCONTA_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
@@ -8099,14 +8098,13 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="IdBanco" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="VWROL_002" EntityType="Model_reportes.VWROL_002" />
+          <EntitySet Name="VWROL_024" EntityType="Model_reportes.VWROL_024" />
           <FunctionImport Name="SPBAN_009" ReturnType="Collection(Model_reportes.SPBAN_009_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdBanco" Mode="In" Type="Int32" />
-            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="VWROL_002" EntityType="Model_reportes.VWROL_002" />
-          <EntitySet Name="VWROL_024" EntityType="Model_reportes.VWROL_024" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10744,14 +10742,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
           <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="SPBAN_009_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdBanco" Nullable="false" />
-          <Property Type="String" Name="ba_descripcion" Nullable="false" MaxLength="150" />
-          <Property Type="Decimal" Name="IdTipoFlujo" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="NomFlujo" Nullable="false" />
-          <Property Type="Double" Name="ValorFlujo" Nullable="true" />
-        </ComplexType>
         <EntityType Name="VWROL_002">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -10839,6 +10829,14 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Dias" Type="Double" Nullable="false" />
         </EntityType>
+        <ComplexType Name="SPBAN_009_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdBanco" Nullable="false" />
+          <Property Type="String" Name="ba_descripcion" Nullable="false" MaxLength="150" />
+          <Property Type="Decimal" Name="IdTipoFlujo" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="NomFlujo" Nullable="false" />
+          <Property Type="Double" Name="ValorFlujo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13983,18 +13981,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPBAN_009" FunctionName="Model_reportes.Store.SPBAN_009">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPBAN_009_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
-                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
-                <ScalarProperty Name="NomFlujo" ColumnName="NomFlujo" />
-                <ScalarProperty Name="ValorFlujo" ColumnName="ValorFlujo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWROL_002">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_002">
               <MappingFragment StoreEntitySet="VWROL_002">
@@ -14049,6 +14035,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPBAN_009" FunctionName="Model_reportes.Store.SPBAN_009">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPBAN_009_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="NomFlujo" ColumnName="NomFlujo" />
+                <ScalarProperty Name="ValorFlujo" ColumnName="ValorFlujo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
