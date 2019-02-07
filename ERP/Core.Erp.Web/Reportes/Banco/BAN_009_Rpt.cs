@@ -13,6 +13,7 @@ namespace Core.Erp.Web.Reportes.Banco
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
+        public int[] IntArray { get; set; }
         public BAN_009_Rpt()
         {
             InitializeComponent();
@@ -25,7 +26,6 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_empresa.Text = empresa;
 
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
             int IdBanco = string.IsNullOrEmpty(p_IdBanco.Value.ToString()) ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
@@ -33,15 +33,21 @@ namespace Core.Erp.Web.Reportes.Banco
 
             if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
             {
-                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
+                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.Ascending));
                 Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
             }
             else
             {
-                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.Ascending));
+                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
                 Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.Ascending));
             }
-            List<BAN_009_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdBanco, fecha_ini, fecha_fin);
+
+            List<BAN_009_Info> lst_rpt = new List<BAN_009_Info>();
+            foreach (var item in IntArray)
+            {
+                lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, item, fecha_fin, !Convert.ToBoolean(p_mostrar_agrupado.Value)));
+            }
+             
             this.DataSource = lst_rpt;
 
         }

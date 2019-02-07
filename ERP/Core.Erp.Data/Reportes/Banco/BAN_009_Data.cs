@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Banco
 {
     public class BAN_009_Data
     {
-        public List<BAN_009_Info> GetList(int IdEmpresa, int IdBanco, DateTime fecha_ini, DateTime fecha_fin)
+        public List<BAN_009_Info> GetList(int IdEmpresa, int IdBanco, DateTime fecha_fin, bool AgruparPorFlujo)
         {
             try
             {
@@ -22,8 +22,9 @@ namespace Core.Erp.Data.Reportes.Banco
                         IdBanco = q.IdBanco,
                         IdTipoFlujo = q.IdTipoFlujo,
                         ba_descripcion = q.ba_descripcion,
-                        NomFlujo = q.NomFlujo,
+                        NomFlujo =  q.NomFlujo,
                         ValorFlujo = q.ValorFlujo,
+                        Descripcion = AgruparPorFlujo ? q.ba_descripcion : q.NomFlujo
                     }).ToList();
                 }
                 return Lista;
