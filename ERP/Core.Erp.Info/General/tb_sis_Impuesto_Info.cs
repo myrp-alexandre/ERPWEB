@@ -31,5 +31,8 @@ namespace Core.Erp.Info.General
         //no existe en la tabla
 
         public tb_sis_Impuesto_x_ctacble_Info info_impuesto_ctacble { get; set; }
+
+        public string IdCtaCble { get; set; }
+        public string IdCtaCble_vta { get; set; }
     }
 }

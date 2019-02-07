@@ -79,7 +79,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble">Cta. Cble Impuesto</label>
-                    @Html.DropDownListFor(q => q.info_impuesto_ctacble.IdCtaCble, new SelectList(ViewBag.lst_cuentas, "IdCtaCble", "pc_Cuenta_combo"), new { @class = "form-control" })
+                    @Html.Partial("_CmbCuenta_Cta_Impuesto", Model)
                     @Html.ValidationMessageFor(q => q.info_impuesto_ctacble.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_vta">Cta. Cble Vta</label>
-                    @Html.DropDownListFor(q => q.info_impuesto_ctacble.IdCtaCble_vta, new SelectList(ViewBag.lst_cuentas, "IdCtaCble", "pc_Cuenta_combo"), new { @class = "form-control" })
+                    @Html.Partial("_CmbCuenta_Vta_Impuesto", Model)
                     @Html.ValidationMessageFor(q => q.info_impuesto_ctacble.IdCtaCble_vta, "", new { @class = "text-danger" })
                 </div>
             </div>

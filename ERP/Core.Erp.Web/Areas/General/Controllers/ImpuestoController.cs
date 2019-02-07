@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
@@ -20,6 +22,37 @@ namespace Core.Erp.Web.Areas.General.Controllers
         tb_sis_Impuesto_x_ctacble_Bus bus_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Bus();
 
         #endregion
+        #region Metodos ComboBox bajo demanda
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_Cta_Impuesto()
+        {
+            tb_sis_Impuesto_x_ctacble_Info model = new tb_sis_Impuesto_x_ctacble_Info();
+            return PartialView("_CmbCuenta_Cta_Impuesto", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+        public ActionResult CmbCuenta_Vta_Impuesto()
+        {
+            tb_sis_Impuesto_x_ctacble_Info model = new tb_sis_Impuesto_x_ctacble_Info();
+            return PartialView("_CmbCuenta_Vta_Impuesto", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_vta(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_vta(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Index
         public ActionResult Index()
         {
@@ -57,7 +90,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_sis_Impuesto_Info model)
         {
-
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (bus_impuesto.validar_existe_IdCod_Impuesto(model.IdCod_Impuesto))
             {
                 ViewBag.mensaje = "El código ya se encuentra registrado";
@@ -65,10 +98,13 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            if (!bus_impuesto.guardarDB(model))
+            if (bus_impuesto.guardarDB(model))
             {
-                model.info_impuesto_ctacble.IdEmpresa_cta = Convert.ToInt32(Session["IdEmpresa"]);
+                model.info_impuesto_ctacble = model.info_impuesto_ctacble ?? new tb_sis_Impuesto_x_ctacble_Info();
+                model.info_impuesto_ctacble.IdEmpresa_cta = IdEmpresa;
                 model.info_impuesto_ctacble.IdCod_Impuesto = model.IdCod_Impuesto;
+                model.IdCtaCble = model.IdCtaCble;
+                model.IdCtaCble_vta = model.IdCtaCble_vta;
                 bus_impuesto_ctacble.guardarDB(model.info_impuesto_ctacble);
                 return RedirectToAction("Index");
             }
@@ -81,12 +117,14 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(SessionFixed.IdEmpresa));
-            if (model.info_impuesto_ctacble == null)
-                model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info
-                {
-                    IdEmpresa_cta = Convert.ToInt32(Session["IdEmpresa"]),
-                    IdCod_Impuesto = model.IdCod_Impuesto
-                };
+            model.IdCtaCble = model.IdCtaCble;
+            model.IdCtaCble_vta = model.IdCtaCble_vta;
+            //if (model.info_impuesto_ctacble == null)
+            //    model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info
+            //    {
+            //        IdEmpresa_cta = Convert.ToInt32(Session["IdEmpresa"]),
+            //        IdCod_Impuesto = model.IdCod_Impuesto
+            //    };
             cargar_combos();
             return View(model);
         }
@@ -110,7 +148,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 return RedirectToAction("Index");
             model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(SessionFixed.IdEmpresa));
             if (model.info_impuesto_ctacble == null)
-                model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info();
+                model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info
+                {
+                    IdEmpresa_cta = Convert.ToInt32(Session["IdEmpresa"]),
+                    IdCod_Impuesto = model.IdCod_Impuesto
+                };
             cargar_combos();
             return View(model);
         }
