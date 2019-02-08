@@ -2658,6 +2658,41 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ningun
           <Property Name="IdSucursal" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol_detalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwro_rol_detalle">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="ru_tipo" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="ru_tipo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="rub_ctacon" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_Emplea" Type="varchar" MaxLength="20" />
+          <Property Name="IdDivision" Type="int" />
+          <Property Name="IdArea" Type="int" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwRo_rol_detalle_saldo_por_pagar">
           <Key>
@@ -5667,6 +5702,27 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_rol].[IdSucursal] AS [IdSucursal]
     FROM [dbo].[vwro_rol] AS [vwro_rol]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_rol_detalle" EntityType="Self.vwro_rol_detalle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_rol_detalle].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_rol_detalle].[IdRol] AS [IdRol], 
+    [vwro_rol_detalle].[IdSucursal] AS [IdSucursal], 
+    [vwro_rol_detalle].[IdNominaTipo] AS [IdNominaTipo], 
+    [vwro_rol_detalle].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
+    [vwro_rol_detalle].[IdPeriodo] AS [IdPeriodo], 
+    [vwro_rol_detalle].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_rol_detalle].[IdRubro] AS [IdRubro], 
+    [vwro_rol_detalle].[Valor] AS [Valor], 
+    [vwro_rol_detalle].[ru_tipo] AS [ru_tipo], 
+    [vwro_rol_detalle].[rub_ctacon] AS [rub_ctacon], 
+    [vwro_rol_detalle].[IdCtaCble_Emplea] AS [IdCtaCble_Emplea], 
+    [vwro_rol_detalle].[IdDivision] AS [IdDivision], 
+    [vwro_rol_detalle].[IdArea] AS [IdArea], 
+    [vwro_rol_detalle].[IdDepartamento] AS [IdDepartamento], 
+    [vwro_rol_detalle].[ru_descripcion] AS [ru_descripcion], 
+    [vwro_rol_detalle].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [dbo].[vwro_rol_detalle] AS [vwro_rol_detalle]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwRo_rol_detalle_saldo_por_pagar" EntityType="Self.vwRo_rol_detalle_saldo_por_pagar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwRo_rol_detalle_saldo_por_pagar].[IdEmpresa] AS [IdEmpresa], 
@@ -8514,6 +8570,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
+          <EntitySet Name="vwro_rol_detalle" EntityType="Model_rrhh.vwro_rol_detalle" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -12103,6 +12160,39 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_rol_detalle">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="ru_tipo" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="ru_tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="rub_ctacon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Emplea" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdDivision" Type="Int32" />
+          <Property Name="IdArea" Type="Int32" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14588,6 +14678,29 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
                 <ScalarProperty Name="ru_codRolGen" ColumnName="ru_codRolGen" />
                 <ScalarProperty Name="rub_codigo" ColumnName="rub_codigo" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_rol_detalle">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_rol_detalle">
+              <MappingFragment StoreEntitySet="vwro_rol_detalle">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
+                <ScalarProperty Name="rub_ctacon" ColumnName="rub_ctacon" />
+                <ScalarProperty Name="ru_tipo" ColumnName="ru_tipo" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
