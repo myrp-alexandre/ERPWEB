@@ -24,7 +24,7 @@ namespace Core.Erp.Data.Reportes.Banco
                         ba_descripcion = q.ba_descripcion,
                         NomFlujo =  q.NomFlujo,
                         ValorFlujo = q.ValorFlujo,
-                        Descripcion = AgruparPorFlujo ? q.ba_descripcion : q.NomFlujo
+                        Descripcion = AgruparPorFlujo ? q.NomFlujo : q.ba_descripcion
                     }).ToList();
                 }
                 return Lista;

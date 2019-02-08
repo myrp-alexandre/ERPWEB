@@ -114,8 +114,6 @@
             this.Detail.HeightF = 20.00002F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.Detail.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("NomFlujo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrTable2
@@ -145,7 +143,7 @@
             // CeldaDescripcion
             // 
             this.CeldaDescripcion.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomFlujo]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion]")});
             this.CeldaDescripcion.Name = "CeldaDescripcion";
             this.CeldaDescripcion.Text = "Descripción";
             this.CeldaDescripcion.Weight = 3.1086091808792382D;
@@ -537,7 +535,6 @@
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("IdTipoFlujo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader1.HeightF = 20.00002F;
-            this.GroupHeader1.Level = 1;
             this.GroupHeader1.Name = "GroupHeader1";
             this.GroupHeader1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader1_BeforePrint);
             // 
@@ -569,6 +566,8 @@
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomFlujo]")});
             this.xrTableCell14.Name = "xrTableCell14";
+            this.xrTableCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 0, 0, 0, 100F);
+            this.xrTableCell14.StylePriority.UsePadding = false;
             this.xrTableCell14.Text = "Descripción";
             this.xrTableCell14.Weight = 3.1086091808792382D;
             // 
@@ -577,8 +576,9 @@
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable10});
             this.GroupHeader2.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("ba_descripcion", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("IdBanco", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader2.HeightF = 20.00002F;
+            this.GroupHeader2.Level = 1;
             this.GroupHeader2.Name = "GroupHeader2";
             this.GroupHeader2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader2_BeforePrint);
             // 
@@ -618,7 +618,6 @@
             this.GroupFooter1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable8});
             this.GroupFooter1.HeightF = 20.00002F;
-            this.GroupFooter1.Level = 1;
             this.GroupFooter1.Name = "GroupFooter1";
             this.GroupFooter1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupFooter1_BeforePrint);
             // 
@@ -679,6 +678,7 @@
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7});
             this.GroupFooter2.HeightF = 20.00002F;
+            this.GroupFooter2.Level = 1;
             this.GroupFooter2.Name = "GroupFooter2";
             this.GroupFooter2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupFooter2_BeforePrint);
             // 

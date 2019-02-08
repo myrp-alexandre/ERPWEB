@@ -21,7 +21,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void BAN_009_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("d/MM/yyyy hh:mm:ss");
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
             lbl_empresa.Text = empresa;
 
@@ -32,21 +32,25 @@ namespace Core.Erp.Web.Reportes.Banco
             BAN_009_Bus bus_rpt = new BAN_009_Bus();
 
             if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {
-                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.Ascending));
+            {                
+                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
                 Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
             }
             else
             {
+                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
                 Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
-                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.Ascending));
+                
             }
 
             List<BAN_009_Info> lst_rpt = new List<BAN_009_Info>();
-            foreach (var item in IntArray)
+            if (IntArray != null)
             {
-                lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, item, fecha_fin, !Convert.ToBoolean(p_mostrar_agrupado.Value)));
-            }
+                foreach (var item in IntArray)
+                {
+                    lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, item, fecha_fin, !Convert.ToBoolean(p_mostrar_agrupado.Value)));
+                }
+            }           
              
             this.DataSource = lst_rpt;
 
@@ -54,7 +58,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void GroupHeader2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
             {
                 e.Cancel = true;
             }
@@ -62,7 +66,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void GroupFooter2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
             {
                 e.Cancel = true;
             }
@@ -70,7 +74,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void GroupHeader1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
             {
                 e.Cancel = true;
             }
@@ -78,7 +82,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void GroupFooter1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
             {
                 e.Cancel = true;
             }
