@@ -14,6 +14,7 @@ namespace Core.Erp.Web.Reportes.RRHH
     public partial class ROL_023_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         List<ROL_023_Info> ListaAgrupada = new List<ROL_023_Info>();
+        List<ROL_023_Info> ListaAgrupadaResumen = new List<ROL_023_Info>();
         public string usuario { get; set; }
         public string empresa { get; set; }
         public ROL_023_Rpt()
@@ -52,7 +53,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  q.IdNominaTipoLiqui,
                                  q.NombreDivision,
                                  q.NombreArea,
-                                 q.NombreDepartamento
+                                 q.NombreDepartamento,
+                                 q.IdEmpleado                           
                              } into Resumen
                              select new ROL_023_Info
                              {
@@ -64,7 +66,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  NombreDivision = Resumen.Key.NombreDivision,
                                  NombreArea = Resumen.Key.NombreArea,
                                  NombreDepartamento = Resumen.Key.NombreDepartamento,
-                                 CantidadEmpleados = Resumen.Count(),
+                                 IdEmpleado = Resumen.Key.IdEmpleado,
                                  TOTALI = Resumen.Sum(q => q.TOTALI),
                                  DECIMOT = Resumen.Sum(q => q.DECIMOT),
                                  DECIMOC = Resumen.Sum(q => q.DECIMOC),
@@ -76,6 +78,32 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  TotalResumen = Resumen.Sum(q=> q.SUELDO+q.DECIMOT+q.DECIMOC+q.FRESERVA+q.SOBRET+q.OTROING)
                              }).ToList();
 
+            ListaAgrupadaResumen = (from q in ListaAgrupada
+                                    group q by new
+                                 {
+                                     q.IdEmpresa,
+                                     q.IdSucursal,
+                                     q.IdPeriodo,
+                                     q.IdNominaTipo,
+                                     q.IdNominaTipoLiqui,
+                                     q.NombreDivision,
+                                     q.NombreArea,
+                                     q.NombreDepartamento
+                                    } into Resumen_Reporte
+                                 select new ROL_023_Info
+                                 {
+                                     IdEmpresa = Resumen_Reporte.Key.IdEmpresa,
+                                     IdSucursal = Resumen_Reporte.Key.IdSucursal,
+                                     IdPeriodo = Resumen_Reporte.Key.IdPeriodo,
+                                     IdNominaTipo = Resumen_Reporte.Key.IdNominaTipo,
+                                     IdNominaTipoLiqui = Resumen_Reporte.Key.IdNominaTipoLiqui,
+                                     NombreDivision = Resumen_Reporte.Key.NombreDivision,
+                                     NombreArea = Resumen_Reporte.Key.NombreArea,
+                                     NombreDepartamento = Resumen_Reporte.Key.NombreDepartamento,
+                                     CantidadEmpleados = Resumen_Reporte.Count()
+                                 }).ToList();
+
+
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             lbl_empresa.Text = emp.em_nombre;
@@ -86,7 +114,7 @@ namespace Core.Erp.Web.Reportes.RRHH
 
         private void ROL_023_Resumen_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            var Resumen = ListaAgrupada;
+            var Resumen = ListaAgrupadaResumen;
             ((XRSubreport)sender).ReportSource.DataSource = Resumen;
         }
     }

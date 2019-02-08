@@ -25,7 +25,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdPrestamo = q.IdPrestamo,
                                  pe_apellido = q.pe_apellido,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
-                                 pe_nombre = q.pe_nombre+" "+q.pe_apellido,
+                                 pe_nombre = q.pe_apellido + " " + q.pe_nombre,
                                  EstadoPago = q.EstadoPago,
                                  de_descripcion = q.de_descripcion,
                                  Total_Cancelado = q.Total_Cancelado,

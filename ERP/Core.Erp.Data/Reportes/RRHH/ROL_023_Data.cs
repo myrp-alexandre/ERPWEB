@@ -63,7 +63,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Descripcion = q.Descripcion,
                         DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                         JORNADA=q.JORNADA,
-                        UBUCACION=q.UBUCACION
+                        UBUCACION=q.UBUCACION,
+                        Contador = 1
                     }).ToList();
                 }
                 return Lista;
