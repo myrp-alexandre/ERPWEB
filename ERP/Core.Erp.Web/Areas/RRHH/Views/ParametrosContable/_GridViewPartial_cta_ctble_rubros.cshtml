@@ -85,7 +85,14 @@
                 Html.RenderPartial("_CmbCuenta_rubros_x_sueldo", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ru_tipo";
+            column.Caption = "Tipo";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
+        });
 
     });
     if (ViewData["EditError"] != null){
