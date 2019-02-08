@@ -109,109 +109,105 @@
 }
 <script>
 
-    $(function () {
-        cargar_tipo_liquidacion_nomina();
+$(function () {
+    cargar_tipo_liquidacion_nomina();
+    cargar_periodos_x_nomina();
+});
+
+$("#IdNomina_Tipo").change(function () {
+    $("#IdNomina_TipoLiqui").empty();
+            cargar_tipo_liquidacion_nomina();
+});
+
+$("#IdNomina_TipoLiqui").change(function () {
+        $("#IdPeriodo").empty();
         cargar_periodos_x_nomina();
-
-
-    });
-
-
-
-    $("#IdNomina_Tipo").change(function () {
-        $("#IdNomina_TipoLiqui").empty();
-             cargar_tipo_liquidacion_nomina();
-
-        });
-
-    $("#IdNomina_TipoLiqui").change(function () {
-           $("#IdPeriodo").empty();
-            cargar_periodos_x_nomina();
-        });
+});
     
 
-        function cargar_tipo_liquidacion_nomina() {
-            var datos = {
-                IdNomina: $("#IdNomina_Tipo").val()
-            }
+function cargar_tipo_liquidacion_nomina() {
+    var datos = {
+        IdNomina: $("#IdNomina_Tipo").val()
+    }
 
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("get_lst_nomina_tipo_liq","NominaTipoLiquidacion", new { Area = "RRHH" })',
-                async: false,
-                bDeferRender: true,
-                bProcessing: true,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: '@Url.Action("get_lst_nomina_tipo_liq","NominaTipoLiquidacion", new { Area = "RRHH" })',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
 
-                    $.each(data, function (i, row) {
-                        $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
-                    });
-                },
-                error: function (error) {
-                }
+            $.each(data, function (i, row) {
+                $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
             });
-        };
-
-    function cargar_periodos_x_nomina() {
-        $("#IdPeriodo").empty();
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val(),
-            IdNomina: $("#IdNomina_Tipo").val(),
-            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
-            
+        },
+        error: function (error) {
         }
+    });
+};
 
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_lst_periodo_x_nomina","PeriodosPorNomina", new { Area = "RRHH" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log(data);
-                $.each(data, function (i, row) {
-                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
-                });
+function cargar_periodos_x_nomina() {
+    $("#IdPeriodo").empty();
+    var datos = {
+        IdEmpresa: $("#IdEmpresa").val(),
+        IdSucursal: $("#IdSucursal").val(),
+        IdNomina: $("#IdNomina_Tipo").val(),
+        IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
+            
+    }
 
-            },
-            error: function (error) {
-            }
-        });
-    };
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: '@Url.Action("get_lst_periodo_x_nomina","PeriodosPorNomina", new { Area = "RRHH" })',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {                
+            $.each(data, function (i, row) {
+                $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
+            });
+
+        },
+        error: function (error) {
+        }
+    });
+};
 
 
-             function cargar_empleados() {
-                var datos = {
-                    IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-                    IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
-                    IdPeriodo: $("#IdPeriodo").val(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+function cargar_empleados() {
+    var datos = {                     
+        IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+        IdSucursal: $("#IdSucursal").val(),
+        IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+        IdPeriodo: $("#IdPeriodo").val(),
+        IdTransaccionSession: $("#IdTransaccionSession").val()
 
-                }
+    }
 
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(datos),
-                    url: '@Url.Action("CargarEmpleados", "AjustesAnticipo", new { Area = "RRHH" })',
-                    async: false,
-                    bDeferRender: true,
-                    bProcessing: true,
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-                        GridViewPartial_ajuste_anticipo.PerformCallback();
-                    },
-                    error: function (error) {
-                    }
-                });
-    };
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: '@Url.Action("CargarEmpleados", "AjustesAnticipo", new { Area = "RRHH" })',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data);
+            GridViewPartial_ajuste_anticipo.PerformCallback();
+        },
+        error: function (error) {
+        }
+    });
+};
 
 
 
