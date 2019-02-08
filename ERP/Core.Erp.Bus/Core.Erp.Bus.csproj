@@ -252,6 +252,7 @@
     <Compile Include="Inventario\in_UnidadMedida_Bus.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Migraciones\FacturasEventos_Bus.cs" />
+    <Compile Include="Migraciones\ImportacionDiarios_Bus.cs" />
     <Compile Include="Presupuesto\pre_Grupo_Bus.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Bus.cs" />
     <Compile Include="Presupuesto\pre_Periodo_Bus.cs" />

@@ -25,6 +25,7 @@ namespace Core.Erp.Info.Migraciones
         public string Detalle { get; set; }
         public string tipo_documento { get; set; }
         public string IdCtaCble { get; set; }
-        public Nullable<decimal> dc_Valor { get; set; }
+        public Nullable<decimal> dc_ValorDebe { get; set; }
+        public Nullable<decimal> dc_ValorHaber { get; set; }
     }
 }

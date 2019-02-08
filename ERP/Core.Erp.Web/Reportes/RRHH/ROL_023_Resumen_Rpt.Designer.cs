@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary4 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary5 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary6 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -516,6 +521,8 @@
             this.xrTableCell14.StylePriority.UseBorderWidth = false;
             this.xrTableCell14.StylePriority.UsePadding = false;
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell14.Summary = xrSummary1;
             this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell14.Weight = 0.38572050563443894D;
             // 
@@ -531,8 +538,8 @@
             this.xrTableCell15.StylePriority.UseBorderWidth = false;
             this.xrTableCell15.StylePriority.UsePadding = false;
             this.xrTableCell15.StylePriority.UseTextAlignment = false;
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Page;
-            this.xrTableCell15.Summary = xrSummary1;
+            xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell15.Summary = xrSummary2;
             this.xrTableCell15.Text = "Sueldos";
             this.xrTableCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell15.TextFormatString = "{0:n2}";
@@ -550,6 +557,8 @@
             this.xrTableCell16.StylePriority.UseBorderWidth = false;
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
+            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell16.Summary = xrSummary3;
             this.xrTableCell16.Text = "Decimo 3ero";
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell16.TextFormatString = "{0:n2}";
@@ -565,6 +574,8 @@
             this.xrTableCell20.StylePriority.UseBorders = false;
             this.xrTableCell20.StylePriority.UseBorderWidth = false;
             this.xrTableCell20.StylePriority.UseTextAlignment = false;
+            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell20.Summary = xrSummary4;
             this.xrTableCell20.Text = "Decimo 4to";
             this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell20.TextFormatString = "{0:n2}";
@@ -582,6 +593,8 @@
             this.xrTableCell22.StylePriority.UseBorderWidth = false;
             this.xrTableCell22.StylePriority.UsePadding = false;
             this.xrTableCell22.StylePriority.UseTextAlignment = false;
+            xrSummary5.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell22.Summary = xrSummary5;
             this.xrTableCell22.Text = "Fondo de Reserva";
             this.xrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell22.TextFormatString = "{0:n2}";
@@ -599,6 +612,8 @@
             this.xrTableCell26.StylePriority.UseBorderWidth = false;
             this.xrTableCell26.StylePriority.UsePadding = false;
             this.xrTableCell26.StylePriority.UseTextAlignment = false;
+            xrSummary6.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell26.Summary = xrSummary6;
             this.xrTableCell26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell26.TextFormatString = "{0:n2}";
             this.xrTableCell26.Weight = 0.48825375214197031D;

@@ -292,6 +292,7 @@
     <Compile Include="Areas\Contabilidad\Controllers\ATSController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\GrupoContableController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\ImportacionDiariosController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ParametroContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
@@ -9847,6 +9848,8 @@
     <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Cta_Impuesto.cshtml" />
     <Content Include="Areas\General\Views\Impuesto\_CmbCuenta_Vta_Impuesto.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbNomina.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ImportacionDiarios\Index.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ImportacionDiarios\_GridViewPartial_ImportacionDiarios.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
