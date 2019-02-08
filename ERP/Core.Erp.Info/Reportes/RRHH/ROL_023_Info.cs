@@ -46,6 +46,5 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public int CantidadEmpleados { get; set; }
         public Nullable<double> TotalResumen { get; set; }
-        public int Contador { get; set; }
     }
 }
