@@ -20,37 +20,27 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh db = new Entities_rrhh())
                 {
-                    oListado = (from a in db.ro_rol_detalle
-                                 join b in db.ro_empleado
-                                 on new {a.IdEmpresa, a.IdEmpleado } equals new {b.IdEmpresa, b.IdEmpleado }
-                                 join c in db.ro_rubro_tipo
-                                 on new { a.IdEmpresa, a.IdRubro } equals new { c.IdEmpresa, c.IdRubro }
-                                 join r in db.ro_rol
-                                 on new { a.IdEmpresa, a.IdRol } equals new { r.IdEmpresa, r.IdRol }
+                    oListado = (from a in db.vwro_rol_detalle
+                                
                                 where a.IdEmpresa == idEmpresa
-                                 && r.IdNominaTipo == idNominaTipo
-                                 && r.IdNominaTipoLiqui == idNominaTipoLiqui
-                                 && r.IdPeriodo == idPeriodo
+                                 && a.IdNominaTipo == idNominaTipo
+                                 && a.IdNominaTipoLiqui == idNominaTipoLiqui
+                                 && a.IdPeriodo == idPeriodo
                                  && a.Valor > 0
-                                 && c.rub_provision== es_provision
+                                 && a.rub_provision== es_provision
                                 select new ro_rol_detalle_Info
                                  {
                                      IdEmpresa = a.IdEmpresa,
-                                     IdNominaTipo = r.IdNominaTipo,
-                                     IdNominaTipoLiqui = r.IdNominaTipoLiqui,
-                                     IdPeriodo = r.IdPeriodo,
-                                     Observacion = a.Observacion,
+                                     IdNominaTipo = a.IdNominaTipo,
+                                     IdNominaTipoLiqui = a.IdNominaTipoLiqui,
+                                     IdPeriodo = a.IdPeriodo,
                                      IdEmpleado = a.IdEmpleado,
                                      IdRubro = a.IdRubro,
-                                     Orden = a.Orden,
                                      Valor = a.Valor,
-                                     rub_visible_reporte = a.rub_visible_reporte,
-                                     IdDivision = b.IdDivision,
-                                     IdArea = b.IdArea,
-                                     IdDepartamento = b.IdDepartamento,
-                                     IdCargo = b.IdCargo,
-                                     ru_tipo=c.ru_tipo
-                                     
+                                     IdDivision = a.IdDivision,
+                                     IdArea = a.IdArea,
+                                     IdDepartamento = a.IdDepartamento,
+                                     ru_tipo=a.ru_tipo                                    
                                  }).ToList();
                 }
                 return oListado;

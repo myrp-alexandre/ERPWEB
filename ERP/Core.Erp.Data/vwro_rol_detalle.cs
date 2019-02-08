@@ -31,5 +31,6 @@ namespace Core.Erp.Data
         public int IdDepartamento { get; set; }
         public string ru_descripcion { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public bool rub_provision { get; set; }
     }
 }
