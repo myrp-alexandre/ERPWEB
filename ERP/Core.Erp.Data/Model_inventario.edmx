@@ -1049,6 +1049,122 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Producto_Stock' no tiene defi
           <Property Name="Stock" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_producto_x_tb_bodega' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwin_producto_x_tb_bodega">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="bo_Descripcion" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdMarca" />
+            <PropertyRef Name="IdProductoTipo" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="pr_precio_publico" />
+            <PropertyRef Name="pr_precio_mayor" />
+            <PropertyRef Name="pr_precio_puerta" />
+            <PropertyRef Name="pr_precio_minimo" />
+            <PropertyRef Name="pr_costo_fob" />
+            <PropertyRef Name="pr_costo_CIF" />
+            <PropertyRef Name="pr_Pedidos_inv" />
+            <PropertyRef Name="pr_stock" />
+            <PropertyRef Name="pr_Disponible" />
+            <PropertyRef Name="IdNaturaleza" />
+            <PropertyRef Name="IdCentro_Costo_Inventario" />
+            <PropertyRef Name="IdCentro_Costo_Costo" />
+            <PropertyRef Name="IdCentroCosto_x_Gasto_x_cxp" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_inv" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_cost" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_cxp" />
+            <PropertyRef Name="IdCtaCble_CosBaseIva" />
+            <PropertyRef Name="IdCtaCble_CosBase0" />
+            <PropertyRef Name="IdCtaCble_VenIva" />
+            <PropertyRef Name="IdCtaCble_Ven0" />
+            <PropertyRef Name="IdCtaCble_DesIva" />
+            <PropertyRef Name="IdCtaCble_Des0" />
+            <PropertyRef Name="IdCtaCble_DevIva" />
+            <PropertyRef Name="IdCtaCble_Dev0" />
+            <PropertyRef Name="Descripcion_UniMedida" />
+            <PropertyRef Name="Descripcion_TipoConsumo" />
+            <PropertyRef Name="IdUnidadMedida_Consumo" />
+            <PropertyRef Name="pr_costo_promedio" />
+            <PropertyRef Name="pr_stock_minimo" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="Aparece_modu_Ventas" />
+            <PropertyRef Name="Aparece_modu_Compras" />
+            <PropertyRef Name="Aparece_modu_Inventario" />
+            <PropertyRef Name="Aparece_modu_Activo_F" />
+            <PropertyRef Name="nom_Tipo_Producto" />
+            <PropertyRef Name="nom_Categoria" />
+            <PropertyRef Name="nom_linea" />
+            <PropertyRef Name="nom_presentacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="pr_codigo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="bo_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="IdProductoTipo" Type="int" Nullable="false" />
+          <Property Name="IdPresentacion" Type="varchar" MaxLength="25" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pr_precio_publico" Type="int" Nullable="false" />
+          <Property Name="pr_precio_mayor" Type="int" Nullable="false" />
+          <Property Name="pr_precio_puerta" Type="int" Nullable="false" />
+          <Property Name="pr_precio_minimo" Type="int" Nullable="false" />
+          <Property Name="pr_costo_fob" Type="int" Nullable="false" />
+          <Property Name="pr_costo_CIF" Type="int" Nullable="false" />
+          <Property Name="pr_Pedidos_inv" Type="float" Nullable="false" />
+          <Property Name="pr_stock" Type="float" Nullable="false" />
+          <Property Name="pr_Disponible" Type="float" Nullable="false" />
+          <Property Name="IdCtaCble_Inven" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_Costo" Type="varchar" MaxLength="20" />
+          <Property Name="IdNaturaleza" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Inventario" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentro_Costo_Inventario" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCentro_Costo_Costo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Gasto_x_cxp" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto_x_Gasto_x_cxp" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_inv" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_cost" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_cxp" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_CosBaseIva" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_CosBase0" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_VenIva" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Ven0" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_DesIva" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Des0" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_DevIva" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Dev0" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_Vta" Type="varchar" MaxLength="20" />
+          <Property Name="Descripcion_UniMedida" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Descripcion_TipoConsumo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdUnidadMedida_Consumo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pr_costo_promedio" Type="float" Nullable="false" />
+          <Property Name="pr_stock_minimo" Type="int" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Aparece_modu_Ventas" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="bit" Nullable="false" />
+          <Property Name="nom_Tipo_Producto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom_Categoria" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nom_linea" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="pr_codigo_barra" Type="nvarchar" MaxLength="200" />
+          <Property Name="IdCtaCtble_Inve_categoria" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCtble_Costo_categoria" Type="varchar" MaxLength="20" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
+          <Property Name="lote_fecha_fab" Type="datetime" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
+          <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_producto_x_tb_bodega_Costo_Historico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_producto_x_tb_bodega_Costo_Historico">
           <Key>
@@ -2604,6 +2720,71 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
     [vwin_Producto_Stock].[IdProducto] AS [IdProducto], 
     [vwin_Producto_Stock].[Stock] AS [Stock]
     FROM [dbo].[vwin_Producto_Stock] AS [vwin_Producto_Stock]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwin_producto_x_tb_bodega" EntityType="Self.vwin_producto_x_tb_bodega" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwin_producto_x_tb_bodega].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_x_tb_bodega].[IdProducto] AS [IdProducto], 
+    [vwin_producto_x_tb_bodega].[IdBodega] AS [IdBodega], 
+    [vwin_producto_x_tb_bodega].[pr_codigo] AS [pr_codigo], 
+    [vwin_producto_x_tb_bodega].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_x_tb_bodega].[bo_Descripcion] AS [bo_Descripcion], 
+    [vwin_producto_x_tb_bodega].[IdSucursal] AS [IdSucursal], 
+    [vwin_producto_x_tb_bodega].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwin_producto_x_tb_bodega].[IdMarca] AS [IdMarca], 
+    [vwin_producto_x_tb_bodega].[IdProductoTipo] AS [IdProductoTipo], 
+    [vwin_producto_x_tb_bodega].[IdPresentacion] AS [IdPresentacion], 
+    [vwin_producto_x_tb_bodega].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_producto_x_tb_bodega].[pr_precio_publico] AS [pr_precio_publico], 
+    [vwin_producto_x_tb_bodega].[pr_precio_mayor] AS [pr_precio_mayor], 
+    [vwin_producto_x_tb_bodega].[pr_precio_puerta] AS [pr_precio_puerta], 
+    [vwin_producto_x_tb_bodega].[pr_precio_minimo] AS [pr_precio_minimo], 
+    [vwin_producto_x_tb_bodega].[pr_costo_fob] AS [pr_costo_fob], 
+    [vwin_producto_x_tb_bodega].[pr_costo_CIF] AS [pr_costo_CIF], 
+    [vwin_producto_x_tb_bodega].[pr_Pedidos_inv] AS [pr_Pedidos_inv], 
+    [vwin_producto_x_tb_bodega].[pr_stock] AS [pr_stock], 
+    [vwin_producto_x_tb_bodega].[pr_Disponible] AS [pr_Disponible], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Inven] AS [IdCtaCble_Inven], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Costo] AS [IdCtaCble_Costo], 
+    [vwin_producto_x_tb_bodega].[IdNaturaleza] AS [IdNaturaleza], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Inventario] AS [IdCtaCble_Inventario], 
+    [vwin_producto_x_tb_bodega].[IdCentro_Costo_Inventario] AS [IdCentro_Costo_Inventario], 
+    [vwin_producto_x_tb_bodega].[IdCentro_Costo_Costo] AS [IdCentro_Costo_Costo], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Gasto_x_cxp] AS [IdCtaCble_Gasto_x_cxp], 
+    [vwin_producto_x_tb_bodega].[IdCentroCosto_x_Gasto_x_cxp] AS [IdCentroCosto_x_Gasto_x_cxp], 
+    [vwin_producto_x_tb_bodega].[IdCentroCosto_sub_centro_costo_inv] AS [IdCentroCosto_sub_centro_costo_inv], 
+    [vwin_producto_x_tb_bodega].[IdCentroCosto_sub_centro_costo_cost] AS [IdCentroCosto_sub_centro_costo_cost], 
+    [vwin_producto_x_tb_bodega].[IdCentroCosto_sub_centro_costo_cxp] AS [IdCentroCosto_sub_centro_costo_cxp], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_CosBaseIva] AS [IdCtaCble_CosBaseIva], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_CosBase0] AS [IdCtaCble_CosBase0], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_VenIva] AS [IdCtaCble_VenIva], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Ven0] AS [IdCtaCble_Ven0], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_DesIva] AS [IdCtaCble_DesIva], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Des0] AS [IdCtaCble_Des0], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_DevIva] AS [IdCtaCble_DevIva], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Dev0] AS [IdCtaCble_Dev0], 
+    [vwin_producto_x_tb_bodega].[IdCtaCble_Vta] AS [IdCtaCble_Vta], 
+    [vwin_producto_x_tb_bodega].[Descripcion_UniMedida] AS [Descripcion_UniMedida], 
+    [vwin_producto_x_tb_bodega].[Descripcion_TipoConsumo] AS [Descripcion_TipoConsumo], 
+    [vwin_producto_x_tb_bodega].[IdUnidadMedida_Consumo] AS [IdUnidadMedida_Consumo], 
+    [vwin_producto_x_tb_bodega].[pr_costo_promedio] AS [pr_costo_promedio], 
+    [vwin_producto_x_tb_bodega].[pr_stock_minimo] AS [pr_stock_minimo], 
+    [vwin_producto_x_tb_bodega].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwin_producto_x_tb_bodega].[Aparece_modu_Ventas] AS [Aparece_modu_Ventas], 
+    [vwin_producto_x_tb_bodega].[Aparece_modu_Compras] AS [Aparece_modu_Compras], 
+    [vwin_producto_x_tb_bodega].[Aparece_modu_Inventario] AS [Aparece_modu_Inventario], 
+    [vwin_producto_x_tb_bodega].[Aparece_modu_Activo_F] AS [Aparece_modu_Activo_F], 
+    [vwin_producto_x_tb_bodega].[nom_Tipo_Producto] AS [nom_Tipo_Producto], 
+    [vwin_producto_x_tb_bodega].[nom_Categoria] AS [nom_Categoria], 
+    [vwin_producto_x_tb_bodega].[nom_linea] AS [nom_linea], 
+    [vwin_producto_x_tb_bodega].[pr_codigo_barra] AS [pr_codigo_barra], 
+    [vwin_producto_x_tb_bodega].[IdCtaCtble_Inve_categoria] AS [IdCtaCtble_Inve_categoria], 
+    [vwin_producto_x_tb_bodega].[IdCtaCtble_Costo_categoria] AS [IdCtaCtble_Costo_categoria], 
+    [vwin_producto_x_tb_bodega].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_producto_x_tb_bodega].[lote_fecha_fab] AS [lote_fecha_fab], 
+    [vwin_producto_x_tb_bodega].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_producto_x_tb_bodega].[nom_presentacion] AS [nom_presentacion]
+    FROM [dbo].[vwin_producto_x_tb_bodega] AS [vwin_producto_x_tb_bodega]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_producto_x_tb_bodega_Costo_Historico" EntityType="Self.vwin_producto_x_tb_bodega_Costo_Historico" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -4509,6 +4690,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           </FunctionImport>
           <EntitySet Name="vwin_producto_x_tb_bodega_Costo_Historico" EntityType="Model_inventario.vwin_producto_x_tb_bodega_Costo_Historico" />
           <EntitySet Name="vwin_movi_inve_x_estado_contabilizacion" EntityType="Model_inventario.vwin_movi_inve_x_estado_contabilizacion" />
+          <EntitySet Name="vwin_producto_x_tb_bodega" EntityType="Model_inventario.vwin_producto_x_tb_bodega" />
           </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -5905,6 +6087,120 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <Property Name="TotalContabilidad" Type="Double" Nullable="false" />
           <Property Name="Diferencia" Type="Double" />
         </EntityType>
+        <EntityType Name="vwin_producto_x_tb_bodega">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="bo_Descripcion" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdMarca" />
+            <PropertyRef Name="IdProductoTipo" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="pr_precio_publico" />
+            <PropertyRef Name="pr_precio_mayor" />
+            <PropertyRef Name="pr_precio_puerta" />
+            <PropertyRef Name="pr_precio_minimo" />
+            <PropertyRef Name="pr_costo_fob" />
+            <PropertyRef Name="pr_costo_CIF" />
+            <PropertyRef Name="pr_Pedidos_inv" />
+            <PropertyRef Name="pr_stock" />
+            <PropertyRef Name="pr_Disponible" />
+            <PropertyRef Name="IdNaturaleza" />
+            <PropertyRef Name="IdCentro_Costo_Inventario" />
+            <PropertyRef Name="IdCentro_Costo_Costo" />
+            <PropertyRef Name="IdCentroCosto_x_Gasto_x_cxp" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_inv" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_cost" />
+            <PropertyRef Name="IdCentroCosto_sub_centro_costo_cxp" />
+            <PropertyRef Name="IdCtaCble_CosBaseIva" />
+            <PropertyRef Name="IdCtaCble_CosBase0" />
+            <PropertyRef Name="IdCtaCble_VenIva" />
+            <PropertyRef Name="IdCtaCble_Ven0" />
+            <PropertyRef Name="IdCtaCble_DesIva" />
+            <PropertyRef Name="IdCtaCble_Des0" />
+            <PropertyRef Name="IdCtaCble_DevIva" />
+            <PropertyRef Name="IdCtaCble_Dev0" />
+            <PropertyRef Name="Descripcion_UniMedida" />
+            <PropertyRef Name="Descripcion_TipoConsumo" />
+            <PropertyRef Name="IdUnidadMedida_Consumo" />
+            <PropertyRef Name="pr_costo_promedio" />
+            <PropertyRef Name="pr_stock_minimo" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="Aparece_modu_Ventas" />
+            <PropertyRef Name="Aparece_modu_Compras" />
+            <PropertyRef Name="Aparece_modu_Inventario" />
+            <PropertyRef Name="Aparece_modu_Activo_F" />
+            <PropertyRef Name="nom_Tipo_Producto" />
+            <PropertyRef Name="nom_Categoria" />
+            <PropertyRef Name="nom_linea" />
+            <PropertyRef Name="nom_presentacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="pr_codigo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="bo_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPresentacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pr_precio_publico" Type="Int32" Nullable="false" />
+          <Property Name="pr_precio_mayor" Type="Int32" Nullable="false" />
+          <Property Name="pr_precio_puerta" Type="Int32" Nullable="false" />
+          <Property Name="pr_precio_minimo" Type="Int32" Nullable="false" />
+          <Property Name="pr_costo_fob" Type="Int32" Nullable="false" />
+          <Property Name="pr_costo_CIF" Type="Int32" Nullable="false" />
+          <Property Name="pr_Pedidos_inv" Type="Double" Nullable="false" />
+          <Property Name="pr_stock" Type="Double" Nullable="false" />
+          <Property Name="pr_Disponible" Type="Double" Nullable="false" />
+          <Property Name="IdCtaCble_Inven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdNaturaleza" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Inventario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentro_Costo_Inventario" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentro_Costo_Costo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Gasto_x_cxp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_x_Gasto_x_cxp" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_inv" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_cost" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo_cxp" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CosBaseIva" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CosBase0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_VenIva" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Ven0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_DesIva" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Des0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_DevIva" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Dev0" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Vta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_UniMedida" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_TipoConsumo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidadMedida_Consumo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pr_costo_promedio" Type="Double" Nullable="false" />
+          <Property Name="pr_stock_minimo" Type="Int32" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
+          <Property Name="nom_Tipo_Producto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_linea" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pr_codigo_barra" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdCtaCtble_Inve_categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCtble_Costo_categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="lote_fecha_fab" Type="DateTime" Precision="3" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7064,6 +7360,73 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
                 <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
                 <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwin_producto_x_tb_bodega">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_producto_x_tb_bodega">
+              <MappingFragment StoreEntitySet="vwin_producto_x_tb_bodega">
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="lote_fecha_fab" ColumnName="lote_fecha_fab" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="IdCtaCtble_Costo_categoria" ColumnName="IdCtaCtble_Costo_categoria" />
+                <ScalarProperty Name="IdCtaCtble_Inve_categoria" ColumnName="IdCtaCtble_Inve_categoria" />
+                <ScalarProperty Name="pr_codigo_barra" ColumnName="pr_codigo_barra" />
+                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
+                <ScalarProperty Name="nom_Categoria" ColumnName="nom_Categoria" />
+                <ScalarProperty Name="nom_Tipo_Producto" ColumnName="nom_Tipo_Producto" />
+                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
+                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
+                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
+                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="pr_stock_minimo" ColumnName="pr_stock_minimo" />
+                <ScalarProperty Name="pr_costo_promedio" ColumnName="pr_costo_promedio" />
+                <ScalarProperty Name="IdUnidadMedida_Consumo" ColumnName="IdUnidadMedida_Consumo" />
+                <ScalarProperty Name="Descripcion_TipoConsumo" ColumnName="Descripcion_TipoConsumo" />
+                <ScalarProperty Name="Descripcion_UniMedida" ColumnName="Descripcion_UniMedida" />
+                <ScalarProperty Name="IdCtaCble_Vta" ColumnName="IdCtaCble_Vta" />
+                <ScalarProperty Name="IdCtaCble_Dev0" ColumnName="IdCtaCble_Dev0" />
+                <ScalarProperty Name="IdCtaCble_DevIva" ColumnName="IdCtaCble_DevIva" />
+                <ScalarProperty Name="IdCtaCble_Des0" ColumnName="IdCtaCble_Des0" />
+                <ScalarProperty Name="IdCtaCble_DesIva" ColumnName="IdCtaCble_DesIva" />
+                <ScalarProperty Name="IdCtaCble_Ven0" ColumnName="IdCtaCble_Ven0" />
+                <ScalarProperty Name="IdCtaCble_VenIva" ColumnName="IdCtaCble_VenIva" />
+                <ScalarProperty Name="IdCtaCble_CosBase0" ColumnName="IdCtaCble_CosBase0" />
+                <ScalarProperty Name="IdCtaCble_CosBaseIva" ColumnName="IdCtaCble_CosBaseIva" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo_cxp" ColumnName="IdCentroCosto_sub_centro_costo_cxp" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo_cost" ColumnName="IdCentroCosto_sub_centro_costo_cost" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo_inv" ColumnName="IdCentroCosto_sub_centro_costo_inv" />
+                <ScalarProperty Name="IdCentroCosto_x_Gasto_x_cxp" ColumnName="IdCentroCosto_x_Gasto_x_cxp" />
+                <ScalarProperty Name="IdCtaCble_Gasto_x_cxp" ColumnName="IdCtaCble_Gasto_x_cxp" />
+                <ScalarProperty Name="IdCentro_Costo_Costo" ColumnName="IdCentro_Costo_Costo" />
+                <ScalarProperty Name="IdCentro_Costo_Inventario" ColumnName="IdCentro_Costo_Inventario" />
+                <ScalarProperty Name="IdCtaCble_Inventario" ColumnName="IdCtaCble_Inventario" />
+                <ScalarProperty Name="IdNaturaleza" ColumnName="IdNaturaleza" />
+                <ScalarProperty Name="IdCtaCble_Costo" ColumnName="IdCtaCble_Costo" />
+                <ScalarProperty Name="IdCtaCble_Inven" ColumnName="IdCtaCble_Inven" />
+                <ScalarProperty Name="pr_Disponible" ColumnName="pr_Disponible" />
+                <ScalarProperty Name="pr_stock" ColumnName="pr_stock" />
+                <ScalarProperty Name="pr_Pedidos_inv" ColumnName="pr_Pedidos_inv" />
+                <ScalarProperty Name="pr_costo_CIF" ColumnName="pr_costo_CIF" />
+                <ScalarProperty Name="pr_costo_fob" ColumnName="pr_costo_fob" />
+                <ScalarProperty Name="pr_precio_minimo" ColumnName="pr_precio_minimo" />
+                <ScalarProperty Name="pr_precio_puerta" ColumnName="pr_precio_puerta" />
+                <ScalarProperty Name="pr_precio_mayor" ColumnName="pr_precio_mayor" />
+                <ScalarProperty Name="pr_precio_publico" ColumnName="pr_precio_publico" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdPresentacion" ColumnName="IdPresentacion" />
+                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="bo_Descripcion" ColumnName="bo_Descripcion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
