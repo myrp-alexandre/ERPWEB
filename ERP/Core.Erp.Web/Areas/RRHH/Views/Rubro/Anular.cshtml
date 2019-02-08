@@ -236,7 +236,21 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="rub_provision"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_ContPorEmpleado, settings =>
+                       {
+                           settings.Name = "rub_ContPorEmpleado";
+                           settings.Text = "Se contabiliza por empleado";
 
+                       }).GetHtml()
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Rubro",new { Area = "RRHH" },null)">Cancelar</a>

@@ -48,6 +48,8 @@ namespace Core.Erp.Info.RRHH
         public bool rub_AplicaIR { get; set; }
 
         public string rub_GrupoResumen { get; set; }
+        public Nullable<bool> rub_ContPorEmpleado { get; set; }
+
 
     }
 }

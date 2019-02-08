@@ -18,7 +18,7 @@ namespace Core.Erp.Data.Inventario
                 using (Entities_inventario Context=new Entities_inventario())
                 {
 
-                    lista = (from q in Context.in_producto_x_tb_bodega
+                    lista = (from q in Context.vwin_producto_x_tb_bodega
                              where q.IdEmpresa == IdEmpresa
                              && q.IdProducto == IdProducto
                              select new in_producto_x_tb_bodega_Info
@@ -27,7 +27,8 @@ namespace Core.Erp.Data.Inventario
                                 IdSucursal=q.IdSucursal,
                                 IdBodega=q.IdBodega,
                                 IdProducto=q.IdProducto,
-                                Stock_minimo=q.Stock_minimo
+                                Su_Descripcion =q.Su_Descripcion,
+                                Stock_minimo=q.pr_stock_minimo
 
                              }).ToList();
                         
