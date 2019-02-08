@@ -272,6 +272,9 @@ namespace Core.Erp.Bus.RRHH
                                                     
                 }
 
+
+                if (info_cta_sueldo_x_pagar == null)
+                    info_cta_sueldo_x_pagar = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info();
                 double valorSueldoXPagar = 0;
                 valorSueldoXPagar = ingreso - egreso;
                 secuecia++;
@@ -286,7 +289,7 @@ namespace Core.Erp.Bus.RRHH
 
                 return lst_detalle_diario;
             }
-            catch (Exception )
+            catch (Exception E)
             {
                 throw;
             }
