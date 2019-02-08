@@ -13,10 +13,10 @@ namespace Core.Erp.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Model_ImportacionDiariosContainer : DbContext
+    public partial class DBSACEntities : DbContext
     {
-        public Model_ImportacionDiariosContainer()
-            : base("name=Model_ImportacionDiariosContainer")
+        public DBSACEntities()
+            : base("name=DBSACEntities")
         {
         }
     

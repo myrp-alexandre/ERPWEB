@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0a5395d470d7436db64daca26bb2d6f2" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model_ImportacionDiarios.vw_diarios_contables_migracion" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="dc4e6e34e57541748d72dea3aea9be61" Name="Diagram1">
+        <EntityTypeShape EntityType="DBSACModel.vw_diarios_contables_migracion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

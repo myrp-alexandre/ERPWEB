@@ -854,6 +854,7 @@
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Migraciones\FacturasEventos_Data.cs" />
+    <Compile Include="Migraciones\ImportacionDiarios_Data.cs" />
     <Compile Include="Model_activo_fijo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2808,13 +2809,13 @@
     </Content>
     <Content Include="Model_ImportacionDiarios.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model_ImportacionDiarios.Context.cs</LastGenOutput>
       <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
+      <LastGenOutput>Model_ImportacionDiarios.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model_ImportacionDiarios.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model_ImportacionDiarios.cs</LastGenOutput>
       <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
+      <LastGenOutput>Model_ImportacionDiarios.cs</LastGenOutput>
     </Content>
     <Content Include="Model_inventario.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
