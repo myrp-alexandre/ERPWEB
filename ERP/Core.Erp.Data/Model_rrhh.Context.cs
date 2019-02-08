@@ -140,9 +140,9 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<ro_empleado_x_CuentaContable> ro_empleado_x_CuentaContable { get; set; }
-        public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
         public DbSet<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
         public DbSet<vwro_empleado_x_division_x_area> vwro_empleado_x_division_x_area { get; set; }
+        public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

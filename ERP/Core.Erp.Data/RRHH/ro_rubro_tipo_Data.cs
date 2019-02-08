@@ -260,8 +260,9 @@ namespace Core.Erp.Data.RRHH
                         rub_acumula_descuento=Entity.rub_acumula_descuento,
                         se_distribuye = Entity.se_distribuye,
                         rub_AplicaIR=Entity.rub_AplicaIR,
-                        rub_GrupoResumen=Entity.rub_GrupoResumen
-                        
+                        rub_GrupoResumen=Entity.rub_GrupoResumen,
+                        rub_ContPorEmpleado = Entity.rub_ContPorEmpleado
+
                     };
                 }
 
@@ -325,6 +326,7 @@ namespace Core.Erp.Data.RRHH
                         se_distribuye = info.se_distribuye,
                         rub_AplicaIR = info.rub_AplicaIR,
                         rub_GrupoResumen = info.rub_GrupoResumen == "" ? null : info.rub_GrupoResumen,
+                        rub_ContPorEmpleado = info.rub_ContPorEmpleado
                     };
                     Context.ro_rubro_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -365,6 +367,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Entity.rub_AplicaIR = info.rub_AplicaIR;
                     Entity.rub_GrupoResumen = info.rub_GrupoResumen == "" ? null : info.rub_GrupoResumen;
+                    Entity.rub_ContPorEmpleado = info.rub_ContPorEmpleado;
+
                     Context.SaveChanges();
                 }
 
