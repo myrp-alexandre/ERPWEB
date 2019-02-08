@@ -383,8 +383,30 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_detalle.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
 
             lst_detalle_op.Add(info_detalle);
+
             lis_cp_orden_pago_det_Info.set_list(lst_detalle_op);
 
+            comprobante_contable_fp.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
+            var pro = bus_proveedor.get_info(IdEmpresa, IdEntidad);
+            var tipo = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
+            var list = lis_cp_orden_pago_det_Info.get_list();
+            foreach (var item in list)
+            {
+                //Debe
+                comprobante_contable_fp.AddRow(new ct_cbtecble_det_Info
+                {
+                    //IdCtaCble = tipo.IdCtaCble_Credito,
+                    dc_Valor = Math.Round(item.Valor_a_pagar, 2, MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(item.Valor_a_pagar, 2, MidpointRounding.AwayFromZero)
+                }, IdTransaccionSession);
+            }
+            comprobante_contable_fp.AddRow(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = pro.IdCtaCble_CXP,
+                dc_Valor = Math.Round(list.Sum(q => q.Valor_a_pagar), 2, MidpointRounding.AwayFromZero) * -1,
+                dc_Valor_haber = Math.Round(list.Sum(q => q.Valor_a_pagar), 2, MidpointRounding.AwayFromZero),
+                dc_para_conciliar = true
+            }, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
