@@ -30,18 +30,7 @@ namespace Core.Erp.Web.Reportes.Banco
             int IdBanco = string.IsNullOrEmpty(p_IdBanco.Value.ToString()) ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
             BAN_009_Bus bus_rpt = new BAN_009_Bus();
-
-            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {                
-                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
-                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
-            }
-            else
-            {
-                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
-                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
-                
-            }
+             
 
             List<BAN_009_Info> lst_rpt = new List<BAN_009_Info>();
             if (IntArray != null)
@@ -58,34 +47,18 @@ namespace Core.Erp.Web.Reportes.Banco
 
         private void GroupHeader2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {
-                e.Cancel = true;
-            }
         }
 
         private void GroupFooter2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {
-                e.Cancel = true;
-            }
         }
 
         private void GroupHeader1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {
-                e.Cancel = true;
-            }
         }
 
         private void GroupFooter1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
-            {
-                e.Cancel = true;
-            }
         }
     }
 }
