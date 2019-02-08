@@ -1,0 +1,21 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdNomina";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "CmbNomina", Area = "Inventario" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdNominaTipo", "ID", 10);
+        settings.Properties.Columns.Add("Descripcion", "Descripción", 90);
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "OnSelectedNominaChanged";
+    })
+     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_list_bajo_demanda_nomina, new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_info_bajo_demanda_nomina)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info) ? "" : (Model == 0 ? "" : Model));
+    }
+@comboBox.GetHtml()

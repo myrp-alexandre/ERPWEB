@@ -385,6 +385,11 @@
             autoclose: true
         })
     })
-
+    function OnSelectedNominaChanged() {
+        GridViewPartial_cta_contable_sueldo_pagar.GetEditor("IdNomina").PerformCallback();
+    }
+    function NominaComboBox_BeginCallback(s, e) {
+        e.customArgs["IdNomina"] = IdNomina.GetValue();
+    }
 
 </script>
