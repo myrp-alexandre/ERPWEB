@@ -11,6 +11,21 @@
     <AssemblyName>Core.Erp.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publicar\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1003,6 +1018,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_importacion.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model_ImportacionDiarios.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_ImportacionDiarios.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_ImportacionDiarios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_ImportacionDiarios.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_ImportacionDiarios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model_inventario.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2524,6 +2554,9 @@
     <Compile Include="vwtb_TarjetaCredito_x_cp_proveedor.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_diarios_contables_migracion.cs">
+      <DependentUpon>Model_ImportacionDiarios.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -2608,6 +2641,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_inventario.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_ImportacionDiarios.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_ImportacionDiarios.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_ImportacionDiarios.edmx.diagram">
+      <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
+    </None>
     <None Include="Model_inventario.edmx.diagram">
       <DependentUpon>Model_inventario.edmx</DependentUpon>
     </None>
@@ -2766,6 +2806,16 @@
       <DependentUpon>Model_importacion.edmx</DependentUpon>
       <LastGenOutput>Model_importacion.cs</LastGenOutput>
     </Content>
+    <Content Include="Model_ImportacionDiarios.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model_ImportacionDiarios.Context.cs</LastGenOutput>
+      <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model_ImportacionDiarios.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model_ImportacionDiarios.cs</LastGenOutput>
+      <DependentUpon>Model_ImportacionDiarios.edmx</DependentUpon>
+    </Content>
     <Content Include="Model_inventario.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_inventario.edmx</DependentUpon>
@@ -2846,6 +2896,17 @@
       <Name>Core.Erp.Info</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
