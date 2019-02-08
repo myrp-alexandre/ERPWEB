@@ -16,5 +16,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public int Secuencia { get; set; }
 
+        public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
     }
 }

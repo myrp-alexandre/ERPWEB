@@ -57,12 +57,16 @@
             column.Width = Unit.Percentage(35);
             column.EditorProperties().ComboBox(p =>
             {
+                p.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "CargarNomina", Area = "RRHH" };
                 p.Columns.Add("DescripcionProcesoNomina", "Descripción").Width = Unit.Percentage(70);
                 p.ValueField = "IdNomina_TipoLiqui";
 
                 p.ValueType = typeof(int);
                 p.DataSource = ViewBag.lst_nomina_tipo;
                 p.Width = Unit.Percentage(100);
+
+                p.ClientSideEvents.BeginCallback = "NominaComboBox_BeginCallback";
+                p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
 

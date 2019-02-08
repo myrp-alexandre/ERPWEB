@@ -11,11 +11,13 @@
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pe_nombreCompleto";
-        settings.Properties.TextFormatString = "{0}";
+        settings.Properties.TextFormatString = " [{0}] {1} {2}";
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.NullText = "== Seleccione ==";
+        settings.Properties.Columns.Add("IdEntidad", "ID", 10);
+        settings.Properties.Columns.Add("pe_cedulaRUC", "RUC", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 100);
         settings.Properties.FilterMinLength = 3;
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e) {$('#GiradoA').val(s.GetText());}";

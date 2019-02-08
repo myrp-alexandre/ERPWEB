@@ -88,6 +88,35 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
 
+        #region Metodos ComboBox bajo demanda provisiones credito
+
+        public ActionResult CmbNomina()
+        {
+            ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info model = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info();
+            return PartialView("_CmbNomina", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_nomina(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_prov_nomina(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        public ActionResult CargarNomina()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdNomina = Request.Params["IdNomina"] != null ? Convert.ToInt32(Request.Params["IdNomina"].ToString()) : 0;
+            return GridViewExtension.GetComboBoxCallbackResult(p =>
+            {
+                p.TextField = "DescripcionProcesoNomina";
+                p.ValueField = "IdNominaTipo";
+                p.ValueType = typeof(int);
+                p.BindList(bus_nomina_tipo.get_list(IdEmpresa, IdNomina));
+            });
+        }
         public ActionResult Index()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -218,6 +247,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public ActionResult EditingNew_cta_sueldo([ModelBinder(typeof(DevExpressEditorsBinder))] ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            var nom = bus_nomina.get_info(IdEmpresa, info_det.IdNomina);
+            var nom_tipo = bus_nomina_tipo.get_info(IdEmpresa, info_det.IdNomina, info_det.IdNominaTipo);
+            if(info_det!=null)
+            {
+                if(nom!=null && nom_tipo!= null)
+                {
+                    info_det.IdNomina = info_det.IdNomina;
+                    info_det.Descripcion = nom.Descripcion;
+                    info_det.IdNominaTipo = info_det.IdNominaTipo;
+                    info_det.DescripcionProcesoNomina = nom_tipo.DescripcionProcesoNomina;
+                }
+            }
+
             if (ModelState.IsValid)
                 lst_cta_rubro.NewRow_cta_sueldo_x_pagar(info_det);
             ro_Parametros_Info model = new ro_Parametros_Info();
