@@ -92,7 +92,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult CmbNomina()
         {
-            int model = new int();
+            ro_Parametros_Info model = new ro_Parametros_Info();
             return PartialView("_CmbNomina", model);
         }
         public List<ro_nomina_tipo_Info> get_list_bajo_demanda_nomina(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -115,7 +115,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
                 p.TextField = "DescripcionProcesoNomina";
-                p.ValueField = "IdNominaTipo";
+                p.ValueField = "IdNomina_TipoLiqui";
                 p.ValueType = typeof(int);
                 p.BindList(bus_nomina_tipo.get_list(IdEmpresa, IdNomina));
             });
