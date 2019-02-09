@@ -92,7 +92,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult CmbNomina()
         {
-            ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info model = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info();
+            int model = new int();
             return PartialView("_CmbNomina", model);
         }
         public List<ro_nomina_tipo_Info> get_list_bajo_demanda_nomina(ListEditItemsRequestedByFilterConditionEventArgs args)

@@ -56,7 +56,7 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
-                p.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "cargar_tipo_liquidacion_nomina", Area = "RRHH" };
+                p.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "cargar_tipo_liquidacion_nomina", Area = "RRHH" };
                 p.TextField = "DescripcionProcesoNomina";
                 p.ValueField = "IdNomina_TipoLiqui";
                 p.ValueType = typeof(int);

@@ -14,7 +14,9 @@
         settings.Properties.Columns.Add("IdNominaTipo", "ID", 10);
         settings.Properties.Columns.Add("Descripcion", "Descripción", 90);
     })
-     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_list_bajo_demanda_nomina, new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info) ? "" : (Model == 0 ? "" : Model));
+
+      .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_list_bajo_demanda_nomina, new Core.Erp.Web.Areas.RRHH.Controllers.ParametrosContableController().get_info_bajo_demanda)
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_Parametros_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_Config_Param_contable_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_Config_Param_contable_Info>)) ? "" : Model);
+
     }
 @comboBox.GetHtml()
