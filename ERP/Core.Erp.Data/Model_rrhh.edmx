@@ -2487,6 +2487,26 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques_det' no t
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="100" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwro_participacion_utilidad">
           <Key>
@@ -5604,6 +5624,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_NominasPagosCheques_det].[Estado] AS [Estado]
     FROM [dbo].[vwro_NominasPagosCheques_det] AS [vwro_NominasPagosCheques_det]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" EntityType="Self.vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[IdNomina] AS [IdNomina], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[IdNominaTipo] AS [IdNominaTipo], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[IdCtaCble] AS [IdCtaCble], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[Observacion] AS [Observacion], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[Descripcion] AS [Descripcion], 
+    [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar].[pc_Cuenta] AS [pc_Cuenta]
+    FROM [dbo].[vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar] AS [vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwro_participacion_utilidad" EntityType="Self.vwro_participacion_utilidad" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwro_participacion_utilidad].[IdEmpresa] AS [IdEmpresa], 
@@ -8574,6 +8606,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
           <EntitySet Name="vwro_rol_detalle" EntityType="Model_rrhh.vwro_rol_detalle" />
+          <EntitySet Name="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" EntityType="Model_rrhh.vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -12198,6 +12231,24 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="rub_provision" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14707,6 +14758,20 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
+              <MappingFragment StoreEntitySet="vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

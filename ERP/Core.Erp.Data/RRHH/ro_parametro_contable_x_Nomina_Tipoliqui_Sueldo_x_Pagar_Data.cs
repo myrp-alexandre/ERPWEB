@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Lista = (from q in Context.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar
+                    Lista = (from q in Context.vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar
                              where q.IdEmpresa == IdEmpresa
                              select new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info
                              {
@@ -26,7 +26,10 @@ namespace Core.Erp.Data.RRHH
                                  IdNominaTipo = q.IdNominaTipo,
                                  IdTipoFlujo = q.IdTipoFlujo,
                                  Observacion = q.Observacion,
-                                 IdCtaCble_sueldo = q.IdCtaCble
+                                 IdCtaCble_sueldo = q.IdCtaCble,
+                                 pc_Cuenta=q.pc_Cuenta,
+                                 Descripcion=q.Descripcion
+                                 
                              }).ToList();
 
                 }
