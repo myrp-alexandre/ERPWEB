@@ -26,7 +26,7 @@ namespace Core.Erp.Data.RRHH
                                  IdNominaTipo = q.IdNominaTipo,
                                  IdTipoFlujo = q.IdTipoFlujo,
                                  Observacion = q.Observacion,
-                                 IdCtaCble = q.IdCtaCble
+                                 IdCtaCble_sueldo = q.IdCtaCble
                              }).ToList();
 
                 }
@@ -84,7 +84,7 @@ namespace Core.Erp.Data.RRHH
                             IdNominaTipo = item.IdNominaTipo,
                             IdTipoFlujo = item.IdTipoFlujo,
                             Observacion = item.Observacion,
-                            IdCtaCble = item.IdCtaCble
+                            IdCtaCble = item.IdCtaCble_sueldo
                         };
                         Context.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar.Add(Entity);
                     }

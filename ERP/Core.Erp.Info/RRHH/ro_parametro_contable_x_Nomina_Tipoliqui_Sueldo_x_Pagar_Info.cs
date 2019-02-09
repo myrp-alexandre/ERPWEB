@@ -12,11 +12,15 @@ namespace Core.Erp.Info.RRHH
         public int IdNomina { get; set; }
         public int IdNominaTipo { get; set; }
         public string IdCtaCble { get; set; }
+        public string IdCtaCble_sueldo { get; set; }
         public string Observacion { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public int Secuencia { get; set; }
 
         public string Descripcion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
+
+
+        public string pc_Cuenta { get; set; }
     }
 }

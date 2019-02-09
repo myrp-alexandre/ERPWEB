@@ -88,6 +88,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
 
+
+        #region Metodos ComboBox bajo demanda sueldo por pagar
+
+        public ActionResult CmbCuenta_sueldo_x_pagar()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_sueldo_x_pagar", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_sueldo_x_pagar(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_sueldo_x_pagar(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+
         #region Metodos ComboBox bajo demanda provisiones credito
 
         public ActionResult CmbNomina()
@@ -361,15 +380,34 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public void UpdateRow_cta_sueldo_x_pagar(ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info info_det)
         {
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_sueldo);
             ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info edited_info = get_list_sueldo_x_pagar().Where(m => m.Secuencia == info_det.Secuencia).First();
-            edited_info.IdCtaCble = info_det.IdCtaCble;
+            if (cta != null)
+            {
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+
+
+            edited_info.IdCtaCble_sueldo = info_det.IdCtaCble_sueldo;
             edited_info.IdNomina = info_det.IdNomina;
             edited_info.IdNominaTipo = info_det.IdNominaTipo;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
         }
         public void NewRow_cta_sueldo_x_pagar(ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info info_det)
         {
             List<ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info> list = get_list_sueldo_x_pagar();
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_sueldo);
+            if (cta != null)
+            {
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+
+
+
             list.Add(info_det);
         }
         public void DeleteRow_cta_sueldo_x_pagar(ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info info_det)
