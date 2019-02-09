@@ -71,7 +71,7 @@ namespace Core.Erp.Data
         public bool se_distribuye { get; set; }
         public string rub_GrupoResumen { get; set; }
         public bool rub_AplicaIR { get; set; }
-        public Nullable<bool> rub_ContPorEmpleado { get; set; }
+        public bool rub_ContPorEmpleado { get; set; }
     
         public virtual ICollection<ro_Acta_Finiquito_Detalle> ro_Acta_Finiquito_Detalle { get; set; }
         public virtual ro_catalogo ro_catalogo { get; set; }

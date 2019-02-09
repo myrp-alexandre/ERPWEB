@@ -51,6 +51,7 @@ namespace Core.Erp.Info.RRHH
         public string pc_Cuenta_prov_credito { get; set; }
         public string pc_Cuenta_prov_debito { get; set; }
         public Nullable<bool> rub_Contabiliza_x_empleado { get; set; }
+        public bool rub_ContPorEmpleado { get; set; }
 
 
     }
