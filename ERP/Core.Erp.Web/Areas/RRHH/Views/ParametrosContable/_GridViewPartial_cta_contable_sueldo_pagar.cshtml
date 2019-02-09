@@ -34,41 +34,39 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
 
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdNomina";
-            column.Caption = "Nómina";
+            column.Caption = "Nomina";
             column.Width = Unit.Percentage(35);
-            column.EditorProperties().ComboBox(p =>
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
-                p.ValueField = "IdNomina_Tipo";
-
-                p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_nomina;
-                p.Width = Unit.Percentage(100);
+                Html.RenderPartial("_CmbNomina", DataBinder.Eval(c.DataItem, "IdNomina"));
             });
         });
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdNominaTipo";
-            column.Caption = "Proceso";
-            column.Width = Unit.Percentage(35);
+            column.Caption = "Tipo nomina";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
-                p.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "CargarNomina", Area = "RRHH" };
-                p.Columns.Add("DescripcionProcesoNomina", "Descripción").Width = Unit.Percentage(70);
+                p.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "cargar_tipo_liquidacion_nomina", Area = "RRHH" };
+                p.TextField = "DescripcionProcesoNomina";
                 p.ValueField = "IdNomina_TipoLiqui";
-
                 p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_nomina_tipo;
-                p.Width = Unit.Percentage(100);
-
-                p.ClientSideEvents.BeginCallback = "NominaComboBox_BeginCallback";
+                //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
+                p.BindList(ViewBag.lst_grupos);
+                p.ClientSideEvents.BeginCallback = "GrupoComboBox_BeginCallback";
                 p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
+
 
         settings.Columns.Add(column =>
         {

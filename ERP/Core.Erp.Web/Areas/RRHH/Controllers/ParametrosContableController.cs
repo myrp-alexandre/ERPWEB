@@ -95,14 +95,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info model = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info();
             return PartialView("_CmbNomina", model);
         }
-        public List<ct_plancta_Info> get_list_bajo_demanda_nomina(ListEditItemsRequestedByFilterConditionEventArgs args)
+        public List<ro_nomina_tipo_Info> get_list_bajo_demanda_nomina(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+            return bus_nomina.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
-        public ct_plancta_Info get_info_bajo_demanda_prov_nomina(ListEditItemRequestedByValueEventArgs args)
+        public ro_nomina_tipo_Info get_info_bajo_demanda_prov_nomina(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            return bus_nomina.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
         }
+
+
+       
         #endregion
 
         public ActionResult CargarNomina()

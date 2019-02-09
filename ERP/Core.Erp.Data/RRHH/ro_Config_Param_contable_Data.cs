@@ -52,7 +52,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                       
-        string sql = " select IdEmpresa,IdRubro,IdCtaCble,IdCtaCble_Haber, ru_descripcion,ru_tipo,IdDepartamento, IdArea, IdDivision,DescripcionArea,de_descripcion from vwRo_Division_Area_dep_rubro where IdEmpresa='" + IdEmpresa + "' and rub_provision='" + es_provision + "' and rub_nocontab='" + 1 + "' group by IdEmpresa,IdRubro,IdCtaCble, ru_descripcion,IdCtaCble_Haber,ru_tipo ,IdDepartamento, IdArea, IdDivision,,DescripcionArea,de_descripcion";
+        string sql = " select IdEmpresa,IdRubro,IdCtaCble,IdCtaCble_Haber, ru_descripcion,ru_tipo,IdDepartamento, IdArea, IdDivision,DescripcionArea,de_descripcion from vwRo_Division_Area_dep_rubro where IdEmpresa='" + IdEmpresa + "' and rub_provision='" + es_provision + "' and rub_nocontab='" + 1 + "' group by IdEmpresa,IdRubro,IdCtaCble, ru_descripcion,IdCtaCble_Haber,ru_tipo ,IdDepartamento, IdArea, IdDivision,DescripcionArea,de_descripcion";
                     var result = Context.Database.SqlQuery<ro_Config_Param_contable_Info>(sql).ToList();
                     Lista = result;
                     Lista.ForEach(v => v.Secuencia = secuencia++);
