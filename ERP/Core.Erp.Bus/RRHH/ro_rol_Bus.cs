@@ -266,7 +266,7 @@ namespace Core.Erp.Bus.RRHH
                             oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         }
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion;
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion+"/ "+ item.DescripcionArea+"/ "+item.de_descripcion;
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
                     }
                                                     
@@ -281,7 +281,7 @@ namespace Core.Erp.Bus.RRHH
                 ct_cbtecble_det_Info oct_cbtecble_det_Info2 = new ct_cbtecble_det_Info();
                 oct_cbtecble_det_Info2.secuencia = secuecia;
                 oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
-                oct_cbtecble_det_Info2.IdCtaCble = info_cta_sueldo_x_pagar.IdCtaCble;
+                oct_cbtecble_det_Info2.IdCtaCble = (info_cta_sueldo_x_pagar.IdCtaCble)==null?"": info_cta_sueldo_x_pagar.IdCtaCble;
                 oct_cbtecble_det_Info2.dc_Valor = valorSueldoXPagar * -1;
                 oct_cbtecble_det_Info2.dc_Valor_haber = valorSueldoXPagar ;
                 oct_cbtecble_det_Info2.dc_Observacion = "Sueldo por Pagar Neto a Recibir al " + idPeriodo;
@@ -320,7 +320,7 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info.secuencia = secuencia;
                         oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info.IdTipoCbte = 1;
-                        oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
+                        oct_cbtecble_det_Info.IdCtaCble = (item.IdCtaCble)==null?"": item.IdCtaCble;
                         oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
                         oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion;
@@ -331,7 +331,8 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info2.secuencia = secuencia;
                         oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info2.IdTipoCbte = 1;
-                        oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_prov_credito; 
+                        oct_cbtecble_det_Info.IdCtaCble = (item.IdCtaCble_prov_credito) == null ? "" : item.IdCtaCble_prov_credito;
+
                         oct_cbtecble_det_Info2.dc_Valor = valorTotal * -1;
                         oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal ;
 
