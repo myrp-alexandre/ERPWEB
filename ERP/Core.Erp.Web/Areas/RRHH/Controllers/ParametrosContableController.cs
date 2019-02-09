@@ -218,13 +218,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
             model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
-            if (model.lst_cta_x_sueldo_pagar.Count() == 0)
-            {
-                model.lst_cta_x_sueldo_pagar = bus_configuracion_cta_x_sueldo.get_list(IdEmpresa);
-                model.lst_cta_x_provisiones = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == true && v.rub_nocontab == true).ToList();
-                lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
-            }
-            model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
+           
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_contable_sueldo_pagar", model);
         }
