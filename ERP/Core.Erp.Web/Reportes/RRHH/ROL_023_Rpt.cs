@@ -50,8 +50,9 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  q.IdSucursal,
                                  q.IdPeriodo,
                                  q.IdNominaTipo,
-                                 q.IdNominaTipoLiqui,
+                                 q.IdNominaTipoLiqui,                                 
                                  q.NombreDivision,
+                                 q.IdArea,
                                  q.NombreArea,
                                  q.IdDepartamento,
                                  q.NombreDepartamento,
@@ -63,8 +64,9 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  IdSucursal = Resumen.Key.IdSucursal,
                                  IdPeriodo = Resumen.Key.IdPeriodo,
                                  IdNominaTipo = Resumen.Key.IdNominaTipo,
-                                 IdNominaTipoLiqui = Resumen.Key.IdNominaTipoLiqui,
+                                 IdNominaTipoLiqui = Resumen.Key.IdNominaTipoLiqui,                                 
                                  NombreDivision = Resumen.Key.NombreDivision,
+                                 IdArea = Resumen.Key.IdArea,
                                  NombreArea = Resumen.Key.NombreArea,
                                  IdDepartamento = Resumen.Key.IdDepartamento,
                                  NombreDepartamento = Resumen.Key.NombreDepartamento,
@@ -90,6 +92,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      q.IdNominaTipo,
                                      q.IdNominaTipoLiqui,
                                      q.NombreDivision,
+                                     q.IdArea,
                                      q.NombreArea,
                                      q.IdDepartamento,
                                      q.NombreDepartamento
@@ -102,6 +105,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      IdNominaTipo = Resumen_Reporte.Key.IdNominaTipo,
                                      IdNominaTipoLiqui = Resumen_Reporte.Key.IdNominaTipoLiqui,
                                      NombreDivision = Resumen_Reporte.Key.NombreDivision,
+                                     IdArea = Resumen_Reporte.Key.IdArea,
                                      NombreArea = Resumen_Reporte.Key.NombreArea,
                                      IdDepartamento = Resumen_Reporte.Key.IdDepartamento,
                                      NombreDepartamento = Resumen_Reporte.Key.NombreDepartamento,
@@ -111,14 +115,14 @@ namespace Core.Erp.Web.Reportes.RRHH
             foreach (var item in ListaAgrupadaResumen)
             {
                 //item.CantidadEmpleados = ListaAgrupadaResumen.Where(q => q.IdDepartamento == item.IdDepartamento).FirstOrDefault().CantidadEmpleados;
-                item.TOTALI = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q=> q.TOTALI);
-                item.DECIMOT = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.DECIMOT);
-                item.DECIMOC = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.DECIMOC);
-                item.FRESERVA = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.FRESERVA);
-                item.SUELDO = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.SUELDO);
-                item.SOBRET = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.SOBRET);
-                item.OTROING = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.OTROING);
-                item.TotalResumen = ListaAgrupada.Where(q => q.IdDepartamento == item.IdDepartamento).Sum(q => q.TotalResumen);
+                item.TOTALI = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q=> q.TOTALI);
+                item.DECIMOT = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.DECIMOT);
+                item.DECIMOC = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.DECIMOC);
+                item.FRESERVA = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.FRESERVA);
+                item.SUELDO = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.SUELDO);
+                item.SOBRET = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.SOBRET);
+                item.OTROING = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.OTROING);
+                item.TotalResumen = ListaAgrupada.Where(q => q.IdArea == item.IdArea && q.IdDepartamento == item.IdDepartamento).Sum(q => q.TotalResumen);
             }
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
