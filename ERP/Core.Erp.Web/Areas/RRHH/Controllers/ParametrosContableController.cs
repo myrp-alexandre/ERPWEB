@@ -234,8 +234,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.lst_catalogo = bus_catalogo.get_list_x_tipo(34);
-            ViewBag.lst_cta_contable = bus_cuenta.get_list(IdEmpresa, false, true);
-            ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
         }
         [HttpPost, ValidateInput(false)]
@@ -297,6 +295,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 lst_cta_rubro.DeleteRow_cta_sueldo_x_pagar(info_det);
             ro_Parametros_Info model = new ro_Parametros_Info();
             model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
+            lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_contable_sueldo_pagar", model);
         }
@@ -387,8 +386,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
             }
-
-
             edited_info.IdCtaCble_sueldo = info_det.IdCtaCble_sueldo;
             edited_info.IdNomina = info_det.IdNomina;
             edited_info.IdNominaTipo = info_det.IdNominaTipo;
