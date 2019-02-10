@@ -235,45 +235,81 @@ namespace Core.Erp.Bus.RRHH
                 info_cta_sueldo_x_pagar = bus_cta_sueldo_x_pagar.get_info(idEmpresa, idNominaTipo, idNominaTipoLiqui);
                 oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo, IdRol, false);
 
-                foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
+
+                #region Rubros que no se contabilizan por empleados
+                foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables.Where(v => v.rub_ContPorEmpleado == false))
                 {
 
                     double valorTotal = 0;
-
-
-                    if (item.rub_ContPorEmpleado == false)
+                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
+                                                                && v.IdArea == item.IdArea
+                                                                && v.IdDepartamento == item.IdDepartamento && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    if (valorTotal < 0)
+                        valorTotal = valorTotal * -1;
+                    if (valorTotal > 0)
                     {
-                        valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
-                                                                    && v.IdArea == item.IdArea
-                                                                    && v.IdDepartamento == item.IdDepartamento                                                                    && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
-                            if (valorTotal < 0)
-                                valorTotal = valorTotal * -1;
-                            if (valorTotal > 0)
-                            {
-                                valorTotal = Math.Round(valorTotal, 2);
-                                secuecia++;
-                                ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
-                                oct_cbtecble_det_Info.secuencia = secuecia;
-                                oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
-                                oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
-                                if (item.ru_tipo == "E")
-                                {
-                                    egreso = egreso + valorTotal;
-                                    oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
-                                    valorTotal = valorTotal * -1;
-                                }
-                                else
-                                {
-                                    ingreso = ingreso + valorTotal;
-                                    oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
-                                }
-                                oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                                oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion + "/ " + item.DescripcionArea + "/ " + item.de_descripcion;
-                                lst_detalle_diario.Add(oct_cbtecble_det_Info);
-                           }
-
+                        valorTotal = Math.Round(valorTotal, 2);
+                        secuecia++;
+                        ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
+                        oct_cbtecble_det_Info.secuencia = secuecia;
+                        oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
+                        oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
+                        if (item.ru_tipo == "E")
+                        {
+                            egreso = egreso + valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
+                            valorTotal = valorTotal * -1;
+                        }
+                        else
+                        {
+                            ingreso = ingreso + valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
+                        }
+                        oct_cbtecble_det_Info.dc_Valor = valorTotal;
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion + "/ " + item.DescripcionArea + "/ " + item.de_descripcion;
+                        lst_detalle_diario.Add(oct_cbtecble_det_Info);
                     }
                 }
+
+                #endregion
+
+                #region Rubros que se contabilizan por empleados
+                foreach (ro_rol_detalle_Info item in oListro_rol_detalle_Info.Where(v => v.rub_ContPorEmpleado == true))
+                {
+
+                    double valorTotal = 0;
+                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
+                                                                && v.IdArea == item.IdArea
+                                                                && v.IdDepartamento == item.IdDepartamento && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    if (valorTotal < 0)
+                        valorTotal = valorTotal * -1;
+                    if (valorTotal > 0)
+                    {
+                        valorTotal = Math.Round(valorTotal, 2);
+                        secuecia++;
+                        ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
+                        oct_cbtecble_det_Info.secuencia = secuecia;
+                        oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
+                        oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble_Emplea;
+                        if (item.ru_tipo == "E")
+                        {
+                            egreso = egreso + valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
+                            valorTotal = valorTotal * -1;
+                        }
+                        else
+                        {
+                            ingreso = ingreso + valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
+                        }
+                        oct_cbtecble_det_Info.dc_Valor = valorTotal;
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion + "/ " + item.pe_nombreCompleato;
+                        lst_detalle_diario.Add(oct_cbtecble_det_Info);
+                    }
+                }
+
+                #endregion
+
 
                 if (info_cta_sueldo_x_pagar == null)
                     info_cta_sueldo_x_pagar = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info();

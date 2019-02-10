@@ -40,8 +40,11 @@ namespace Core.Erp.Data.RRHH
                                      IdDivision = a.IdDivision,
                                      IdArea = a.IdArea,
                                      IdDepartamento = a.IdDepartamento,
-                                     ru_tipo=a.ru_tipo                                    
-                                 }).ToList();
+                                     ru_tipo=a.ru_tipo,
+                                     rub_ContPorEmpleado=a.rub_ContPorEmpleado  ,
+                                     IdCtaCble_Emplea=a.IdCtaCble_Emplea,
+                                    ru_descripcion=a.ru_descripcion
+                                }).ToList();
                 }
                 return oListado;
             }

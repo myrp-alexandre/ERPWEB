@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public string ru_descripcion { get; set; }
         public string pe_nombreCompleto { get; set; }
         public bool rub_provision { get; set; }
+        public bool rub_ContPorEmpleado { get; set; }
     }
 }

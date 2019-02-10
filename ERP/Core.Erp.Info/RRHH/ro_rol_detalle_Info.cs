@@ -19,6 +19,9 @@ namespace Core.Erp.Info.RRHH
         public double Valor { get; set; }
         public Nullable<bool> rub_visible_reporte { get; set; }
         public string Observacion { get; set; }
+        public bool rub_ContPorEmpleado { get; set; }
+        public string IdCtaCble_Emplea { get; set; }
+        public string ru_descripcion { get; set; }
 
         #region campos de la vista
         public Nullable<int> IdArea { get; set; }
