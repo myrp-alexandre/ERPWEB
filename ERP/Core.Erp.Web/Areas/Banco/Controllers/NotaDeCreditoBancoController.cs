@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
     [SessionTimeout]
@@ -34,7 +33,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_Banco_Flujo_Det_NotaCredito_List List_Banco_Flujo_Det = new ba_Banco_Flujo_Det_NotaCredito_List();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_Cbte_Ban_x_ba_TipoFlujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
         #endregion
-
         #region Metodos ComboBox bajo demanda flujo
         public ActionResult CmbFlujo_ND_C()
         {
@@ -50,7 +48,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
-
         #region Metodos ComboBox bajo demanda flujo
         public ActionResult CmbFlujo_NotaCredito()
         {
@@ -66,7 +63,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
-
         #region Metodos ComboBox tipo de nota
         public ActionResult CmbTipoNota()
         {
@@ -82,7 +78,266 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return bus_tipo_nota.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+        #region Detalle del diario
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_comprobante_detalle_Credito()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cuentas = lst_cuentas;
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+        public ActionResult EditingDelete(int secuencia)
+        {
+            List_ct.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+        #endregion
+        #region Detalle Flujo
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_flujo_det()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewFlujo([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_Banco_Flujo_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateFlujo([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_Banco_Flujo_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        public ActionResult EditingDeleteFlujo(int Secuencia)
+        {
+            List_Banco_Flujo_Det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        #endregion
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                CodTipoCbteBan = cl_enumeradores.eTipoCbteBancario.NCBA.ToString(),
+                cb_Fecha = DateTime.Now.Date,
+                lst_det_ct = new List<ct_cbtecble_det_Info>(),
+                IdBanco = 1,
+                IdTipoNota = 2,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                list_det = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
+            };
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
+            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Nuevo(ba_Cbte_Ban_Info model)
+        {
+            model.list_det = List_Banco_Flujo_Det.get_list(model.IdTransaccionSession);
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
+            {
+                ViewBag.mensaje = "No se pudo guardar el registro";
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Modificar(ba_Cbte_Ban_Info model)
+        {
+            model.list_det = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
+            {
+                ViewBag.mensaje = "No se pudo modificar el registro";
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            return View(model);
+        }
+        public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(ba_Cbte_Ban_Info model)
+        {
+            model.IdUsuario_Anu = SessionFixed.IdUsuario;
+            if (!bus_cbteban.anularDB(model))
+            {   ViewBag.mensaje = "No se pudo anular el registro";
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        #endregion
+        #region Metodos
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
+        {
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+            var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, cl_enumeradores.eTipoCbteBancario.NCBA.ToString(), false);
+            ViewBag.lst_tipo_nota = lst_tipo_nota;
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
+            ViewBag.lst_banco_cuenta = lst_banco_cuenta;
+        }
+        private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.BANCO, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
+            i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
 
+            if (i_validar.lst_det_ct.Count == 0)
+            {
+                msg = "El detalle del diario se encuentra vacío";
+                return false;
+            }
+            foreach (var item in i_validar.lst_det_ct)
+            {
+                if (string.IsNullOrEmpty(item.IdCtaCble))
+                {
+                    mensaje = "Faltan cuentas contables, por favor verifique";
+                    return false;
+                }
+            }
+            if (Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
+            {
+                mensaje = "La suma de los detalles debe ser 0, por favor verifique";
+                return false;
+            }
+            if (i_validar.lst_det_ct.Where(q => q.dc_Valor == 0).Count() > 0)
+            {
+                mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
+                return false;
+            }
+            if (i_validar.list_det.Count() > 0)
+            {
+                if (Math.Round(i_validar.list_det.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero) != i_validar.cb_Valor)
+                {
+                    mensaje = "La suma de los detalles del flujo debe ser igual a el valor del documento";
+                    return false;
+                }
+            }
+            var cta = bus_banco_cuenta.get_info(i_validar.IdEmpresa, i_validar.IdBanco);
+            if(cta==null)
+            {
+                mensaje = "Selecciona la cuenta bancaria";
+                return false;
+            }
+            i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
+            i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            i_validar.IdUsuario_Anu = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
+            return true;
+        }
+        #endregion
         #region Index
         public ActionResult Index()
         {
@@ -123,212 +378,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return PartialView("_GridViewPartial_CreditoBanco", model);
         }
         #endregion
-
-        #region Metodos
-        private void cargar_combos(int IdEmpresa, int IdSucursal)
-        {
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            ViewBag.lst_sucursal = lst_sucursal;
-
-            var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, cl_enumeradores.eTipoCbteBancario.NCBA.ToString(), false);
-            ViewBag.lst_tipo_nota = lst_tipo_nota;
-
-            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
-            ViewBag.lst_banco_cuenta = lst_banco_cuenta;
-        }
-        private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
-        {
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.BANCO, ref msg))
-            {
-                return false;
-            }
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
-            {
-                return false;
-            }
-            i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
-
-            if (i_validar.lst_det_ct.Count == 0)
-            {
-                msg = "El detalle del diario se encuentra vacío";
-                return false;
-            }
-
-            foreach (var item in i_validar.lst_det_ct)
-            {
-                if (string.IsNullOrEmpty(item.IdCtaCble))
-                {
-                    mensaje = "Faltan cuentas contables, por favor verifique";
-                    return false;
-                }
-            }
-
-            if (Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
-            {
-                mensaje = "La suma de los detalles debe ser 0, por favor verifique";
-                return false;
-            }
-            if (i_validar.lst_det_ct.Where(q => q.dc_Valor == 0).Count() > 0)
-            {
-                mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
-                return false;
-            }
-
-            if (i_validar.list_det.Count() > 0)
-            {
-                if (Math.Round(i_validar.list_det.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero) != i_validar.cb_Valor)
-                {
-                    mensaje = "La suma de los detalles del flujo debe ser igual a el valor del documento";
-                    return false;
-                }
-            }
-            
-            i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
-            i_validar.IdUsuario = SessionFixed.IdUsuario;
-            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
-            i_validar.IdUsuario_Anu = SessionFixed.IdUsuario;
-            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
-            i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
-            return true;
-        }
-        #endregion
-
-        #region Acciones
-
-        public ActionResult Nuevo(int IdEmpresa = 0)
-        {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-
-            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                CodTipoCbteBan = cl_enumeradores.eTipoCbteBancario.NCBA.ToString(),
-                cb_Fecha = DateTime.Now.Date,
-                lst_det_ct = new List<ct_cbtecble_det_Info>(),
-                IdBanco = 1,
-                IdTipoNota = 2,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                list_det = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
-            };
-            SessionFixed.TipoPersona = model.IdTipo_Persona;
-            List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
-            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
-            cargar_combos(IdEmpresa, model.IdSucursal);
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Nuevo(ba_Cbte_Ban_Info model)
-        {
-            model.list_det = List_Banco_Flujo_Det.get_list(model.IdTransaccionSession);
-
-            if (!validar(model, ref mensaje))
-            {
-                ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa, model.IdSucursal);
-                return View(model);
-            }
-            if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
-            {
-                ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa, model.IdSucursal);
-                return View(model);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Modificar(ba_Cbte_Ban_Info model)
-        {
-            model.list_det = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            if (!validar(model, ref mensaje))
-            {
-                ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa, model.IdSucursal);
-                return View(model);
-            }
-            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
-            {
-                ViewBag.mensaje = "No se pudo modificar el registro";
-                cargar_combos(model.IdEmpresa, model.IdSucursal);
-                return View(model);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
-            if (model == null)
-                return RedirectToAction("Index");
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa, model.IdSucursal);
-            SessionFixed.TipoPersona = model.IdTipo_Persona;
-            return View(model);
-        }
-
-        public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
-
-            if (model == null)
-                return RedirectToAction("Index");
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa, model.IdSucursal);
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Anular(ba_Cbte_Ban_Info model)
-        {
-            model.IdUsuario_Anu = SessionFixed.IdUsuario;
-            if (!bus_cbteban.anularDB(model))
-            {
-                ViewBag.mensaje = "No se pudo anular el registro";
-                cargar_combos(model.IdEmpresa, model.IdSucursal);
-                return View(model);
-            }
-
-            return RedirectToAction("Index");
-        }
-        #endregion
-
         #region Json
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0, double Valor = 0)
         {
             List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
-
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var tipo_nota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
-
             //Debe
             if (bco != null)
             {
@@ -340,7 +395,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                     dc_para_conciliar = true
                 },IdTransaccionSession);
             }            
-
             //Haber
             if (tipo_nota != null && !string.IsNullOrEmpty(tipo_nota.IdCtaCble))
             {
@@ -364,101 +418,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return Json(0, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
-        #region Detalle del diario
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_detalle_Credito()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
-        }
-
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
-            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
-            ViewBag.lst_cuentas = lst_cuentas;
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
-        {
-            if (ModelState.IsValid)
-                List_ct.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
-        {
-            if (ModelState.IsValid)
-                List_ct.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
-        }
-
-        public ActionResult EditingDelete(int secuencia)
-        {
-            List_ct.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
-        }
-        #endregion
-
-        #region Detalle Flujo
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_flujo_det()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_flujo_det", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFlujo([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
-        {
-            if (ModelState.IsValid)
-                List_Banco_Flujo_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_flujo_det", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdateFlujo([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
-        {
-
-            if (ModelState.IsValid)
-                List_Banco_Flujo_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_flujo_det", model);
-        }
-        public ActionResult EditingDeleteFlujo(int Secuencia)
-        {
-            List_Banco_Flujo_Det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_Banco_Flujo_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_flujo_det", model);
-        }
-        #endregion
     }
-
     public class ba_Banco_Flujo_Det_NotaCredito_List
     {
         string Variable = "ba_Cbte_Ban_x_ba_TipoFlujo_Info";
         public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> get_list(decimal IdTransaccionSession)
         {
-
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>();
@@ -467,21 +432,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return (List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
-
         public void set_list(List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
-
         public void AddRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
         {
             List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
-
             list.Add(info_det);
         }
-
         public void UpdateRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
         {
             ba_Cbte_Ban_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
@@ -491,7 +451,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             edited_info.Valor = info_det.Valor;
             edited_info.Secuencia = info_det.Secuencia;
         }
-
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
