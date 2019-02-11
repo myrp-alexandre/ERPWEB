@@ -41,7 +41,6 @@ namespace Core.Erp.Data
         public DbSet<ba_parametros> ba_parametros { get; set; }
         public DbSet<vwba_Cbte_Ban> vwba_Cbte_Ban { get; set; }
         public DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
-        public DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
         public DbSet<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
         public DbSet<ba_Cbte_Ban_x_ba_TipoFlujo> ba_Cbte_Ban_x_ba_TipoFlujo { get; set; }
         public DbSet<ba_TipoFlujo> ba_TipoFlujo { get; set; }
@@ -52,5 +51,6 @@ namespace Core.Erp.Data
         public DbSet<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
         public DbSet<vwba_TipoFlujo_Movimiento> vwba_TipoFlujo_Movimiento { get; set; }
         public DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
+        public DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
     }
 }

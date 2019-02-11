@@ -32,7 +32,7 @@ namespace Core.Erp.Data.Banco
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      IdCtaCble = q.IdCtaCble,
-
+                                     EsFlujoObligatorio = q.EsFlujoObligatorio,
                                      EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
@@ -54,6 +54,7 @@ namespace Core.Erp.Data.Banco
                                          Estado = q.Estado,
                                          IdBanco = q.IdBanco,
                                          IdCtaCble = q.IdCtaCble,
+                                         EsFlujoObligatorio = q.EsFlujoObligatorio,
 
                                          EstadoBool = q.Estado == "A" ? true : false
 
@@ -78,6 +79,7 @@ namespace Core.Erp.Data.Banco
                                          Estado = q.Estado,
                                          IdBanco = q.IdBanco,
                                          IdCtaCble = q.IdCtaCble,
+                                         EsFlujoObligatorio = q.EsFlujoObligatorio,
 
                                          EstadoBool = q.Estado == "A" ? true : false
 
@@ -116,6 +118,7 @@ namespace Core.Erp.Data.Banco
                         IdBanco_Financiero = Entity.IdBanco_Financiero,
                         ReporteCheque = Entity.ReporteCheque,
                         ReporteChequeComprobante = Entity.ReporteChequeComprobante,
+                        EsFlujoObligatorio = Entity.EsFlujoObligatorio,
                     };
                 }
                 return info;
@@ -165,6 +168,7 @@ namespace Core.Erp.Data.Banco
                         Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque,
                         IdBanco_Financiero = info.IdBanco_Financiero,
 
+                        EsFlujoObligatorio = info.EsFlujoObligatorio,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     });
@@ -211,6 +215,7 @@ namespace Core.Erp.Data.Banco
                     Entity.IdCtaCble = info.IdCtaCble;
                     Entity.IdBanco_Financiero = info.IdBanco_Financiero;                    
                     Entity.Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque;
+                    Entity.EsFlujoObligatorio = info.EsFlujoObligatorio;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
@@ -287,6 +292,7 @@ namespace Core.Erp.Data.Banco
                                 Estado = item.Estado="A",
                                 ba_descripcion = item.ba_descripcion,
                                 Imprimir_Solo_el_cheque = item.Imprimir_Solo_el_cheque,
+                                EsFlujoObligatorio = item.EsFlujoObligatorio
                              };
                             Context.ba_Banco_Cuenta.Add(Entity);
                             Context.SaveChanges();

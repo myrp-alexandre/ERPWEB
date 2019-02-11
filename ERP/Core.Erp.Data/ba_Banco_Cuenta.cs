@@ -42,6 +42,7 @@ namespace Core.Erp.Data
         public byte[] ReporteCheque { get; set; }
         public bool Imprimir_Solo_el_cheque { get; set; }
         public int IdBanco_Financiero { get; set; }
+        public bool EsFlujoObligatorio { get; set; }
     
         public virtual ICollection<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
