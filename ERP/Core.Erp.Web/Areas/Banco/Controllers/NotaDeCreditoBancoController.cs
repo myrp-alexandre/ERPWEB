@@ -329,6 +329,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 mensaje = "Selecciona la cuenta bancaria";
                 return false;
             }
+            if (cta.EsFlujoObligatorio)
+            {
+                if (i_validar.list_det.Count == 0)
+                {
+                    mensaje = "Falta distribución de flujo";
+                    return false;
+                }
+            }
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
