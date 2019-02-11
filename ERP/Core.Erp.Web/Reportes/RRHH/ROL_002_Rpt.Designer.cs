@@ -249,9 +249,9 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Margins = new System.Drawing.Printing.Margins(25, 25, 25, 25);
-            this.PageHeight = 584;
+            this.PageHeight = 1169;
             this.PageWidth = 827;
-            this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdNomina,

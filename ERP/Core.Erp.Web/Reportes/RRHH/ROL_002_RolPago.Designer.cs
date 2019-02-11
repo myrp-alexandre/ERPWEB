@@ -492,7 +492,7 @@
             this.DataSource = this.objectDataSource1;
             this.DefaultPrinterSettingsUsing.UseLandscape = true;
             this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 5);
-            this.PageHeight = 534;
+            this.PageHeight = 1169;
             this.PageWidth = 777;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
