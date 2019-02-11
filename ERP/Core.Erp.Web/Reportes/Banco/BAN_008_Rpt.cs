@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Info.Reportes.Banco;
 using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.Banco;
+using System.Linq;
 
 namespace Core.Erp.Web.Reportes.Banco
 {
@@ -13,6 +14,7 @@ namespace Core.Erp.Web.Reportes.Banco
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
+        public int[] IntArray { get; set; }
         public BAN_008_Rpt()
         {
             InitializeComponent();
@@ -30,9 +32,27 @@ namespace Core.Erp.Web.Reportes.Banco
             int IdBanco = string.IsNullOrEmpty(p_IdBanco.Value.ToString()) ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
             BAN_008_Bus bus_rpt = new BAN_008_Bus();
-            List<BAN_008_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, IdBanco);
-            
+            List<BAN_008_Info> lst_rpt = new List<BAN_008_Info>();
+            //List<BAN_008_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, IdBanco);
+            if (IntArray != null)
+            {
+                foreach (var item in IntArray)
+                {
+                    lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, item));
+                }
+            }
             this.DataSource = lst_rpt;
+
+            var NC = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA DEBITO BANCARIA").Sum(q => q.ValorAbsoluto);
+            var ND = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA CREDITO BANCARIA").Sum(q => q.ValorAbsoluto);
+            var DP = lst_rpt.Where(q => q.tc_TipoCbte == "DEPOSITO").Sum(q => q.ValorAbsoluto);
+            var CH = lst_rpt.Where(q => q.tc_TipoCbte == "CHEQUE").Sum(q => q.ValorAbsoluto);
+
+
+            lbl_NC.Text = NC.ToString();
+            lbl_ND.Text = ND.ToString();
+            lbl_DP.Text = DP.ToString();
+            lbl_CH.Text = CH.ToString();
         }
     }
 }
