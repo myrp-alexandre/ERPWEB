@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Migraciones.ImportacionDiarios_Info
 @{
-    ViewBag.Title = "Nuevo comprobante contable";
+    ViewBag.Title = "Importación de diarios contable";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -88,7 +88,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="cb_Observacion">Observación*</label>
+                    <label for="cb_Observacion">Observación</label>
                     @Html.TextBoxFor(q => q.cb_Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
                 </div>
@@ -97,14 +97,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
+                    <label for="IdSucursal">Tipo documento*</label>
                     <div class="form-group">
                         @Html.DropDownListFor(q => q.tipo_documento, new SelectList(ViewBag.lst_tipo_movimiento, "Key", "Value"), new { @class = "form-control", @id = "tipo_documento" })
                         @Html.ValidationMessageFor(q => q.tipo_documento, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="btn_guardar" onclick="buscar_diarios();">Buscar</button>
             </div>
         </div>
     </div>
@@ -117,9 +120,33 @@
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "ImportacionDiarios", new { tipo_documento = Model.tipo_documento, Area = "Contabilidad" }, null)">Cancelar</a>
+        @*<a class="btn btn-default" href="@Url.Action("Index", "ImportacionDiarios", new { tipo_documento = Model.tipo_documento, Area = "Contabilidad" }, null)">Cancelar</a>*@
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    function buscar_diarios() {
+        var datos = {
+            tipo_documento : $("#tipo_documento").val()
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("buscar_diarios", "ImportacionDiarios", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridViewPartial_ImportacionDiarios.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
