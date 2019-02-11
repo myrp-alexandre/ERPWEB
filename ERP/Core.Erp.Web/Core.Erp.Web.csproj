@@ -600,6 +600,12 @@
     <Compile Include="Reportes\Banco\BAN_008_Rpt.Designer.cs">
       <DependentUpon>BAN_008_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_009_Flujo_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_009_Flujo_Rpt.Designer.cs">
+      <DependentUpon>BAN_009_Flujo_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_009_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9973,6 +9979,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10023,6 +10030,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_008_Rpt.resx">
       <DependentUpon>BAN_008_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_009_Flujo_Rpt.resx">
+      <DependentUpon>BAN_009_Flujo_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_009_Rpt.resx">
       <DependentUpon>BAN_009_Rpt.cs</DependentUpon>
