@@ -17,10 +17,10 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }
-        public string CodCtbteCble { get; set; }
-        public int IdPeriodo { get; set; }
-        public string cb_Observacion { get; set; }
         public Nullable<int> IdNomina { get; set; }
         public Nullable<int> IdNominaTipo { get; set; }
+        public int IdPeriodo { get; set; }
+        public string cb_Observacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
     }
 }

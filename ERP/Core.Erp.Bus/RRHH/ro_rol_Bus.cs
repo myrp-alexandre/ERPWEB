@@ -172,7 +172,6 @@ namespace Core.Erp.Bus.RRHH
                         info_comprobanteID.IdPeriodo = info.IdPeriodo;
                         info_comprobanteID.IdTipoCbte = info_ctb.IdTipoCbte;
                         info_comprobanteID.IdCbteCble = info_ctb.IdCbteCble;
-                        info_comprobanteID.CodCtbteCble = info_ctb.IdCbteCble.ToString();
                         ro_comprobante.grabarDB(info_comprobanteID);
                         info_ctb = null;
                         if(info.lst_provisiones.Count() > 0)
@@ -189,7 +188,6 @@ namespace Core.Erp.Bus.RRHH
                                 info_comprobanteID.IdPeriodo = info.IdPeriodo;
                                 info_comprobanteID.IdTipoCbte = info_ctb.IdTipoCbte;
                                 info_comprobanteID.IdCbteCble = info_ctb.IdCbteCble;
-                                info_comprobanteID.CodCtbteCble = info_ctb.IdCbteCble.ToString();
                                 ro_comprobante.grabarDB(info_comprobanteID);
                             }
                         }

@@ -35,7 +35,6 @@ namespace Core.Erp.Data
         public DbSet<ro_cargaFamiliar> ro_cargaFamiliar { get; set; }
         public DbSet<ro_catalogo> ro_catalogo { get; set; }
         public DbSet<ro_catalogoTipo> ro_catalogoTipo { get; set; }
-        public DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
         public DbSet<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
         public DbSet<ro_Departamento> ro_Departamento { get; set; }
         public DbSet<ro_Division> ro_Division { get; set; }
@@ -145,6 +144,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar> vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar { get; set; }
         public DbSet<vwro_rol_detalle> vwro_rol_detalle { get; set; }
         public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
+        public DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

@@ -22,7 +22,7 @@ namespace Core.Erp.Data.RRHH
                         IdPeriodo = info.IdPeriodo,
                         IdTipoCbte = info.IdTipoCbte,
                         IdCbteCble = info.IdCbteCble,
-                        CodCtbteCble = info.CodCtbteCble
+                        IdSucursal=info.IdSucursal
                     };
                     Contex.ro_Comprobantes_Contables.Add(Entity);
                     Contex.SaveChanges();
