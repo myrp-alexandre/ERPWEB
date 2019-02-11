@@ -45,7 +45,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNomina_Tipo == IdNomina
                              && q.IdNomina_TipoLiqui == IdNominaTipo
                              && q.Valor > 0
-                             && q.IdRubro==info_rub_calculados.IdRubro_tot_pagar
+                             //&& q.IdRubro==info_rub_calculados.IdRubro_tot_pagar
                              select new ROL_022_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
