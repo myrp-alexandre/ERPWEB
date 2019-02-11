@@ -1,69 +1,125 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Migraciones.ImportacionDiarios_Info
 @{
-    ViewBag.Title = "Importación de diarios";
+    ViewBag.Title = "Nuevo comprobante contable";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
-    Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Nuevo", "ImportacionDiarios", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box ">
-        <div class="box-header with-border">
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="CodCbteCble">Código</label>
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdSucursal">Sucursal*</label>
-                            <div class="form-group">
-                                @Html.DropDownListFor(q => q.TipoRubro, new SelectList(ViewBag.lst_tipo_movimiento, "Key", "Value"), new { @class = "form-control", @id = "tipo_documento" })
-                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdTipoCbte">Tipo comprobante</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte, settings =>
+               {
+                   settings.Name = "IdTipoCbte";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de comprobante</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
                         </div>
+                        @Html.DevExpress().DateEditFor(q => q.cb_Fecha, settings =>
+                   {
+                       settings.Name = "cb_Fecha";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.box-body -->
     </div>
-
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">@ViewBag.Title</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cb_Observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.cb_Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-        <div class="box-body">
-            @Html.Action("GridViewPartial_ImportacionDiarios", new { tipo_documento = Model.TipoRubro })
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
-        </div>
-        <!-- /.box-footer-->
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(q => q.tipo_documento, new SelectList(ViewBag.lst_tipo_movimiento, "Key", "Value"), new { @class = "form-control", @id = "tipo_documento" })
+                        @Html.ValidationMessageFor(q => q.tipo_documento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_ImportacionDiarios", new { tipo_documento = Model.tipo_documento })
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "ImportacionDiarios", new { tipo_documento = Model.tipo_documento, Area = "Contabilidad" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
