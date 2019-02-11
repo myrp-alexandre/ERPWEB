@@ -265,7 +265,7 @@
 }
 <script>
 
-    $("#Valor_a_pagar").keyup(function () {
+    $("#Valor_a_pagar").change(function () {
         armar_diario();
     });
 
@@ -277,7 +277,8 @@
             Valor_a_pagar: $("#Valor_a_pagar").val(),
             observacion: $("#observacion").val(),
             IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdTipo_Persona: $("#IdTipo_Persona").val()
         }
         $.ajax({
             type: 'POST',
@@ -291,7 +292,6 @@
             success: function (data) {
                 GridViewPartial_detalle_op.PerformCallback();
                 GridViewPartial_orden_pago_dc.PerformCallback();
-
             },
             error: function (error) {
             }

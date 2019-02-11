@@ -119,6 +119,17 @@
                     @Html.ValidationMessageFor(q => q.Imprimir_Solo_el_cheque, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="EsFlujoObligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsFlujoObligatorio, settings =>
+                           {
+                               settings.Name = "EsFlujoObligatorio";
+                               settings.Text = "Es flujo obligatorio";
+                           }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsFlujoObligatorio, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
 

@@ -37,8 +37,10 @@ namespace Core.Erp.Info.Migraciones
         public int IdTipoCbte { get; set; }
         public DateTime cb_Fecha { get; set; }
         public string cb_Observacion { get; set; }
-        
-
+        public int Secuencial { get; set; }
+        public string pc_Cuenta { get; set; }
+        public Nullable<decimal> dc_Valor { get; set; }
+        public List<ImportacionDiarios_Info> ListaTipoDocumento { get; set; }
         #endregion
     }
 }

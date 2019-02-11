@@ -13,11 +13,13 @@ namespace Core.Erp.Data.Migraciones
         {
             try
             {
+                var Secuencial = 0;
                 List<ImportacionDiarios_Info> Lista;
                 using (DBSACEntities Context = new DBSACEntities())
                 {
-                    Lista = (from q in Context.vw_diarios_contables_migracion
+                    Lista = (from q in Context.vw_diarios_contables_migracion                             
                              where q.tipo_documento == tipo_documento
+                             orderby q.Glosa ascending
                              select new ImportacionDiarios_Info
                              {
                                  Empresa = q.Empresa,
@@ -35,6 +37,13 @@ namespace Core.Erp.Data.Migraciones
                                  dc_ValorHaber = q.dc_ValorHaber
                              }).ToList();                    
                 }
+
+                foreach (var item in Lista)
+                {
+                    Secuencial++;
+                    item.Secuencial = Secuencial;
+                }
+
                 return Lista;
             }
             catch (Exception)

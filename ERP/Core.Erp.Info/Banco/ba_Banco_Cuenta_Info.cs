@@ -26,6 +26,7 @@ namespace Core.Erp.Info.Banco
         public byte[] ReporteCheque { get; set; }
         public bool Imprimir_Solo_el_cheque { get; set; }
         public int IdBanco_Financiero { get; set; }
+        public bool EsFlujoObligatorio { get; set; }
 
         #region Campos de auditoria
         public string IdUsuario { get; set; }

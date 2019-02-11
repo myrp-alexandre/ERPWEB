@@ -269,7 +269,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-        public ActionResult BAN_009()
+        public ActionResult BAN_009(bool mostrar_agrupado = false)
         {
             cl_filtros_banco_Info model = new cl_filtros_banco_Info
             {
@@ -277,32 +277,63 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdBanco = 0
             };
             cargar_banco(model.IdEmpresa);
-            BAN_009_Rpt report = new BAN_009_Rpt();
-            report.IntArray = model.IntArray;
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdBanco.Value = model.IdBanco;
-            report.p_fecha_ini.Value = model.fecha_ini;
-            report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
-            ViewBag.Report = report;
+            if(!mostrar_agrupado)
+            {
+                BAN_009_Rpt report = new BAN_009_Rpt();
+                report.IntArray = model.IntArray;
+                report.p_IdEmpresa.Value = model.IdEmpresa;
+                report.p_IdBanco.Value = model.IdBanco;
+                report.p_fecha_ini.Value = model.fecha_ini;
+                report.p_fecha_fin.Value = model.fecha_fin;
+                report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
+                report.usuario = SessionFixed.IdUsuario.ToString();
+                report.empresa = SessionFixed.NomEmpresa.ToString();
+                ViewBag.Report = report;
+            }
+            else
+            {
+                BAN_009_Flujo_Rpt report_flujo = new BAN_009_Flujo_Rpt();
+                report_flujo.IntArray = model.IntArray;
+                report_flujo.p_IdEmpresa.Value = model.IdEmpresa;
+                report_flujo.p_IdBanco.Value = model.IdBanco;
+                report_flujo.p_fecha_fin.Value = model.fecha_fin;
+                report_flujo.p_mostrar_agrupado.Value = model.mostrar_agrupado;
+                report_flujo.usuario = SessionFixed.IdUsuario.ToString();
+                report_flujo.empresa = SessionFixed.NomEmpresa.ToString();
+                ViewBag.Report = report_flujo;
+            }
             return View(model);
         }
         [HttpPost]
         public ActionResult BAN_009(cl_filtros_banco_Info model)
         {
-            BAN_009_Rpt report = new BAN_009_Rpt();
-            report.IntArray = model.IntArray;
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdBanco.Value = model.IdBanco;
-            report.p_fecha_ini.Value = model.fecha_ini;
-            report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
-            cargar_banco(model.IdEmpresa);
-            ViewBag.Report = report;
+            if(!model.mostrar_agrupado)
+            {
+                BAN_009_Rpt report = new BAN_009_Rpt();
+                report.IntArray = model.IntArray;
+                report.p_IdEmpresa.Value = model.IdEmpresa;
+                report.p_IdBanco.Value = model.IdBanco;
+                report.p_fecha_ini.Value = model.fecha_ini;
+                report.p_fecha_fin.Value = model.fecha_fin;
+                report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
+                report.usuario = SessionFixed.IdUsuario.ToString();
+                report.empresa = SessionFixed.NomEmpresa.ToString();
+                cargar_banco(model.IdEmpresa);
+                ViewBag.Report = report;
+            }
+            else
+            {
+                BAN_009_Flujo_Rpt report_flujo = new BAN_009_Flujo_Rpt();
+                report_flujo.IntArray = model.IntArray;
+                report_flujo.p_IdEmpresa.Value = model.IdEmpresa;
+                report_flujo.p_IdBanco.Value = model.IdBanco;
+                report_flujo.p_fecha_fin.Value = model.fecha_fin;
+                report_flujo.p_mostrar_agrupado.Value = model.mostrar_agrupado;
+                report_flujo.usuario = SessionFixed.IdUsuario.ToString();
+                report_flujo.empresa = SessionFixed.NomEmpresa.ToString();
+                cargar_banco(model.IdEmpresa);
+                ViewBag.Report = report_flujo;
+            }
             return View(model);
         }
     }

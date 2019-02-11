@@ -29,6 +29,6 @@ namespace Core.Erp.Data
         public string IdCtaCble { get; set; }
         public int IdCaja { get; set; }
         public string ca_Descripcion { get; set; }
-        public Nullable<int> cbr_IdSucursal { get; set; }
+        public int cbr_IdSucursal { get; set; }
     }
 }

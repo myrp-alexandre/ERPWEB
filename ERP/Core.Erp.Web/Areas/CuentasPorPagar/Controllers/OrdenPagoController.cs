@@ -185,7 +185,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Fecha=DateTime.Now.Date,
                 IdTipo_Persona = "PROVEE",
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdTipo_op = "OTROS_CONC",
+                IdFormaPago = "CHEQUE",
+                IdTipoFlujo = 1
             };
             SessionFixed.TipoPersona = "PROVEE";
             lis_cp_orden_pago_det_Info.set_list(new List<cp_orden_pago_det_Info>());
@@ -371,7 +374,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         #region json
        
-        public JsonResult armar_diario(string IdTipo_op = "", decimal IdEntidad = 0, double Valor_a_pagar = 0, string observacion="",int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario(string IdTipo_op = "", string IdTipo_Persona = "" ,decimal IdEntidad = 0, double Valor_a_pagar = 0, string observacion="",int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
             info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
 
@@ -387,22 +390,32 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             lis_cp_orden_pago_det_Info.set_list(lst_detalle_op);
 
             comprobante_contable_fp.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
-            var pro = bus_proveedor.get_info(IdEmpresa, IdEntidad);
+
+            string CtaCbleDebe = string.Empty;
+            string CtaCbleHaber = string.Empty;
+
             var tipo = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
+            if (IdTipo_Persona == "PROVEE")
+            {
+                var pro = bus_proveedor.get_info(IdEmpresa, IdEntidad);
+                if(pro != null)
+                    CtaCbleHaber = pro.IdCtaCble_CXP;
+            }
+
             var list = lis_cp_orden_pago_det_Info.get_list();
             foreach (var item in list)
             {
                 //Debe
                 comprobante_contable_fp.AddRow(new ct_cbtecble_det_Info
                 {
-                    //IdCtaCble = tipo.IdCtaCble_Credito,
+                    IdCtaCble = tipo == null ? "" : tipo.IdCtaCble,
                     dc_Valor = Math.Round(item.Valor_a_pagar, 2, MidpointRounding.AwayFromZero),
                     dc_Valor_debe = Math.Round(item.Valor_a_pagar, 2, MidpointRounding.AwayFromZero)
                 }, IdTransaccionSession);
             }
             comprobante_contable_fp.AddRow(new ct_cbtecble_det_Info
             {
-                IdCtaCble = pro.IdCtaCble_CXP,
+                IdCtaCble = string.IsNullOrEmpty(CtaCbleHaber) ? (tipo == null ? ""  : tipo.IdCtaCble_Credito) : CtaCbleHaber,
                 dc_Valor = Math.Round(list.Sum(q => q.Valor_a_pagar), 2, MidpointRounding.AwayFromZero) * -1,
                 dc_Valor_haber = Math.Round(list.Sum(q => q.Valor_a_pagar), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
@@ -586,6 +599,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             try
             {
                 set_list(new List<ct_cbtecble_det_Info>(),IdTransaccionSession);
+
+                if (info_param_op.IdTipoCbte_OP == null)
+                    return;
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_debe_Info = new ct_cbtecble_det_Info();

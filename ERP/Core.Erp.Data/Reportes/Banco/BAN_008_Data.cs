@@ -36,7 +36,8 @@ namespace Core.Erp.Data.Reportes.Banco
                         Su_Descripcion = q.Su_Descripcion,
                         Tipo = q.Tipo,
                         Valor = q.Valor,
-                        ValorAbsoluto = q.ValorAbsoluto
+                        ValorAbsoluto = q.ValorAbsoluto,
+                        tc_TipoCbte = q.tc_TipoCbte
                     }).ToList();
                 }
                 return Lista;

@@ -27,5 +27,6 @@ namespace Core.Erp.Info.Reportes.Banco
         public string Estado { get; set; }
         public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
+        public string tc_TipoCbte { get; set; }
     }
 }

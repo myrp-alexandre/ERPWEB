@@ -32,34 +32,59 @@ namespace Core.Erp.Data.Banco
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      IdCtaCble = q.IdCtaCble,
-
+                                     EsFlujoObligatorio = q.EsFlujoObligatorio,
                                      EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     }
                     else
                     {
-                        Lista = (from q in Context.ba_Banco_Cuenta
-                                 join b in Context.ba_Banco_Cuenta_x_tb_sucursal
-                                 on new { q.IdEmpresa, q.IdBanco} equals new { b.IdEmpresa, b.IdBanco}
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
-                                 && IdSucursalIni <= b.IdSucursal
-                                 && b.IdSucursal <= IdSucursalFin
-                                 select new ba_Banco_Cuenta_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     ba_descripcion = q.ba_descripcion,
-                                     ba_Num_Cuenta = q.ba_Num_Cuenta,
-                                     ba_num_digito_cheq = q.ba_num_digito_cheq,
-                                     ba_Tipo = q.ba_Tipo,
-                                     Estado = q.Estado,
-                                     IdBanco = q.IdBanco,
-                                     IdCtaCble = q.IdCtaCble,
+                        if(IdSucursal==0)
+                        {
+                            Lista = (from q in Context.ba_Banco_Cuenta
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.Estado == "A"
+                                     select new ba_Banco_Cuenta_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         ba_descripcion = q.ba_descripcion,
+                                         ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                         ba_num_digito_cheq = q.ba_num_digito_cheq,
+                                         ba_Tipo = q.ba_Tipo,
+                                         Estado = q.Estado,
+                                         IdBanco = q.IdBanco,
+                                         IdCtaCble = q.IdCtaCble,
+                                         EsFlujoObligatorio = q.EsFlujoObligatorio,
 
-                                     EstadoBool = q.Estado == "A" ? true : false
+                                         EstadoBool = q.Estado == "A" ? true : false
 
-                                 }).ToList();
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            Lista = (from q in Context.ba_Banco_Cuenta
+                                     join b in Context.ba_Banco_Cuenta_x_tb_sucursal
+                                     on new { q.IdEmpresa, q.IdBanco } equals new { b.IdEmpresa, b.IdBanco }
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.Estado == "A"
+                                     && IdSucursalIni <= b.IdSucursal
+                                     && b.IdSucursal <= IdSucursalFin
+                                     select new ba_Banco_Cuenta_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         ba_descripcion = q.ba_descripcion,
+                                         ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                         ba_num_digito_cheq = q.ba_num_digito_cheq,
+                                         ba_Tipo = q.ba_Tipo,
+                                         Estado = q.Estado,
+                                         IdBanco = q.IdBanco,
+                                         IdCtaCble = q.IdCtaCble,
+                                         EsFlujoObligatorio = q.EsFlujoObligatorio,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+
+                                     }).ToList();
+                        }
                     }                        
                 }
                 return Lista;
@@ -93,6 +118,7 @@ namespace Core.Erp.Data.Banco
                         IdBanco_Financiero = Entity.IdBanco_Financiero,
                         ReporteCheque = Entity.ReporteCheque,
                         ReporteChequeComprobante = Entity.ReporteChequeComprobante,
+                        EsFlujoObligatorio = Entity.EsFlujoObligatorio,
                     };
                 }
                 return info;
@@ -142,6 +168,7 @@ namespace Core.Erp.Data.Banco
                         Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque,
                         IdBanco_Financiero = info.IdBanco_Financiero,
 
+                        EsFlujoObligatorio = info.EsFlujoObligatorio,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     });
@@ -188,6 +215,7 @@ namespace Core.Erp.Data.Banco
                     Entity.IdCtaCble = info.IdCtaCble;
                     Entity.IdBanco_Financiero = info.IdBanco_Financiero;                    
                     Entity.Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque;
+                    Entity.EsFlujoObligatorio = info.EsFlujoObligatorio;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
@@ -264,6 +292,7 @@ namespace Core.Erp.Data.Banco
                                 Estado = item.Estado="A",
                                 ba_descripcion = item.ba_descripcion,
                                 Imprimir_Solo_el_cheque = item.Imprimir_Solo_el_cheque,
+                                EsFlujoObligatorio = item.EsFlujoObligatorio
                              };
                             Context.ba_Banco_Cuenta.Add(Entity);
                             Context.SaveChanges();

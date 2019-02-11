@@ -3716,11 +3716,11 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <PropertyRef Name="IdPeriodo" />
             <PropertyRef Name="pe_FechaIni" />
             <PropertyRef Name="pe_FechaFin" />
-            <PropertyRef Name="Valor" />
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="Su_Descripcion" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="Dias" />
+            <PropertyRef Name="Valor" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -8092,18 +8092,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <Parameter Name="IdDepartamentoIni" Mode="In" Type="Int32" />
             <Parameter Name="IdDepartamentoFin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SPBAN_008" ReturnType="Collection(Model_reportes.SPBAN_008_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="IdBanco" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="VWROL_002" EntityType="Model_reportes.VWROL_002" />
           <EntitySet Name="VWROL_024" EntityType="Model_reportes.VWROL_024" />
           <FunctionImport Name="SPBAN_009" ReturnType="Collection(Model_reportes.SPBAN_009_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdBanco" Mode="In" Type="Int32" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SPBAN_008" ReturnType="Collection(Model_reportes.SPBAN_008_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdBanco" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
@@ -10721,27 +10721,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="String" Name="UBUCACION" Nullable="false" MaxLength="50" />
           <Property Type="Double" Name="Porcentaje" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="SPBAN_008_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
-          <Property Type="Int32" Name="IdTipoCbte" Nullable="false" />
-          <Property Type="Decimal" Name="IdCbteCble" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="secuencia" Nullable="false" />
-          <Property Type="Decimal" Name="SaldoInicial" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="cb_Observacion" Nullable="true" />
-          <Property Type="String" Name="cb_Cheque" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="cb_giradoA" Nullable="true" MaxLength="150" />
-          <Property Type="DateTime" Name="cb_Fecha" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="Valor" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="8" />
-          <Property Type="Decimal" Name="ValorAbsoluto" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="Orden" Nullable="false" />
-          <Property Type="String" Name="Referencia" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ba_descripcion" Nullable="true" MaxLength="5000" />
-          <Property Type="Int32" Name="IdBanco" Nullable="true" />
-          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
-          <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <EntityType Name="VWROL_002">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -10836,6 +10815,28 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="Decimal" Name="IdTipoFlujo" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="NomFlujo" Nullable="false" />
           <Property Type="Double" Name="ValorFlujo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SPBAN_008_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
+          <Property Type="Int32" Name="IdTipoCbte" Nullable="false" />
+          <Property Type="Decimal" Name="IdCbteCble" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="secuencia" Nullable="false" />
+          <Property Type="Decimal" Name="SaldoInicial" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="cb_Observacion" Nullable="true" />
+          <Property Type="String" Name="cb_Cheque" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cb_giradoA" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="cb_Fecha" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Valor" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="8" />
+          <Property Type="Decimal" Name="ValorAbsoluto" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Orden" Nullable="false" />
+          <Property Type="String" Name="Referencia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ba_descripcion" Nullable="true" MaxLength="5000" />
+          <Property Type="Int32" Name="IdBanco" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="tc_TipoCbte" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13956,31 +13957,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPBAN_008" FunctionName="Model_reportes.Store.SPBAN_008">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPBAN_008_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
-                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
-                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
-                <ScalarProperty Name="cb_giradoA" ColumnName="cb_giradoA" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="ValorAbsoluto" ColumnName="ValorAbsoluto" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWROL_002">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_002">
               <MappingFragment StoreEntitySet="VWROL_002">
@@ -14044,6 +14020,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
                 <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
                 <ScalarProperty Name="NomFlujo" ColumnName="NomFlujo" />
                 <ScalarProperty Name="ValorFlujo" ColumnName="ValorFlujo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPBAN_008" FunctionName="Model_reportes.Store.SPBAN_008">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPBAN_008_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
+                <ScalarProperty Name="cb_giradoA" ColumnName="cb_giradoA" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="ValorAbsoluto" ColumnName="ValorAbsoluto" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
