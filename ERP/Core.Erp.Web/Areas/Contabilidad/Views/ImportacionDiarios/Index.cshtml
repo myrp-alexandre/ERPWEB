@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "ImportacionDiarios", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Index", "ImportacionDiarios", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
     {

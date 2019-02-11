@@ -17,9 +17,9 @@ namespace Core.Erp.Data.Migraciones
                 List<ImportacionDiarios_Info> Lista;
                 using (DBSACEntities Context = new DBSACEntities())
                 {
-                    Lista = (from q in Context.vw_diarios_contables_migracion
-                             
+                    Lista = (from q in Context.vw_diarios_contables_migracion                             
                              where q.tipo_documento == tipo_documento
+                             orderby q.Glosa ascending
                              select new ImportacionDiarios_Info
                              {
                                  Empresa = q.Empresa,

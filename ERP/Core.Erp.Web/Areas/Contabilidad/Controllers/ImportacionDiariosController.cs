@@ -41,12 +41,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             cargar_filtros(model.IdEmpresa);
             return View(model);
         }
-        [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
-        {
-            cargar_filtros(model.IdEmpresa);
-            return View(model);
-        }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_ImportacionDiarios(string tipo_documento)
@@ -85,13 +79,13 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_ImportacionDiarios", model.ListaTipoDocumento);
         }
 
-        public ActionResult EditingDelete(int secuencia)
+        public ActionResult EditingDelete(int Secuencial)
         {
-            ImportacionDiarios_Lista.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ImportacionDiarios_Lista.DeleteRow(Secuencial, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ImportacionDiarios_Info model = new ImportacionDiarios_Info();
             model.ListaTipoDocumento = ImportacionDiarios_Lista.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
          
-            return PartialView("_GridViewPartial_ImportacionDiarios", model);
+            return PartialView("_GridViewPartial_ImportacionDiarios", model.ListaTipoDocumento);
         }
         #endregion
 
@@ -185,11 +179,15 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                     var info_cta = bus_plancta.get_info(IdEmpresa, item.IdCtaCble);
                     if (info_cta == null)
                     {
+                        item.IdCtaCble = "";
                         item.pc_Cuenta = "";
+                        item.dc_Valor = item.dc_ValorDebe > 0 ? item.dc_ValorDebe : item.dc_ValorHaber;
                     }
                     else
                     {
+                        item.IdCtaCble = info_cta.IdCtaCble;
                         item.pc_Cuenta = info_cta.IdCtaCble + " - " + info_cta.pc_Cuenta;
+                        item.dc_Valor = item.dc_ValorDebe > 0 ? item.dc_ValorDebe : item.dc_ValorHaber;
                     }
                     
                 }
@@ -208,7 +206,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         #region Acciones
         [HttpPost]
-        public ActionResult Nuevo(ImportacionDiarios_Info model)
+        public ActionResult Index(ImportacionDiarios_Info model)
         {
             model.ListaTipoDocumento = ImportacionDiarios_Lista.get_list(model.IdTransaccionSession);
             ct_cbtecble_Info model_comprobante = new ct_cbtecble_Info();
@@ -218,14 +216,16 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model_comprobante.IdSucursal = model.IdSucursal;
             model_comprobante.CodCbteCble = model.Codigo;
             model_comprobante.cb_Fecha = model.cb_Fecha;
-            model_comprobante.cb_Valor = 0;
+            model_comprobante.cb_Valor = Convert.ToDouble( model.ListaTipoDocumento.Sum(q=> q.dc_ValorDebe) );
             model_comprobante.cb_Observacion = model.cb_Observacion;
+            model_comprobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
+            model_comprobante.IdUsuario = SessionFixed.IdUsuario;
 
             foreach (var item in model.ListaTipoDocumento)
             {
                 ct_cbtecble_det_Info lista_det = new ct_cbtecble_det_Info();
                 lista_det.dc_Valor = Convert.ToDouble(item.dc_Valor);
-                lista_det.dc_Observacion = item.cb_Observacion;
+                lista_det.dc_Observacion = item.Detalle;
                 lista_det.IdCtaCble = item.IdCtaCble;
                 lista_det.dc_para_conciliar = false;
 
