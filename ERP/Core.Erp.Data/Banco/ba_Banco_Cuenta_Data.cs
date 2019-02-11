@@ -39,27 +39,50 @@ namespace Core.Erp.Data.Banco
                     }
                     else
                     {
-                        Lista = (from q in Context.ba_Banco_Cuenta
-                                 join b in Context.ba_Banco_Cuenta_x_tb_sucursal
-                                 on new { q.IdEmpresa, q.IdBanco} equals new { b.IdEmpresa, b.IdBanco}
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
-                                 && IdSucursalIni <= b.IdSucursal
-                                 && b.IdSucursal <= IdSucursalFin
-                                 select new ba_Banco_Cuenta_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     ba_descripcion = q.ba_descripcion,
-                                     ba_Num_Cuenta = q.ba_Num_Cuenta,
-                                     ba_num_digito_cheq = q.ba_num_digito_cheq,
-                                     ba_Tipo = q.ba_Tipo,
-                                     Estado = q.Estado,
-                                     IdBanco = q.IdBanco,
-                                     IdCtaCble = q.IdCtaCble,
+                        if(IdSucursal==0)
+                        {
+                            Lista = (from q in Context.ba_Banco_Cuenta
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.Estado == "A"
+                                     select new ba_Banco_Cuenta_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         ba_descripcion = q.ba_descripcion,
+                                         ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                         ba_num_digito_cheq = q.ba_num_digito_cheq,
+                                         ba_Tipo = q.ba_Tipo,
+                                         Estado = q.Estado,
+                                         IdBanco = q.IdBanco,
+                                         IdCtaCble = q.IdCtaCble,
 
-                                     EstadoBool = q.Estado == "A" ? true : false
+                                         EstadoBool = q.Estado == "A" ? true : false
 
-                                 }).ToList();
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            Lista = (from q in Context.ba_Banco_Cuenta
+                                     join b in Context.ba_Banco_Cuenta_x_tb_sucursal
+                                     on new { q.IdEmpresa, q.IdBanco } equals new { b.IdEmpresa, b.IdBanco }
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.Estado == "A"
+                                     && IdSucursalIni <= b.IdSucursal
+                                     && b.IdSucursal <= IdSucursalFin
+                                     select new ba_Banco_Cuenta_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         ba_descripcion = q.ba_descripcion,
+                                         ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                         ba_num_digito_cheq = q.ba_num_digito_cheq,
+                                         ba_Tipo = q.ba_Tipo,
+                                         Estado = q.Estado,
+                                         IdBanco = q.IdBanco,
+                                         IdCtaCble = q.IdCtaCble,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+
+                                     }).ToList();
+                        }
                     }                        
                 }
                 return Lista;

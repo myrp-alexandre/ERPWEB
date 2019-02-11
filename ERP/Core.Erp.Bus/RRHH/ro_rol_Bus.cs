@@ -281,6 +281,7 @@ namespace Core.Erp.Bus.RRHH
                     valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
                                                                 && v.IdArea == item.IdArea
                                                                 && v.IdDepartamento == item.IdDepartamento && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    valorTotal = item.Valor;
                     if (valorTotal < 0)
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
@@ -303,7 +304,7 @@ namespace Core.Erp.Bus.RRHH
                             oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         }
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion + "/ " + item.pe_nombreCompleato;
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion + "/ " + item.pe_nombreCompleato ;
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
                     }
                 }

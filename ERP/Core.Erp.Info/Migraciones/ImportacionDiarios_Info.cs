@@ -8,6 +8,8 @@ namespace Core.Erp.Info.Migraciones
 {
     public class ImportacionDiarios_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+        
         public string Empresa { get; set; }
         public string centro { get; set; }
         public int Numero { get; set; }
@@ -27,5 +29,16 @@ namespace Core.Erp.Info.Migraciones
         public string IdCtaCble { get; set; }
         public Nullable<decimal> dc_ValorDebe { get; set; }
         public Nullable<decimal> dc_ValorHaber { get; set; }
+
+        #region Campos que no existen en  la vista
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public string Codigo { get; set; }
+        public int IdTipoCbte { get; set; }
+        public DateTime cb_Fecha { get; set; }
+        public string cb_Observacion { get; set; }
+        
+
+        #endregion
     }
 }
