@@ -246,6 +246,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
             cargar_banco(model.IdEmpresa);
             BAN_008_Rpt report = new BAN_008_Rpt();
+            report.IntArray = model.IntArray;
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdBanco.Value = model.IdBanco;
             report.p_fecha_ini.Value = model.fecha_ini;
@@ -259,6 +260,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult BAN_008(cl_filtros_banco_Info model)
         {
             BAN_008_Rpt report = new BAN_008_Rpt();
+            report.IntArray = model.IntArray;
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdBanco.Value = model.IdBanco;
             report.p_fecha_ini.Value = model.fecha_ini;
