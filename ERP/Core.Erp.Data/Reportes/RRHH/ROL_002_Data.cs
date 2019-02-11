@@ -31,7 +31,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
                              && q.IdEmpleado==Idempleado
-                             && q.IdRubro!=info_rubros_calcu.IdRubro_dias_trabajados)                             
+                             && q.IdRubro!=info_rubros_calcu.IdRubro_tot_pagar)                             
                              orderby q.NombreCompleto
                              select new ROL_002_Info
                              {
@@ -93,7 +93,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
-                             && q.IdRubro==info_rubros_calcu.IdRubro_dias_trabajados
+                             && q.IdRubro==info_rubros_calcu.IdRubro_tot_pagar
                              )
                              orderby q.NombreCompleto
                              select new ROL_002_Info

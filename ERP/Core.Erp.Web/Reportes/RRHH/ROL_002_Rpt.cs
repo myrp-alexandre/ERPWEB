@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
             int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             ROL_002_Bus bus_rpt = new ROL_002_Bus();
             List<ROL_002_Info> lst_rpt = bus_rpt.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
             this.DataSource = lst_rpt;
