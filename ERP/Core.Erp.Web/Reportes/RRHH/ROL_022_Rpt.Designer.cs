@@ -195,7 +195,8 @@
             // 
             this.lbl_periodo.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lbl_periodo.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Periodo: \', [IdPeriodo])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Periodo: \', Substring([IdPeriodo], 0, 4),\'/\',Substring([IdPeriodo], 4, 2)" +
+                    ")")});
             this.lbl_periodo.Font = new System.Drawing.Font("Verdana", 10F);
             this.lbl_periodo.Name = "lbl_periodo";
             this.lbl_periodo.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 100, 0, 0, 100F);
