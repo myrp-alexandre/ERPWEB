@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_nominas_cerradas";
+        settings.Name = "GridViewPartial_nominas_cerradas";
         settings.CallbackRouteValues = new { Controller = "ProcesarRol", Action = "GridViewPartial_nominas_cerradas" };
 
         settings.Width = Unit.Percentage(100);
@@ -58,7 +58,7 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(70);
             column.SetDataItemTemplateContent(container =>
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "Cerrado")) == "S" && Convert.ToString(DataBinder.Eval(container.DataItem, "Contabilizado"))=="N")
@@ -81,7 +81,7 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(90);
             column.SetDataItemTemplateContent(container =>
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "Contabilizado")) == "S")
@@ -115,9 +115,11 @@
 
             });
         });
-
-        settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(8);
-        settings.Columns.Add("DescripcionProcesoNomina", "Proceso").Width = Unit.Percentage(15);
+        
+        settings.Columns.Add("IdRol", "IdRol").Width = Unit.Percentage(5);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
+        settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(10);
+        settings.Columns.Add("DescripcionProcesoNomina", "Proceso").Width = Unit.Percentage(18);
         settings.Columns.Add("IdPeriodo").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
@@ -135,7 +137,7 @@
             column.PropertiesEdit.DisplayFormatString = "d";
 
         });
-        settings.Columns.Add("Procesado", "Procesado").Width = Unit.Percentage(7);
+        settings.Columns.Add("Procesado", "Procesado").Width = Unit.Percentage(6);
         settings.Columns.Add("Cerrado", "Cerrado").Width = Unit.Percentage(5);
         settings.Columns.Add("Contabilizado", "Contabilizado").Width = Unit.Percentage(8);
 

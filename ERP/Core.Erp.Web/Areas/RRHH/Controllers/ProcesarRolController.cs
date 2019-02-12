@@ -441,7 +441,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_nomonas_cerradas()
+        public ActionResult GridViewPartial_nominas_cerradas()
         {
             try
             {

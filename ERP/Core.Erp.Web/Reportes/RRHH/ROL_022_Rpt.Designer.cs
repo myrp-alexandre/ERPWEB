@@ -336,7 +336,7 @@
             // xrPivotGrid1
             // 
             this.xrPivotGrid1.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
-            this.xrPivotGrid1.AnchorVertical = ((DevExpress.XtraReports.UI.VerticalAnchorStyles)((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top | DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom)));
+            this.xrPivotGrid1.AnchorVertical = DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom;
             this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Verdana", 7.2F);
             this.xrPivotGrid1.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.xrPivotGrid1.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -380,10 +380,12 @@
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsChartDataSource.DataProvideMode = DevExpress.XtraPivotGrid.PivotChartDataProvideMode.UseCustomSettings;
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintHeadersOnEveryPage = true;
+            this.xrPivotGrid1.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 40;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 300;
@@ -477,7 +479,6 @@
             this.pivotGridField3.FieldName = "ru_descripcion";
             this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.Options.ShowGrandTotal = false;
             this.pivotGridField3.Options.ShowTotals = false;
             this.pivotGridField3.RowValueLineCount = 50;
@@ -652,6 +653,7 @@
             this.P_IdDivision,
             this.P_IdArea});
             this.Version = "17.2";
+            this.VerticalContentSplitting = DevExpress.XtraPrinting.VerticalContentSplitting.Smart;
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_022_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();

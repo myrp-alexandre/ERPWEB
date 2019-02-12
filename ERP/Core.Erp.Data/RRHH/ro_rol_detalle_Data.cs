@@ -26,6 +26,7 @@ namespace Core.Erp.Data.RRHH
                                  && a.IdNominaTipo == idNominaTipo
                                  && a.IdNominaTipoLiqui == idNominaTipoLiqui
                                  && a.IdPeriodo == idPeriodo
+                                 && a.IdRol == IdRol
                                  && a.Valor > 0
                                  && a.rub_provision== es_provision
                                 select new ro_rol_detalle_Info
