@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Reportes.RRHH
         private void ROL_002_RolPago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
-            //lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
 
             ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
             ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
