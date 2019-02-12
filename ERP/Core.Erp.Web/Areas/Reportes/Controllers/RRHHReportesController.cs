@@ -104,9 +104,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region metodo bajo demanda Area Independiente
         public ActionResult CmbArea_Individual()
         {
-            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
+            //SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
             int model = new int();
-            return PartialView("_CmbArea_reportes", model);
+            return PartialView("_CmbArea_Individual", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_individual(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
