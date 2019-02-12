@@ -259,7 +259,9 @@ namespace Core.Erp.Data.RRHH
                         rub_aplica_IESS=Entity.rub_aplica_IESS,
                         rub_acumula_descuento=Entity.rub_acumula_descuento,
                         se_distribuye = Entity.se_distribuye,
-                        rub_AplicaIR=Entity.rub_AplicaIR,
+                        rub_provision = Entity.rub_provision,
+                        rub_acumula = Entity.rub_acumula,
+                        rub_AplicaIR =Entity.rub_AplicaIR,
                         rub_GrupoResumen=Entity.rub_GrupoResumen,
                         rub_ContPorEmpleado = Entity.rub_ContPorEmpleado
 
@@ -325,6 +327,9 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transac = DateTime.Now,
                         se_distribuye = info.se_distribuye,
                         rub_AplicaIR = info.rub_AplicaIR,
+                        rub_acumula = info.rub_acumula,
+                        rub_provision = info.rub_provision,
+                        rub_aplica_IESS = info.rub_aplica_IESS,                         
                         rub_GrupoResumen = info.rub_GrupoResumen == "" ? null : info.rub_GrupoResumen,
                         rub_ContPorEmpleado = info.rub_ContPorEmpleado
                     };
