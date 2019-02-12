@@ -191,11 +191,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_Parametros_Info model = new ro_Parametros_Info();
             var lst = lst_cta_rubro.get_list_cta_rubros();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            if (model.lst_cta_x_rubros.Count() == 0)
-            {
-                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
 
-            }
+            model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_rubros", model);
         }
@@ -205,10 +202,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            if (model.lst_cta_x_rubros.Count() == 0)
-            {
-                model.lst_cta_x_provisiones = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
-            }
+            
+          model.lst_cta_x_provisiones = model.lst_cta_x_rubros.Where(v => v.rub_provision == true).ToList();
+            
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_provisiones", model);
         }
