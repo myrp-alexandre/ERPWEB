@@ -1,9 +1,9 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_nota_credito_det";
+        settings.Name = "GridView_nota_credito_det";
         settings.CallbackRouteValues = new { Controller = "NotaCredito", Action = "GridViewPartial_nota_credito_det" };
-        settings.KeyFieldName = "IdOrdenPago";
+        settings.KeyFieldName = "IdOrdenPago_op";
         settings.Width = Unit.Percentage(100);
         //CConfiguracion responsive
 

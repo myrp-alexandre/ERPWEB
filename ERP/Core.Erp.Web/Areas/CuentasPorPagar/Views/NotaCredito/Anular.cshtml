@@ -36,6 +36,7 @@
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {

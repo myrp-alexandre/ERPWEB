@@ -32,6 +32,7 @@
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();    
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
@@ -67,6 +68,8 @@
             error: function (error) {
             }
         });
+        selectedIDs = "";
+        GridViewPartial_ordenes_pagos_con_saldo.UnselectRows();
     }
 
 </script>
@@ -574,7 +577,8 @@ function armar_diario() {
 function Buscar_op() {
     var datos = {
         IdProveedor: IdProveedor.GetValue(),
-        IdEmpresa: $("#IdEmpresa").val()
+        IdEmpresa: $("#IdEmpresa").val(),
+        IdTransaccionSession: $("#IdTransaccionSession").val()
 
 
     }

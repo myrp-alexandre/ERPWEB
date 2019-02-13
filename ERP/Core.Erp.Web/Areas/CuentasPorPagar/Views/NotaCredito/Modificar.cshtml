@@ -24,7 +24,7 @@
         }
         else {
             Buscar_op();
-            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
+            GridView_ordenes_pagos_con_saldo.PerformCallback();
             $("#op_con_saldo").modal("show");
         }
     };
@@ -39,6 +39,7 @@
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();    
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
@@ -67,13 +68,15 @@
             success: function (data) {
 
                 $("#myform").submit();
-                GridViewPartial_nota_credito_det.PerformCallback();
+                GridView_nota_credito_det.PerformCallback();
                 $("#op_con_saldo").modal("hide");
 
             },
             error: function (error) {
             }
         });
+        //selectedIDs = "";
+        //GridView_ordenes_pagos_con_saldo.UnselectRows();
     }
 
 </script>
@@ -402,7 +405,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Ordenes de pago con aldos</h4>
+                <h4 class="modal-title">Ordenes de pago con saldos</h4>
             </div>
             <div class="modal-body">
                 @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")
@@ -568,7 +571,8 @@ function armar_diario() {
 function Buscar_op() {
     var datos = {
         IdProveedor: IdProveedor.GetValue(),
-        IdEmpresa: $("#IdEmpresa").val()
+        IdEmpresa: $("#IdEmpresa").val(),
+        IdTransaccionSession: $("#IdTransaccionSession").val()
     }
     $.ajax({
         type: 'POST',
@@ -580,7 +584,7 @@ function Buscar_op() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
+            GridView_ordenes_pagos_con_saldo.PerformCallback();
 
         },
         error: function (error) {
