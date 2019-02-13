@@ -62,7 +62,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                         pivotGridField8.Visible = true;
                         break;
                     case "E":
-                        lblNombreReporte.Text = "Reporte de rubros de descuento";
+                        lblNombreReporte.Text = "Reporte de rubros de descuentos";
                         xrPivotGrid1.OptionsView.ShowColumnTotals = false;
                         pivotGridField5.Visible = false;
                         pivotGridField8.Visible = false;

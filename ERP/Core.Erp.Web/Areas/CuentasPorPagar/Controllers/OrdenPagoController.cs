@@ -80,7 +80,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-                lst_detalle_op =lis_cp_orden_pago_det_Info.get_list();
+                var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                lst_detalle_op =lis_cp_orden_pago_det_Info.get_list(IdTransaccionSession);
                 return PartialView("_GridViewPartial_detalle_op", lst_detalle_op);
             }
             catch (Exception)
@@ -191,7 +192,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 IdTipoFlujo = 1
             };
             SessionFixed.TipoPersona = "PROVEE";
-            lis_cp_orden_pago_det_Info.set_list(new List<cp_orden_pago_det_Info>());
+            lis_cp_orden_pago_det_Info.set_list(new List<cp_orden_pago_det_Info>(), model.IdTransaccionSession);
             comprobante_contable_fp.set_list(new List<ct_cbtecble_det_Info>(),model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -202,7 +203,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             bus_orden_pago_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
             bus_orden_pago = new cp_orden_pago_Bus();
-            model.detalle =lis_cp_orden_pago_det_Info.get_list();
+            model.detalle =lis_cp_orden_pago_det_Info.get_list(model.IdTransaccionSession);
             model.info_comprobante.lst_ct_cbtecble_det = comprobante_contable_fp.get_list(model.IdTransaccionSession);
             info_param_op = bus_orden_pago_tipo.get_info(model.IdEmpresa, model.IdTipo_op);
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
@@ -259,7 +260,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             comprobante_contable_fp.set_list(model.info_comprobante.lst_ct_cbtecble_det,model.IdTransaccionSession);
-            lis_cp_orden_pago_det_Info.set_list(model.detalle);
+            lis_cp_orden_pago_det_Info.set_list(model.detalle, model.IdTransaccionSession);
 
             return View(model);
         }
@@ -298,7 +299,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.detalle = lis_cp_orden_pago_det_Info.get_list();
+            model.detalle = lis_cp_orden_pago_det_Info.get_list(model.IdTransaccionSession);
             model.info_comprobante.lst_ct_cbtecble_det = comprobante_contable_fp.get_list(model.IdTransaccionSession);
             
             info_param_op = bus_orden_pago_tipo.get_info(model.IdEmpresa,model.IdTipo_op);
@@ -387,7 +388,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             lst_detalle_op.Add(info_detalle);
 
-            lis_cp_orden_pago_det_Info.set_list(lst_detalle_op);
+            lis_cp_orden_pago_det_Info.set_list(lst_detalle_op, IdTransaccionSession);
 
             comprobante_contable_fp.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
 
@@ -402,7 +403,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     CtaCbleHaber = pro.IdCtaCble_CXP;
             }
 
-            var list = lis_cp_orden_pago_det_Info.get_list();
+            var list = lis_cp_orden_pago_det_Info.get_list(IdTransaccionSession);
             foreach (var item in list)
             {
                 //Debe
@@ -637,20 +638,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class cp_orden_pago_det_Info_list
     {
-        public List<cp_orden_pago_det_Info> get_list()
+        public List<cp_orden_pago_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["cp_orden_pago_det_Info"] == null)
+            if (HttpContext.Current.Session["cp_orden_pago_det_Info" + IdTransaccionSession.ToString()] == null)
             {
                 List<cp_orden_pago_det_Info> list = new List<cp_orden_pago_det_Info>();
 
-                HttpContext.Current.Session["cp_orden_pago_det_Info"] = list;
+                HttpContext.Current.Session["cp_orden_pago_det_Info" + IdTransaccionSession.ToString()] = list;
             }
-            return (List<cp_orden_pago_det_Info>)HttpContext.Current.Session["cp_orden_pago_det_Info"];
+            return (List<cp_orden_pago_det_Info>)HttpContext.Current.Session["cp_orden_pago_det_Info" + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<cp_orden_pago_det_Info> list)
+        public void set_list(List<cp_orden_pago_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["cp_orden_pago_det_Info"] = list;
+            HttpContext.Current.Session["cp_orden_pago_det_Info" + IdTransaccionSession.ToString()] = list;
         }
 
       
