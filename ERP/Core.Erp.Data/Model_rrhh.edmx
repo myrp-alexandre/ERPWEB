@@ -4932,6 +4932,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Parameter Name="IdNomina" Type="int" Mode="In" />
           <Parameter Name="IdNominaTipo" Type="int" Mode="In" />
           <Parameter Name="IdPeriodo" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdRol" Type="int" Mode="In" />
         </Function>
         <Function Name="spROL_DecimoCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -8038,12 +8040,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="sprol_CancelarNovedades_Prestamos">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdNomina" Mode="In" Type="Int32" />
-            <Parameter Name="IdNominaTipo" Mode="In" Type="Int32" />
-            <Parameter Name="IdPeriodo" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Model_rrhh.ro_tabla_Impu_Renta" />
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" />
           <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" />
@@ -8600,6 +8596,14 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_rol_detalle_x_rubro_acumulado" EntitySet="ro_rol_detalle_x_rubro_acumulado" />
           </AssociationSet>
           <EntitySet Name="vwRo_Prestamo" EntityType="Model_rrhh.vwRo_Prestamo" />
+          <FunctionImport Name="sprol_CancelarNovedades_Prestamos">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdNomina" Mode="In" Type="Int32" />
+            <Parameter Name="IdNominaTipo" Mode="In" Type="Int32" />
+            <Parameter Name="IdPeriodo" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -13124,7 +13128,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sprol_CancelarNovedades_Prestamos" FunctionName="Model_rrhh.Store.sprol_CancelarNovedades_Prestamos" />
           <EntitySetMapping Name="ro_tabla_Impu_Renta">
             <EntityTypeMapping TypeName="Model_rrhh.ro_tabla_Impu_Renta">
               <MappingFragment StoreEntitySet="ro_tabla_Impu_Renta">
@@ -14798,6 +14801,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sprol_CancelarNovedades_Prestamos" FunctionName="Model_rrhh.Store.sprol_CancelarNovedades_Prestamos" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
