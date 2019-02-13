@@ -106,7 +106,7 @@
             this.xrTableCell5.StylePriority.UsePadding = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell5.Weight = 0.40000000000000013D;
+            this.xrTableCell5.Weight = 0.26666666666666683D;
             // 
             // xrTableCell6
             // 
@@ -117,7 +117,7 @@
             this.xrTableCell6.StylePriority.UsePadding = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell6.Weight = 0.53333333333333344D;
+            this.xrTableCell6.Weight = 0.40000000000000008D;
             // 
             // xrTableCell7
             // 
@@ -128,7 +128,7 @@
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell7.Weight = 2.2666666666666666D;
+            this.xrTableCell7.Weight = 2.5333333333333332D;
             // 
             // xrTableCell8
             // 
@@ -193,19 +193,19 @@
             // 
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.Text = "ID";
-            this.xrTableCell1.Weight = 0.40000000000000013D;
+            this.xrTableCell1.Weight = 0.26666666666666683D;
             // 
             // xrTableCell2
             // 
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Text = "Referencia";
-            this.xrTableCell2.Weight = 0.53333333333333344D;
+            this.xrTableCell2.Weight = 0.40000000000000008D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = "Observación";
-            this.xrTableCell3.Weight = 2.2666666666666666D;
+            this.xrTableCell3.Weight = 2.5333333333333332D;
             // 
             // xrTableCell4
             // 
