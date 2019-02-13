@@ -50,6 +50,7 @@ namespace Core.Erp.Info.RRHH
         public string region { get; set; }
         public string Su_Descripcion { get; set; }
 
+        public string EstadoRol { get; set; }
         public ro_rol_Info()
         {
             lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();

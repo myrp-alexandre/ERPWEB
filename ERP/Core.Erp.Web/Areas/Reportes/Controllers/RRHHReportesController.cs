@@ -239,8 +239,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdTipoNomina = 1,
-                fecha_ini = DateTime.Now.AddMonths(-1),
-                fecha_fin = DateTime.Now.Date,
+                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1),
                 estado_novedad = novedad,
                 TipoRubro = "",
                 IdArea=0

@@ -42,8 +42,8 @@ namespace Core.Erp.Data.RRHH
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
                                  pe_FechaFin = ROL.pe_FechaFin,
-                                 Su_Descripcion = ROL.Su_Descripcion
-
+                                 Su_Descripcion = ROL.Su_Descripcion,
+                                 EstadoRol = ROL.EstadoRol
 
                              }).ToList();
                 }
@@ -69,7 +69,7 @@ namespace Core.Erp.Data.RRHH
                              where ROL.IdEmpresa == IdEmpresa
                              && ROL.IdNominaTipoLiqui <= 2
                              && ROL.IdNominaTipoLiqui >= 1
-                             && ROL.Cerrado=="S"
+                             && ROL.Cerrado=="CERRADO"
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
@@ -86,8 +86,8 @@ namespace Core.Erp.Data.RRHH
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
                                  pe_FechaFin = ROL.pe_FechaFin,
-                                 Su_Descripcion = ROL.Su_Descripcion
-
+                                 Su_Descripcion = ROL.Su_Descripcion,
+                                 EstadoRol = ROL.EstadoRol
 
                              }).ToList();
                 }

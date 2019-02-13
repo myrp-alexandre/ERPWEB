@@ -113,9 +113,9 @@
             });
         });
 
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(9);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
 
-        settings.Columns.Add("Descripcion","Nómina").Width=Unit.Percentage(9);
+        settings.Columns.Add("Descripcion","Nómina").Width=Unit.Percentage(15);
         settings.Columns.Add("DescripcionProcesoNomina","Proceso").Width = Unit.Percentage(15);
         settings.Columns.Add(column =>
         {
@@ -133,10 +133,7 @@
             column.PropertiesEdit.DisplayFormatString = "d";
 
         });
-        settings.Columns.Add("Procesado","Proc.").Width=Unit.Percentage(5);
-        settings.Columns.Add("Cerrado","Cerrada").Width = Unit.Percentage(5);
-        settings.Columns.Add("Contabilizado", "Contab.").Width = Unit.Percentage(5);
-
+        settings.Columns.Add("EstadoRol", "Estado").Width=Unit.Percentage(10);
 
         settings.Columns.Add(column =>
         {
