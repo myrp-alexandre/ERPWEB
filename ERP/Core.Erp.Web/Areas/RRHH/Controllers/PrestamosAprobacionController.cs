@@ -51,7 +51,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             var info_parametros = bus_parametros.get_info(IdEmpresa);
             var info_op_tipo = bus_orden_pago_tipo_x_empresa.get_info(IdEmpresa, info_parametros.IdTipo_op_prestamos);
-
           
 
             string[] array = Ids.Split(',');
