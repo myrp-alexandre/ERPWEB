@@ -156,11 +156,13 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                ro_parametro = new ro_Parametros_Data();
                 ro_Comprobantes_Contables_Info info_comprobanteID = new ro_Comprobantes_Contables_Info();
                 ct_cbtecble_Info info_ctb =null;
                  info_parametro = ro_parametro.get_info(info.IdEmpresa);
                 if(info.lst_sueldo_x_pagar.Count()>0)
                  info_ctb = get_armar_diario_sueldo(info,Convert.ToInt32( info_parametro.IdTipoCbte_AsientoSueldoXPagar));
+                info_ctb.IdSucursal = Convert.ToInt32(info.IdSucursal);
                 if (info_ctb != null)
                 {
                     if (odata_comprobante.guardarDB(info_ctb))
@@ -172,10 +174,12 @@ namespace Core.Erp.Bus.RRHH
                         info_comprobanteID.IdPeriodo = info.IdPeriodo;
                         info_comprobanteID.IdTipoCbte = info_ctb.IdTipoCbte;
                         info_comprobanteID.IdCbteCble = info_ctb.IdCbteCble;
+                        info_comprobanteID.IdSucursal = info_ctb.IdSucursal;
                         ro_comprobante.grabarDB(info_comprobanteID);
                         info_ctb = null;
                         if(info.lst_provisiones.Count() > 0)
                         info_ctb = get_armar_diario_provisiones(info, Convert.ToInt32(info_parametro.IdTipoCbte_AsientoSueldoXPagar));
+                        info_ctb.IdSucursal = Convert.ToInt32(info.IdSucursal);
                         if (info_ctb != null)
                         {
                             if(odata_comprobante.guardarDB(info_ctb))
@@ -188,6 +192,7 @@ namespace Core.Erp.Bus.RRHH
                                 info_comprobanteID.IdPeriodo = info.IdPeriodo;
                                 info_comprobanteID.IdTipoCbte = info_ctb.IdTipoCbte;
                                 info_comprobanteID.IdCbteCble = info_ctb.IdCbteCble;
+                                info_comprobanteID.IdSucursal = info_ctb.IdSucursal;
                                 ro_comprobante.grabarDB(info_comprobanteID);
                             }
                         }

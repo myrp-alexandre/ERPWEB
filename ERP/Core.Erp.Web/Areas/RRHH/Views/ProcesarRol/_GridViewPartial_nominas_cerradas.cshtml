@@ -32,17 +32,7 @@
 
 
         settings.SettingsExport.EnableClientSideExportAPI = true;
-        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
-        settings.Toolbars.Add(t =>
-        {
-            t.EnableAdaptivity = true;
-            t.Items.Add(GridViewToolbarCommand.ExportToPdf).Text = "Exportar a PDF";
-            t.Items.Add(GridViewToolbarCommand.ExportToXls).Text = "Exportar a XLS";
-            t.Items.Add(GridViewToolbarCommand.ExportToXlsx).Text = "Exportar a XLSX";
-            t.Items.Add(GridViewToolbarCommand.ExportToDocx).Text = "Exportar a DOCX";
-            t.Items.Add(GridViewToolbarCommand.ExportToRtf).Text = "Exportar a RTF";
-            t.Items.Add(GridViewToolbarCommand.ExportToCsv).Text = "Exportar a CSV";
-        });
+        
         settings.SettingsExport.RenderBrick = (sender, e) =>
         {
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
@@ -137,9 +127,8 @@
             column.PropertiesEdit.DisplayFormatString = "d";
 
         });
-        settings.Columns.Add("Procesado", "Procesado").Width = Unit.Percentage(6);
-        settings.Columns.Add("Cerrado", "Cerrado").Width = Unit.Percentage(5);
-        settings.Columns.Add("Contabilizado", "Contabilizado").Width = Unit.Percentage(8);
+        settings.Columns.Add("EstadoRol", "Estado rol").Width = Unit.Percentage(6);
+        
 
 
     });

@@ -271,7 +271,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         return View(info);
                     }
                 }
-                info.IdEmpresa = GetIdEmpresa();
+                info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                     if (!bus_rol.ContabilizarPeriodo(info))
                     {
                         cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
