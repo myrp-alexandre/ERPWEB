@@ -252,7 +252,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Context.sprol_CancelarNovedades_Prestamos(info.IdEmpresa,  info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                    Context.sprol_CancelarNovedades_Prestamos(info.IdEmpresa,  info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.IdSucursal,Convert.ToInt32( info.IdRol));
                 }
                 return true;
             }
