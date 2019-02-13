@@ -49,10 +49,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public JsonResult aprobar(int IdEmpresa = 0, string Ids = "")
         {
-            var info_parametros = bus_parametros.get_info(IdEmpresa);
-            var info_op_tipo = bus_orden_pago_tipo_x_empresa.get_info(IdEmpresa, info_parametros.IdTipo_op_prestamos);
-          
-
+            var existen_cuentas = true;
+            var mensaje_aprobar = "";
+            ro_prestamo_Info info_prestamo = new ro_prestamo_Info();
             string[] array = Ids.Split(',');
             string IdUsuarioAprueba = SessionFixed.IdUsuario;
 
@@ -62,15 +61,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             else
             {
-                if (string.IsNullOrEmpty(info_op_tipo.IdCtaCble) || string.IsNullOrEmpty(info_op_tipo.IdCtaCble_Credito))
+                foreach (var item in array)
                 {
-                    return Json(false, JsonRequestBehavior.AllowGet);
+                    info_prestamo = bus_prestamos.get_info(IdEmpresa, Convert.ToDecimal(item));
+
+                    if (info_prestamo == null || (info_prestamo.IdCtaCble_Emplea == null || info_prestamo.rub_ctacon == null))
+                    {
+                        existen_cuentas = false;
+                        mensaje_aprobar = "No estan asignadas las cuentas contables de los empleados seleccionados";
+                        break;
+                    }
+                }
+
+                if (existen_cuentas)
+                {
+                    var resultado_orden = bus_prestamos.aprobar_prestamo(IdEmpresa, array, IdUsuarioAprueba);
+                    return Json(mensaje_aprobar, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    var resultado_orden = bus_prestamos.aprobar_prestamo(IdEmpresa, array, IdUsuarioAprueba);
-                    return Json(resultado_orden, JsonRequestBehavior.AllowGet);
-                }                
+                    return Json(mensaje_aprobar, JsonRequestBehavior.AllowGet);
+                }
+                               
             }         
         }
     }

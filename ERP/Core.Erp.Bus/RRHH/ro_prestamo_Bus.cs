@@ -343,5 +343,20 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+
+        public ro_prestamo_Info get_info(int IdEmpresa, decimal IdPrestamo)
+        {
+            try
+            {
+                ro_prestamo_Info info = new ro_prestamo_Info();
+                info = odata.get_info(IdEmpresa, IdPrestamo);
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

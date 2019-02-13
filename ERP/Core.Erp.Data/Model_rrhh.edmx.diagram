@@ -188,7 +188,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion" Width="1.5" PointX="15" PointY="26.375" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
-        <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="27.375" PointY="27.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_catalogo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_catalogo1" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rubros_calculados" Width="1.5" PointX="11.25" PointY="82" />
@@ -252,6 +251,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_ro_periodo_x_ro_Nomina_TipoLiqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_rol" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_x_rubro_acumulado_ro_rol" />
+        <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="27.375" PointY="27.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

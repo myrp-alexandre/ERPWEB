@@ -386,9 +386,6 @@ namespace Core.Erp.Data.RRHH
 
                 foreach (var item in Lista)
                 {
-
-
-
                     var IdPrestamo = Convert.ToDecimal(item);
                     ro_prestamo Entity_Prestamo = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
 
@@ -457,7 +454,7 @@ namespace Core.Erp.Data.RRHH
                                 IdTipoCbte = diario.IdTipoCbte,
                                 IdCbteCble = diario.IdCbteCble,
                                 secuencia = 1,
-                                IdCtaCble = Entity_Empleado.IdCtaCble_Emplea,
+                                IdCtaCble = cuenta_x_rubro.rub_ctacon,                                
                                 dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero),
                             };
 
@@ -469,7 +466,7 @@ namespace Core.Erp.Data.RRHH
                                 IdTipoCbte = diario.IdTipoCbte,
                                 IdCbteCble = diario.IdCbteCble,
                                 secuencia = 2,
-                                IdCtaCble = cuenta_x_rubro.rub_ctacon,
+                                IdCtaCble = Entity_Empleado.IdCtaCble_Emplea,
                                 dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero) * -1
                             };
 
@@ -493,23 +490,62 @@ namespace Core.Erp.Data.RRHH
 
                             Context_cxp.cp_orden_pago_det.Add(op_det);
                         }
-                    
-                
+                    }
+                    Context_ct.SaveChanges();
+                    Context_cxp.SaveChanges();
+                    Context.SaveChanges();                
                 }
-                Context_ct.SaveChanges();
-                Context_cxp.SaveChanges();
-                Context.SaveChanges();
-
                 Context_ct.Dispose();
                 Context_cxp.Dispose();
                 Context.Dispose();
-            }
-            
 
                 return true;
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public ro_prestamo_Info get_info(int IdEmpresa, decimal IdPrestamo)
+        {
+            try
+            {
+                ro_prestamo_Info info = new ro_prestamo_Info();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    vwRo_Prestamo Entity = Context.vwRo_Prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+                    if (Entity == null) return null;
+
+                    info = new ro_prestamo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdPrestamo = Entity.IdPrestamo,
+                        descuento_mensual = Entity.descuento_mensual,
+                        descuento_men_quin = Entity.descuento_men_quin,
+                        descuento_quincena = Entity.descuento_quincena,
+                        IdEmpleado = Entity.IdEmpleado,
+                        IdRubro = Entity.IdRubro,
+                        Estado = Entity.Estado,
+                        Fecha = Entity.Fecha,
+                        MontoSol = Entity.MontoSol,
+                        NumCuotas = Entity.NumCuotas,
+                        Fecha_PriPago = Entity.Fecha_PriPago,
+                        Observacion = Entity.Observacion,
+                        IdTipoCbte = Entity.IdTipoCbte,
+                        IdCbteCble = Entity.IdCbteCble,
+                        IdOrdenPago = Entity.IdOrdenPago,
+                        IdCtaCble_Emplea = Entity.IdCtaCble_Emplea,
+                        rub_ctacon = Entity.rub_ctacon
+                    };
+                }
+
+                return info;
+            }
             catch (Exception)
             {
+
                 throw;
             }
         }

@@ -42,5 +42,7 @@ namespace Core.Erp.Data
         public string EstadoAprob { get; set; }
         public string IdUsuarioAprueba { get; set; }
         public Nullable<System.DateTime> Fecha_registro { get; set; }
+        public string IdCtaCble_Emplea { get; set; }
+        public string rub_ctacon { get; set; }
     }
 }

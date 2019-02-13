@@ -128,7 +128,6 @@ namespace Core.Erp.Data
         public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<vwro_archivos_bancos_generacion> vwro_archivos_bancos_generacion { get; set; }
         public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
-        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public DbSet<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
         public DbSet<ro_jornada> ro_jornada { get; set; }
@@ -145,6 +144,7 @@ namespace Core.Erp.Data
         public DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
         public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
+        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
