@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.CuentasPorPagar;
 using Core.Erp.Info.Reportes.CuentasPorPagar;
 using System.Collections.Generic;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Reportes.CuentasPorPagar
 {
@@ -29,6 +30,11 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             CXP_004_Bus bus_rpt = new CXP_004_Bus();
             List<CXP_004_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdOrdenPago);
             this.DataSource = lst_rpt;
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
         }
     }
 }
