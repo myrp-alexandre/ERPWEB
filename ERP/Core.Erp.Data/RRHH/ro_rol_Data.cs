@@ -69,7 +69,7 @@ namespace Core.Erp.Data.RRHH
                              where ROL.IdEmpresa == IdEmpresa
                              && ROL.IdNominaTipoLiqui <= 2
                              && ROL.IdNominaTipoLiqui >= 1
-                             && ROL.Cerrado=="CERRADO"
+                             && ROL.EstadoRol== "CERRADO"
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
