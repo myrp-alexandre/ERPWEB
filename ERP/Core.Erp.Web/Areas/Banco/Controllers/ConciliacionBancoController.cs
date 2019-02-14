@@ -93,6 +93,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Nuevo
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             ba_Conciliacion_Info model = new ba_Conciliacion_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -102,7 +109,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 lst_det = new List<ba_Conciliacion_det_IngEgr_Info>(),
                 IdBanco = 1
             };
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
             var bco = bus_banco_cuenta.get_info(model.IdEmpresa, model.IdBanco);
             var periodo = bus_periodo.get_info(model.IdEmpresa, model.IdPeriodo);
             if (bco != null && periodo != null)
@@ -119,11 +126,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
@@ -144,9 +153,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
             return Json(Math.Round(resultado, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
-        public void CargarMovimientos(int IdBanco = 0, int IdPeriodo = 0)
+        public void CargarMovimientos(int IdBanco = 0, int IdPeriodo = 0, decimal IdTransaccionSession=0)
         {
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var periodo = bus_periodo.get_info(IdEmpresa, IdPeriodo);
@@ -156,23 +164,24 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             List_det.set_list(lst_det, IdTransaccionSession);
         }
 
-        public void EditingUpdate(string IdPk = "")
+        public void EditingUpdate(string IdPk = "", decimal IdTransaccionSession=0)
         {
-            List_det.UpdateRow(IdPk);
+            List_det.UpdateRow(IdPk, IdTransaccionSession);
         }
         #endregion
 
         public ActionResult GridViewPartial_ConciliacionBanco_x_cruzar()
         {
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            var model = List_det.get_list(IdTransaccionSession).Where(q=>q.seleccionado == false).ToList();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q=>q.seleccionado == false).ToList();
             return PartialView("_GridViewPartial_ConciliacionBanco_x_cruzar", model);
         }
 
         public ActionResult GridViewPartial_ConciliacionBanco_det()
         {
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            var model = List_det.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
+            var x = Request.Params["TransaccionFixed"];
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_ConciliacionBanco_det", model);
         }
         #region Modificar
@@ -290,9 +299,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info" + IdTransaccionSession.ToString()] = list;
         }
 
-        public void UpdateRow(string IdPk)
+        public void UpdateRow(string IdPk, decimal IdTransaccionSession)
         {
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             ba_Conciliacion_det_IngEgr_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdPK == IdPk).FirstOrDefault();
             if(edited_info != null)
                 edited_info.seleccionado = !edited_info.seleccionado;
