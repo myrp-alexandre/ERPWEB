@@ -23,5 +23,19 @@ namespace Core.Erp.Bus.Banco
                 throw;
             }
         }
+
+        public List<ba_Banco_Cuenta_x_tb_sucursal_Info> GetListSuc(int IdEmpresa, int IdSucursal)
+
+        {
+            try
+            {
+                return odata.GetListSuc(IdEmpresa, IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

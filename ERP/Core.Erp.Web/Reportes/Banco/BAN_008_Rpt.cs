@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.Banco;
 using System.Linq;
 using Core.Erp.Bus.General;
+using Core.Erp.Bus.Banco;
+using Core.Erp.Info.Banco;
 
 namespace Core.Erp.Web.Reportes.Banco
 {
@@ -15,7 +17,7 @@ namespace Core.Erp.Web.Reportes.Banco
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public int[] IntArray { get; set; }
+        public int IdSucursal { get; set; }
         public BAN_008_Rpt()
         {
             InitializeComponent();
@@ -35,11 +37,15 @@ namespace Core.Erp.Web.Reportes.Banco
             BAN_008_Bus bus_rpt = new BAN_008_Bus();
             List<BAN_008_Info> lst_rpt = new List<BAN_008_Info>();
             //List<BAN_008_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, IdBanco);
-            if (IntArray != null)
+
+            
+            ba_Banco_Cuenta_x_tb_sucursal_Bus bus_cta_suc = new ba_Banco_Cuenta_x_tb_sucursal_Bus();
+            var sucursal = bus_cta_suc.GetListSuc(IdEmpresa, IdSucursal);
+            if (sucursal != null)
             {
-                foreach (var item in IntArray)
+                foreach (var item in sucursal)
                 {
-                    lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, item));
+                    lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, item.IdBanco));
                 }
             }
             this.DataSource = lst_rpt;
@@ -59,6 +65,8 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_ND.Text = ND.ToString();
             lbl_DP.Text = DP.ToString();
             lbl_CH.Text = CH.ToString();
+
+
         }
     }
 }

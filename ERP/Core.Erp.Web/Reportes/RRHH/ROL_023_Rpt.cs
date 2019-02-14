@@ -42,6 +42,9 @@ namespace Core.Erp.Web.Reportes.RRHH
             ROL_023_Bus bus_rpt = new ROL_023_Bus();
             List<ROL_023_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdSucursal, IdNomina, IdNominaTipoLiqui, IdPeriodo, IdDivision, IdArea, IdDepartamento);
             this.DataSource = lst_rpt;
+            lst_rpt.ForEach(q => { q.FRESERVA_R = Math.Round(q.FRESERVA ?? 0, 2, MidpointRounding.AwayFromZero);
+            q.IESS_R = Math.Round(q.IESS ?? 0, 2, MidpointRounding.AwayFromZero);
+            });
 
             ListaAgrupada = (from q in lst_rpt
                              group q by new
