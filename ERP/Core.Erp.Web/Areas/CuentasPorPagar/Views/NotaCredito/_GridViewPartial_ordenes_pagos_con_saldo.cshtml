@@ -1,7 +1,7 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_ordenes_pagos_con_saldo";
+        settings.Name = "GridViewPartial_ordenes_pagos_con_saldo";
         settings.CallbackRouteValues = new { Controller = "NotaCredito", Action = "GridViewPartial_ordenes_pagos_con_saldo" };
         settings.KeyFieldName = "IdOrdenPago_op";
         settings.Width = Unit.Percentage(100);

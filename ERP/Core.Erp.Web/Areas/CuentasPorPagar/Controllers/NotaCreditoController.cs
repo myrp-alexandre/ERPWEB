@@ -143,7 +143,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            //Session["list_op_por_proveedor"] = null;
             var param = bus_param.get_info(IdEmpresa);
             cp_nota_DebCre_Info model = new cp_nota_DebCre_Info
             {
@@ -322,13 +321,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public JsonResult seleccionar_op(string Ids = "", decimal IdTransaccionSession = 0)
         {
-            var model = List_op_det.get_list(IdTransaccionSession);
             string[] array = Ids.Split(',');
             var output = array.GroupBy(q => q).ToList();
+            var model = List_op.get_list(IdTransaccionSession);
             foreach (var item in output)
             {
                 if (item.Key != "")
                 {
+                    List_op_det.set_list(new List<cp_orden_pago_cancelaciones_Info>(), IdTransaccionSession);
                     var lista_tmp = model.Where(v => v.IdOrdenPago_op == Convert.ToDecimal(item.Key));
                     var info_add = lista_tmp.FirstOrDefault();
                     info_add.MontoAplicado = (double)info_add.MontoAplicado;
