@@ -24,5 +24,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public ro_empleado_x_jornada_Info GetInfo_Empleado_Jornada(int IdEmpresa, decimal IdEmpleado, int IdJornada)
+        {
+            try
+            {
+                return odata.GetInfo_Empleado_Jornada(IdEmpresa, IdEmpleado, IdJornada);
+            }
+            catch (Exception)
+
+            {
+
+                throw;
+            }
+        }
     }
 }
