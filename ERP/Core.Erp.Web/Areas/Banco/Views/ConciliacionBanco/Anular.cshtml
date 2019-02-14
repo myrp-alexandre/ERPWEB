@@ -27,7 +27,8 @@
 
     function EditingUpdate(ID) {
         var datos = {
-            IdPk: ID
+            IdPk: ID,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -50,7 +51,8 @@
     function CargarMovimientos() {
             var datos = {
                 IdBanco: $("#IdBanco").val(),
-                IdPeriodo: $("#IdPeriodo").val()
+                IdPeriodo: $("#IdPeriodo").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
         $.ajax({
             type: 'POST',
