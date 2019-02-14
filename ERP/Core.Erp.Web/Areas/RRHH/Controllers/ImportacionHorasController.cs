@@ -341,13 +341,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         IdEmpleado = empleado.IdEmpleado,
                                         IdRubro = rubros.IdRubro,
                                         ru_descripcion = rubros.ru_descripcion,
-                                        ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino),
-                                        codigo = jornada,
-                                        IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada
+                                        ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
+                                       
                                     };
                                     horas_mat = info.NumHoras;
                                     info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
                                     info.Secuencia = lista_novedades.Count() + 1;
+                                if (jornada != null && jornada != "")
+                                    info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
                                     if (info.Valor > 0)
                                         lista_novedades.Add(info);
                                 }

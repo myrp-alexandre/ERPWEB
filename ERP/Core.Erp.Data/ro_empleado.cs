@@ -39,7 +39,6 @@ namespace Core.Erp.Data
             this.ro_participacion_utilidad_empleado = new HashSet<ro_participacion_utilidad_empleado>();
             this.ro_permiso_x_empleado = new HashSet<ro_permiso_x_empleado>();
             this.ro_permiso_x_empleado1 = new HashSet<ro_permiso_x_empleado>();
-            this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_SancionesPorMarcaciones_det = new HashSet<ro_SancionesPorMarcaciones_det>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
@@ -47,6 +46,7 @@ namespace Core.Erp.Data
             this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
             this.ro_empleado_Novedad1 = new HashSet<ro_empleado_Novedad>();
             this.ro_empleado_x_division_x_area = new HashSet<ro_empleado_x_division_x_area>();
+            this.ro_prestamo = new HashSet<ro_prestamo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -147,7 +147,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
         public virtual ICollection<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
         public virtual ICollection<ro_permiso_x_empleado> ro_permiso_x_empleado1 { get; set; }
-        public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
@@ -156,5 +155,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad1 { get; set; }
         public virtual ICollection<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
+        public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
     }
 }

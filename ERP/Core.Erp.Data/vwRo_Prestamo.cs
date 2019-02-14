@@ -44,5 +44,8 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_registro { get; set; }
         public string IdCtaCble_Emplea { get; set; }
         public string rub_ctacon { get; set; }
+        public bool GeneraOP { get; set; }
+        public Nullable<int> IdEmpresa_op { get; set; }
+        public Nullable<int> IdEmpresa_dc { get; set; }
     }
 }

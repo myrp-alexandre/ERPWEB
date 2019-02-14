@@ -51,10 +51,11 @@ namespace Core.Erp.Data
         public string IdTipo_Persona { get; set; }
         public Nullable<decimal> IdEntidad { get; set; }
         public Nullable<decimal> IdPersona { get; set; }
+        public bool GeneraOP { get; set; }
     
         public virtual ro_catalogo ro_catalogo { get; set; }
-        public virtual ICollection<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ICollection<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
     }
 }
