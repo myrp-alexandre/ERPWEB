@@ -8,6 +8,11 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPeriodo";
 
+
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -32,7 +37,7 @@
 
 
         settings.SettingsExport.EnableClientSideExportAPI = true;
-        
+
         settings.SettingsExport.RenderBrick = (sender, e) =>
         {
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
@@ -105,7 +110,7 @@
 
             });
         });
-        
+
         settings.Columns.Add("IdRol", "IdRol").Width = Unit.Percentage(5);
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
         settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(10);
@@ -128,7 +133,7 @@
 
         });
         settings.Columns.Add("EstadoRol", "Estado rol").Width = Unit.Percentage(6);
-        
+
 
 
     });
