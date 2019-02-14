@@ -68,8 +68,6 @@
             error: function (error) {
             }
         });
-        selectedIDs = "";
-        GridViewPartial_ordenes_pagos_con_saldo.UnselectRows();
     }
 
 </script>
@@ -411,7 +409,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Ordenes de pago con aldos</h4>
+                <h4 class="modal-title">Ordenes de pago con saldos</h4>
             </div>
             <div class="modal-body">
                 @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")

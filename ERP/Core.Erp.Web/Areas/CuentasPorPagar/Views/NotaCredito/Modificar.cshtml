@@ -24,7 +24,7 @@
         }
         else {
             Buscar_op();
-            GridView_ordenes_pagos_con_saldo.PerformCallback();
+            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
             $("#op_con_saldo").modal("show");
         }
     };
@@ -68,15 +68,13 @@
             success: function (data) {
 
                 $("#myform").submit();
-                GridView_nota_credito_det.PerformCallback();
+                GridViewPartial_nota_credito_det.PerformCallback();
                 $("#op_con_saldo").modal("hide");
 
             },
             error: function (error) {
             }
         });
-        //selectedIDs = "";
-        //GridView_ordenes_pagos_con_saldo.UnselectRows();
     }
 
 </script>
@@ -584,7 +582,7 @@ function Buscar_op() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            GridView_ordenes_pagos_con_saldo.PerformCallback();
+            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
 
         },
         error: function (error) {
