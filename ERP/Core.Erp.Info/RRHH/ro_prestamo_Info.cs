@@ -46,6 +46,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<decimal> IdOrdenPago { get; set; }    
         public string IdUsuarioAprueba { get; set; }
         public string EstadoAprob { get; set; }
+        public bool GeneraOP { get; set; }
 
 
 

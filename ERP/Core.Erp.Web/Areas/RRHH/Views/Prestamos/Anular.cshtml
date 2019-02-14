@@ -17,27 +17,32 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdProveedor">Empleado*</label>
                     @Html.Partial("_CmbEmpleado_prestamos", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-5">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Rubro*</label>
+                    <label for="IdRubro">Rubro*</label>
                     @Html.Partial("_CmbRubro_Prestamos", Model)
                     @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor(q => q.GeneraOP, settings =>
+                       {
+                           settings.Name = "GeneraOP";
+                           settings.Text = "Genera O.P";
+                       }).GetHtml()
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
