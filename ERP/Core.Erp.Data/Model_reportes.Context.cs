@@ -40,7 +40,6 @@ namespace Core.Erp.Data
         public DbSet<VWCXC_002_diario> VWCXC_002_diario { get; set; }
         public DbSet<VWCXP_002> VWCXP_002 { get; set; }
         public DbSet<VWCXP_002_diario> VWCXP_002_diario { get; set; }
-        public DbSet<VWCXP_003> VWCXP_003 { get; set; }
         public DbSet<VWCXP_003_cancelaciones> VWCXP_003_cancelaciones { get; set; }
         public DbSet<VWCXP_005> VWCXP_005 { get; set; }
         public DbSet<VWCXP_005_cancelaciones> VWCXP_005_cancelaciones { get; set; }
@@ -114,6 +113,7 @@ namespace Core.Erp.Data
         public DbSet<VWROL_021> VWROL_021 { get; set; }
         public DbSet<VWROL_002> VWROL_002 { get; set; }
         public DbSet<VWROL_024> VWROL_024 { get; set; }
+        public DbSet<VWCXP_003> VWCXP_003 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {
@@ -1067,27 +1067,6 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPBAN_009_Result>("SPBAN_009", idEmpresaParameter, idBancoParameter, fechaFinParameter);
         }
     
-        public virtual ObjectResult<SPBAN_008_Result> SPBAN_008(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<int> idBanco)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var fechaIniParameter = fechaIni.HasValue ?
-                new ObjectParameter("FechaIni", fechaIni) :
-                new ObjectParameter("FechaIni", typeof(System.DateTime));
-    
-            var fechaFinParameter = fechaFin.HasValue ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(System.DateTime));
-    
-            var idBancoParameter = idBanco.HasValue ?
-                new ObjectParameter("IdBanco", idBanco) :
-                new ObjectParameter("IdBanco", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPBAN_008_Result>("SPBAN_008", idEmpresaParameter, fechaIniParameter, fechaFinParameter, idBancoParameter);
-        }
-    
         public virtual ObjectResult<SPROL_022_Result> SPROL_022(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
         {
             var idempresaParameter = idempresa.HasValue ?
@@ -1107,6 +1086,27 @@ namespace Core.Erp.Data
                 new ObjectParameter("idperiodo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_022_Result>("SPROL_022", idempresaParameter, idnomina_tipoParameter, idnomina_Tipo_liqParameter, idperiodoParameter);
+        }
+    
+        public virtual ObjectResult<SPBAN_008_Result> SPBAN_008(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<int> idBanco)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var idBancoParameter = idBanco.HasValue ?
+                new ObjectParameter("IdBanco", idBanco) :
+                new ObjectParameter("IdBanco", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPBAN_008_Result>("SPBAN_008", idEmpresaParameter, fechaIniParameter, fechaFinParameter, idBancoParameter);
         }
     }
 }
