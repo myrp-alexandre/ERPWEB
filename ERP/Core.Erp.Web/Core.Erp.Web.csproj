@@ -540,6 +540,12 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_006_Rpt.Designer.cs">
       <DependentUpon>ACTF_006_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_007_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_007_Rpt.Designer.cs">
+      <DependentUpon>ACTF_007_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9858,6 +9864,7 @@
     <Content Include="Areas\Contabilidad\Views\ImportacionDiarios\_GridViewPartial_ImportacionDiarios.cshtml" />
     <Content Include="Areas\RRHH\Views\ParametrosContable\_CmbCuenta_sueldo_x_pagar.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ImportacionDiarios\_CmbCuenta.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_007.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -10002,6 +10009,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_006_Rpt.resx">
       <DependentUpon>ACTF_006_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_007_Rpt.resx">
+      <DependentUpon>ACTF_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>

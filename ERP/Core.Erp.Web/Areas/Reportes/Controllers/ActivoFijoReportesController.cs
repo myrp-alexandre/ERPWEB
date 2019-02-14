@@ -249,5 +249,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        public ActionResult ACTF_007(int IdActivoFijo = 0)
+        {
+            ACTF_007_Rpt model = new ACTF_007_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdActivoFijo.Value = IdActivoFijo;
+            model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+
+        }
     }
 }
