@@ -61,7 +61,14 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  empleado = q.empleado,
                                  ru_orden = q.ru_orden,
                                  Valor = q.Valor,
-                                 ru_tipo = q.ru_tipo
+                                 ru_tipo = q.ru_tipo,
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 FechaIni = q.FechaIni,
+                                 FechaFin = q.FechaFin,
+                                 NomArea = q.NomArea,
+                                 NomDivision = q.NomDivision,
+                                 NomNomina = q.NomNomina,
+                                 NomNominaTipo = q.NomNominaTipo
 
                              }).ToList();
 

@@ -38,7 +38,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
                 int IdDivision = P_IdDivision.Value == null ? 0 : Convert.ToInt32(P_IdDivision.Value);
                 int IdArea = P_IdArea.Value == null ? 0 : Convert.ToInt32(P_IdArea.Value);
-                lblNombreReporte.Text = "Ingresos";
+                lblNombreReporte.Text = "Reporte de ingresos";
                 //pivotGridField2.Visible = false;
                 pivotGridField4.Visible = false;
                 ROL_022_Bus bus_rpt = new ROL_022_Bus();
