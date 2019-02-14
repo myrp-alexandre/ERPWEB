@@ -10849,7 +10849,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
           <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="tc_TipoCbte" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Tipo1" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="TipoAgrupacion" Nullable="false" MaxLength="8" />
           <Property Type="Int32" Name="OrdenRegistros" Nullable="false" />
           <Property Type="String" Name="MotivoNota" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Flujo" Nullable="true" />
@@ -14070,7 +14070,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
-                <ScalarProperty Name="Tipo1" ColumnName="Tipo1" />
+                <ScalarProperty Name="TipoAgrupacion" ColumnName="TipoAgrupacion" />
                 <ScalarProperty Name="OrdenRegistros" ColumnName="OrdenRegistros" />
                 <ScalarProperty Name="MotivoNota" ColumnName="MotivoNota" />
                 <ScalarProperty Name="Flujo" ColumnName="Flujo" />

@@ -40,7 +40,7 @@ namespace Core.Erp.Data.Reportes.Banco
                         tc_TipoCbte = q.tc_TipoCbte,
                         Flujo = q.Flujo,
                         MotivoNota = q.MotivoNota,
-                        Tipo1 = q.Tipo1,
+                        TipoAgrupacion = q.TipoAgrupacion,
                         OrdenRegistros = q.OrdenRegistros
                     }).ToList();
                 }

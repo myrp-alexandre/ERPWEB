@@ -253,6 +253,8 @@
             // 
             // xrTableCell18
             // 
+            this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomTipoNota]")});
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.Weight = 1.7342212334511262D;
             // 
