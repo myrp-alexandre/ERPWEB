@@ -248,7 +248,7 @@
             this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
-            this.xrTableCell14.Text = "Tipo nota";
+            this.xrTableCell14.Text = "Tipo nota:";
             this.xrTableCell14.Weight = 0.66577876654887413D;
             // 
             // xrTableCell18
@@ -261,11 +261,15 @@
             this.xrTableCell19.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.StylePriority.UseFont = false;
+            this.xrTableCell19.Text = "Total:";
             this.xrTableCell19.Weight = 0.8D;
             // 
             // xrTableCell17
             // 
+            this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cn_total]")});
             this.xrTableCell17.Name = "xrTableCell17";
+            this.xrTableCell17.TextFormatString = "{0:n2}";
             this.xrTableCell17.Weight = 0.8D;
             // 
             // xrTableRow4

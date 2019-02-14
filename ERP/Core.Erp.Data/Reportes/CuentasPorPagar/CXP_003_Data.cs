@@ -46,7 +46,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  Tipo_doc = q.Tipo_doc,
                                  cn_subtotal_siniva = q.cn_subtotal_siniva,
                                  num_documento = q.num_documento,
-                                 Su_Descripcion =q.Su_Descripcion
+                                 Su_Descripcion =q.Su_Descripcion,
+                                 NomTipoNota = q.NomTipoNota
 
                              }).ToList();
                 }

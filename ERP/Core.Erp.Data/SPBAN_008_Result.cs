@@ -33,5 +33,9 @@ namespace Core.Erp.Data
         public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
         public string tc_TipoCbte { get; set; }
+        public string Tipo1 { get; set; }
+        public int OrdenRegistros { get; set; }
+        public string MotivoNota { get; set; }
+        public string Flujo { get; set; }
     }
 }
