@@ -286,6 +286,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var rubros_calculados = bus_rubros_calculados.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
             ro_rubro_tipo_Info_list ro_rubro_tipo_Info_list = new ro_rubro_tipo_Info_list();
             ro_jornada_Data odata_j = new ro_jornada_Data();
+            ro_empleado_x_jornada_Bus empleado_jornada_bus = new ro_empleado_x_jornada_Bus();
+            ro_empleado_x_jornada_Info empleado_jornada_info = new ro_empleado_x_jornada_Info();
 
             var lst_jornada = odata_j.get_list(Convert.ToInt32(SessionFixed.IdEmpresa),false);
             double horas_mat = 0;
@@ -341,16 +343,37 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         IdEmpleado = empleado.IdEmpleado,
                                         IdRubro = rubros.IdRubro,
                                         ru_descripcion = rubros.ru_descripcion,
-                                        ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
+                                        //ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
                                        
                                     };
                                     horas_mat = info.NumHoras;
-                                    info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
+
+                                    //info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
+
                                     info.Secuencia = lista_novedades.Count() + 1;
-                                if (jornada != null && jornada != "")
-                                    info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
-                                    if (info.Valor > 0)
-                                        lista_novedades.Add(info);
+
+                                    if (jornada != null && jornada != "")
+                                    {
+                                        info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
+                                        if (info.IdJornada != 0)
+                                        {
+                                            empleado_jornada_info = empleado_jornada_bus.GetInfo_Empleado_Jornada(empleado.IdEmpresa, empleado.IdEmpleado, info.IdJornada);
+
+                                            if (empleado_jornada_info != null)
+                                            {
+                                                info.ValorHora = empleado_jornada_info.ValorHora;
+                                                info.Valor = Convert.ToDouble(empleado_jornada_info.ValorHora * info.NumHoras);
+                                            }
+
+                                            if (info.Valor > 0)
+                                            {
+                                                lista_novedades.Add(info);
+                                            }
+                                        }
+                                    //if (info.Valor > 0)
+                                    //    lista_novedades.Add(info);
+                                    }
+                                    
                                 }
 
 

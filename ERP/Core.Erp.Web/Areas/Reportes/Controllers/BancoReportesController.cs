@@ -197,6 +197,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             });
             ViewBag.lst_catalogo = lst_catalogo;
+
+            tb_sucursal_Bus bus_suc = new tb_sucursal_Bus();
+            var lst_suc = bus_suc.get_list(IdEmpresa, false);
+            ViewBag.lst_suc = lst_suc;
         }
         public ActionResult BAN_007()
         {
@@ -241,14 +245,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_banco_Info model = new cl_filtros_banco_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdBanco = 0
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
             cargar_banco(model.IdEmpresa);
             BAN_008_Rpt report = new BAN_008_Rpt();
-            report.IntArray = model.IntArray;
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdBanco.Value = model.IdBanco;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
@@ -260,9 +262,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult BAN_008(cl_filtros_banco_Info model)
         {
             BAN_008_Rpt report = new BAN_008_Rpt();
-            report.IntArray = model.IntArray;
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdBanco.Value = model.IdBanco;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();

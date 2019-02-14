@@ -133,6 +133,7 @@ namespace Core.Erp.Info.Helps
         public string Estado { get; set; }
         public DateTime fecha_ini { get; set; }
         public DateTime fecha_fin { get; set; }
+        public int IdSucursal { get; set; }
         public cl_filtros_banco_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

@@ -65,19 +65,17 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="IdBanco">Banco</label>
+                            <label for="IdSucursal">Sucursal</label>
 
                             @Html.DevExpress().DropDownEditFor(q => q.IntArray, settings =>
                        {
                            settings.Name = "checkComboBox";
                            settings.Width = Unit.Percentage(100);
-
-
                            settings.SetDropDownWindowTemplateContent(c =>
                            {
                                @Html.DevExpress().ListBox(listBoxSettings =>
                                {
-                                   listBoxSettings.Name = "IntArray";
+                                   listBoxSettings.Name = "sucursal";
                                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
                                    listBoxSettings.ControlStyle.BorderBottom.BorderWidth = 1;
 
@@ -87,9 +85,9 @@
                                    listBoxSettings.Properties.EnableSelectAll = true;
                                    listBoxSettings.Properties.FilteringSettings.ShowSearchUI = true;
                                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
-                                   foreach (var item in ViewBag.lst_banco)
+                                   foreach (var item in ViewBag.lst_suc)
                                    {
-                                       listBoxSettings.Properties.Items.Add(item.ba_descripcion, item.IdBanco);
+                                       listBoxSettings.Properties.Items.Add(item.Su_Descripcion, item.IdSucursal);
                                    }
                                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateText";
                                    listBoxSettings.Properties.ClientSideEvents.Init = "updateText";
@@ -111,9 +109,11 @@
                        }).GetHtml()
 
                             @*Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control" })*@
-                            @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio</label>

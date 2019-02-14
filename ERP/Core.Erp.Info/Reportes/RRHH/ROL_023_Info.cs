@@ -46,5 +46,11 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public int CantidadEmpleados { get; set; }
         public Nullable<double> TotalResumen { get; set; }
+
+        #region MyRegion
+
+        public Nullable<double> FRESERVA_R { get; set; }
+        public Nullable<double> IESS_R { get; set; }
+        #endregion
     }
 }
