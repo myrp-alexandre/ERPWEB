@@ -60,7 +60,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1)
+            };
             return View(model);
         }
         [HttpPost]
@@ -75,8 +81,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
-                ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+                ViewBag.Fecha_ini = Fecha_ini == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) : Convert.ToDateTime(Fecha_ini);
+                ViewBag.Fecha_fin = Fecha_fin == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1) : Convert.ToDateTime(Fecha_fin);
 
                 List<ro_Historico_Liquidacion_Vacaciones_Info> model = bus_liquidacion.get_list(IdEmpresa, ViewBag. Fecha_ini,ViewBag. Fecha_fin);
                 return PartialView("_GridViewPartial_vacaciones_liquidadas", model);
