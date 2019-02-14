@@ -87,7 +87,7 @@
             success: function (data) {
                 if (data.GiradoA.length > 0) {
 
-                    var ob = $("#cb_cheque").text();
+                    var ob = $("#cb_Cheque").Val();
 
                     $("#cb_giradoA").val(data.GiradoA);
                     $("#cb_Observacion").val("CH# "+ob+" - "+ data.Observacion);
@@ -144,7 +144,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                var ob = $("#cb_cheque").text();
+                var ob = $("#cb_Cheque").val();
 
                 $("#cb_giradoA").val(data.GiradoA);
                 $("#cb_Observacion").val("CH# " + ob + " - " + data.Observacion);

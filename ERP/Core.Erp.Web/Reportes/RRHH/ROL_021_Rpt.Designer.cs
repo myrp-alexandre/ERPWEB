@@ -858,6 +858,7 @@
             this.pivotGridField4.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.pivotGridField4.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField4.Appearance.Cell.WordWrap = true;
+            this.pivotGridField4.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
             this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField4.AreaIndex = 0;
             this.pivotGridField4.Caption = "Tipo";
@@ -891,6 +892,7 @@
             this.pivotGridField2.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.pivotGridField2.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField2.Appearance.Cell.WordWrap = true;
+            this.pivotGridField2.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
             this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField2.AreaIndex = 2;
             this.pivotGridField2.Caption = "Orden";
@@ -1032,6 +1034,7 @@
             // 
             // pivotGridField6
             // 
+            this.pivotGridField6.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField6.AreaIndex = 1;
             this.pivotGridField6.Caption = "Grupo";
