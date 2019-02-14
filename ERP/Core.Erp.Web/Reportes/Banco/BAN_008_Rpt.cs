@@ -7,6 +7,7 @@ using Core.Erp.Info.Reportes.Banco;
 using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.Banco;
 using System.Linq;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Reportes.Banco
 {
@@ -42,6 +43,11 @@ namespace Core.Erp.Web.Reportes.Banco
                 }
             }
             this.DataSource = lst_rpt;
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
 
             var NC = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA DEBITO BANCARIA").Sum(q => q.ValorAbsoluto);
             var ND = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA CREDITO BANCARIA").Sum(q => q.ValorAbsoluto);

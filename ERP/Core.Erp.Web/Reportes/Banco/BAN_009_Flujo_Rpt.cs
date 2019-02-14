@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Info.Reportes.Banco;
 using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.Banco;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Reportes.Banco
 {
@@ -42,6 +43,11 @@ namespace Core.Erp.Web.Reportes.Banco
             }
 
             this.DataSource = lst_rpt;
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
         }
     }
 }
