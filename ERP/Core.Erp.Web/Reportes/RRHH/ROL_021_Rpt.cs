@@ -99,16 +99,14 @@ namespace Core.Erp.Web.Reportes.RRHH
         }
 
         private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
-        {
-            /*
-            if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+        {   
+            if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.Field.Caption == "Tipo")
             {
                 
                 LabelBrick lb = new LabelBrick();
                 lb.IsVisible = false;
                 e.Brick = lb;
-            }
-            */
+            }else
         }
     }
 }

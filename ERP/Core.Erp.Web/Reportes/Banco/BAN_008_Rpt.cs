@@ -49,10 +49,10 @@ namespace Core.Erp.Web.Reportes.Banco
             ImageConverter obj = new ImageConverter();
             lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
 
-            var NC = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA DEBITO BANCARIA").Sum(q => q.ValorAbsoluto);
-            var ND = lst_rpt.Where(q => q.tc_TipoCbte == "NOTA CREDITO BANCARIA").Sum(q => q.ValorAbsoluto);
-            var DP = lst_rpt.Where(q => q.tc_TipoCbte == "DEPOSITO").Sum(q => q.ValorAbsoluto);
-            var CH = lst_rpt.Where(q => q.tc_TipoCbte == "CHEQUE").Sum(q => q.ValorAbsoluto);
+            var NC = lst_rpt.Where(q => q.tc_TipoCbte == "NCB").Sum(q => q.ValorAbsoluto);
+            var ND = lst_rpt.Where(q => q.tc_TipoCbte == "NDB").Sum(q => q.ValorAbsoluto);
+            var DP = lst_rpt.Where(q => q.tc_TipoCbte == "DEP").Sum(q => q.ValorAbsoluto);
+            var CH = lst_rpt.Where(q => q.tc_TipoCbte == "CHE").Sum(q => q.ValorAbsoluto);
 
 
             lbl_NC.Text = NC.ToString();
