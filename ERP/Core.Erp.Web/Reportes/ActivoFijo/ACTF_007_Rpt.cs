@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
         private void ACTF_007_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_empresa.Text = empresa;
-            lbl_fecha.Text = DateTime.Now.ToString("dd de MMMM del yyyy");
+            lbl_fecha.Text = DateTime.Now.ToString("dd 'de' MMMM 'del' yyyy");
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdActivoFijo = p_IdActivoFijo.Value == null ? 0 : Convert.ToInt32(p_IdActivoFijo.Value);
 
