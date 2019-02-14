@@ -106,7 +106,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 LabelBrick lb = new LabelBrick();
                 lb.IsVisible = false;
                 e.Brick = lb;
-            }else
+            }
         }
     }
 }

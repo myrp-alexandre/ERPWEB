@@ -25,10 +25,8 @@ namespace Core.Erp.Data.RRHH
                         v.Secuencia = secuencia++;
                         if (v.IdCtaCble == null | v.IdCtaCble == "")
                             v.IdCtaCble = v.rub_ctacon;
-                        if (v.IdCtaCble == "NULL")
-                            v.IdCtaCble = "";
-                        if (v.IdCtaCble_prov_credito == "NULL")
-                            v.IdCtaCble_prov_credito = "";
+                        v.IdCtaCble_prov_debito = v.DebCre == "D" ? v.IdCtaCble : null;
+                        v.IdCtaCble_prov_credito = v.DebCre == "C" ? v.IdCtaCble : null;
                     });
 
                 }
