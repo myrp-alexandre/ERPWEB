@@ -31,6 +31,12 @@
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="IdRubro">Sucursal</label>
+                            @Html.Partial("_CmbSucursal_reportes_RRHH", Model.IdSucursal)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="">División</label>
                             @Html.Partial("_CmbDivision_reportes", Model.IdDivision)
                         </div>

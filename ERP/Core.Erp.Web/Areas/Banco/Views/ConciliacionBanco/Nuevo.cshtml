@@ -129,7 +129,7 @@
 @using (Html.BeginForm("Nuevo", "ConciliacionBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

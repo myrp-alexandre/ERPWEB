@@ -26,5 +26,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string Descripcion { get; set; }
 
         public string Division_Descripcion { get; set; }
+        public string Su_Descripcion { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

@@ -30,5 +30,7 @@ namespace Core.Erp.Data
         public Nullable<int> IdArea { get; set; }
         public string Descripcion { get; set; }
         public string Division_Descripcion { get; set; }
+        public string Su_Descripcion { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

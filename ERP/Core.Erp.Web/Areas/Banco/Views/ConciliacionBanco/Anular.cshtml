@@ -124,7 +124,7 @@
     @Html.HiddenFor(q => q.IdConciliacion)
     @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.IdPeriodo)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

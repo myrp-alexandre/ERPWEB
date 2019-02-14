@@ -39,7 +39,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1)
             };
             cargar_combos_consulta();
             return View(model);
@@ -57,8 +59,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
-            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
+            ViewBag.fecha_ini = fecha_ini == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) : Convert.ToDateTime(fecha_ini);
+            ViewBag.fecha_fin = fecha_fin == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1) : Convert.ToDateTime(fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             var model = bus_archivo.get_list(IdEmpresa, ViewBag.fecha_ini, ViewBag.fecha_fin, IdSucursal, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);

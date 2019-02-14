@@ -61,8 +61,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         private bool validar(ba_Conciliacion_Info i_validar, ref string msg)
         {
-            i_validar.co_totalIng = Math.Round(List_det.get_list().Where(q => q.tipo_IngEgr == "+" && q.seleccionado == true).Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
-            i_validar.co_totalEgr = Math.Round(List_det.get_list().Where(q => q.tipo_IngEgr == "-" && q.seleccionado == true).Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
+            i_validar.co_totalIng = Math.Round(List_det.get_list(i_validar.IdTransaccionSession).Where(q => q.tipo_IngEgr == "+" && q.seleccionado == true).Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
+            i_validar.co_totalEgr = Math.Round(List_det.get_list(i_validar.IdTransaccionSession).Where(q => q.tipo_IngEgr == "-" && q.seleccionado == true).Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
             i_validar.co_SaldoConciliado = Math.Round(i_validar.co_SaldoBanco_anterior + i_validar.co_totalIng + i_validar.co_totalEgr, 2, MidpointRounding.AwayFromZero);
             i_validar.co_Diferencia = Math.Round(i_validar.co_SaldoConciliado - i_validar.co_SaldoBanco_EstCta, 2, MidpointRounding.AwayFromZero);
 
@@ -73,9 +73,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
 
             if (i_validar.IdEstado_Concil_Cat == cl_enumeradores.eEstadoCierreBanco.PRE_CONCIL.ToString())
-                i_validar.lst_det = List_det.get_list().Where(q => q.seleccionado == true).ToList();
+                i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
             else
-                i_validar.lst_det = List_det.get_list();
+                i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
 
             if (i_validar.IdConciliacion == 0)
             {
@@ -96,16 +96,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Conciliacion_Info model = new ba_Conciliacion_Info
             {
                 IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 co_Fecha = DateTime.Now.Date,
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.AddMonths(-1).ToString("yyyyMM")),
                 lst_det = new List<ba_Conciliacion_det_IngEgr_Info>(),
                 IdBanco = 1
             };
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var bco = bus_banco_cuenta.get_info(model.IdEmpresa, model.IdBanco);
             var periodo = bus_periodo.get_info(model.IdEmpresa, model.IdPeriodo);
             if (bco != null && periodo != null)
                 model.lst_det = bus_det.get_list_x_conciliar(model.IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin);            
-            List_det.set_list(model.lst_det);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal) );
             return View(model);
         }
@@ -144,13 +146,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public void CargarMovimientos(int IdBanco = 0, int IdPeriodo = 0)
         {
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var periodo = bus_periodo.get_info(IdEmpresa, IdPeriodo);
             List<ba_Conciliacion_det_IngEgr_Info> lst_det = new List<ba_Conciliacion_det_IngEgr_Info>();
             if (bco != null && periodo != null)
                 lst_det = bus_det.get_list_x_conciliar(IdEmpresa, IdBanco, bco.IdCtaCble, periodo.pe_FechaFin);
-            List_det.set_list(lst_det);
+            List_det.set_list(lst_det, IdTransaccionSession);
         }
 
         public void EditingUpdate(string IdPk = "")
@@ -161,26 +164,36 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult GridViewPartial_ConciliacionBanco_x_cruzar()
         {
-            var model = List_det.get_list().Where(q=>q.seleccionado == false).ToList();
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            var model = List_det.get_list(IdTransaccionSession).Where(q=>q.seleccionado == false).ToList();
             return PartialView("_GridViewPartial_ConciliacionBanco_x_cruzar", model);
         }
 
         public ActionResult GridViewPartial_ConciliacionBanco_det()
         {
-            var model = List_det.get_list().Where(q => q.seleccionado == true).ToList();
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            var model = List_det.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_ConciliacionBanco_det", model);
         }
         #region Modificar
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdConciliacion = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             ba_Conciliacion_Info model = bus_conciliacion.get_info(IdEmpresa,IdConciliacion);
             if(model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdConciliacion);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, model.IdBanco);
             var periodo = bus_periodo.get_info(IdEmpresa, model.IdPeriodo);
             model.lst_det.AddRange(bus_det.get_list_x_conciliar(IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin.Date));
-            List_det.set_list(model.lst_det);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
@@ -190,12 +203,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             if (!bus_conciliacion.modificarDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
@@ -209,11 +224,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Conciliacion_Info model = bus_conciliacion.get_info(IdEmpresa, IdConciliacion);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdConciliacion);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, model.IdBanco);
             var periodo = bus_periodo.get_info(IdEmpresa, model.IdPeriodo);
             model.lst_det.AddRange(bus_det.get_list_x_conciliar(IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin.Date));
-            List_det.set_list(model.lst_det);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
@@ -233,10 +249,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public JsonResult Calcular(double co_SaldoContable_MesAnt = 0, double co_SaldoBanco_anterior = 0, double co_SaldoBanco_EstCta = 0 )
         {
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             ba_Conciliacion_valores_Info resultado = new ba_Conciliacion_valores_Info
             {
-                co_totalIng = Math.Round(List_det.get_list().Where(q => q.tipo_IngEgr == "+" && q.seleccionado == true).Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero),
-                co_totalEgr = Math.Round(List_det.get_list().Where(q => q.tipo_IngEgr == "-" && q.seleccionado == true).Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero)
+                co_totalIng = Math.Round(List_det.get_list(IdTransaccionSession).Where(q => q.tipo_IngEgr == "+" && q.seleccionado == true).Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero),
+                co_totalEgr = Math.Round(List_det.get_list(IdTransaccionSession).Where(q => q.tipo_IngEgr == "-" && q.seleccionado == true).Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero)
             };
             resultado.co_SaldoConciliado = Math.Round(co_SaldoBanco_anterior + resultado.co_totalIng + resultado.co_totalEgr,2,MidpointRounding.AwayFromZero);
             resultado.co_Diferencia = Math.Round(resultado.co_SaldoConciliado - co_SaldoBanco_EstCta,2,MidpointRounding.AwayFromZero);
@@ -257,25 +274,26 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
     public class ba_Conciliacion_det_IngEgr_List
     {
-        public List<ba_Conciliacion_det_IngEgr_Info> get_list()
+        public List<ba_Conciliacion_det_IngEgr_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info"] == null)
+            if (HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info" + IdTransaccionSession.ToString()] == null)
             {
                 List<ba_Conciliacion_det_IngEgr_Info> list = new List<ba_Conciliacion_det_IngEgr_Info>();
 
-                HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info"] = list;
+                HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info" + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ba_Conciliacion_det_IngEgr_Info>)HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info"];
+            return (List<ba_Conciliacion_det_IngEgr_Info>)HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info" + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<ba_Conciliacion_det_IngEgr_Info> list)
+        public void set_list(List<ba_Conciliacion_det_IngEgr_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info"] = list;
+            HttpContext.Current.Session["ba_Conciliacion_det_IngEgr_Info" + IdTransaccionSession.ToString()] = list;
         }
 
         public void UpdateRow(string IdPk)
         {
-            ba_Conciliacion_det_IngEgr_Info edited_info = get_list().Where(m => m.IdPK == IdPk).FirstOrDefault();
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            ba_Conciliacion_det_IngEgr_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdPK == IdPk).FirstOrDefault();
             if(edited_info != null)
                 edited_info.seleccionado = !edited_info.seleccionado;
         }

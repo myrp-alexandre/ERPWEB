@@ -423,6 +423,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdTipoNomina = 0,
                 IdArea = 0,
                 IdDivision = 0
@@ -430,6 +431,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
             report.p_IdDivision.Value = model.IdDivision;
@@ -444,6 +446,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
             report.p_IdDivision.Value = model.IdDivision;

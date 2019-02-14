@@ -44,7 +44,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1)
             };
             return View(model);
         }
@@ -59,8 +61,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            ViewBag.Fecha_ini = Fecha_ini == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1) : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
 
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, ViewBag.IdSucursal, false);

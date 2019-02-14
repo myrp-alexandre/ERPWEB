@@ -5,6 +5,7 @@ namespace Core.Erp.Info.Banco
 {
     public class ba_Conciliacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdConciliacion { get; set; }
         public int IdBanco { get; set; }

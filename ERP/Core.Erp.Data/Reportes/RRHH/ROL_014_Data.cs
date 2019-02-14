@@ -9,10 +9,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_014_Data
     {
-        public List<ROL_014_Info> get_list(int IdEmpresa, int IdTipoNomina, int IdArea, int IdDivision)
+        public List<ROL_014_Info> get_list(int IdEmpresa, int IdSucursal, int IdTipoNomina, int IdArea, int IdDivision)
         {
             try
             {
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 int IdDivisionIni = IdDivision;
                 int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
                 int IdAreaIni = IdArea;
@@ -24,6 +26,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = (from q in Context.VWROL_014
                              where q.IdEmpresa == IdEmpresa
+                             && IdSucursalIni <= q.IdSucursal
+                             && q.IdSucursal <= IdSucursalFin
                              && IdTipoNominaInicio <= q.IdTipoNomina
                              && q.IdTipoNomina <= IdTipoNominaFin
                              && IdAreaIni <= q.IdArea
@@ -33,6 +37,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              select new ROL_014_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
                                  IdEmpleado = q.IdEmpleado,
                                  IdTipoNomina = q.IdTipoNomina,
                                  IdDepartamento = q.IdDepartamento,
@@ -47,7 +52,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdArea = q.IdArea,
                                  Descripcion = q.Descripcion,
                                  Division_Descripcion = q.Division_Descripcion,
-                                 EstadoContrato = q.EstadoContrato
+                                 EstadoContrato = q.EstadoContrato,
+                                 Su_Descripcion =  q.Su_Descripcion
                              }).ToList();
                 }
                 Lista.ForEach(
