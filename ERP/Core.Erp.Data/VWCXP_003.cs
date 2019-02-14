@@ -39,5 +39,6 @@ namespace Core.Erp.Data
         public string Tipo_doc { get; set; }
         public string num_documento { get; set; }
         public string Su_Descripcion { get; set; }
+        public string NomTipoNota { get; set; }
     }
 }

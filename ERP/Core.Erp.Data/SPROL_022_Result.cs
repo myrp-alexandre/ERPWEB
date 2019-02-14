@@ -30,5 +30,12 @@ namespace Core.Erp.Data
         public Nullable<int> ru_orden { get; set; }
         public Nullable<double> Valor { get; set; }
         public string IdRubro { get; set; }
+        public string NomNomina { get; set; }
+        public string NomNominaTipo { get; set; }
+        public string Su_Descripcion { get; set; }
+        public Nullable<System.DateTime> FechaIni { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
+        public string NomDivision { get; set; }
+        public string NomArea { get; set; }
     }
 }
