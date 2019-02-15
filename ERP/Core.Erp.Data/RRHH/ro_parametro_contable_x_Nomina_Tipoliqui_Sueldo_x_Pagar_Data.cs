@@ -27,6 +27,7 @@ namespace Core.Erp.Data.RRHH
                                  IdTipoFlujo = q.IdTipoFlujo,
                                  Observacion = q.Observacion,
                                  IdCtaCble_sueldo = q.IdCtaCble,
+                                 IdCtaCble = q.IdCtaCble,
                                  pc_Cuenta=q.pc_Cuenta,
                                  Descripcion=q.Descripcion
                                  

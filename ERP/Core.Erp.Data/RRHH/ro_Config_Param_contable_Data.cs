@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
 
-                    string sql = " select IdEmpresa,IdDivision,IdArea,IdDepartamento,IdRubro,IdCtaCble,IdCentroCosto,DebCre,IdCtaCble_Haber,0 as Secuencia,rub_nocontab,rub_provision,DescripcionDiv,descripcionArea,de_descripcion,ru_descripcion,pc_Cuenta_prov_debito,pc_Cuenta, ru_tipo from vwRo_Division_Area_dep_rubro where IdEmpresa=" + IdEmpresa;
+                    string sql = " select IdEmpresa,IdDivision,IdArea,IdDepartamento,IdRubro,IdCtaCble,IdCentroCosto,DebCre,IdCtaCble_Haber IdCtaCble_prov_credito,0 as Secuencia,rub_nocontab,rub_provision,DescripcionDiv,descripcionArea,de_descripcion,ru_descripcion,pc_Cuenta_prov_debito,pc_Cuenta, ru_tipo from vwRo_Division_Area_dep_rubro where IdEmpresa=" + IdEmpresa;
                     var result = Context.Database.SqlQuery<ro_Config_Param_contable_Info>(sql).ToList();
                     Lista = result;
                     Lista.ForEach(v =>
@@ -25,8 +25,9 @@ namespace Core.Erp.Data.RRHH
                         v.Secuencia = secuencia++;
                         if (v.IdCtaCble == null | v.IdCtaCble == "")
                             v.IdCtaCble = v.rub_ctacon;
-                        v.IdCtaCble_prov_debito = v.DebCre == "D" ? v.IdCtaCble : null;
-                        v.IdCtaCble_prov_credito = v.DebCre == "C" ? v.IdCtaCble : null;
+                        v.IdCtaCble_prov_debito = v.IdCtaCble;
+                        
+                        v.pc_Cuenta_prov_credito = v.pc_Cuenta;
                     });
 
                 }

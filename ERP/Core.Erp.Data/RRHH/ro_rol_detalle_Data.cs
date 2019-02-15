@@ -44,7 +44,8 @@ namespace Core.Erp.Data.RRHH
                                      ru_tipo=a.ru_tipo,
                                      rub_ContPorEmpleado=a.rub_ContPorEmpleado  ,
                                      IdCtaCble_Emplea=a.IdCtaCble_Emplea,
-                                    ru_descripcion=a.ru_descripcion
+                                    IdCtaCble_Debe = a.rub_ctacon,
+                                    ru_descripcion=a.ru_descripcion,
                                 }).ToList();
                 }
                 return oListado;

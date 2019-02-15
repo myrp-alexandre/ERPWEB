@@ -20,9 +20,10 @@
 
         settings.KeyFieldName = "Secuencia";
 
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = true;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
         //Configuracion responsive
@@ -69,19 +70,37 @@
 
         });
 
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pc_Cuenta_prov_debito";
+            column.Caption = "Cuenta Debito";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble_prov_debito";
+            column.Caption = "Cuenta Débito";
+            column.Width = Unit.Percentage(35);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbCuenta_provisiones_debito", DataBinder.Eval(c.DataItem, "IdCtaCble_prov_debito"));
+            });
+        });
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pc_Cuenta";
-            column.Caption = "Cuenta Credito";
+            column.FieldName = "pc_Cuenta_prov_credito";
+            column.Caption = "Cuenta Crédito";
             column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble_prov_credito";
-            column.Caption = "Cuenta";
+            column.Caption = "Cuenta Crédito";
             column.Width = Unit.Percentage(35);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
@@ -93,25 +112,7 @@
 
 
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pc_Cuenta_prov_debito";
-            column.Caption = "Cuenta Debito";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdCtaCble_prov_debito";
-            column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(35);
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
-            {
-                Html.RenderPartial("_CmbCuenta_provisiones_debito", DataBinder.Eval(c.DataItem, "IdCtaCble_prov_debito"));
-            });
-        });
+
 
 
 

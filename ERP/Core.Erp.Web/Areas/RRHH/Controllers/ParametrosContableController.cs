@@ -336,7 +336,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_prov_credito);
             if (cta != null)
             {
-                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+                info_det.pc_Cuenta_prov_credito = cta.IdCtaCble + " - " + cta.pc_Cuenta;
             }
 
             var cta_deb = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble_prov_debito);
@@ -348,7 +348,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.IdCtaCble_prov_credito = info_det.IdCtaCble_prov_credito;
             edited_info.IdCtaCble_prov_debito = info_det.IdCtaCble_prov_debito;
 
-            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            edited_info.pc_Cuenta_prov_credito = info_det.pc_Cuenta_prov_credito;
             edited_info.pc_Cuenta_prov_debito = info_det.pc_Cuenta_prov_debito;
         }
 
