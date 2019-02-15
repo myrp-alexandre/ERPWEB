@@ -1035,6 +1035,9 @@
             // pivotGridField6
             // 
             this.pivotGridField6.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
+            this.pivotGridField6.Appearance.FieldValueGrandTotal.ForeColor = System.Drawing.Color.Black;
+            this.pivotGridField6.Appearance.FieldValueTotal.ForeColor = System.Drawing.Color.Black;
+            this.pivotGridField6.Appearance.TotalCell.ForeColor = System.Drawing.Color.Black;
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField6.AreaIndex = 1;
             this.pivotGridField6.Caption = "Grupo";
