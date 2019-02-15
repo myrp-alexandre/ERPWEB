@@ -8,6 +8,7 @@ using Core.Erp.Info.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
 using Core.Erp.Bus.General;
+using DevExpress.XtraPrinting;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -39,8 +40,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdDivision = P_IdDivision.Value == null ? 0 : Convert.ToInt32(P_IdDivision.Value);
                 int IdArea = P_IdArea.Value == null ? 0 : Convert.ToInt32(P_IdArea.Value);
                 lblNombreReporte.Text = "Reporte de ingresos";
-                //pivotGridField2.Visible = false;
-                pivotGridField4.Visible = false;
+
                 ROL_022_Bus bus_rpt = new ROL_022_Bus();
                 List<ROL_022_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea);
                 this.DataSource = lst_rpt;
