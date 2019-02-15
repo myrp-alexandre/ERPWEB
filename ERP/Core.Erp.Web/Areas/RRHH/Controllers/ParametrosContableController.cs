@@ -318,8 +318,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (cta != null)
             {
-                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
-                edited_info.pc_Cuenta = info_det.pc_Cuenta;
+                info_det.pc_Cuenta_prov_debito = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+                edited_info.pc_Cuenta_prov_debito = info_det.pc_Cuenta_prov_debito;
             }
 
             edited_info.IdCtaCble = info_det.IdCtaCble;
