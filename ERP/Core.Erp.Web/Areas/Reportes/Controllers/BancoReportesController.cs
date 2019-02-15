@@ -278,15 +278,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_banco_Info model = new cl_filtros_banco_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdBanco = 0
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_banco(model.IdEmpresa);
             if(!mostrar_agrupado)
             {
                 BAN_009_Rpt report = new BAN_009_Rpt();
-                report.IntArray = model.IntArray;
                 report.p_IdEmpresa.Value = model.IdEmpresa;
-                report.p_IdBanco.Value = model.IdBanco;
+                report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_fecha_ini.Value = model.fecha_ini;
                 report.p_fecha_fin.Value = model.fecha_fin;
                 report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
@@ -297,9 +296,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             else
             {
                 BAN_009_Flujo_Rpt report_flujo = new BAN_009_Flujo_Rpt();
-                report_flujo.IntArray = model.IntArray;
                 report_flujo.p_IdEmpresa.Value = model.IdEmpresa;
-                report_flujo.p_IdBanco.Value = model.IdBanco;
+                report_flujo.p_IdSucursal.Value = model.IdSucursal;
                 report_flujo.p_fecha_fin.Value = model.fecha_fin;
                 report_flujo.p_mostrar_agrupado.Value = model.mostrar_agrupado;
                 report_flujo.usuario = SessionFixed.IdUsuario.ToString();
@@ -314,9 +312,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             if(!model.mostrar_agrupado)
             {
                 BAN_009_Rpt report = new BAN_009_Rpt();
-                report.IntArray = model.IntArray;
                 report.p_IdEmpresa.Value = model.IdEmpresa;
-                report.p_IdBanco.Value = model.IdBanco;
+                report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_fecha_ini.Value = model.fecha_ini;
                 report.p_fecha_fin.Value = model.fecha_fin;
                 report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
@@ -328,9 +325,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             else
             {
                 BAN_009_Flujo_Rpt report_flujo = new BAN_009_Flujo_Rpt();
-                report_flujo.IntArray = model.IntArray;
                 report_flujo.p_IdEmpresa.Value = model.IdEmpresa;
-                report_flujo.p_IdBanco.Value = model.IdBanco;
+                report_flujo.p_IdSucursal.Value = model.IdSucursal;
                 report_flujo.p_fecha_fin.Value = model.fecha_fin;
                 report_flujo.p_mostrar_agrupado.Value = model.mostrar_agrupado;
                 report_flujo.usuario = SessionFixed.IdUsuario.ToString();
