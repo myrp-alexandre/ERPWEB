@@ -144,7 +144,6 @@
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.ROL_023_Resumen_Rpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell48 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -984,18 +983,9 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.ROL_023_Resumen_Rpt,
             this.xrTable5});
-            this.ReportFooter.HeightF = 76.25002F;
+            this.ReportFooter.HeightF = 40.83335F;
             this.ReportFooter.Name = "ReportFooter";
-            // 
-            // ROL_023_Resumen_Rpt
-            // 
-            this.ROL_023_Resumen_Rpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 53.25002F);
-            this.ROL_023_Resumen_Rpt.Name = "ROL_023_Resumen_Rpt";
-            this.ROL_023_Resumen_Rpt.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_023_Resumen_Rpt();
-            this.ROL_023_Resumen_Rpt.SizeF = new System.Drawing.SizeF(1129F, 23F);
-            this.ROL_023_Resumen_Rpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_023_Resumen_Rpt_BeforePrint);
             // 
             // xrTable5
             // 
@@ -2161,7 +2151,6 @@
         private DevExpress.XtraReports.UI.XRTable xrTable7;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow12;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
-        private DevExpress.XtraReports.UI.XRSubreport ROL_023_Resumen_Rpt;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader4;
         private DevExpress.XtraReports.UI.XRTable xrTable9;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow14;

@@ -788,8 +788,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult ROL_023()
         {
-
-
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
@@ -799,39 +797,68 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdDepartamento = 0
             };
 
-            ROL_023_Rpt report = new ROL_023_Rpt();
-
+            ROL_023_Rpt reportDetallado = new ROL_023_Rpt();
             cargar_combos(model.IdEmpresa);
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdNomina.Value = model.IdNomina;
-            report.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
-            report.p_IdPeriodo.Value = model.IdPeriodo;
-            report.p_IdDivision.Value = model.IdDivision;
-            report.p_IdArea.Value = model.IdArea;
-            report.p_IdDepartamento.Value = model.IdDepartamento;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
-            ViewBag.Report = report;
+            reportDetallado.p_IdEmpresa.Value = model.IdEmpresa;
+            reportDetallado.p_IdSucursal.Value = model.IdSucursal;
+            reportDetallado.p_IdNomina.Value = model.IdNomina;
+            reportDetallado.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            reportDetallado.p_IdPeriodo.Value = model.IdPeriodo;
+            reportDetallado.p_IdDivision.Value = model.IdDivision;
+            reportDetallado.p_IdArea.Value = model.IdArea;
+            reportDetallado.p_IdDepartamento.Value = model.IdDepartamento;
+            reportDetallado.usuario = SessionFixed.IdUsuario.ToString();
+            reportDetallado.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.ReportDetallado = reportDetallado;
+
+            ROL_023_Resumen_Rpt reportResumen = new ROL_023_Resumen_Rpt();
+            cargar_combos(model.IdEmpresa);
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_IdSucursal.Value = model.IdSucursal;
+            reportResumen.p_IdNomina.Value = model.IdNomina;
+            reportResumen.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            reportResumen.p_IdPeriodo.Value = model.IdPeriodo;
+            reportResumen.p_IdDivision.Value = model.IdDivision;
+            reportResumen.p_IdArea.Value = model.IdArea;
+            reportResumen.p_IdDepartamento.Value = model.IdDepartamento;
+            reportResumen.usuario = SessionFixed.IdUsuario.ToString();
+            reportResumen.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.ReportResumen = reportResumen;
+
             return View(model);
         }
 
         [HttpPost]
         public ActionResult ROL_023(cl_filtros_Info model)
         {
-            ROL_023_Rpt report = new ROL_023_Rpt();
+            ROL_023_Rpt reportDetallado = new ROL_023_Rpt();
             cargar_combos(model.IdEmpresa);
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdNomina.Value = model.IdNomina;
-            report.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
-            report.p_IdPeriodo.Value = model.IdPeriodo;
-            report.p_IdDivision.Value = model.IdDivision;
-            report.p_IdArea.Value = model.IdArea;
-            report.p_IdDepartamento.Value = model.IdDepartamento;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
-            ViewBag.Report = report;
+            reportDetallado.p_IdEmpresa.Value = model.IdEmpresa;
+            reportDetallado.p_IdSucursal.Value = model.IdSucursal;
+            reportDetallado.p_IdNomina.Value = model.IdNomina;
+            reportDetallado.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            reportDetallado.p_IdPeriodo.Value = model.IdPeriodo;
+            reportDetallado.p_IdDivision.Value = model.IdDivision;
+            reportDetallado.p_IdArea.Value = model.IdArea;
+            reportDetallado.p_IdDepartamento.Value = model.IdDepartamento;
+            reportDetallado.usuario = SessionFixed.IdUsuario.ToString();
+            reportDetallado.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.ReportDetallado = reportDetallado;
+
+            ROL_023_Resumen_Rpt reportResumen = new ROL_023_Resumen_Rpt();
+            cargar_combos(model.IdEmpresa);
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_IdSucursal.Value = model.IdSucursal;
+            reportResumen.p_IdNomina.Value = model.IdNomina;
+            reportResumen.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            reportResumen.p_IdPeriodo.Value = model.IdPeriodo;
+            reportResumen.p_IdDivision.Value = model.IdDivision;
+            reportResumen.p_IdArea.Value = model.IdArea;
+            reportResumen.p_IdDepartamento.Value = model.IdDepartamento;
+            reportResumen.usuario = SessionFixed.IdUsuario.ToString();
+            reportResumen.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.ReportResumen = reportResumen;
+
             return View(model);
         }
 

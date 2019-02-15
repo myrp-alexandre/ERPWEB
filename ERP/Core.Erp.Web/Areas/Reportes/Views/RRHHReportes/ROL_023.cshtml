@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <div class="box">
+    @*<div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
             <div class="box-tools pull-right">
@@ -126,6 +126,41 @@
            settings.MobileMode = false;
            settings.Name = "webDocumentViewer";
        }).Bind(ViewBag.Report).GetHtml()
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+        </div>
+        <!-- /.box-footer-->
+    </div>*@
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_stock" aria-controls="stock" role="tab" data-toggle="tab">Detallado</a>
+            </li>
+            <li>
+                <a href="#tab_listado" aria-controls="listado" role="tab" data-toggle="tab">Resumido</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_stock">
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer1";
+               }).Bind(ViewBag.ReportDetallado).GetHtml()
+            </div>
+
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_listado">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer2";
+               }).Bind(ViewBag.ReportResumen).GetHtml()
+            </div>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
