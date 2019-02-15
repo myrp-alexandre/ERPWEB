@@ -31,7 +31,7 @@ namespace Core.Erp.Info.RRHH
         public double Valor { get; set; }
 
         public string codigo { get; set; }
-        public int IdJornada { get; set; }
+        public Nullable<int> IdJornada { get; set; }
 
 
     }
