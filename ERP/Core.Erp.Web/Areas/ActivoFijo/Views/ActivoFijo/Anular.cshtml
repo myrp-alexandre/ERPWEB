@@ -110,7 +110,17 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Af_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.Af_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Af_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
