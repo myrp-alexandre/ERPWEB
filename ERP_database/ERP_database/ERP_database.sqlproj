@@ -1122,6 +1122,10 @@
     <Build Include="dbo\Views\vwfa_factura_sin_automatico.sql" />
     <Build Include="web\Stored Procedures\SPBAN_009.sql" />
     <Build Include="web\Stored Procedures\SPBAN_008.sql" />
+    <Build Include="web\Views\VWROL_024.sql" />
+    <Build Include="web\Views\VWACTF_007.sql" />
+    <Build Include="dbo\Views\vwro_rol_detalle.sql" />
+    <Build Include="dbo\Views\vwro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

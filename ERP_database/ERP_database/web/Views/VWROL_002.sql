@@ -1,24 +1,28 @@
-﻿CREATE view web.VWROL_002 as
-
-SELECT        dbo.tb_persona.pe_nombreCompleto AS NombreCompleto, dbo.tb_persona.pe_cedulaRuc AS Ruc, web.ro_SPROL_002.ru_descripcion AS RubroDescripcion, web.ro_SPROL_002.IdEmpresa, web.ro_SPROL_002.IdNominaTipo, 
-                         web.ro_SPROL_002.IdNominaTipoLiqui, web.ro_SPROL_002.IdPeriodo, web.ro_SPROL_002.IdEmpleado, web.ro_SPROL_002.Valor, dbo.ro_cargo.ca_descripcion AS Cargo, dbo.tb_persona.pe_apellido, 
-                         dbo.tb_persona.pe_nombre, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_empleado.em_status, dbo.ro_rubro_tipo.ru_orden, dbo.tb_empresa.em_ruc, 
-                         dbo.ro_empleado.IdSucursal, CASE WHEN ro_rubro_tipo.IdRubro IN (19) THEN 'FONDO RESERVA' WHEN ro_rubro_tipo.IdRubro IN (15, 16) 
-                         THEN 'DECIMOS' ELSE CASE WHEN ro_rubro_tipo.ru_tipo = 'I' THEN 'INGRESOS' ELSE 'EGRESOS' END END AS Grupo, dbo.ro_empleado.em_codigo, dbo.ro_Departamento.de_descripcion, dbo.ro_area.Descripcion AS Area, 
-                         web.ro_SPROL_002.IdRubro
-FROM            dbo.ro_rubro_tipo INNER JOIN
-                         dbo.ro_empleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
-                         web.ro_SPROL_002 ON dbo.ro_empleado.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_empleado.IdEmpleado = web.ro_SPROL_002.IdEmpleado ON dbo.ro_rubro_tipo.IdRubro = web.ro_SPROL_002.IdRubro AND 
-                         dbo.ro_rubro_tipo.IdEmpresa = web.ro_SPROL_002.IdEmpresa INNER JOIN
-                         dbo.ro_cargo ON dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo AND dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa INNER JOIN
-                         dbo.ro_periodo ON web.ro_SPROL_002.IdEmpresa = dbo.ro_periodo.IdEmpresa AND web.ro_SPROL_002.IdPeriodo = dbo.ro_periodo.IdPeriodo INNER JOIN
-                         dbo.tb_empresa ON dbo.ro_empleado.IdEmpresa = dbo.tb_empresa.IdEmpresa INNER JOIN
-                         dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento AND 
-                         dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento AND dbo.tb_empresa.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND 
-                         dbo.tb_empresa.IdEmpresa = dbo.ro_Departamento.IdEmpresa INNER JOIN
-                         dbo.ro_area ON dbo.ro_rubro_tipo.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea LEFT OUTER JOIN
-                         dbo.ro_catalogo ON dbo.ro_rubro_tipo.rub_grupo = dbo.ro_catalogo.CodCatalogo
+﻿CREATE VIEW web.VWROL_002
+AS
+SELECT dbo.tb_persona.pe_nombreCompleto AS NombreCompleto, dbo.tb_persona.pe_cedulaRuc AS Ruc, web.ro_SPROL_002.ru_descripcion AS RubroDescripcion, web.ro_SPROL_002.IdEmpresa, web.ro_SPROL_002.IdNominaTipo, 
+                  web.ro_SPROL_002.IdNominaTipoLiqui, web.ro_SPROL_002.IdPeriodo, web.ro_SPROL_002.IdEmpleado, web.ro_SPROL_002.Valor, dbo.ro_cargo.ca_descripcion AS Cargo, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, 
+                  dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_empleado.em_status, dbo.ro_rubro_tipo.ru_orden, dbo.tb_empresa.em_ruc, dbo.ro_empleado.IdSucursal, 
+                  CASE WHEN ro_rubro_tipo.IdRubro IN (19) THEN 'FONDO RESERVA' WHEN ro_rubro_tipo.IdRubro IN (15, 16) THEN 'DECIMOS' ELSE CASE WHEN ro_rubro_tipo.ru_tipo = 'I' THEN 'INGRESOS' ELSE 'EGRESOS' END END AS Grupo, 
+                  dbo.ro_empleado.em_codigo, dbo.ro_Departamento.de_descripcion, dbo.ro_area.Descripcion AS Area, web.ro_SPROL_002.IdRubro, dbo.ro_Nomina_Tipo.Descripcion AS NomNomina, 
+                  dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina AS NomNominaTipo
+FROM     dbo.ro_Nomina_Tipo INNER JOIN
+                  dbo.ro_Nomina_Tipoliqui ON dbo.ro_Nomina_Tipo.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND dbo.ro_Nomina_Tipo.IdNomina_Tipo = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo AND 
+                  dbo.ro_Nomina_Tipo.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND dbo.ro_Nomina_Tipo.IdNomina_Tipo = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo INNER JOIN
+                  dbo.ro_rubro_tipo INNER JOIN
+                  dbo.ro_empleado INNER JOIN
+                  dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
+                  web.ro_SPROL_002 ON dbo.ro_empleado.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_empleado.IdEmpleado = web.ro_SPROL_002.IdEmpleado ON dbo.ro_rubro_tipo.IdRubro = web.ro_SPROL_002.IdRubro AND 
+                  dbo.ro_rubro_tipo.IdEmpresa = web.ro_SPROL_002.IdEmpresa INNER JOIN
+                  dbo.ro_cargo ON dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo AND dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa INNER JOIN
+                  dbo.ro_periodo ON web.ro_SPROL_002.IdEmpresa = dbo.ro_periodo.IdEmpresa AND web.ro_SPROL_002.IdPeriodo = dbo.ro_periodo.IdPeriodo INNER JOIN
+                  dbo.tb_empresa ON dbo.ro_empleado.IdEmpresa = dbo.tb_empresa.IdEmpresa INNER JOIN
+                  dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento AND 
+                  dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento AND dbo.tb_empresa.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND 
+                  dbo.tb_empresa.IdEmpresa = dbo.ro_Departamento.IdEmpresa INNER JOIN
+                  dbo.ro_area ON dbo.ro_rubro_tipo.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND 
+                  dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = web.ro_SPROL_002.IdNominaTipo AND dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui = web.ro_SPROL_002.IdNominaTipoLiqui LEFT OUTER JOIN
+                  dbo.ro_catalogo ON dbo.ro_rubro_tipo.rub_grupo = dbo.ro_catalogo.CodCatalogo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -26,7 +30,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[7] 4[5] 2[63] 3) )"
+         Configuration = "(H (1[35] 4[14] 2[22] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -88,7 +92,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -360
          Left = -100
       End
       Begin Tables = 
@@ -104,20 +108,20 @@ Begin DesignProperties =
          End
          Begin Table = "ro_empleado"
             Begin Extent = 
-               Top = 23
-               Left = 658
-               Bottom = 428
-               Right = 947
+               Top = 468
+               Left = 1024
+               Bottom = 873
+               Right = 1313
             End
             DisplayFlags = 280
             TopColumn = 9
          End
          Begin Table = "tb_persona"
             Begin Extent = 
-               Top = 0
-               Left = 1378
-               Bottom = 215
-               Right = 1610
+               Top = 541
+               Left = 495
+               Bottom = 756
+               Right = 727
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -126,11 +130,11 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 1
                Left = 428
-               Bottom = 191
-               Right = 620
+               Bottom = 315
+               Right = 681
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 1
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
@@ -144,21 +148,23 @@ Begin DesignProperties =
          End
          Begin Table = "ro_periodo"
             Begin Extent = 
-               Top = 436
-               Left = 542
-               Bottom = 566
-               Right = 763
+               Top = 348
+               Left = 1420
+               Bottom = 622
+               Right = 1641
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "tb_empresa"
             Begin Extent = 
-               Top = 42
-               Left = 1168
-               Bottom = 265
-               Right = 1387
-            End', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+               Top = 564
+               Left = 596
+               Bottom = 787
+               Right = 815
+      ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+
+
 
 
 
@@ -168,7 +174,27 @@ Begin DesignProperties =
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_Departamento"
+            Begin Extent = 
+               Top = 529
+               Left = 570
+               Bottom = 659
+               Right = 749
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_area"
+            Begin Extent = 
+               Top = 399
+               Left = 910
+               Bottom = 529
+               Right = 1089
+            End
             DisplayFlags = 280
             TopColumn = 0
          End
@@ -182,22 +208,22 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_Departamento"
+         Begin Table = "ro_Nomina_Tipoliqui"
             Begin Extent = 
-               Top = 242
-               Left = 1011
-               Bottom = 372
-               Right = 1190
+               Top = 0
+               Left = 828
+               Bottom = 255
+               Right = 1106
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_area"
+         Begin Table = "ro_Nomina_Tipo"
             Begin Extent = 
-               Top = 10
-               Left = 972
-               Bottom = 140
-               Right = 1151
+               Top = 0
+               Left = 1182
+               Bottom = 163
+               Right = 1394
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -213,7 +239,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
          Width = 284
          Width = 1500
          Width = 1500
-         Width = 2625
+         Width = 2628
          Width = 1500
          Width = 1500
          Width = 1500
@@ -248,14 +274,14 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -263,6 +289,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+
+
 
 
 

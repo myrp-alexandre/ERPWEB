@@ -21,17 +21,20 @@ AS
 --@IdUsuario varchar(50),
 --@observacion varchar(500),
 --@IdRol int,
---@IdSucursal int
-
+--@IdSucursal int,
+--@IdSucursalInicio int,
+--@IdSucursalFin int
 
 --set @IdEmpresa =1
 --set @IdNomina =1
---set @IdNominaTipo =2
---set @IdPEriodo= 201812
+--set @IdNominaTipo =1
+--set @IdPEriodo= 20190201
 --set @IdUsuario ='admin'
---set @observacion= 'PERIODO'+CAST( @IdPEriodo AS varchar(15))
---set @IdRol =11
-
+--set @observacion= '1ERA QUINCENA FEBRERO'
+--set @IdRol =6
+--set @IdSucursal=1
+--set @IdSucursalInicio=1
+--set @IdSucursalFin=1
 BEGIN
 
 declare
@@ -40,10 +43,11 @@ declare
 @IdRubro_calculado varchar(50),
 @Dias_trabajados int,
 @Anio float,
-@IdSucursal int,
 @IdRubroTotalING varchar(50),
 @IdRubroTotalEGR varchar(50),
-@Porcentaje_anticipo float
+@Porcentaje_anticipo float,
+@IdRubroMatutina varchar(50),
+@IdRubroVespertina varchar(50)
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------obteniendo fecha del perido------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,14 +127,14 @@ and emp.Pago_por_horas=0
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando sueldo por días trabajados al personal que  se les paga por horas-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_sueldo, @IdRubroTotalING=IdRubro_tot_ing from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_sueldo, @IdRubroMatutina=IdRubro_horas_matutina, @IdRubroVespertina=IdRubro_horas_vespertina from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,ISNULL( ROUND( rol_det.valor*emp.em_AnticipoSueldo,2),0)
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,ISNULL( ROUND( SUM( rol_det.valor)*emp.em_AnticipoSueldo,2),0)
 ,1						,'Sueldo base'		
 FROM            dbo.ro_rol AS rol INNER JOIN
                          dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol INNER JOIN
@@ -139,7 +143,7 @@ FROM            dbo.ro_rol AS rol INNER JOIN
                          dbo.ro_periodo AS peri ON pe_x_nom.IdEmpresa = peri.IdEmpresa AND pe_x_nom.IdPeriodo = peri.IdPeriodo INNER JOIN
                          dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
                          dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
-						 and rol_det.idrubro=@IdRubroTotalING
+						 and rol_det.idrubro in(@IdRubroMatutina,@IdRubroVespertina)
 						 and emp.Pago_por_horas=1
 						 and peri.pe_anio=case when DATEPART(MONTH, @Fi) =1 then DATEPART(year, @Fi)-1 else  DATEPART(year, peri.pe_FechaIni) end
 						 and peri.pe_mes=case when DATEPART(MONTH, @Fi)=1 then 12 else  DATEPART(MONTH, @Fi)-1 end
@@ -151,7 +155,7 @@ and CAST( cont.FechaInicio as date)<=@Ff
 and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
 and emp.IdSucursal = @IdSucursalFin
 and emp.Pago_por_horas=1
-
+group by emp.IdSucursal, cont.IdEmpleado, emp.em_AnticipoSueldo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando novedades del periodo e insertando al rol detalle-----------------------------------------------------------------------<
@@ -163,7 +167,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,novc.IdEmpleado		,nov.IdRubro		,rub.ru_orden	,sum(nov.Valor)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,novc.IdEmpleado		,nov.IdRubro		,rub.ru_orden	,sum(ROUND( nov.Valor,2))
 ,1						,rub.ru_descripcion		
 FROM   dbo.ro_empleado AS emp INNER JOIN
 dbo.ro_empleado_Novedad AS novc ON emp.IdEmpresa = novc.IdEmpresa AND emp.IdEmpleado = novc.IdEmpleado INNER JOIN
@@ -189,7 +193,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,pre.IdEmpleado		,pre.IdRubro		,rub.ru_orden	,pred.TotalCuota
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,pre.IdEmpleado		,pre.IdRubro		,rub.ru_orden	,ROUND( pred.TotalCuota,2)
 ,1						,pred.Observacion_det
 FROM            dbo.ro_prestamo AS pre INNER JOIN
                          dbo.ro_prestamo_detalle AS pred ON pre.IdEmpresa = pred.IdEmpresa AND pre.IdPrestamo = pred.IdPrestamo INNER JOIN
@@ -214,7 +218,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,emp.IdEmpleado		,rub_fij.IdRubro	,rub.ru_orden	,rub_fij.Valor
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,emp.IdEmpleado		,rub_fij.IdRubro	,rub.ru_orden	,ROUND( rub_fij.Valor,2)
 ,1						,rub.ru_descripcion	
 FROM            dbo.ro_rubro_tipo AS rub INNER JOIN
                          dbo.ro_empleado_x_ro_rubro AS rub_fij ON rub.IdEmpresa = rub_fij.IdEmpresa AND rub.IdRubro = rub_fij.IdRubro INNER JOIN
@@ -240,7 +244,7 @@ insert into ro_rol_detalle
 
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'100'			,sum(rol_det.Valor)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'100'			,sum(ROUND( rol_det.Valor,2))
 ,1						,'Total ingresos'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -265,7 +269,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'200'			,sum(rol_det.Valor)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'200'			,sum( ROUND( rol_det.Valor,2))
 ,1						,'Total Egreso'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN

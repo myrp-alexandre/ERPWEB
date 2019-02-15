@@ -1,4 +1,5 @@
-﻿--exec [dbo].[spCXP_Rpt035] 1,'3/10/2017',88,88
+﻿
+--exec [dbo].[spCXP_Rpt035] 1,'3/10/2017',88,88
 CREATE PROCEDURE [web].[SPCXP_008]
   @idempresa int ,
   @fecha datetime ,
@@ -55,7 +56,7 @@ Select
 			AND OG.IdEmpresa = @idempresa AND OG.IdSucursal BETWEEN @IdSucursalIni AND @IdSucursalFin AND OG.cn_fecha <= @fecha
 			AND OG.IDPROVEEDOR BETWEEN @idProveedorIni AND @idProveedorFIn
 			UNION ALL
-			select og.IdEmpresa,d.IdTipoCbte_cxp,d.IdCbteCble_cxp,'00',cast(og.IdOrdenPago as varchar(20)), 'Orden de pago' as nom_tipo_doc,'OP' as cod_tipo_doc, og.IdEntidad, per.pe_nombreCompleto as nom_proveedor,
+			select og.IdEmpresa,CAST( d.IdCbteCble_cxp AS INT), CAST(d.IdTipoCbte_cxp AS DECIMAL),'00',cast(og.IdOrdenPago as varchar(20)), 'Orden de pago' as nom_tipo_doc,'OP' as cod_tipo_doc, og.IdEntidad, per.pe_nombreCompleto as nom_proveedor,
 			d.Valor_a_pagar as Valor_a_pagar, og.Observacion Observacion,per.pe_cedulaRuc Ruc_Proveedor, per.pe_nombreCompleto as representante_legal, 'CBTE_CXP' as Tipo_cbte, 0, OG.Fecha, OG.Fecha,0,
 			DATEDIFF(DAY,og.Fecha,@fecha) as Dias_Vcto, Su_Descripcion
 			from cp_orden_pago as og inner join cp_proveedor AS pro on pro.IdEmpresa = og.IdEmpresa

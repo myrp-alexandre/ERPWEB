@@ -18,11 +18,14 @@
     [ReporteCheque]            VARBINARY (MAX) NULL,
     [Imprimir_Solo_el_cheque]  BIT             NOT NULL,
     [IdBanco_Financiero]       INT             NOT NULL,
+    [EsFlujoObligatorio]       BIT             NOT NULL,
     CONSTRAINT [PK_ba_Banco_Cuenta] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdBanco] ASC),
     CONSTRAINT [FK_ba_Banco_Cuenta_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_ba_Banco_Cuenta_tb_banco] FOREIGN KEY ([IdBanco_Financiero]) REFERENCES [dbo].[tb_banco] ([IdBanco]),
     CONSTRAINT [FK_ba_Banco_Cuenta_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 

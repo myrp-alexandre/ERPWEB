@@ -11,14 +11,16 @@ SELECT        dbo.ro_Departamento.IdDepartamento, dbo.ro_Departamento.de_descrip
                              (SELECT        RUBRO
                                FROM            dbo.vwro_rubros_acumulados_x_empleados AS D
                                WHERE        (IdEmpleado = dbo.ro_empleado.IdEmpleado) AND (IdEmpresa = dbo.ro_empleado.IdEmpresa) AND (IdRubro = 19)) AS Fondos_Reservas, dbo.ro_empleado.IdDivision, dbo.ro_empleado.IdEmpresa, 
-                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion, dbo.ro_Division.Descripcion AS Division_Descripcion
+                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion, dbo.ro_Division.Descripcion AS Division_Descripcion, 
+                         dbo.tb_sucursal.Su_Descripcion, dbo.ro_empleado.IdSucursal
 FROM            dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
                          dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento INNER JOIN
                          dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado INNER JOIN
                          dbo.ro_area ON dbo.ro_empleado.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea INNER JOIN
                          dbo.ro_Division ON dbo.ro_empleado.IdEmpresa = dbo.ro_Division.IdEmpresa AND dbo.ro_empleado.IdDivision = dbo.ro_Division.IdDivision AND dbo.ro_area.IdEmpresa = dbo.ro_Division.IdEmpresa AND 
-                         dbo.ro_area.IdDivision = dbo.ro_Division.IdDivision
+                         dbo.ro_area.IdDivision = dbo.ro_Division.IdDivision INNER JOIN
+                         dbo.tb_sucursal ON dbo.ro_empleado.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND dbo.ro_empleado.IdSucursal = dbo.tb_sucursal.IdSucursal
 WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_contrato.EstadoContrato = 'ECT_ACT')
 
 
@@ -27,7 +29,20 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Width = 1500
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 17
+         Width = 284
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -63,6 +78,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Widt
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+
+
 
 
 
@@ -137,7 +154,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -192
+         Top = 0
          Left = 0
       End
       Begin Tables = 
@@ -149,7 +166,7 @@ Begin DesignProperties =
                Right = 327
             End
             DisplayFlags = 280
-            TopColumn = 23
+            TopColumn = 1
          End
          Begin Table = "tb_persona"
             Begin Extent = 
@@ -179,7 +196,7 @@ Begin DesignProperties =
                Right = 884
             End
             DisplayFlags = 280
-            TopColumn = 7
+            TopColumn = 4
          End
          Begin Table = "ro_area"
             Begin Extent = 
@@ -201,17 +218,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-      End
-   End
-   Begin SQLPane = 
-   End
-   Begin DataPane = 
-      Begin ParameterDefaults = ""
-      End
-      Begin ColumnWidths = 17
-         Width = 284
-         Width = 1500
-   ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+         Begin Table = "tb_sucursal"
+            Begin Extent = 
+               Top = 332
+               Left = 476
+               Bottom = 462
+               Right = 706
+            End
+      ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+
+
 
 
 

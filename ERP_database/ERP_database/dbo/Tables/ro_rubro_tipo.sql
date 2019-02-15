@@ -25,10 +25,14 @@
     [se_distribuye]         BIT          NOT NULL,
     [rub_GrupoResumen]      VARCHAR (10) NULL,
     [rub_AplicaIR]          BIT          NOT NULL,
+    [rub_ContPorEmpleado]   BIT          NOT NULL,
     CONSTRAINT [PK_ro_rubro_tipo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdRubro] ASC),
+    CONSTRAINT [FK_ro_rubro_tipo_ct_plancta] FOREIGN KEY ([IdEmpresa], [rub_ctacon]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_ro_rubro_tipo_ro_catalogo] FOREIGN KEY ([rub_grupo]) REFERENCES [dbo].[ro_catalogo] ([CodCatalogo]),
     CONSTRAINT [FK_ro_rubro_tipo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 

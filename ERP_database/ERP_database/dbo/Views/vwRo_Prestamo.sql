@@ -1,9 +1,9 @@
-﻿CREATE VIEW dbo.vwRo_Prestamo
+﻿CREATE VIEW [dbo].[vwRo_Prestamo]
 AS
 SELECT        pres.IdEmpresa, pres.IdPrestamo, pres.IdEmpleado, per_emp.pe_nombre, per_emp.pe_apellido, pres.IdRubro, rub.ru_descripcion, pres.Estado, pres.Fecha, pres.MontoSol, ISNULL(estado_can.TotalCobrado, 0) 
                          AS TotalCobrado, ISNULL(pres.MontoSol - estado_can.TotalCobrado, 0) AS Valor_pendiente, pres.NumCuotas, pres.Fecha_PriPago, pres.Observacion, pres.MotiAnula, per_emp.pe_cedulaRuc, 'EMPLEA' AS IdTipoPersona, 
                          per_emp.IdPersona, pres.IdTipoCbte, pres.IdCbteCble, pres.IdOrdenPago, pres.descuento_mensual, pres.descuento_quincena, pres.descuento_men_quin, pres.EstadoAprob, pres.IdUsuarioAprueba, 
-                         CAST(pres.Fecha_Transac AS date) AS Fecha_registro
+                         CAST(pres.Fecha_Transac AS date) AS Fecha_registro, emp.IdCtaCble_Emplea, rub.rub_ctacon, pres.GeneraOP, pres.IdEmpresa_op, pres.IdEmpresa_dc
 FROM            dbo.ro_prestamo AS pres INNER JOIN
                          dbo.ro_empleado AS emp ON pres.IdEmpresa = emp.IdEmpresa AND pres.IdEmpleado = emp.IdEmpleado INNER JOIN
                          dbo.tb_persona AS per_emp ON emp.IdPersona = per_emp.IdPersona INNER JOIN

@@ -1,4 +1,4 @@
-﻿
+﻿--exec [web].[SPROL_022]  1,1,2,201901
 CREATE  PROCEDURE [web].[SPROL_022]  
 	@idempresa int,
 	@idnomina_tipo int,
@@ -25,10 +25,11 @@ declare
 @FechaInicio date,
 @FechaFin date,
 @IdRubroMatutino varchar(50),
-@IdRubroVespertino varchar(50)
+@IdRubroVespertino varchar(50),
+@IdRubroTotalPagar varchar(50)
 
 delete web.ro_SPROL_022 where IdEmpresa=@idempresa and IdPeriodo=@idperiodo
-select @IdRubroMatutino=IdRubro_horas_matutina, @IdRubroVespertino=IdRubro_horas_vespertina from ro_rubros_calculados where IdEmpresa=@idempresa 
+select @IdRubroMatutino=IdRubro_horas_matutina, @IdRubroVespertino=IdRubro_horas_vespertina, @IdRubroTotalPagar = IdRubro_tot_pagar from ro_rubros_calculados where IdEmpresa=@idempresa 
 
 select @FechaInicio=pe_FechaIni, @FechaFin=pe_FechaFin from ro_periodo where IdEmpresa=IdEmpresa and IdPeriodo=@idperiodo
 insert into web.ro_SPROL_022
@@ -107,9 +108,18 @@ FROM            dbo.ro_rol AS r INNER JOIN
 						 and d.IdPeriodo=@idperiodo
 						 
 						 )
-
-
-						 select * from web.ro_SPROL_022 order by empleado 
-
+SELECT r.IdEmpresa, r.IdDivision, r.IdSucursal, r.IdNomina_TipoLiqui, r.IdArea, r.IdEmpleado, r.IdJornada, r.IdNomina_Tipo, r.IdPeriodo, r.Descripcion, r.ru_descripcion, r.empleado, r.ca_descripcion, r.ru_tipo, r.ru_orden, r.Valor, r.IdRubro, 
+                  ro_Nomina_Tipo.Descripcion AS NomNomina, ro_Nomina_Tipoliqui.DescripcionProcesoNomina AS NomNominaTipo, tb_sucursal.Su_Descripcion, @FechaInicio AS FechaIni, @FechaFin AS FechaFin, ro_Division.Descripcion AS NomDivision, 
+                  ro_area.Descripcion AS NomArea
+FROM     web.ro_SPROL_022 AS r LEFT OUTER JOIN
+                  ro_Division INNER JOIN
+                  ro_area ON ro_Division.IdEmpresa = ro_area.IdEmpresa AND ro_Division.IdDivision = ro_area.IdDivision AND ro_Division.IdEmpresa = ro_area.IdEmpresa AND ro_Division.IdDivision = ro_area.IdDivision ON 
+                  r.IdEmpresa = ro_area.IdEmpresa AND r.IdDivision = ro_area.IdDivision AND r.IdArea = ro_area.IdArea LEFT OUTER JOIN
+                  tb_sucursal ON r.IdEmpresa = tb_sucursal.IdEmpresa AND r.IdSucursal = tb_sucursal.IdSucursal LEFT OUTER JOIN
+                  ro_Nomina_Tipoliqui INNER JOIN
+                  ro_Nomina_Tipo ON ro_Nomina_Tipoliqui.IdEmpresa = ro_Nomina_Tipo.IdEmpresa AND ro_Nomina_Tipoliqui.IdNomina_Tipo = ro_Nomina_Tipo.IdNomina_Tipo AND ro_Nomina_Tipoliqui.IdEmpresa = ro_Nomina_Tipo.IdEmpresa AND 
+                  ro_Nomina_Tipoliqui.IdNomina_Tipo = ro_Nomina_Tipo.IdNomina_Tipo ON r.IdEmpresa = ro_Nomina_Tipoliqui.IdEmpresa AND r.IdNomina_TipoLiqui = ro_Nomina_Tipoliqui.IdNomina_TipoLiqui AND 
+                  r.IdNomina_Tipo = ro_Nomina_Tipoliqui.IdNomina_Tipo
+ORDER BY r.empleado
 
 END

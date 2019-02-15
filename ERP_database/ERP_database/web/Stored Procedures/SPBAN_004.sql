@@ -30,6 +30,9 @@ delete web.ba_SPBAN_004
 BEGIN --OBTENGO DATOS PARA EL REPORTE EN CASO DE QUE NO EXISTAN REGISTROS NO CONCILIADOS
 BEGIN --OBTENGO SALDO CONTABLE ANTERIOR Y ESTADO DE CONCILIACION
 
+SELECT @IdBanco = IdBanco FROM ba_Conciliacion WHERE IdEmpresa = @IdEmpresa
+AND IdConciliacion = @IdConciliacion
+
 SELECT @EstadoConciliado =  C.ca_descripcion,
 @SaldoContable = A.co_SaldoBanco_EstCta
 FROM ba_Conciliacion A, ba_Catalogo C
@@ -79,7 +82,7 @@ GROUP BY A.IdEmpresa, B.IdCtaCble
 END
 
 BEGIN --CALCULO EGRESOS NO CONCILIADOS
-SELECT       @w_TEgr=  ISNULL(SUM(D.dc_Valor),0)
+SELECT       @w_TEgr=  ISNULL(SUM(D.dc_valor),0)
 FROM            ct_cbtecble_det AS D INNER JOIN
                          ct_cbtecble AS C ON C.IdEmpresa = D.IdEmpresa AND C.IdTipoCbte = D.IdTipoCbte AND D.IdCbteCble = C.IdCbteCble
 WHERE        (C.IdEmpresa = @IdEmpresa) AND (D.IdCtaCble = @IdCtaCble) AND (D.dc_Valor < 0) 
@@ -104,7 +107,7 @@ AND C.cb_Estado = 'A'
 END
 
 BEGIN --CALCULO EGRESOS NO CONCILIADOS QUE ESTAN ANULADOS
-SELECT       @w_TEgr_ANU=  ISNULL(SUM(D.dc_Valor),0)
+SELECT       @w_TEgr_ANU=  ISNULL(SUM(D.dc_valor),0)
 FROM            ct_cbtecble_det AS D INNER JOIN
                          ct_cbtecble AS C ON C.IdEmpresa = D.IdEmpresa AND C.IdTipoCbte = D.IdTipoCbte AND D.IdCbteCble = C.IdCbteCble
 WHERE        (C.IdEmpresa = @IdEmpresa) AND (D.IdCtaCble = @IdCtaCble) AND (D.dc_Valor < 0) 
@@ -129,7 +132,7 @@ AND C.cb_Estado = 'I'
 END
 
 BEGIN --CALCULO INGRESOS NO CONCILIADOS
-SELECT       @w_TIng = ISNULL(SUM(D.dc_Valor),0)
+SELECT       @w_TIng = ISNULL(SUM(D.dc_valor),0)
 FROM            ct_cbtecble_det AS D INNER JOIN
                          ct_cbtecble AS C ON C.IdEmpresa = D.IdEmpresa AND C.IdTipoCbte = D.IdTipoCbte AND D.IdCbteCble = C.IdCbteCble
 WHERE        (C.IdEmpresa = @IdEmpresa) AND (D.IdCtaCble = @IdCtaCble) AND (D.dc_Valor > 0) 
@@ -153,7 +156,7 @@ AND EXISTS
 END
 
 BEGIN --CALCULO INGRESOS NO CONCILIADOS QUE PUEDEN ESTAR ANULADOS
-SELECT       @w_TIng_ANU = ISNULL(SUM(D.dc_Valor),0)
+SELECT       @w_TIng_ANU = ISNULL(SUM(D.dc_valor),0)
 FROM            ct_cbtecble_det AS D INNER JOIN
                          ct_cbtecble AS C ON C.IdEmpresa = D.IdEmpresa AND C.IdTipoCbte = D.IdTipoCbte AND D.IdCbteCble = C.IdCbteCble
 WHERE        (C.IdEmpresa = @IdEmpresa) AND (D.IdCtaCble = @IdCtaCble) AND (D.dc_Valor > 0) 

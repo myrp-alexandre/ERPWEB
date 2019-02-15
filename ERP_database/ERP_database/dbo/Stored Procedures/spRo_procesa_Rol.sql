@@ -1,6 +1,4 @@
-﻿
-
-CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
+﻿CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
 @IdEmpresa int,
 @IdNomina numeric,
 @IdNominaTipo numeric,
@@ -49,7 +47,10 @@ declare
 @IdRubro_total_ingreso varchar(50),
 @IdRubro_total_egreso varchar(50),
 @IdRubro_total_pagar varchar(50),
-@IdRubro_anticipo varchar(50)
+@IdRubro_anticipo varchar(50),
+@PorAportePersonal float,
+@SalarioBasico float
+
 end
 
 select @SueldoBasico= Sueldo_basico,@Por_apor_pers_iess= Porcentaje_aporte_pers, @por_apor_per_patr=Porcentaje_aporte_patr from ro_Parametros where IdEmpresa=@IdEmpresa
@@ -57,21 +58,22 @@ select @SueldoBasico= Sueldo_basico,@Por_apor_pers_iess= Porcentaje_aporte_pers,
 -------------obteniendo fecha del perido------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 select @Fi= pe_FechaIni, @Ff=pe_FechaFin, @Anio=pe_anio from ro_periodo where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo
-
+-------------obteniendo aporte personal------------------- ----------------------------------------------------------------------------------<
+select @PorAportePersonal = Porcentaje_aporte_pers, @SalarioBasico = Sueldo_basico from ro_Parametros where IdEmpresa=@IdEmpresa
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------preparando la cabecera del rol general-------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 if((select  COUNT(idrol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol)>0)
-update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
+update ro_rol set PorAportePersonal=@PorAportePersonal, SalarioBasico=@SalarioBasico, UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 else
 insert into ro_rol
 (IdEmpresa,	IdRol, IdSucursal,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
-IdCentroCosto)
+IdCentroCosto, PorAportePersonal, SalarioBasico)
 select
- @IdEmpresa	, @IdRol, case when @IdSucursalInicio=0then NULL else @IdSucursalInicio end	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+ @IdEmpresa	, @IdRol, case when @IdSucursalInicio=0then NULL else @IdSucursalInicio end	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'ABIERTO'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
-,null
+,null, @PorAportePersonal, @SalarioBasico
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------eliminando detalle--------------------------- ----------------------------------------------------------------------------------<

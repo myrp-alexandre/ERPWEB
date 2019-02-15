@@ -35,27 +35,6 @@ BEGIN
 
 
 
-	  -- inserto si tiene saldo zero a pagar 
-	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea,ru_descripcion)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor , D.IdSucursal,emp.IdArea, r.ru_descripcion
-
-	FROM            dbo.ro_rol_detalle AS D INNER JOIN
-                         dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_rol AS Ro ON D.IdEmpresa = Ro.IdEmpresa AND D.IdRol = Ro.IdRol INNER JOIN
-                         dbo.ro_rubro_tipo AS R ON D.IdEmpresa = R.IdEmpresa AND D.IdRubro = R.IdRubro
-
-	  where D.IdEmpresa=@idempresa
-	  and IdNominaTipo=@idnomina_tipo
-	  and IdNominaTipoLiqui=@idnomina_Tipo_liq
-	  and IdPeriodo=@idperiodo
-	  and R.IdEmpresa=D.IdEmpresa
-	  and D.IdRubro=R.IdRubro
-	   and ro.IdEmpresa=D.IdEmpresa
-	   and ro.IdRol=D.IdRol
-	  And R.ru_tipo='A'
-	  and D.Valor=0
-	  and D.IdRubro=@IdRubroTotalPagar
-
 
 
 	  	  -- inserto dias trabajados 
@@ -76,7 +55,7 @@ BEGIN
 	  and ro.IdEmpresa=D.IdEmpresa
 	  and ro.IdRol=D.IdRol
 	  And R.ru_tipo='A'
-	  and D.IdRubro=@IdRubroDiasTrabajados
+	  and D.IdRubro=@IdRubroTotalPagar
 
 
 --insertando egresos

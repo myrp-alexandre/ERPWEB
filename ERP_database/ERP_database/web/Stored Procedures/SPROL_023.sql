@@ -46,7 +46,10 @@ AS
 --set @IdDepartamentoFin= 99
 
 
-SELECT a.IdEmpresa, A.IdRol, A.IdEmpleado, A.IdDivision, A.IdArea, A.IdDepartamento, A.IdSucursal,IdNominaTipo,  A.Descripcion,  A.IdNominaTipoLiqui,DescripcionProcesoNomina,  A.IdPeriodo, A.pe_nombreCompleto, A.NombreDivision, A.NombreArea, A.NombreDepartamento, A.Su_Descripcion,  ( A.SUELDO)*(B.Porcentaje/100) SUELDO, case when B.CargaGasto=1 then  A.ANTICIPO else 0 end ANTICIPO,  (A.DECIMOC)*(B.Porcentaje/100) DECIMOC, ( A.DECIMOT)*(B.Porcentaje/100) DECIMOT, ( A.FRESERVA)*(B.Porcentaje/100) FRESERVA, case when B.CargaGasto=1 then A.IESS else 0  end IESS, case when B.CargaGasto=1 then  A.PRESTAMO else 0 end PRESTAMO,( A.SOBRET)*(B.Porcentaje/100) SOBRET,
+DECLARE 
+@ValorFR float
+
+SELECT a.IdEmpresa, A.IdRol, A.IdEmpleado, A.IdDivision, A.IdArea, A.IdDepartamento, A.IdSucursal,IdNominaTipo,  A.Descripcion,  A.IdNominaTipoLiqui,DescripcionProcesoNomina,  A.IdPeriodo, A.pe_nombreCompleto, A.NombreDivision, A.NombreArea, A.NombreDepartamento, A.Su_Descripcion,  ( A.SUELDO)*(B.Porcentaje/100) SUELDO, case when B.CargaGasto=1 then  A.ANTICIPO else 0 end ANTICIPO,  (A.DECIMOC)*(B.Porcentaje/100) DECIMOC, ( A.DECIMOT)*(B.Porcentaje/100) DECIMOT, ( A.FRESERVA)*(B.Porcentaje/100) FRESERVA, ( A.IESS)*(B.Porcentaje/100) IESS, case when B.CargaGasto=1 then  A.PRESTAMO else 0 end PRESTAMO,( A.SOBRET)*(B.Porcentaje/100) SOBRET,
  case when B.CargaGasto=1 then A.TOTALE else 0 end TOTALE, ( A.TOTALI)*(B.Porcentaje/100)TOTALI, case when B.CargaGasto=1 then  A.OTROEGR else 0 end OTROEGR,  (A.OTROING)*(B.Porcentaje/100)OTROING,  A.DIASTRABAJADOS, case when B.CargaGasto=1 then  ((A.TOTALI)*(B.Porcentaje/100)) - a.TOTALE else ( A.TOTALI)*(B.Porcentaje/100) end NETO,NombreCargo, A.JORNADA, B.Descripcion AS UBUCACION, B.Porcentaje
 
  FROM (
@@ -62,8 +65,8 @@ ro_cargo.ca_descripcion as NombreCargo,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'ANTICIPO' THEN VALOR ELSE 0 END AS ANTICIPO,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'DECIMOC' THEN  VALOR ELSE 0 END AS DECIMOC,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'DECIMOT' THEN  VALOR ELSE 0 END AS DECIMOT,
-				  CASE WHEN ro_catalogo.CodCatalogo = 'FRESERVA' THEN  VALOR ELSE 0 END AS FRESERVA,
-				  CASE WHEN ro_catalogo.CodCatalogo = 'IESS' THEN VALOR ELSE 0 END AS IESS,
+				  case when ( select SUM( d.Valor) from ro_rol_detalle d where  d.IdEmpresa=ro_rol_detalle.IdEmpresa AND d.IdRol=ro_rol_detalle.IdRol and ro_rol_detalle.IdEmpleado=d.IdEmpleado and d.IdRubro=ro_rubros_calculados.IdRubro_fondo_reserva) is not null then  CASE WHEN ro_rubro_tipo.rub_aplica_IESS=1 THEN  VALOR*(0.0833)  ELSE 0 END ELSE 0 END AS FRESERVA,
+				  CASE WHEN ro_rubro_tipo.rub_aplica_IESS = 1 THEN  VALOR*(ro_rol.PorAportePersonal) ELSE 0 END AS IESS,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'PRESTAMO' THEN VALOR ELSE 0 END AS PRESTAMO,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'SOBRET' THEN  VALOR ELSE 0 END AS SOBRET,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'E' THEN VALOR ELSE 0 END AS TOTALE,
@@ -71,7 +74,7 @@ ro_cargo.ca_descripcion as NombreCargo,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'E' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROEGR,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'I' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROING,
 				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_dias_trabajados then VALOR ELSE 0 END AS DIASTRABAJADOS,
-				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_matutina  then 'HORAS MATUTINA' WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_vespertina THEN'HORAS VESPERTINA'  ELSE 'GENERAL' END AS JORNADA
+				  CASE WHEN ro_rubro_tipo.IdRubro != ro_rubros_calculados.IdRubro_horas_vespertina  then 'HORAS MATUTINA' WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_vespertina THEN'HORAS VESPERTINA'  END AS JORNADA
 				 
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
@@ -136,7 +139,7 @@ FROM            ro_empleado_division_area_x_rol AS emp_x_are_xrol INNER JOIN
 				  UNION ALL
 
 				  
-SELECT IdEmpresa, IdRol,IdEmpleado,IdDivision,IdArea,IdDepartamento,IdSucursal,IdNominaTipo, Descripcion, IdNominaTipoLiqui,DescripcionProcesoNomina, IdPeriodo,pe_nombreCompleto,NombreDivision,NombreArea,NombreDepartamento,Su_Descripcion, SUM(SUELDO) SUELDO, SUM(ANTICIPO) ANTICIPO, SUM(DECIMOC) DECIMOC, SUM(DECIMOT) DECIMOT, SUM(FRESERVA)FRESERVA,SUM(IESS)IESS, SUM(PRESTAMO)PRESTAMO,SUM(SOBRET) SOBRET, 
+SELECT IdEmpresa, IdRol,IdEmpleado,IdDivision,IdArea,IdDepartamento,IdSucursal,IdNominaTipo, Descripcion, IdNominaTipoLiqui,DescripcionProcesoNomina, IdPeriodo,pe_nombreCompleto,NombreDivision,NombreArea, NombreDepartamento,Su_Descripcion, SUM(SUELDO) SUELDO, SUM(ANTICIPO) ANTICIPO, SUM(DECIMOC) DECIMOC, SUM(DECIMOT) DECIMOT, SUM(FRESERVA)FRESERVA,SUM(IESS)IESS, SUM(PRESTAMO)PRESTAMO,SUM(SOBRET) SOBRET, 
 SUM(TOTALE)TOTALE, SUM(TOTALI)TOTALI,SUM(OTROEGR)OTROEGR, SUM(OTROING) OTROING, SUM(DIASTRABAJADOS) DIASTRABAJADOS, (SUM(TOTALI) - SUM(TOTALE)) NETO,NombreCargo, JORNADA, '' UBICACION, 0 PORCENTAJE
 FROM (
 SELECT ro_rol_detalle.IdEmpresa, ro_rol_detalle.IdRol, ro_rol_detalle.IdEmpleado, ro_empleado.IdDivision, ro_empleado.IdArea, ro_empleado.IdDepartamento, ro_rol.IdSucursal, ro_rol.IdNominaTipo,ro_Nomina_Tipo.Descripcion, ro_rol.IdNominaTipoLiqui, ro_Nomina_Tipoliqui.DescripcionProcesoNomina, tb_sucursal.Su_Descripcion,
@@ -147,8 +150,9 @@ ro_cargo.ca_descripcion as NombreCargo,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'ANTICIPO' THEN VALOR ELSE 0 END AS ANTICIPO,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'DECIMOC' THEN VALOR ELSE 0 END AS DECIMOC,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'DECIMOT' THEN VALOR ELSE 0 END AS DECIMOT,
-				  CASE WHEN ro_catalogo.CodCatalogo = 'FRESERVA' THEN VALOR ELSE 0 END AS FRESERVA,
-				  CASE WHEN ro_catalogo.CodCatalogo = 'IESS' THEN VALOR ELSE 0 END AS IESS,
+				
+				  case when ( select SUM( d.Valor) from ro_rol_detalle d where  d.IdEmpresa=ro_rol_detalle.IdEmpresa AND d.IdRol=ro_rol.IdRol and ro_rol_detalle.IdEmpleado=d.IdEmpleado and d.IdRubro=ro_rubros_calculados.IdRubro_fondo_reserva) is not null then  CASE WHEN ro_rubro_tipo.rub_aplica_IESS=1 THEN  VALOR*(0.0833)  ELSE 0 END ELSE 0 END AS FRESERVA,
+				  CASE WHEN ro_rubro_tipo.rub_aplica_IESS = 1 THEN  VALOR*(ro_rol.PorAportePersonal)  ELSE 0 END AS IESS,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'PRESTAMO' THEN VALOR ELSE 0 END AS PRESTAMO,
 				  CASE WHEN ro_catalogo.CodCatalogo = 'SOBRET' THEN VALOR ELSE 0 END AS SOBRET,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'E' THEN VALOR ELSE 0 END AS TOTALE,
@@ -156,7 +160,7 @@ ro_cargo.ca_descripcion as NombreCargo,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'E' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROEGR,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'I' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROING,
 				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_dias_trabajados then VALOR ELSE 0 END AS DIASTRABAJADOS,
-				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_matutina  then 'HORAS MATUTINA' WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_vespertina THEN'HORAS VESPERTINA'  ELSE 'GENERAL' END AS JORNADA
+				  CASE WHEN ro_rubro_tipo.IdRubro != ro_rubros_calculados.IdRubro_horas_vespertina  then 'HORAS MATUTINA' WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_vespertina THEN'HORAS VESPERTINA'   END AS JORNADA
 				 
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
