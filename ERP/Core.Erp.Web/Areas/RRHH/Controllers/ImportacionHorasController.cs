@@ -31,7 +31,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
-         
+
         ro_rubro_tipo_Info_list ro_rubro_tipo_Info_list = new ro_rubro_tipo_Info_list();
 
         int IdEmpresa = 0;
@@ -75,13 +75,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region Vistas
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
-                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1)
-            };
+            cl_filtros_Info model = new cl_filtros_Info();
             return View(model);
         }
         [HttpPost]
@@ -95,8 +89,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult GridViewPartial_importacion_horas(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ViewBag.Fecha_ini = Fecha_ini == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.Fecha_fin = Fecha_fin == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1) : Convert.ToDateTime(Fecha_fin);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, false);
             return PartialView("_GridViewPartial_importacion_horas", model);
@@ -292,10 +286,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var rubros_calculados = bus_rubros_calculados.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
             ro_rubro_tipo_Info_list ro_rubro_tipo_Info_list = new ro_rubro_tipo_Info_list();
             ro_jornada_Data odata_j = new ro_jornada_Data();
-            ro_empleado_x_jornada_Bus empleado_jornada_bus = new ro_empleado_x_jornada_Bus();
-            ro_empleado_x_jornada_Info empleado_jornada_info = new ro_empleado_x_jornada_Info();
 
-            var lst_jornada = odata_j.get_list(Convert.ToInt32(SessionFixed.IdEmpresa),false);
+            var lst_jornada = odata_j.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
             double horas_mat = 0;
             string jornada = "";
             string IdRubro = "";
@@ -311,132 +303,111 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont != 0)
                     {
-                        
-                         cedula = reader.GetString(0);
-                         IdRubro =Convert.ToString( reader.GetValue(3));
 
-                        jornada = Convert.ToString( reader.GetValue(2));
+                        cedula = reader.GetString(0);
+                        IdRubro = Convert.ToString(reader.GetValue(3));
+
+                        jornada = Convert.ToString(reader.GetValue(2));
                         ro_rubro_tipo_Info rubros = new ro_rubro_tipo_Info();
                         var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedula).FirstOrDefault();
-                            
+
                         if (empleado != null)
                         {
-                                if (empleado.Valor_horas_matutino == null)
-                                    empleado.Valor_horas_matutino = 0;
-                                if (empleado.Valor_horas_vespertina == null)
-                                    empleado.Valor_horas_vespertina = 0;
-                                if (empleado.Valor_horas_brigada == null)
-                                    empleado.Valor_horas_brigada = 0;
-                                if (empleado.Valor_hora_adicionales == null)
-                                    empleado.Valor_hora_adicionales = 0;
-                                if (empleado.Valor_hora_control_salida == null)
-                                    empleado.Valor_hora_control_salida = 0;
+                            if (empleado.Valor_horas_matutino == null)
+                                empleado.Valor_horas_matutino = 0;
+                            if (empleado.Valor_horas_vespertina == null)
+                                empleado.Valor_horas_vespertina = 0;
+                            if (empleado.Valor_horas_brigada == null)
+                                empleado.Valor_horas_brigada = 0;
+                            if (empleado.Valor_hora_adicionales == null)
+                                empleado.Valor_hora_adicionales = 0;
+                            if (empleado.Valor_hora_control_salida == null)
+                                empleado.Valor_hora_control_salida = 0;
 
 
 
 
-                                rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.rub_codigo == IdRubro);
-                                if (rubros != null)
-                                {
-                                    ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
-                                    {
-                                        NumHoras = Convert.ToDouble(reader.GetValue(4)),
-                                        pe_cedulaRuc = cedula,
-                                        pe_apellido = empleado.Empleado,
-                                        em_codigo = empleado.em_codigo,
-                                        IdSucursal = empleado.IdSucursal,
-                                        Secuencia = cont,
-                                        IdEmpleado = empleado.IdEmpleado,
-                                        IdRubro = rubros.IdRubro,
-                                        ru_descripcion = rubros.ru_descripcion,
-                                        //ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
-                                       
-                                    };
-                                    horas_mat = info.NumHoras;
-
-                                    //info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
-
-                                    info.Secuencia = lista_novedades.Count() + 1;
-
-                                    if (jornada != null && jornada != "")
-                                    {
-                                        info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
-                                        if (info.IdJornada != 0)
-                                        {
-                                            empleado_jornada_info = empleado_jornada_bus.GetInfo_Empleado_Jornada(empleado.IdEmpresa, empleado.IdEmpleado, info.IdJornada);
-
-                                            if (empleado_jornada_info != null)
-                                            {
-                                                info.ValorHora = empleado_jornada_info.ValorHora;
-                                                info.Valor = Convert.ToDouble(empleado_jornada_info.ValorHora * info.NumHoras);
-                                            }
-
-                                            if (info.Valor > 0)
-                                            {
-                                                lista_novedades.Add(info);
-                                            }
-                                        }
-                                    //if (info.Valor > 0)
-                                    //    lista_novedades.Add(info);
-                                    }
-                                    
-                                }
-
-
-
-                           
-
-                            }
-
-                        
-                    }
-                 cont++;
-                }
-
-                   
-                }
-
-
-
-                foreach (var item in empleado_info_list.get_list())
-                {
-
-                    double mat_mas_ves = lista_novedades.Where(v => v.IdEmpleado == item.IdEmpleado && (v.IdRubro== rubros_calculados.IdRubro_horas_matutina || v.IdRubro== rubros_calculados.IdRubro_horas_vespertina)).Sum(v => v.Valor);
-
-                    #region horas recargo
-                    if ((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor) > 0)
-                    {
-                        if (rubros_calculados.IdRubro_horas_recargo != null)
-                        {
-                            var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_recargo);
+                            rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.rub_codigo == IdRubro);
                             if (rubros != null)
                             {
                                 ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                 {
-                                    pe_cedulaRuc = item.pe_cedulaRuc,
-                                    pe_apellido = item.Empleado,
-                                    IdSucursal = item.IdSucursal,
-                                    em_codigo = item.em_codigo,
+                                    NumHoras = Convert.ToDouble(reader.GetValue(4)),
+                                    pe_cedulaRuc = cedula,
+                                    pe_apellido = empleado.Empleado,
+                                    em_codigo = empleado.em_codigo,
+                                    IdSucursal = empleado.IdSucursal,
                                     Secuencia = cont,
-                                    IdEmpleado = item.IdEmpleado,
-                                    IdRubro = rubros_calculados.IdRubro_horas_recargo,
+                                    IdEmpleado = empleado.IdEmpleado,
+                                    IdRubro = rubros.IdRubro,
                                     ru_descripcion = rubros.ru_descripcion,
-                                    IdJornada = lst_jornada.Where(v => v.codigo ==jornada).FirstOrDefault().IdJornada
+                                    ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
 
                                 };
-                                info.ValorHora = 1.32;
-                                info.NumHoras = (Math.Round(Convert.ToDouble((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor))) - 160);
-                                info.Valor = 1.32 * info.NumHoras;
+                                horas_mat = info.NumHoras;
+                                info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
                                 info.Secuencia = lista_novedades.Count() + 1;
+                                if (jornada != null && jornada != "")
+                                    info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
                                 if (info.Valor > 0)
                                     lista_novedades.Add(info);
                             }
+
+
+
+
+
+                        }
+
+
+                    }
+                    cont++;
+                }
+
+
+            }
+
+
+
+            foreach (var item in empleado_info_list.get_list())
+            {
+
+                double mat_mas_ves = lista_novedades.Where(v => v.IdEmpleado == item.IdEmpleado && (v.IdRubro == rubros_calculados.IdRubro_horas_matutina || v.IdRubro == rubros_calculados.IdRubro_horas_vespertina)).Sum(v => v.Valor);
+
+                #region horas recargo
+                if ((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor) > 0)
+                {
+                    if (rubros_calculados.IdRubro_horas_recargo != null)
+                    {
+                        var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_recargo);
+                        if (rubros != null)
+                        {
+                            ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                            {
+                                pe_cedulaRuc = item.pe_cedulaRuc,
+                                pe_apellido = item.Empleado,
+                                IdSucursal = item.IdSucursal,
+                                em_codigo = item.em_codigo,
+                                Secuencia = cont,
+                                IdEmpleado = item.IdEmpleado,
+                                IdRubro = rubros_calculados.IdRubro_horas_recargo,
+                                ru_descripcion = rubros.ru_descripcion,
+                                IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada
+
+                            };
+                            info.ValorHora = 1.32;
+                            info.NumHoras = (Math.Round(Convert.ToDouble((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor))) - 160);
+                            info.Valor = 1.32 * info.NumHoras;
+                            info.Secuencia = lista_novedades.Count() + 1;
+                            if (info.Valor > 0)
+                                lista_novedades.Add(info);
                         }
                     }
-                    #endregion
+                }
+                #endregion
 
 
-                
+
 
 
 

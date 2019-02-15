@@ -392,16 +392,15 @@ namespace Core.Erp.Data.RRHH
 
                     var IdPrestamo = Convert.ToDecimal(item);
                     ro_prestamo Entity_Prestamo = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+                    if (Entity_Prestamo != null)
+                    {
+                        Entity_Prestamo.IdUsuarioAprueba = IdUsuarioAprueba;
+                        Entity_Prestamo.EstadoAprob = "APROB";
+                    }
 
                     if (Entity_Prestamo.GeneraOP)
                     {
-                        if (Entity_Prestamo != null)
-                        {
-                            Entity_Prestamo.IdUsuarioAprueba = IdUsuarioAprueba;
-                            Entity_Prestamo.EstadoAprob = "APROB";
-                        }
-                        if (Entity_ro_parametros.genera_op_x_pago == true)
-                        {
+                        
                             IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
                             IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP));
                             ro_empleado Entity_Empleado = Context.ro_empleado.Where(q => q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdEmpleado == Entity_Prestamo.IdEmpleado).FirstOrDefault();
@@ -495,12 +494,14 @@ namespace Core.Erp.Data.RRHH
                                 Context_cxp.cp_orden_pago_det.Add(op_det);
                             
                         }
-                    }
+                    
+                   
+                }
                     Context_ct.SaveChanges();
                     Context_cxp.SaveChanges();
                     Context.SaveChanges();
-                }              
-             }
+                }
+
                 Context_ct.Dispose();
                 Context_cxp.Dispose();
                 Context.Dispose();

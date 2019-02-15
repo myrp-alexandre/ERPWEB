@@ -23,9 +23,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                fecha_ini = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
-                fecha_fin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             return View(model);
         }
@@ -43,8 +41,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult GridViewPartial_prestamos_aprobacion(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ViewBag.Fecha_ini = Fecha_ini == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.Fecha_fin = Fecha_fin == null ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1) : Convert.ToDateTime(Fecha_fin);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             List<ro_prestamo_Info> model = bus_prestamos.get_list_aprobacion(IdEmpresa, Convert.ToDateTime(Fecha_ini), Convert.ToDateTime(Fecha_fin));
             return PartialView("_GridViewPartial_prestamos_aprobacion", model);
         }
@@ -67,11 +65,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     info_prestamo = bus_prestamos.get_info(IdEmpresa, Convert.ToDecimal(item));
 
-                    if (info_prestamo == null || (info_prestamo.IdCtaCble_Emplea == null || info_prestamo.rub_ctacon == null))
+                    if (info_prestamo.GeneraOP)
                     {
-                        existen_cuentas = false;
-                        mensaje_aprobar = "No estan asignadas las cuentas contables de los empleados seleccionados";
-                        break;
+                        if (info_prestamo == null || (info_prestamo.IdCtaCble_Emplea == null || info_prestamo.rub_ctacon == null))
+                        {
+                            existen_cuentas = false;
+                            mensaje_aprobar = "No estan asignadas las cuentas contables de los empleados seleccionados";
+                            break;
+                        }
                     }
                 }
 
