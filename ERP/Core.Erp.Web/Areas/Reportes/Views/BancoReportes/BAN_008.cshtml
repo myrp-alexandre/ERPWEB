@@ -108,7 +108,7 @@
                            settings.Properties.ClientSideEvents.DropDown = "synchronizeListBoxValues";
                        }).GetHtml()*@
 
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_suc, "Su_Descripcion", "IdSucursal"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_suc, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
