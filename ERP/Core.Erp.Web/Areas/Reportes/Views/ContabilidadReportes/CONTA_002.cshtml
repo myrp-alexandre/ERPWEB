@@ -6,6 +6,7 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Areas/Reportes/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("CONTA_002", "ContabilidadReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
