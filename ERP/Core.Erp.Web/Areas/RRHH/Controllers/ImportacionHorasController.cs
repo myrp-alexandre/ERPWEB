@@ -372,7 +372,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             foreach (var item in empleado_info_list.get_list())
             {
 
-                double mat_mas_ves = lista_novedades.Where(v => v.IdEmpleado == item.IdEmpleado && (v.IdRubro == rubros_calculados.IdRubro_horas_matutina || v.IdRubro == rubros_calculados.IdRubro_horas_vespertina)).Sum(v => v.Valor);
+                double mat_mas_ves = lista_novedades.Where(v => v.IdEmpleado == item.IdEmpleado && (v.IdRubro == rubros_calculados.IdRubro_horas_matutina || v.IdRubro == rubros_calculados.IdRubro_horas_vespertina)).Sum(v => v.NumHoras);
 
                 #region horas recargo
                 if ((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor) > 0)

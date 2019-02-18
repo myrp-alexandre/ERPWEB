@@ -44,6 +44,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdSucursal <= IdSucursalFin
                              && q.IdNomina_Tipo == IdNomina
                              && q.IdNomina_TipoLiqui == IdNominaTipo
+                             && q.IdPeriodo == IdPeriodo
                              && q.Valor > 0
                              //&& q.IdRubro==info_rub_calculados.IdRubro_tot_pagar
                              select new ROL_022_Info

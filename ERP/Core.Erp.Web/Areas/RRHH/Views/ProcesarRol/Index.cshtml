@@ -56,15 +56,6 @@
                 </button>
             </div>
         </div>
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <a class="btn btn-primary" href="@Url.Action("Importar","Empleado",new { Area = "RRHH", IdEmpresa = SessionFixed.IdEmpresa },null)">Importar desde excel</a>
-                </div>
-            </div>
-
-            @Html.Action("GridViewPartial_ro_rol", new { IdSucursal = Model.IdSucursal })
-        </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]

@@ -5,6 +5,7 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="col-md-12">    
     <a class="btn btn-primary" href="@Url.Action("Consulta","ReportesPorUsuario",new { Area = "General" },null)">Reportes</a>
