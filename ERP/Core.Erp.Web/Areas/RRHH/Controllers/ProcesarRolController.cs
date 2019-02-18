@@ -12,6 +12,7 @@ using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -29,6 +30,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
+        #endregion
+        #region Metodos ComboBox bajo demanda xueldo
+
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_sueldos()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_sueldos", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_sueldo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_sueldo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
 
