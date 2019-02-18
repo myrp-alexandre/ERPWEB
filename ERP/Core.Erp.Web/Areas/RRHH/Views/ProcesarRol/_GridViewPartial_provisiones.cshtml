@@ -9,7 +9,7 @@
 
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ProcesarRol", Action = "EditingUpdate" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ProcesarRol", Action = "EditingUpdate_prov" };
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsBehavior.ConfirmDelete = true;
@@ -82,7 +82,7 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbCuenta_sueldos", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                Html.RenderPartial("_CmbCuenta_prov", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add("dc_Observacion", "Descripción").Width = Unit.Percentage(40);
