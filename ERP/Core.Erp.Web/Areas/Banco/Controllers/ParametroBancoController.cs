@@ -15,7 +15,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Variables
         ba_parametros_Bus bus_parametro = new ba_parametros_Bus();
         ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
-        fa_TipoNota_Bus bus_tipo = new fa_TipoNota_Bus();
         ct_plancta_Bus bus_cta = new ct_plancta_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         #endregion
@@ -48,10 +47,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             var lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
             ViewBag.lst_tipo_comprobante = lst_tipo_comprobante;
-
-            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo = lst_tipo;
-
+            
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
 
