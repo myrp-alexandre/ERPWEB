@@ -109,24 +109,41 @@ namespace Core.Erp.Data.RRHH
                 {
                     foreach (var item in info)
                     {
-
+                       
                         if (item.IdCtaCble == "")
                             item.IdCtaCble = null;
                         if (item.IdCtaCble_prov_debito == "")
                             item.IdCtaCble_prov_debito = null;
-                        ro_Config_Param_contable Entity = new  ro_Config_Param_contable
+                        if (item.rub_provision == false)
                         {
-                             IdEmpresa = item.IdEmpresa,
-                             IdDivision = item.IdDivision,
-                             IdArea = item.IdArea,
-                             IdDepartamento = item.IdDepartamento,
-                             IdRubro = item.IdRubro,
-                             IdCentroCosto = item.IdCentroCosto,
-                             DebCre = item.DebCre,
-                             IdCtaCble = (item.IdCtaCble)==null?item.IdCtaCble_prov_debito: item.IdCtaCble,
-                             IdCtaCble_Haber = (item.IdCtaCble_prov_credito) == "" ? null : item.IdCtaCble_prov_credito
-                         };
-                        Context. ro_Config_Param_contable.Add(Entity);
+                            ro_Config_Param_contable Entity = new ro_Config_Param_contable
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdDivision = item.IdDivision,
+                                IdArea = item.IdArea,
+                                IdDepartamento = item.IdDepartamento,
+                                IdRubro = item.IdRubro,
+                                IdCentroCosto = item.IdCentroCosto,
+                                DebCre = item.DebCre,
+                                IdCtaCble = item.IdCtaCble
+                            };
+                            Context.ro_Config_Param_contable.Add(Entity);
+                        }
+                        else
+                        {
+                            ro_Config_Param_contable Entity = new ro_Config_Param_contable
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdDivision = item.IdDivision,
+                                IdArea = item.IdArea,
+                                IdDepartamento = item.IdDepartamento,
+                                IdRubro = item.IdRubro,
+                                IdCentroCosto = item.IdCentroCosto,
+                                DebCre = item.DebCre,
+                                IdCtaCble = item.IdCtaCble
+                            };
+                            Context.ro_Config_Param_contable.Add(Entity);
+                        }
                     }
                     Context.SaveChanges();
 
