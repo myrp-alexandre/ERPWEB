@@ -147,6 +147,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model = bus_parametros.get_info(IdEmpresa);
 
             lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
+            lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
             cargar_combos();
             cargar_combos_detalle();
             return View(model);
@@ -163,7 +164,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             }
             else
-            {
+             {
+                bus_parametros = new ro_Parametros_Bus();
+                model = bus_parametros.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+                lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
+                lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
                 cargar_combos();
                 return View(model);
             }
@@ -190,9 +195,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_Parametros_Info model = new ro_Parametros_Info();
             var lst = lst_cta_rubro.get_list_cta_rubros();
-            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
+            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == false).ToList();
 
-            model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_rubros", model);
         }
@@ -318,11 +322,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (cta != null)
             {
-                info_det.pc_Cuenta_prov_debito = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
                 edited_info.pc_Cuenta_prov_debito = info_det.pc_Cuenta_prov_debito;
             }
 
             edited_info.IdCtaCble = info_det.IdCtaCble;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+
             edited_info.IdCtaCble_prov_credito = info_det.IdCtaCble_prov_credito;
             edited_info.DebCre = info_det.DebCre;
         }
