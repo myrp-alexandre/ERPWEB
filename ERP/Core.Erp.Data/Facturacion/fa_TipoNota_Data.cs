@@ -49,7 +49,7 @@ namespace Core.Erp.Data.Facturacion
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
