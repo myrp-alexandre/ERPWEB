@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rol_Bus bus_rol = new ro_rol_Bus();
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-
+        ct_cbtecble_det_lst list_det = new ct_cbtecble_det_lst();
         #endregion
         #region Metodos ComboBox bajo demanda xueldo
 
@@ -439,8 +439,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult GridViewPartial_sueldo_x_pagar()
         {
             cargar_combo_detalle();
-            ro_rol_Info model = new ro_rol_Info();
-            model.lst_sueldo_x_pagar = Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
+            var model = list_det.get_list_cta();
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
         }
 
@@ -458,6 +457,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_empleados_sin_percibir_sueldo", model);
         }
 
+  
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nominas_cerradas()
         {
@@ -473,7 +473,47 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_det.UpdateRow_cta_rubros(info_det);
+            var model = list_det.get_list_cta();
+            return PartialView("_GridViewPartial_sueldo_x_pagar", model);
+        }
+    }
+    public class ct_cbtecble_det_lst
+    {
+        public List<ct_cbtecble_det_Info> get_list_cta()
+        {
+            if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
+            {
+                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
+
+                HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+            }
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session["ct_cbtecble_det_Info"];
+        }
+        public void set_list_cta(List<ct_cbtecble_det_Info> list)
+        {
+            HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+        }
+        public void UpdateRow_cta_rubros(ct_cbtecble_det_Info info_det)
+        {
+            var ls = get_list_cta();
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            ct_cbtecble_det_Info edited_info = get_list_cta().Where(m => m.secuencia == info_det.secuencia).First();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            if (cta != null)
+            {
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+                edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            }
+
+            edited_info.IdCtaCble = info_det.IdCtaCble;
+        }
     }
 
-
-}
+    }
