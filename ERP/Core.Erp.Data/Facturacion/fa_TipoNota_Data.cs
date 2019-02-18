@@ -17,9 +17,7 @@ namespace Core.Erp.Data.Facturacion
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.fa_TipoNota
-                                 where q.IdEmpresa == IdEmpresa
-                                 select new fa_TipoNota_Info
+                        Lista = Context.fa_TipoNota.Where(q=>q.IdEmpresa == IdEmpresa).Select(q=> new fa_TipoNota_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,
@@ -32,10 +30,7 @@ namespace Core.Erp.Data.Facturacion
                                  }).ToList();
                     else
 
-                        Lista = (from q in Context.fa_TipoNota
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
-                                 select new fa_TipoNota_Info
+                        Lista = Context.fa_TipoNota.Where(q=>q.IdEmpresa == IdEmpresa && q.Estado == "A").Select(q=> new fa_TipoNota_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,

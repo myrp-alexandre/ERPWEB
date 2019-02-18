@@ -12,6 +12,7 @@ using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -28,7 +29,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rol_Bus bus_rol = new ro_rol_Bus();
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ct_cbtecble_det_lst list_det = new ct_cbtecble_det_lst();
+        #endregion
+        #region Metodos ComboBox bajo demanda xueldo
 
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_sueldos()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_sueldos", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_sueldo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ct_plancta_Info get_info_bajo_demanda_sueldo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
 
@@ -244,8 +262,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-               info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>; 
-               info.lst_provisiones= Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
+                //info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
+                info.lst_sueldo_x_pagar = list_det.get_list_cta();
+                info.lst_provisiones= Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
                 info.UsuarioCierre = Session["IdUsuario"].ToString();
 
                 foreach (var item in info.lst_sueldo_x_pagar)
@@ -296,9 +315,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 cargar_combo_detalle();
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                ro_rol_Info model = new ro_rol_Info();
+                ro_rol_Info model = new ro_rol_Info
+
+                {
+                    lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>()
+                };
                 model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
-                Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
+                list_det.set_list_cta(model.lst_sueldo_x_pagar);
+                //Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
                 Session["lst_provisiones"] = model.lst_provisiones;
 
                 model.Fechacontabilizacion=DateTime.Now;
@@ -402,27 +426,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        private void cargar_combo_detalle()
-        {
-            try
-            {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                ViewBag.lst_cuentas = bus_cuentas.get_list(IdEmpresa,false,true);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_sueldo_x_pagar()
         {
-            cargar_combo_detalle();
+           int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ro_rol_Info model = new ro_rol_Info();
-            model.lst_sueldo_x_pagar = Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
+            model.lst_sueldo_x_pagar = list_det.get_list_cta();
+            cargar_combo_detalle();
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
         }
 
@@ -440,6 +451,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_empleados_sin_percibir_sueldo", model);
         }
 
+  
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nominas_cerradas()
         {
@@ -455,7 +467,74 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        private void cargar_combo_detalle()
+        {
+            try
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                ViewBag.lst_cuentas = bus_cuentas.get_list(IdEmpresa, false, true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            if (info_det != null)
+            {
+                if (cta == null)
+                {
+                    info_det.pc_Cuenta = cta.pc_Cuenta;
+                    info_det.IdCtaCble = cta.IdCtaCble;
+                }
+            }
+            list_det.UpdateRow(info_det);
+            ro_rol_Info model = new ro_rol_Info();
+            model.lst_sueldo_x_pagar = list_det.get_list_cta().Where(v => v.pc_Cuenta == "").ToList();
+            cargar_combo_detalle();
+            return PartialView("_GridViewPartial_sueldo_x_pagar", model);
+        }
+    }
+    public class ct_cbtecble_det_lst
+    {
+        public List<ct_cbtecble_det_Info> get_list_cta()
+        {
+            if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
+            {
+                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
+
+                HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+            }
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session["ct_cbtecble_det_Info"];
+        }
+        public void set_list_cta(List<ct_cbtecble_det_Info> list)
+        {
+            HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+        }
+        public void UpdateRow(ct_cbtecble_det_Info info_det)
+        {
+            var ls = get_list_cta();
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            ct_cbtecble_det_Info edited_info = get_list_cta().Where(m => m.secuencia == info_det.secuencia).First();
+            if (cta != null)
+            {
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+                edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            }
+
+            edited_info.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            edited_info.IdCtaCble = info_det.IdCtaCble;
+        }
     }
 
-
-}
+    }

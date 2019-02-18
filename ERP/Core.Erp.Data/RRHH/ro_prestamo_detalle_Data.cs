@@ -154,7 +154,7 @@ namespace Core.Erp.Data.RRHH
                             SaldoInicial = item.SaldoInicial,
                             TotalCuota = item.TotalCuota,
                             Saldo = item.Saldo,
-                            FechaPago = item.FechaPago,
+                            FechaPago = item.FechaPago.Date,
                             EstadoPago = item.EstadoPago = "PEN",
                             Observacion_det = item.Observacion_det,
                             IdNominaTipoLiqui = item.IdNominaTipoLiqui,

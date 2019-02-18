@@ -57,8 +57,9 @@ namespace Core.Erp.Web.Areas.Presupuesto
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
             ViewBag.IdPeriodo = IdPeriodo == 0 ? 0 : Convert.ToInt32(IdPeriodo);
 
-            lst_Presupuesto = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, IdPeriodo, false);
-            return PartialView("_GridViewPartial_AprobacionPresupuesto", lst_Presupuesto);
+        //    lst_Presupuesto
+                var model = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, IdPeriodo, false);
+            return PartialView("_GridViewPartial_AprobacionPresupuesto", model);
         }
 
         #region Metodos
