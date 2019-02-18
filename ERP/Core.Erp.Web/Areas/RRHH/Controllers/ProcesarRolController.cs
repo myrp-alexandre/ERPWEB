@@ -41,7 +41,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public List<ct_plancta_Info> get_list_bajo_demanda_sueldo(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
         }
         public ct_plancta_Info get_info_bajo_demanda_sueldo(ListEditItemRequestedByValueEventArgs args)
         {
@@ -56,7 +56,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public List<ct_plancta_Info> get_list_bajo_demanda_prov(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
         }
         public ct_plancta_Info get_info_bajo_demanda_prov(ListEditItemRequestedByValueEventArgs args)
         {
@@ -449,6 +449,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ro_rol_Info model = new ro_rol_Info();
+
             model.lst_sueldo_x_pagar = list_det.get_list_cta();
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
         }
@@ -512,10 +513,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     info_det.IdCtaCble = cta.IdCtaCble;
                 }
             }
-            list_det.UpdateRow(info_det);
+            if (ModelState.IsValid)
+                list_det.UpdateRow(info_det);
             ro_rol_Info model = new ro_rol_Info();
             model.lst_sueldo_x_pagar = list_det.get_list_cta().Where(v => v.pc_Cuenta == "").ToList();
-            return PartialView("__GridViewPartial_provisiones", model);
+            return PartialView("_GridViewPartial_provisiones", model);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
@@ -531,7 +533,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     info_det.IdCtaCble = cta.IdCtaCble;
                 }
             }
-            list_det.UpdateRow(info_det);
+            if (ModelState.IsValid)
+                list_det.UpdateRow(info_det);
             ro_rol_Info model = new ro_rol_Info();
             model.lst_sueldo_x_pagar = list_det.get_list_cta().Where(v => v.pc_Cuenta == "").ToList();
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
@@ -562,11 +565,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ct_cbtecble_det_Info edited_info = get_list_cta().Where(m => m.secuencia == info_det.secuencia).First();
             if (cta != null)
             {
-                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
-                edited_info.pc_Cuenta = info_det.pc_Cuenta;
+                info_det.IdCtaCble = cta.IdCtaCble ;
+                info_det.pc_Cuenta = cta.pc_Cuenta;
             }
 
-            edited_info.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
             edited_info.IdCtaCble = info_det.IdCtaCble;
         }
     }
