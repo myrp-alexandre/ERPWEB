@@ -264,7 +264,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 //info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
                 info.lst_sueldo_x_pagar = list_det.get_list_cta();
-                info.lst_provisiones= Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
+                info.lst_provisiones = list_det.get_list_cta();
                 info.UsuarioCierre = Session["IdUsuario"].ToString();
 
                 foreach (var item in info.lst_sueldo_x_pagar)
@@ -318,12 +318,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_rol_Info model = new ro_rol_Info
 
                 {
-                    lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>()
+                    lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>(),
+                    lst_provisiones = new List<ct_cbtecble_det_Info>()
                 };
                 model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 list_det.set_list_cta(model.lst_sueldo_x_pagar);
+                list_det.set_list_cta(model.lst_provisiones);
                 //Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
-                Session["lst_provisiones"] = model.lst_provisiones;
+                //Session["lst_provisiones"] = model.lst_provisiones;
 
                 model.Fechacontabilizacion=DateTime.Now;
                 return View(model);
@@ -441,7 +443,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             cargar_combo_detalle();
             ro_rol_Info model = new ro_rol_Info();
-            model.lst_provisiones = Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
+            model.lst_provisiones = list_det.get_list_cta();
             return PartialView("_GridViewPartial_provisiones", model);
         }
 

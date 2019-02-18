@@ -9,6 +9,15 @@
 
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ProcesarRol", Action = "EditingUpdate" };
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.Width = Unit.Percentage(100);
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
 
 
 
@@ -56,18 +65,24 @@
 
 
         settings.Columns.Add("secuencia", "#").Width = Unit.Percentage(2);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(30);
-            column.EditorProperties().ComboBox(p =>
+            column.Caption = "Cuenta contble";
+            column.Width = Unit.Percentage(35);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
+                Html.RenderPartial("_CmbCuenta_sueldos", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add("dc_Observacion", "Descripción").Width = Unit.Percentage(40);
