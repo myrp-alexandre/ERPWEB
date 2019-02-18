@@ -294,12 +294,42 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult ROL_010()
         {
-            ROL_010_Rpt model = new ROL_010_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.usuario = SessionFixed.IdUsuario.ToString();
-            model.empresa = SessionFixed.NomEmpresa.ToString();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdDivision = 0,
+                IdArea = 0
+            };
+
+            ROL_010_Rpt report = new ROL_010_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdSucursal.Value = Convert.ToInt32(SessionFixed.IdSucursal);
+            report.p_IdDivision.Value = model.IdDivision;
+            report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult ROL_010(cl_filtros_Info model)
+        {
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            ROL_010_Rpt report = new ROL_010_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdDivision.Value = model.IdDivision;
+            report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+
         public ActionResult ROL_011( int IdHorasExtras =0)
         {
             ROL_011_Rpt model = new ROL_011_Rpt();
