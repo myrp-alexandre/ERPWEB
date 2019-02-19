@@ -95,6 +95,7 @@
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.subreport_resumen = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -434,7 +435,7 @@
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.Text = "xrTableCell37";
             this.xrTableCell37.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell37.Weight = 2.8464413870840346D;
+            this.xrTableCell37.Weight = 2.9194261478130521D;
             // 
             // xrTableCell40
             // 
@@ -442,7 +443,7 @@
             this.xrTableCell40.Name = "xrTableCell40";
             this.xrTableCell40.StylePriority.UseFont = false;
             this.xrTableCell40.Text = "Hasta:";
-            this.xrTableCell40.Weight = 1.4597130466482575D;
+            this.xrTableCell40.Weight = 1.3867282859192402D;
             // 
             // xrTableCell42
             // 
@@ -731,6 +732,7 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.subreport_resumen,
             this.xrTable3,
             this.xrTable2,
             this.xrTable7});
@@ -740,6 +742,14 @@
             this.ReportFooter.StylePriority.UseFont = false;
             this.ReportFooter.StylePriority.UseTextAlignment = false;
             this.ReportFooter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            // 
+            // subreport_resumen
+            // 
+            this.subreport_resumen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.subreport_resumen.Name = "subreport_resumen";
+            this.subreport_resumen.ReportSource = new Core.Erp.Web.Reportes.Banco.BAN_008_resumen_Rpt();
+            this.subreport_resumen.SizeF = new System.Drawing.SizeF(100F, 20F);
+            this.subreport_resumen.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.subreport_resumen_BeforePrint);
             // 
             // xrTable3
             // 
@@ -1179,5 +1189,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell39;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell36;
         public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
+        private DevExpress.XtraReports.UI.XRSubreport subreport_resumen;
     }
 }

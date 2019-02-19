@@ -40,6 +40,7 @@ namespace Core.Erp.Info.RRHH
         public string IdRubro_bono_x_antiguedad { get; set; }
         public string IdRubro_anticipo { get; set; }
         public string IdRubro_novedad_proceso { get; set; }
+        public string IdRubro_primaria_vespertina { get; set; }
 
     }
 }

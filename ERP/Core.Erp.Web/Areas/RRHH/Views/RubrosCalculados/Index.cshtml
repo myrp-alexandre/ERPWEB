@@ -489,13 +489,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
@@ -574,7 +567,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-md-12">
@@ -656,6 +648,39 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdRubro_primaria_vespertina">Rubro para primaria vespertina*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_primaria_vespertina, settings =>
+               {
+                   settings.Name = "IdRubro_primaria_vespertina";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdRubro";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "ru_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro_primaria_vespertina, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
