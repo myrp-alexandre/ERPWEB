@@ -45,8 +45,9 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_bono_x_antiguedad=Entity.IdRubro_bono_x_antiguedad,
                         IdRubro_horas_control_salida=Entity.IdRubro_horas_control_salida,
                         IdRubro_anticipo = Entity.IdRubro_anticipo,
-                        IdRubro_novedad_proceso = Entity.IdRubro_novedad_proceso
-                    };
+                        IdRubro_novedad_proceso = Entity.IdRubro_novedad_proceso,
+                        IdRubro_primaria_vespertina = Entity.IdRubro_primaria_vespertina
+                };
                 }
 
                 return info;
