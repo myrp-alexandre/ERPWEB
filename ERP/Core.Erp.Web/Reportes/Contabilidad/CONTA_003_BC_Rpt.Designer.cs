@@ -155,7 +155,7 @@
             this.xrTableCell18.StylePriority.UsePadding = false;
             this.xrTableCell18.StylePriority.UseTextAlignment = false;
             this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell18.Weight = 0.41999998779296877D;
+            this.xrTableCell18.Weight = 0.64399998779296874D;
             // 
             // xrTableCell19
             // 
@@ -173,7 +173,7 @@
             this.xrTableCell19.StylePriority.UsePadding = false;
             this.xrTableCell19.StylePriority.UseTextAlignment = false;
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell19.Weight = 1.8480000610351564D;
+            this.xrTableCell19.Weight = 1.6240000610351564D;
             // 
             // xrTableCell20
             // 
@@ -338,7 +338,7 @@
             this.xrTableCell8.StylePriority.UseFont = false;
             this.xrTableCell8.StylePriority.UsePadding = false;
             this.xrTableCell8.Text = "xrTableCell8";
-            this.xrTableCell8.Weight = 0.40000020892704669D;
+            this.xrTableCell8.Weight = 0.61333334241310467D;
             // 
             // xrTableCell3
             // 
@@ -348,7 +348,7 @@
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UsePadding = false;
             this.xrTableCell3.Text = "Desde:";
-            this.xrTableCell3.Weight = 1.7600000213942877D;
+            this.xrTableCell3.Weight = 1.5466668879082297D;
             // 
             // xrTableCell4
             // 
@@ -519,7 +519,7 @@
             this.xrTableCell27.StylePriority.UseBorders = false;
             this.xrTableCell27.StylePriority.UseFont = false;
             this.xrTableCell27.Text = "Id cuenta";
-            this.xrTableCell27.Weight = 0.41999998779296877D;
+            this.xrTableCell27.Weight = 0.64399998779296874D;
             // 
             // xrTableCell28
             // 
@@ -531,7 +531,7 @@
             this.xrTableCell28.StylePriority.UseBorders = false;
             this.xrTableCell28.StylePriority.UseFont = false;
             this.xrTableCell28.Text = "Descripción";
-            this.xrTableCell28.Weight = 1.8480000610351564D;
+            this.xrTableCell28.Weight = 1.6240000610351564D;
             // 
             // xrTableCell29
             // 
@@ -623,7 +623,7 @@
             this.xrTableCell9.StylePriority.UsePadding = false;
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell9.Weight = 0.41999998779296877D;
+            this.xrTableCell9.Weight = 0.64399998779296874D;
             // 
             // xrTableCell10
             // 
@@ -637,7 +637,7 @@
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
             this.xrTableCell10.Text = "TOTAL";
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell10.Weight = 1.8480000610351564D;
+            this.xrTableCell10.Weight = 1.6240000610351564D;
             // 
             // xrTableCell12
             // 
@@ -759,7 +759,7 @@
             this.xrTableCell25.StylePriority.UseTextAlignment = false;
             this.xrTableCell25.Text = "Usuario:";
             this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell25.Weight = 0.80000048828124992D;
+            this.xrTableCell25.Weight = 1.2266666666666666D;
             // 
             // lbl_usuario
             // 
@@ -772,7 +772,7 @@
             this.lbl_usuario.StylePriority.UsePadding = false;
             this.lbl_usuario.StylePriority.UseTextAlignment = false;
             this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_usuario.Weight = 1.3377761230468752D;
+            this.lbl_usuario.Weight = 0.91110994466145856D;
             // 
             // xrTableCell32
             // 
