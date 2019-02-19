@@ -125,13 +125,13 @@ namespace Core.Erp.Data.RRHH
                                 IdRubro = item.IdRubro,
                                 IdCentroCosto = item.IdCentroCosto,
                                 DebCre = item.DebCre,
-                                IdCtaCble = item.IdCtaCble
+                                IdCtaCble_Haber = item.IdCtaCble
                             };
                             Context.ro_Config_Param_contable.Add(Entity);
                         }
                         else
                         {
-                            ro_Config_Param_contable Entity = new ro_Config_Param_contable
+                            ro_Config_Param_contable Entity_ = new ro_Config_Param_contable
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdDivision = item.IdDivision,
@@ -140,9 +140,10 @@ namespace Core.Erp.Data.RRHH
                                 IdRubro = item.IdRubro,
                                 IdCentroCosto = item.IdCentroCosto,
                                 DebCre = item.DebCre,
-                                IdCtaCble = item.IdCtaCble
+                                IdCtaCble = item.IdCtaCble_prov_debito,
+                                IdCtaCble_Haber=item.IdCtaCble
                             };
-                            Context.ro_Config_Param_contable.Add(Entity);
+                            Context.ro_Config_Param_contable.Add(Entity_);
                         }
                     }
                     Context.SaveChanges();

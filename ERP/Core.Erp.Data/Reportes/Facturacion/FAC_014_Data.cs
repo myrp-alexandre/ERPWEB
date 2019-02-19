@@ -17,8 +17,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = Context.VWFAC_014.Where(q=>q.IdEmpresa == IdEmpresa
-                    && fecha_ini <= q.FechaAutorizacion
-                    && q.FechaAutorizacion <= fecha_fin
+                    && fecha_ini <= q.Fecha_Emi_Fact
+                    && q.Fecha_Emi_Fact <= fecha_fin
                     ).Select(q => new FAC_014_Info
                     {
                         IdEmpresa = q.IdEmpresa,
