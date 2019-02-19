@@ -54,15 +54,18 @@ namespace Core.Erp.Web.Reportes.Banco
                              group q by new
                              {
                                  q.IdEmpresa,
+                                 q.IdBanco,
                                  q.ba_descripcion,
                                  q.Valor
                              } into Resumen
                              select new BAN_008_Info
                              {
                                  IdEmpresa = Resumen.Key.IdEmpresa,
+                                 IdBanco = Resumen.Key.IdBanco,
                                  ba_descripcion = Resumen.Key.ba_descripcion,
                                  Valor = Resumen.Sum(q => q.Valor)
                              }).ToList();
+
             this.DataSource = lst_rpt;
             #region Suc / valores
 
