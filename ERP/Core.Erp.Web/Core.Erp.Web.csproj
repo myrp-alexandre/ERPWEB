@@ -600,6 +600,12 @@
     <Compile Include="Reportes\Banco\BAN_007_Rpt.Designer.cs">
       <DependentUpon>BAN_007_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_008_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_008_resumen_Rpt.Designer.cs">
+      <DependentUpon>BAN_008_resumen_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_008_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -10041,6 +10047,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_007_Rpt.resx">
       <DependentUpon>BAN_007_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_008_resumen_Rpt.resx">
+      <DependentUpon>BAN_008_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_008_Rpt.resx">
       <DependentUpon>BAN_008_Rpt.cs</DependentUpon>
