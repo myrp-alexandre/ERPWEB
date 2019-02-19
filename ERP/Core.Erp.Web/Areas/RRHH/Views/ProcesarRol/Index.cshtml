@@ -12,6 +12,7 @@
 @using (Html.BeginForm("Index", "ProcesarRol", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">

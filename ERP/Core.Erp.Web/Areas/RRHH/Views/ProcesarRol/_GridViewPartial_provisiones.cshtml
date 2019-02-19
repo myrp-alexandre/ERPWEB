@@ -1,5 +1,4 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_rol_Info
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -110,10 +109,11 @@
             });
             column.PropertiesEdit.DisplayFormatString = "n2";
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber");
         settings.Settings.ShowFooter = true;
 
     });
 }
-@grid.Bind(Model.lst_provisiones).GetHtml()
+@grid.Bind(Model).GetHtml()
