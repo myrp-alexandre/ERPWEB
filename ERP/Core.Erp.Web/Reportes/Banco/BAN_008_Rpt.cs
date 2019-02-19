@@ -56,8 +56,7 @@ namespace Core.Erp.Web.Reportes.Banco
                              {
                                  q.IdEmpresa,
                                  q.IdBanco,
-                                 q.ba_descripcion,
-                                 q.Valor
+                                 q.ba_descripcion
                              } into Resumen
                              select new BAN_008_Info
                              {
