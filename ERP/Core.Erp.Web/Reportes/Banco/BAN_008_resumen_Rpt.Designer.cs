@@ -72,7 +72,7 @@
             this.xrTable8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow6});
-            this.xrTable8.SizeF = new System.Drawing.SizeF(751F, 20.00002F);
+            this.xrTable8.SizeF = new System.Drawing.SizeF(490F, 20.00002F);
             this.xrTable8.StylePriority.UseBorders = false;
             this.xrTable8.StylePriority.UseFont = false;
             this.xrTable8.StylePriority.UsePadding = false;
@@ -94,7 +94,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ba_descripcion]")});
             this.xrTableCell16.Multiline = true;
             this.xrTableCell16.Name = "xrTableCell16";
-            this.xrTableCell16.Weight = 2.6349497914641455D;
+            this.xrTableCell16.Weight = 1.8381493194323664D;
             // 
             // xrTableCell17
             // 
@@ -109,7 +109,7 @@
             this.xrTableCell17.Text = "Valor";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell17.TextFormatString = "{0:n2}";
-            this.xrTableCell17.Weight = 0.90466587803064891D;
+            this.xrTableCell17.Weight = 0.47132029182255952D;
             // 
             // TopMargin
             // 
@@ -172,7 +172,7 @@
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow9});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(750.9999F, 20.00002F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(490F, 20.00002F);
             this.xrTable4.StylePriority.UseBorders = false;
             this.xrTable4.StylePriority.UseFont = false;
             this.xrTable4.StylePriority.UseTextAlignment = false;
@@ -189,20 +189,22 @@
             // xrTableCell28
             // 
             this.xrTableCell28.Name = "xrTableCell28";
+            this.xrTableCell28.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrTableCell28.StylePriority.UsePadding = false;
             this.xrTableCell28.StylePriority.UseTextAlignment = false;
             this.xrTableCell28.Text = "Cuenta bancaria";
             this.xrTableCell28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell28.Weight = 1.7326597588568298D;
+            this.xrTableCell28.Weight = 1.2087087911697736D;
             // 
             // xrTableCell11
             // 
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Text = "Total";
-            this.xrTableCell11.Weight = 0.59487912867199944D;
+            this.xrTableCell11.Weight = 0.30992535033391549D;
             // 
             // ReportFooter
             // 
-            this.ReportFooter.HeightF = 0F;
+            this.ReportFooter.HeightF = 20.83333F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // BAN_008_resumen_Rpt

@@ -50,6 +50,7 @@ namespace Core.Erp.Web.Reportes.Banco
 
                 }
             }
+            this.DataSource = lst_rpt;
             ListaAgrupada = (from q in lst_rpt
                              group q by new
                              {
@@ -66,7 +67,6 @@ namespace Core.Erp.Web.Reportes.Banco
                                  Valor = Resumen.Sum(q => q.Valor)
                              }).ToList();
 
-            this.DataSource = lst_rpt;
             #region Suc / valores
 
             var suc = lst_rpt.Where(q => q.Su_Descripcion != null).FirstOrDefault();
