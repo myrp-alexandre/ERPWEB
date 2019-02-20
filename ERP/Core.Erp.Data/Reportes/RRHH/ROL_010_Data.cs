@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_010_Data
     {
-        public List<ROL_010_Info> get_list(int IdEmpresa, int IdSucursal, int IdDivision, int IdArea, string em_status)
+        public List<ROL_010_Info> get_list(int IdEmpresa, int IdSucursal, int IdDivision, int IdArea, string em_status, string Ubicacion)
         {
             try
             {
@@ -21,12 +21,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                 int IdAreaInicio = IdArea;
                 int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
-
                 
+
                 List<ROL_010_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    if (em_status == "")
+                    if (em_status == "" )
                     {
                         Lista = (from q in Context.VWROL_010
                                  where q.IdEmpresa == IdEmpresa
@@ -56,7 +56,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      de_descripcion = q.de_descripcion,
                                      pe_fechaNacimiento = q.pe_fechaNacimiento,
                                      EstadoCivil = q.EstadoCivil,
-                                     edad = q.edad
+                                     edad = q.edad,
+                                     CodCatalogo_Ubicacion = q.CodCatalogo_Ubicacion,
+                                     UbicacionGeneral = q.UbicacionGeneral
                                  }).ToList();
                     }
                     else
@@ -90,10 +92,14 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      de_descripcion = q.de_descripcion,
                                      pe_fechaNacimiento = q.pe_fechaNacimiento,
                                      EstadoCivil = q.EstadoCivil,
-                                     edad = q.edad
+                                     edad = q.edad,
+                                     CodCatalogo_Ubicacion = q.CodCatalogo_Ubicacion,
+                                     UbicacionGeneral = q.UbicacionGeneral
                                  }).ToList();
                     }                    
                 }
+                if(!string.IsNullOrEmpty(Ubicacion))
+                Lista = Lista.Where(q => q.CodCatalogo_Ubicacion == Ubicacion).ToList();
                 return Lista;
             }
             catch (Exception)

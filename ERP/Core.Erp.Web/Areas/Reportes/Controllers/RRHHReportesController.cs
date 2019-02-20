@@ -303,7 +303,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 ca_descripcion = "Todos"
             });
             ViewBag.lst_EstadoEmpleado = lst_EstadoEmpleado;
-
+            var lst_ubi = bus_catalogo.get_list_x_tipo(44);
+            lst_ubi.Add(new ro_catalogo_Info
+            {
+                CodCatalogo = "",
+                ca_descripcion = "Todos"
+            });
+            ViewBag.lst_ubi = lst_ubi;
         }
 
         public ActionResult ROL_010()
@@ -314,7 +320,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 em_status = "",
                 IdDivision = 0,
-                IdArea = 0
+                IdArea = 0,
+                Ubicacion =""
             };
 
             ROL_010_Rpt report = new ROL_010_Rpt();
@@ -325,6 +332,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             report.p_em_status.Value = model.em_status;
+            report.p_IdUbicacion.Value = model.Ubicacion;
             ViewBag.Report = report;
             cargar_filtros_ROL_010();
             return View(model);
@@ -341,6 +349,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdDivision.Value = model.IdDivision;
             report.p_IdArea.Value = model.IdArea;
             report.p_em_status.Value = model.em_status;
+            report.p_IdUbicacion.Value = model.Ubicacion;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             cargar_filtros_ROL_010();

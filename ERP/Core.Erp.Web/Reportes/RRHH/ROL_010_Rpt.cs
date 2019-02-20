@@ -31,6 +31,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             int IdDivision = p_IdDivision.Value == null ? 0 : Convert.ToInt32(p_IdDivision.Value);
             int IdArea = p_IdArea.Value == null ? 0 : Convert.ToInt32(p_IdArea.Value);
             string em_status = Convert.ToString(p_em_status.Value) == "" ? "" : Convert.ToString(p_em_status.Value);
+            string Ubicacion = Convert.ToString(p_IdUbicacion.Value) == "" ? "" : Convert.ToString(p_IdUbicacion.Value);
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
@@ -39,7 +40,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
 
             ROL_010_Bus bus_rpt = new ROL_010_Bus();
-            List<ROL_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdDivision, IdArea, em_status);
+            List<ROL_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdDivision, IdArea, em_status, Ubicacion);
             this.DataSource = lst_rpt;
 
             lst_rpt_resumen = (from q in lst_rpt
