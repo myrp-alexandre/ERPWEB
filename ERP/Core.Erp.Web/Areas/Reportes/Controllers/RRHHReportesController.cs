@@ -296,11 +296,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         private void cargar_filtros_ROL_010()
         {            
-            var lst_EstadoEmpleado = bus_catalogo.get_list_x_tipo(33);
+            var lst_EstadoEmpleado = bus_catalogo.get_list_x_tipo(25);
             lst_EstadoEmpleado.Add(new ro_catalogo_Info
             {
                 CodCatalogo = "",
-                ca_descripcion = "TODAS"
+                ca_descripcion = "Todos"
             });
             ViewBag.lst_EstadoEmpleado = lst_EstadoEmpleado;
 
@@ -326,6 +326,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa.ToString();
             report.p_em_status.Value = model.em_status;
             ViewBag.Report = report;
+            cargar_filtros_ROL_010();
             return View(model);
         }
 
@@ -342,7 +343,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_em_status.Value = model.em_status;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-
+            cargar_filtros_ROL_010();
             ViewBag.Report = report;
             return View(model);
         }
