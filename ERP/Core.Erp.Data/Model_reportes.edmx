@@ -3380,6 +3380,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_010' no tiene definida ningu
           <Property Name="em_status" Type="varchar" MaxLength="10" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="antiguedad_string" Type="varchar" MaxLength="57" />
+          <Property Name="CodCatalogo_Ubicacion" Type="varchar" MaxLength="10" />
+          <Property Name="UbicacionGeneral" Type="varchar" MaxLength="250" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWROL_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -6075,7 +6077,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
     [VWROL_010].[EstadoEmpleado] AS [EstadoEmpleado], 
     [VWROL_010].[em_status] AS [em_status], 
     [VWROL_010].[em_fechaIngaRol] AS [em_fechaIngaRol], 
-    [VWROL_010].[antiguedad_string] AS [antiguedad_string]
+    [VWROL_010].[antiguedad_string] AS [antiguedad_string], 
+    [VWROL_010].[CodCatalogo_Ubicacion] AS [CodCatalogo_Ubicacion], 
+    [VWROL_010].[UbicacionGeneral] AS [UbicacionGeneral]
     FROM [web].[VWROL_010] AS [VWROL_010]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_011" EntityType="Self.VWROL_011" store:Type="Views" store:Schema="web">
@@ -10981,6 +10985,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
           <Property Name="antiguedad_string" Type="String" MaxLength="57" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogo_Ubicacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UbicacionGeneral" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -14211,6 +14217,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <EntitySetMapping Name="VWROL_010">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_010">
               <MappingFragment StoreEntitySet="VWROL_010">
+                <ScalarProperty Name="UbicacionGeneral" ColumnName="UbicacionGeneral" />
+                <ScalarProperty Name="CodCatalogo_Ubicacion" ColumnName="CodCatalogo_Ubicacion" />
                 <ScalarProperty Name="antiguedad_string" ColumnName="antiguedad_string" />
                 <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
                 <ScalarProperty Name="em_status" ColumnName="em_status" />

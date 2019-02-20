@@ -36,5 +36,7 @@ namespace Core.Erp.Data
         public string em_status { get; set; }
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
         public string antiguedad_string { get; set; }
+        public string CodCatalogo_Ubicacion { get; set; }
+        public string UbicacionGeneral { get; set; }
     }
 }
