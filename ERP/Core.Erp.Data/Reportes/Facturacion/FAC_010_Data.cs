@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_010_Data
     {
-        public List<FAC_010_Info> get_list(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin)
+        public List<FAC_010_Info> get_list(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin, string IdCatalogo_FormaPago)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 List<FAC_010_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPFAC_010(IdEmpresa, IdSucursalIni, IdSucursalFin, fecha_inicio, fecha_fin_)
+                    Lista = (from q in Context.SPFAC_010(IdEmpresa, IdSucursalIni, IdSucursalFin, fecha_inicio, fecha_fin_, IdCatalogo_FormaPago)
                              select new FAC_010_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

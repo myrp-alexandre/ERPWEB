@@ -29,9 +29,10 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fech_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
+            string IdCatalogo_FormaPago = Convert.ToString(p_IdCatalogo_FormaPago.Value) == "" ? "" : Convert.ToString(p_IdCatalogo_FormaPago.Value);
 
             FAC_010_Bus bus_rpt = new FAC_010_Bus();
-            List<FAC_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha_ini, fech_fin);
+            List<FAC_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha_ini, fech_fin, IdCatalogo_FormaPago);
             #region Grupo
 
             Lista = (from q in lst_rpt
