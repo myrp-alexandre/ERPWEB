@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_010_Data
     {
-        public List<ROL_010_Info> get_list(int IdEmpresa, int IdSucursal, int IdDivision, int IdArea)
+        public List<ROL_010_Info> get_list(int IdEmpresa, int IdSucursal, int IdDivision, int IdArea, string em_status)
         {
             try
             {
@@ -33,7 +33,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdDivision >= IdDivisionInicio
                             && q.IdDivision <= IdDivisionFin
                             && q.IdArea >= IdAreaInicio
-                            && q.IdArea <= IdAreaFin                                 
+                            && q.IdArea <= IdAreaFin
+                            && em_status.Contains(q.em_status)
                              select new ROL_010_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
