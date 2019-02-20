@@ -459,7 +459,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult GridViewPartial_provisiones()
         {
-            cargar_combo_detalle();
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
            var model = list_prov.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_provisiones", model);
@@ -510,15 +509,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (info_det != null)
             {
-                if (cta == null)
+                if (cta != null)
                 {
                     info_det.pc_Cuenta = cta.pc_Cuenta;
                     info_det.IdCtaCble = cta.IdCtaCble;
                 }
             }
             if (ModelState.IsValid)
-                list_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-           var model = list_prov.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(v => v.pc_Cuenta == "").ToList();
+                list_prov.UpdateRow_prov(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+           var model = list_prov.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_provisiones", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -592,7 +591,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
-        public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
+        public void UpdateRow_prov(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
             var ls = get_list(IdTransaccionSession);
 
