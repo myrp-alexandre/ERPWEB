@@ -466,7 +466,7 @@
             // xrTableCell35
             // 
             this.xrTableCell35.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_em_status]=0,\'TODOS\' ,[EstadoEmpleado])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_em_status]=\'\',\'TODOS\' ,[EstadoEmpleado])")});
             this.xrTableCell35.Name = "xrTableCell35";
             this.xrTableCell35.Text = "xrTableCell35";
             this.xrTableCell35.Weight = 1.1428574542609673D;
@@ -482,7 +482,7 @@
             // xrTableCell38
             // 
             this.xrTableCell38.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdUbicacion]=0,\'TODOS\' ,[UbicacionGeneral])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdUbicacion]=\'\',\'TODOS\' ,[UbicacionGeneral])")});
             this.xrTableCell38.Name = "xrTableCell38";
             this.xrTableCell38.Text = "xrTableCell38";
             this.xrTableCell38.Weight = 1.1428584351830144D;
