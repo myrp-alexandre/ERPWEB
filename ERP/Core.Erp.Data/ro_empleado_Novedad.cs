@@ -16,10 +16,10 @@ namespace Core.Erp.Data
     {
         public ro_empleado_Novedad()
         {
-            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
             this.ro_EmpleadoNovedadCargaMasiva_det = new HashSet<ro_EmpleadoNovedadCargaMasiva_det>();
             this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
             this.ro_SancionesPorMarcaciones_x_novedad = new HashSet<ro_SancionesPorMarcaciones_x_novedad>();
+            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,7 +40,6 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
     
-        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public virtual ro_jornada ro_jornada { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
@@ -48,5 +47,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_SancionesPorMarcaciones_x_novedad> ro_SancionesPorMarcaciones_x_novedad { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_empleado ro_empleado1 { get; set; }
+        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
     }
 }

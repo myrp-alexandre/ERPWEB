@@ -29,8 +29,8 @@ namespace Core.Erp.Data.RRHH
                                  Valor = q.Valor,
                                  IdRubro = q.IdRubro ,
                                  Secuencia=q.Secuencia ,
-                                 ru_descripcion = q.ru_descripcion
-                                                              
+                                 ru_descripcion = q.ru_descripcion,
+                                 CantidadHoras = q.CantidadHoras
                              }).ToList();
 
                 }
@@ -105,6 +105,7 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = Entity.IdEmpresa,
                         IdNovedad = Entity.IdNovedad,
                         FechaPago = Entity.FechaPago,
+                        CantidadHoras = Entity.CantidadHoras
                     };
                 }
 
@@ -131,8 +132,8 @@ namespace Core.Erp.Data.RRHH
                             FechaPago = item.FechaPago.Date,
                             Secuencia=item.Secuencia,
                             IdRubro=item.IdRubro,
-                            
-                            Valor=item.Valor,
+                            CantidadHoras = item.CantidadHoras,
+                            Valor =item.Valor,
                             Observacion=item.Observacion,
                             EstadoCobro = item.EstadoCobro="PEN",
                             

@@ -79,7 +79,6 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
         public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
-        public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
         public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
@@ -102,7 +101,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_nomina_sin_percebir_sueldo> vwro_nomina_sin_percebir_sueldo { get; set; }
         public DbSet<ro_FormulaHorasRecargo> ro_FormulaHorasRecargo { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
-        public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
         public DbSet<ro_NominasPagosCheques> ro_NominasPagosCheques { get; set; }
         public DbSet<vwRo_rol_detalle_saldo_por_pagar> vwRo_rol_detalle_saldo_por_pagar { get; set; }
         public DbSet<vwro_NominasPagosCheques> vwro_NominasPagosCheques { get; set; }
@@ -145,6 +143,8 @@ namespace Core.Erp.Data
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
+        public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
