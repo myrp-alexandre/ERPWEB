@@ -258,7 +258,8 @@ namespace Core.Erp.Data.RRHH
                         Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                         Valor_maximo_horas_vesp=info.Valor_maximo_horas_vesp,
                         DiasVacaciones = info.DiasVacaciones,
-                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
+                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
+                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion
                     };
                 }
 
@@ -366,7 +367,7 @@ namespace Core.Erp.Data.RRHH
                        
                         DiasVacaciones = info.DiasVacaciones,
                         GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
-
+                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion
                         
                     };
                     Context.ro_empleado.Add(Entity);
@@ -537,6 +538,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.DiasVacaciones = info.DiasVacaciones;
                         Entity.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
                         Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
+                    Entity.CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion;
 
                     var lst_delete = Context.ro_empleado_x_division_x_area.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdEmpleado == info.IdEmpleado);
                     Context.ro_empleado_x_division_x_area.RemoveRange(lst_delete);
@@ -646,8 +648,8 @@ namespace Core.Erp.Data.RRHH
         }
 
         public bool guardarDB_importacion(int IdEmpresa, List<ro_division_Info> Lista_Division, List<ro_area_Info> Lista_Area, List<ro_departamento_Info> Lista_Departamento, List<ro_cargo_Info> Lista_Cargo,
-                                        List<ro_rubro_tipo_Info> Lista_Rubro, List<ro_horario_Info> Lista_Horario, List<ro_turno_Info> Lista_Turno, List<ro_empleado_Info> Lista_Empleado, List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados, List<ro_nomina_tipo_Info> Lista_TipoNomina, List<ro_contrato_Info> Lista_Contrato,
-                                        List<ro_cargaFamiliar_Info> Lista_CargasFamiliares, List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas, List<ro_historico_vacaciones_x_empleado_Info> Lista_VacacionesList)
+        List<ro_rubro_tipo_Info> Lista_Rubro, List<ro_horario_Info> Lista_Horario, List<ro_turno_Info> Lista_Turno, List<ro_empleado_Info> Lista_Empleado, List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados, List<ro_nomina_tipo_Info> Lista_TipoNomina, List<ro_contrato_Info> Lista_Contrato,
+        List<ro_cargaFamiliar_Info> Lista_CargasFamiliares, List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas, List<ro_historico_vacaciones_x_empleado_Info> Lista_VacacionesList)
         {
             Entities_rrhh Context_rrhh = new Entities_rrhh();
             Entities_general Context_general = new Entities_general();

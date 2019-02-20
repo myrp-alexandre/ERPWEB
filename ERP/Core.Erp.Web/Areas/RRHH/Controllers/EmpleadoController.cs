@@ -514,7 +514,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_tipo_cuenta = bus_catalogorrhh.get_list_x_tipo(9);
                 ViewBag.lst_tipo_empleado = bus_catalogorrhh.get_list_x_tipo(8);
                 ViewBag.lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-
+                ViewBag.lst_cat = bus_catalogorrhh.get_list_x_tipo(44);
 
             }
             catch (Exception)
