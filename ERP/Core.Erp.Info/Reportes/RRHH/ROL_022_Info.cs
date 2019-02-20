@@ -32,5 +32,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<System.DateTime> FechaFin { get; set; }
         public string NomDivision { get; set; }
         public string NomArea { get; set; }
+        public string IdRubro { get; set; }
+
     }
 }
