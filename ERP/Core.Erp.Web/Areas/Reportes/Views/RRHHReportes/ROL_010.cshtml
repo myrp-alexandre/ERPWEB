@@ -30,7 +30,7 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
                             @Html.Partial("_CmbSucursal_reportes_RRHH", Model.IdSucursal)
@@ -53,6 +53,13 @@
                             <label for="IdCatalogo">Estado</label>
                             @Html.DropDownListFor(q => q.em_status, new SelectList(ViewBag.lst_EstadoEmpleado, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogo" })
                             @Html.ValidationMessageFor(q => q.em_status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Ubicacion">Ubicación</label>
+                            @Html.DropDownListFor(q => q.Ubicacion, new SelectList(ViewBag.lst_ubi, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogo" })
+                            @Html.ValidationMessageFor(q => q.Ubicacion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

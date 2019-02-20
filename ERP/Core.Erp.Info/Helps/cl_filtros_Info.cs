@@ -48,6 +48,7 @@ namespace Core.Erp.Info.Helps
         public int IdDepartamento { get; set; }
         public int IdProceso { get; set; }
         public string em_status { get; set; }
+        public string Ubicacion { get; set; }
         #endregion
 
         #region filtros de Presupuesto
