@@ -2,6 +2,7 @@
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
@@ -20,6 +21,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         fa_factura_Bus bus_factura = new fa_factura_Bus();
+        fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
 
@@ -120,6 +122,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 Su_Descripcion = "Todas"
             });
             ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);
+            lst_formapago.Add(new fa_catalogo_Info
+            {
+                IdCatalogo = "",
+                Nombre = "TODAS"
+            });
+
+            ViewBag.lst_formapago = lst_formapago;
 
         }
         private void cargar_combos(cl_filtros_facturacion_Info model)
@@ -411,15 +422,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCatalogo_FormaPago = ""
             };
 
+            
             cargar_FAC010(model);
             FAC_010_Rpt report = new FAC_010_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdCatalogo_FormaPago.Value = model.IdCatalogo_FormaPago;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -434,6 +448,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdCatalogo_FormaPago.Value = model.IdCatalogo_FormaPago;
 
             cargar_FAC010(model);
 

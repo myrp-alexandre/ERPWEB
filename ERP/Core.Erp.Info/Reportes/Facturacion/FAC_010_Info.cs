@@ -29,5 +29,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public Nullable<decimal> SubtotalSinIVAConDscto { get; set; }
         public Nullable<decimal> ValorIVA { get; set; }
         public Nullable<decimal> Total { get; set; }
+
     }
 }
