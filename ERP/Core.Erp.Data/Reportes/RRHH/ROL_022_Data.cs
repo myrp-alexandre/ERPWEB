@@ -69,12 +69,20 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  NomArea = q.NomArea,
                                  NomDivision = q.NomDivision,
                                  NomNomina = q.NomNomina,
-                                 NomNominaTipo = q.NomNominaTipo
-
+                                 NomNominaTipo = q.NomNominaTipo,
+                                IdRubro= q.IdRubro
+                                 
                              }).ToList();
 
 
 
+                }
+                foreach (var item in Lista)
+                {
+                    if(item.IdRubro== "134")
+                    {
+
+                    }
                 }
                 return Lista;
             }
