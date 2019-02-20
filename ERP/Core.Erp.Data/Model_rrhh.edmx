@@ -437,6 +437,7 @@
           <Property Name="FechaPago" Type="datetime" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="EstadoCobro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantidadHoras" Type="float" />
         </EntityType>
         <EntityType Name="ro_empleado_proyeccion_gastos">
           <Key>
@@ -1831,6 +1832,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_novedad_det' no tien
           <Property Name="EstadoCobro" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rub_codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantidadHoras" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Empleado_Novedades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -5256,7 +5258,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_empleado_novedad_det].[Valor] AS [Valor], 
     [vwro_empleado_novedad_det].[EstadoCobro] AS [EstadoCobro], 
     [vwro_empleado_novedad_det].[ru_descripcion] AS [ru_descripcion], 
-    [vwro_empleado_novedad_det].[rub_codigo] AS [rub_codigo]
+    [vwro_empleado_novedad_det].[rub_codigo] AS [rub_codigo], 
+    [vwro_empleado_novedad_det].[CantidadHoras] AS [CantidadHoras]
     FROM [dbo].[vwro_empleado_novedad_det] AS [vwro_empleado_novedad_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_Empleado_Novedades" EntityType="Self.vwro_Empleado_Novedades" store:Type="Views" store:Schema="dbo">
@@ -8087,7 +8090,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
             <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
           </AssociationSet>
-          <EntitySet Name="ro_empleado_novedad_det" EntityType="Model_rrhh.ro_empleado_novedad_det" />
           <EntitySet Name="vwro_Empleado_Novedades" EntityType="Model_rrhh.vwro_Empleado_Novedades" />
           <AssociationSet Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
             <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
@@ -8182,7 +8184,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySet Name="vwro_nomina_sin_percebir_sueldo" EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" />
           <EntitySet Name="ro_FormulaHorasRecargo" EntityType="Model_rrhh.ro_FormulaHorasRecargo" />
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
-          <EntitySet Name="vwro_empleado_novedad_det" EntityType="Model_rrhh.vwro_empleado_novedad_det" />
           <FunctionImport Name="spRo_procesa_Rol_bono">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
@@ -8287,10 +8288,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySet Name="vwro_empleado_x_jornada" EntityType="Model_rrhh.vwro_empleado_x_jornada" />
           <EntitySet Name="ro_empleado_Novedad" EntityType="Model_rrhh.ro_empleado_Novedad" />
           <EntitySet Name="vwro_empleado_Novedad" EntityType="Model_rrhh.vwro_empleado_Novedad" />
-          <AssociationSet Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad">
-            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
-            <End Role="ro_empleado_novedad_det" EntitySet="ro_empleado_novedad_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_Novedad_ro_jornada" Association="Model_rrhh.FK_ro_empleado_Novedad_ro_jornada">
             <End Role="ro_jornada" EntitySet="ro_jornada" />
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
@@ -8332,10 +8329,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <AssociationSet Name="FK_ro_Config_Param_contable_ro_rubro_tipo" Association="Model_rrhh.FK_ro_Config_Param_contable_ro_rubro_tipo">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_Config_Param_contable" EntitySet="ro_Config_Param_contable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_novedad_det_ro_rubro_tipo" Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_empleado_novedad_det" EntitySet="ro_empleado_novedad_det" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_CuentaContable_ro_rubro_tipo" Association="Model_rrhh.FK_ro_empleado_x_CuentaContable_ro_rubro_tipo">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
@@ -8637,6 +8630,16 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
+          <EntitySet Name="ro_empleado_novedad_det" EntityType="Model_rrhh.ro_empleado_novedad_det" />
+          <EntitySet Name="vwro_empleado_novedad_det" EntityType="Model_rrhh.vwro_empleado_novedad_det" />
+          <AssociationSet Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad">
+            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
+            <End Role="ro_empleado_novedad_det" EntitySet="ro_empleado_novedad_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_novedad_det_ro_rubro_tipo" Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_empleado_novedad_det" EntitySet="ro_empleado_novedad_det" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8897,23 +8900,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ro_empleado_novedad_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_novedad_det" ToRole="ro_empleado_Novedad" />
-          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_empleado_novedad_det" ToRole="ro_rubro_tipo" />
-        </EntityType>
         <EntityType Name="vwro_Empleado_Novedades">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -9587,28 +9573,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdLiquidacion" Type="Int32" />
           <Property Name="Estado_liquidacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vwro_empleado_novedad_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="FechaPago" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="EstadoCobro" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="rub_codigo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ro_NominasPagosCheques">
           <Key>
@@ -10525,7 +10489,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_empleado_novedad_det" />
           <NavigationProperty Name="ro_jornada" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_jornada" FromRole="ro_empleado_Novedad" ToRole="ro_jornada" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" FromRole="ro_empleado_Novedad" ToRole="ro_Nomina_Tipoliqui" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
@@ -10533,6 +10496,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_SancionesPorMarcaciones_x_novedad" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_SancionesPorMarcaciones_x_novedad" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_empleado_novedad_det" />
         </EntityType>
         <EntityType Name="vwro_empleado_Novedad">
           <Key>
@@ -10564,20 +10528,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdSucursal" Type="Int32" />
         </EntityType>
-        <Association Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad">
-          <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_empleado_novedad_det" Role="ro_empleado_novedad_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado_Novedad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNovedad" />
-            </Principal>
-            <Dependent Role="ro_empleado_novedad_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNovedad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_empleado_Novedad_ro_jornada">
           <End Type="Model_rrhh.ro_jornada" Role="ro_jornada" Multiplicity="0..1" />
           <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="*" />
@@ -10809,7 +10759,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_Acta_Finiquito_Detalle" Relationship="Model_rrhh.FK_ro_Acta_Finiquito_Detalle_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_Acta_Finiquito_Detalle" />
           <NavigationProperty Name="ro_catalogo" Relationship="Model_rrhh.FK_ro_rubro_tipo_ro_catalogo" FromRole="ro_rubro_tipo" ToRole="ro_catalogo" />
           <NavigationProperty Name="ro_Config_Param_contable" Relationship="Model_rrhh.FK_ro_Config_Param_contable_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_Config_Param_contable" />
-          <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_novedad_det" />
           <NavigationProperty Name="ro_empleado_x_CuentaContable" Relationship="Model_rrhh.FK_ro_empleado_x_CuentaContable_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_CuentaContable" />
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_ro_rubro" />
           <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_empleado_x_rubro_acumulado_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_rubro_acumulado" />
@@ -10834,6 +10783,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_rubros_calculados14" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
           <NavigationProperty Name="ro_rubros_calculados15" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
           <NavigationProperty Name="ro_rubros_calculados16" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_novedad_det" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_Detalle_ro_rubro_tipo">
           <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
@@ -10870,20 +10820,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               <PropertyRef Name="IdRubro" />
             </Principal>
             <Dependent Role="ro_Config_Param_contable">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_empleado_novedad_det_ro_rubro_tipo">
-          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="0..1" />
-          <End Type="Model_rrhh.ro_empleado_novedad_det" Role="ro_empleado_novedad_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_empleado_novedad_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdRubro" />
             </Dependent>
@@ -12323,6 +12259,75 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="Valor_hora_control_salida" Type="Double" />
           <Property Name="CodCatalogo_Ubicacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ro_empleado_novedad_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CantidadHoras" Type="Double" />
+          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_novedad_det" ToRole="ro_empleado_Novedad" />
+          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_empleado_novedad_det" ToRole="ro_rubro_tipo" />
+        </EntityType>
+        <EntityType Name="vwro_empleado_novedad_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="EstadoCobro" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="rub_codigo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CantidadHoras" Type="Double" />
+        </EntityType>
+        <Association Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad">
+          <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_novedad_det" Role="ro_empleado_novedad_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado_Novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Principal>
+            <Dependent Role="ro_empleado_novedad_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_novedad_det_ro_rubro_tipo">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="0..1" />
+          <End Type="Model_rrhh.ro_empleado_novedad_det" Role="ro_empleado_novedad_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_empleado_novedad_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13363,20 +13368,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado_novedad_det">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_novedad_det">
-              <MappingFragment StoreEntitySet="ro_empleado_novedad_det">
-                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwro_Empleado_Novedades">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_Empleado_Novedades">
               <MappingFragment StoreEntitySet="vwro_Empleado_Novedades">
@@ -13817,22 +13808,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwro_empleado_novedad_det">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_novedad_det">
-              <MappingFragment StoreEntitySet="vwro_empleado_novedad_det">
-                <ScalarProperty Name="rub_codigo" ColumnName="rub_codigo" />
-                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
-                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -14859,6 +14834,38 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado_novedad_det">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_novedad_det">
+              <MappingFragment StoreEntitySet="ro_empleado_novedad_det">
+                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
+                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_empleado_novedad_det">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_novedad_det">
+              <MappingFragment StoreEntitySet="vwro_empleado_novedad_det">
+                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
+                <ScalarProperty Name="rub_codigo" ColumnName="rub_codigo" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

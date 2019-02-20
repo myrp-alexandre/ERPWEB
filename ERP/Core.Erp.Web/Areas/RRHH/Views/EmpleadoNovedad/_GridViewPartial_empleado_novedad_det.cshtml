@@ -61,9 +61,22 @@
         });
         settings.Columns.Add(column =>
         {
+            column.FieldName = "CantidadHoras";
+            column.Caption = "Cantidad Horas";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "FechaPago";
             column.Caption = "Fecha pago";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
@@ -75,7 +88,7 @@
         {
             column.FieldName = "Valor";
             column.Caption = "$Valor";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -83,7 +96,7 @@
                 sp.Width = Unit.Percentage(100);
 
             });
-        });
+        });        
         settings.Columns.Add(column =>
         {
             column.FieldName = "Observacion";
