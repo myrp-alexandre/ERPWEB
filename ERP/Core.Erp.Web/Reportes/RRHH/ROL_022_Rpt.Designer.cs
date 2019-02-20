@@ -572,6 +572,7 @@
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(466.5417F, 126.0417F);
+            this.xrPivotGrid1.FieldValueDisplayText += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.PivotFieldDisplayTextEventArgs>(this.xrPivotGrid1_FieldValueDisplayText);
             // 
             // xrPivotGridField44
             // 

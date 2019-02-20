@@ -108,5 +108,16 @@ namespace Core.Erp.Web.Reportes.RRHH
                 e.Brick = lb;
             }
         }
+
+        private void xrPivotGrid1_FieldValueDisplayText(object sender, DevExpress.XtraReports.UI.PivotGrid.PivotFieldDisplayTextEventArgs e)
+        {
+            if (e.ValueType == DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal)
+            {
+                if (e.IsColumn)
+                    e.DisplayText = "Total";
+                else
+                    e.DisplayText = "Total";
+            }
+        }
     }
 }
