@@ -77,13 +77,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 
 
                 }
-                foreach (var item in Lista)
-                {
-                    if(item.IdRubro== "134")
-                    {
-
-                    }
-                }
+                
                 return Lista;
             }
             catch (Exception)
