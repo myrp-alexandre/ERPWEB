@@ -31,6 +31,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         ct_cbtecble_det_lst list_det = new ct_cbtecble_det_lst();
         ct_cbtecble_lst_prov list_prov = new ct_cbtecble_lst_prov();
+        ct_cbtecble_tipo_Bus bus_tipo = new ct_cbtecble_tipo_Bus();
+        ro_Parametros_Bus bus_parametro = new ro_Parametros_Bus();
         #endregion
         #region Metodos ComboBox bajo demanda xueldo-prov
 
@@ -282,7 +284,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info.lst_sueldo_x_pagar = list_det.get_list_cta(info.IdTransaccionSession);
                 info.lst_provisiones = list_prov.get_list(info.IdTransaccionSession);
                 info.UsuarioCierre = Session["IdUsuario"].ToString();
-
+                
                 foreach (var item in info.lst_sueldo_x_pagar)
                 {
                     item.IdCtaCble = item.IdCtaCble.Trim();
@@ -307,6 +309,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                 }
                 info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+              //  var param = bus_parametro.get_info(info.IdEmpresa);
+                
                     if (!bus_rol.ContabilizarPeriodo(info))
                     {
                         cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
