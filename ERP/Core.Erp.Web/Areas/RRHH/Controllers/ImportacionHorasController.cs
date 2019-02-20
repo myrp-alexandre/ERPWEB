@@ -362,7 +362,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     info.ValorHora = Convert.ToDouble(empleado.Valor_hora_adicionales);
 
                                 horas_mat = info.NumHoras;
-                                info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
+                                info.Valor = Convert.ToDouble(info.ValorHora * info.NumHoras);
                                 info.Secuencia = lista_novedades.Count() + 1;
                                 if (jornada != null && jornada != "")
                                     info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;
