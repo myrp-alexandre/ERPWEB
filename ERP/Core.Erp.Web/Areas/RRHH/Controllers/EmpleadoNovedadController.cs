@@ -157,9 +157,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_novedad_Info model)
         {
-
-
-
             model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(model.IdTransaccionSession);
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
@@ -396,6 +393,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_novedad_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdNovedad = info_det.IdNovedad;
             edited_info.IdRubro = info_det.IdRubro;
+            edited_info.CantidadHoras = info_det.CantidadHoras;
             edited_info.Valor = info_det.Valor;
             edited_info.Observacion = info_det.Observacion;
             edited_info.ru_descripcion = info_rubro.ru_descripcion;

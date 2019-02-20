@@ -111,7 +111,8 @@ namespace Core.Erp.Data.RRHH
                             Valor = item.Valor,
                             Observacion = item.Observacion,
                             EstadoCobro  = "PEN",
-                            Secuencia=1
+                            Secuencia=1,
+                            CantidadHoras=item.CantidadHoras
                         };
                         Contex.ro_empleado_novedad_det.Add(Entity_det);
 

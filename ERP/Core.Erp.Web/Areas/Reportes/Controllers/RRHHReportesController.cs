@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using Core.Erp.Info.Reportes.RRHH;
 using Core.Erp.Bus.Reportes.RRHH;
 using Core.Erp.Web.Areas.Reportes.Views.RRHHReportes;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -25,6 +26,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         ro_nomina_tipo_Bus bus_tiponomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodo_x_nominas = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
+        ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
 
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
@@ -292,14 +294,34 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        private void cargar_filtros_ROL_010()
+        {            
+            var lst_EstadoEmpleado = bus_catalogo.get_list_x_tipo(25);
+            lst_EstadoEmpleado.Add(new ro_catalogo_Info
+            {
+                CodCatalogo = "",
+                ca_descripcion = "Todos"
+            });
+            ViewBag.lst_EstadoEmpleado = lst_EstadoEmpleado;
+            var lst_ubi = bus_catalogo.get_list_x_tipo(44);
+            lst_ubi.Add(new ro_catalogo_Info
+            {
+                CodCatalogo = "",
+                ca_descripcion = "Todos"
+            });
+            ViewBag.lst_ubi = lst_ubi;
+        }
+
         public ActionResult ROL_010()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                em_status = "",
                 IdDivision = 0,
-                IdArea = 0
+                IdArea = 0,
+                Ubicacion =""
             };
 
             ROL_010_Rpt report = new ROL_010_Rpt();
@@ -309,7 +331,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdArea.Value = model.IdArea;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.p_em_status.Value = model.em_status;
+            report.p_IdUbicacion.Value = model.Ubicacion;
             ViewBag.Report = report;
+            cargar_filtros_ROL_010();
             return View(model);
         }
 
@@ -323,9 +348,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdDivision.Value = model.IdDivision;
             report.p_IdArea.Value = model.IdArea;
+            report.p_em_status.Value = model.em_status;
+            report.p_IdUbicacion.Value = model.Ubicacion;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-
+            cargar_filtros_ROL_010();
             ViewBag.Report = report;
             return View(model);
         }

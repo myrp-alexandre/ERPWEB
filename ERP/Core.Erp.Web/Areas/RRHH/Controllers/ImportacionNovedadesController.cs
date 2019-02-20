@@ -241,6 +241,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 ro_EmpleadoNovedadCargaMasiva_det_Info info = new ro_EmpleadoNovedadCargaMasiva_det_Info
                                 {
                                     Valor = Convert.ToDouble(reader.GetValue(3)),
+                                    CantidadHoras = Convert.ToDouble(reader.GetValue(4)),
+
                                     pe_cedulaRuc = cedua,
                                     pe_apellido = empleado.Empleado,
                                     em_codigo = empleado.em_codigo,

@@ -104,6 +104,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<double> Valor_hora_adicionales { get; set; }
         public Nullable<double> Valor_hora_control_salida { get; set; }
 
+        public string CodCatalogo_Ubicacion { get; set; }
 
         public bool GozaMasDeQuinceDiasVaciones { get; set; }
         public double DiasVacaciones { get; set; }

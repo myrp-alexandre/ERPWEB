@@ -24,6 +24,8 @@ namespace Core.Erp.Info.RRHH
         public string IdCalendario { get; set; }
         public Nullable<double> Num_Horas { get; set; }
         public Nullable<int> IdPeriodo { get; set; }
+        public Nullable<double> CantidadHoras { get; set; }
+
 
         public string rub_tipo { get; set; }
         public string ru_descripcion { get; set; }

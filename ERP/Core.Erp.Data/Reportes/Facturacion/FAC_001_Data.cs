@@ -43,13 +43,13 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 {
                     Lista = (from q in Context.VWFAC_001
                              where q.IdEmpresa ==IdEmpresa
-                             && q.IdSucursal >=IdSucursal_Ini  && q.IdSucursal <= IdSucursal_Fin
-                             &&  q.IdVendedor>= IdVendedor_Ini && q.IdVendedor <= IdVendedor_Fin
-                             &&   q.IdCliente>= IdCliente_Ini && q.IdCliente <= IdCliente_Fin
-                             && q.IdContacto>= IdCliente_contacto_Ini && q.IdContacto <= IdCliente_contacto_Fin
-                             &&  q.IdProducto >= IdProducto_Ini && q.IdProducto <= IdProducto_Fin
-                             &&  q.IdProducto_padre>= IdProducto_padre_Ini && q.IdProducto_padre <= IdProducto_padre_Fin
-                             && q.vt_fecha >= fecha_ini && q.vt_fecha <= fecha_fin
+                             && IdSucursal_Ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_Fin
+                             && IdVendedor_Ini <= q.IdVendedor && q.IdVendedor <= IdVendedor_Fin
+                             && IdCliente_Ini <= q.IdCliente && q.IdCliente <= IdCliente_Fin
+                             && IdCliente_contacto_Ini <= q.IdContacto && q.IdContacto <= IdCliente_contacto_Fin
+                             && IdProducto_Ini <= q.IdProducto && q.IdProducto <= IdProducto_Fin
+                             && IdProducto_padre_Ini <= q.IdProducto_padre && q.IdProducto_padre <= IdProducto_padre_Fin
+                             && fecha_ini <= q.vt_fecha && q.vt_fecha <= fecha_fin
                              select new FAC_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

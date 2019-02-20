@@ -87,10 +87,10 @@
             success: function (data) {
                 if (data.GiradoA.length > 0) {
 
-                    var ob = $("#cb_Cheque").Val();
+                    var ob = $("#cb_Cheque").val();
 
-                    $("#cb_giradoA").val(data.GiradoA);
-                    $("#cb_Observacion").val("CH# "+ob+" - "+ data.Observacion);
+                    $("#cb_giradoA").val(data.GiradoA);                    
+                    $("#cb_Observacion").val("CH# " + ob + " - " + data.Observacion);
                 }
             },
             error: function (error) {
