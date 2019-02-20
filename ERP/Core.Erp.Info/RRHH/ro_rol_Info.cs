@@ -10,6 +10,7 @@ namespace Core.Erp.Info.RRHH
 {
    public class ro_rol_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo nómina es obligatorio")]
         public int IdNomina_Tipo { get; set; }
@@ -51,11 +52,11 @@ namespace Core.Erp.Info.RRHH
         public string Su_Descripcion { get; set; }
 
         public string EstadoRol { get; set; }
-        //public ro_rol_Info()
-        //{
-        //    lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();
-        //    lst_provisiones = new List<ct_cbtecble_det_Info>();
-        //}
+        public ro_rol_Info()
+        {
+            lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();
+            lst_provisiones = new List<ct_cbtecble_det_Info>();
+        }
 
     }
 }

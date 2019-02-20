@@ -48,23 +48,25 @@ namespace Core.Erp.Web.Reportes.Banco
                 {
                     lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, item.IdBanco));
 
-                    ListaAgrupada = (from q in lst_rpt
-                                     group q by new
-                                     {
-                                         q.IdEmpresa,
-                                         q.ba_descripcion,
-                                         q.Valor
-                                     } into Resumen
-                                     select new BAN_008_Info
-                                     {
-                                         IdEmpresa = Resumen.Key.IdEmpresa,
-                                         ba_descripcion = Resumen.Key.ba_descripcion,
-                                         Valor = Resumen.Sum(q => q.Valor)
-                                     }).ToList();
                 }
             }
-
             this.DataSource = lst_rpt;
+            ListaAgrupada = (from q in lst_rpt
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdBanco,
+                                 q.ba_descripcion
+                             } into Resumen
+                             select new BAN_008_Info
+                             {
+                                 IdEmpresa = Resumen.Key.IdEmpresa,
+                                 IdBanco = Resumen.Key.IdBanco,
+                                 ba_descripcion = Resumen.Key.ba_descripcion,
+                                 Valor = Resumen.Sum(q => q.Valor)
+                             }).ToList();
+
+            #region Suc / valores
 
             var suc = lst_rpt.Where(q => q.Su_Descripcion != null).FirstOrDefault();
             if(suc!=null)
@@ -87,6 +89,7 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_ND.Text = ND.ToString();
             lbl_DP.Text = DP.ToString();
             lbl_CH.Text = CH.ToString();
+            #endregion
         }
 
         private void subreport_resumen_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

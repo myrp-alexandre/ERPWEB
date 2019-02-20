@@ -435,7 +435,7 @@
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.Text = "xrTableCell37";
             this.xrTableCell37.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell37.Weight = 2.8464413870840346D;
+            this.xrTableCell37.Weight = 2.9194261478130521D;
             // 
             // xrTableCell40
             // 
@@ -443,7 +443,7 @@
             this.xrTableCell40.Name = "xrTableCell40";
             this.xrTableCell40.StylePriority.UseFont = false;
             this.xrTableCell40.Text = "Hasta:";
-            this.xrTableCell40.Weight = 1.4597130466482575D;
+            this.xrTableCell40.Weight = 1.3867282859192402D;
             // 
             // xrTableCell42
             // 
@@ -748,7 +748,7 @@
             this.subreport_resumen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.subreport_resumen.Name = "subreport_resumen";
             this.subreport_resumen.ReportSource = new Core.Erp.Web.Reportes.Banco.BAN_008_resumen_Rpt();
-            this.subreport_resumen.SizeF = new System.Drawing.SizeF(345F, 23F);
+            this.subreport_resumen.SizeF = new System.Drawing.SizeF(100F, 20F);
             this.subreport_resumen.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.subreport_resumen_BeforePrint);
             // 
             // xrTable3
@@ -878,7 +878,7 @@
             // 
             this.xrTableCell23.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Valor])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([ValorAbsoluto])")});
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.xrTableCell23.StylePriority.UseBorders = false;
