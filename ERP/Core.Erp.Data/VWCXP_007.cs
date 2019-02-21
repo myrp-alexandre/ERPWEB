@@ -54,5 +54,7 @@ namespace Core.Erp.Data
         public string descripcion_cod_sri { get; set; }
         public string re_tipoRet { get; set; }
         public string Num_Autorizacion_OG { get; set; }
+        public int IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }
