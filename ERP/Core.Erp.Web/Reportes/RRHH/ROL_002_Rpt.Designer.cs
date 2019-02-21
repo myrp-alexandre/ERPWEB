@@ -42,7 +42,6 @@
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.SubReporte_RolPago = new DevExpress.XtraReports.UI.XRSubreport();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
-            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -74,7 +73,7 @@
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 20F);
             this.xrLabel1.Text = "xrLabel1";
             this.xrLabel1.Visible = false;
             // 
@@ -125,27 +124,22 @@
             this.SubReporte_RolPago});
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("NombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader1.HeightF = 43F;
+            this.GroupHeader1.HeightF = 39.99999F;
             this.GroupHeader1.Name = "GroupHeader1";
-            this.GroupHeader1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
+            this.GroupHeader1.PageBreak = DevExpress.XtraReports.UI.PageBreak.AfterBand;
             // 
             // SubReporte_RolPago
             // 
-            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 23F);
+            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 20F);
             this.SubReporte_RolPago.Name = "SubReporte_RolPago";
             this.SubReporte_RolPago.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
-            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(777.0001F, 20F);
+            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(777F, 20F);
             this.SubReporte_RolPago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RolPago_BeforePrint);
             // 
             // PageHeader
             // 
             this.PageHeader.HeightF = 0F;
             this.PageHeader.Name = "PageHeader";
-            // 
-            // ReportFooter
-            // 
-            this.ReportFooter.HeightF = 113.9583F;
-            this.ReportFooter.Name = "ReportFooter";
             // 
             // ROL_002_Rpt
             // 
@@ -154,15 +148,15 @@
             this.TopMargin,
             this.BottomMargin,
             this.GroupHeader1,
-            this.PageHeader,
-            this.ReportFooter});
+            this.PageHeader});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
+            this.Landscape = true;
             this.Margins = new System.Drawing.Printing.Margins(25, 25, 25, 25);
-            this.PageHeight = 1169;
+            this.PageHeight = 583;
             this.PageWidth = 827;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A5;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdNomina,
@@ -191,6 +185,5 @@
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
-        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
     }
 }
