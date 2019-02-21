@@ -47,7 +47,8 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                                  SaldoDebitosCreditosNaturaleza = q.SaldoDebitosCreditosNaturaleza,
                                  SaldoDebitosNaturaleza = q.SaldoDebitosNaturaleza,
                                  SaldoFinalNaturaleza = q.SaldoFinalNaturaleza,
-                                 SaldoInicialNaturaleza = q.SaldoInicialNaturaleza
+                                 SaldoInicialNaturaleza = q.SaldoInicialNaturaleza,
+                                 Su_Descripcion = ""
                              }).ToList();
                 }
                 return Lista;

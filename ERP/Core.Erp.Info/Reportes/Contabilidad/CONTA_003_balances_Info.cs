@@ -35,5 +35,7 @@ namespace Core.Erp.Info.Reportes.Contabilidad
         public double SaldoDebitosNaturaleza { get; set; }
         public double SaldoCreditosNaturaleza { get; set; }
         public double SaldoFinalNaturaleza { get; set; }
+
+        public string Su_Descripcion { get; set; }
     }
 }
