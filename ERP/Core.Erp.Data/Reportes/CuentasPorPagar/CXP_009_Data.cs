@@ -51,7 +51,11 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  serie = q.serie,
                                  NumRetencion = q.NumRetencion,
                                  co_descripcion = q.co_descripcion,
-                                 IdCtaCble = q.IdCtaCble
+                                 IdCtaCble = q.IdCtaCble,
+                                 co_observacion = q.co_observacion,
+                                 IdCbteCbleRet = q.IdCbteCbleRet,
+                                 IdSucursal = q.IdSucursal,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
 

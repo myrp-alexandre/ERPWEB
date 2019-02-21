@@ -1535,6 +1535,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_009' no tiene definida ningu
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
           <Property Name="IdCbteCbleRet" Type="numeric" Precision="18" Scale="0" />
           <Property Name="co_observacion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4961,7 +4963,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
     [VWCXP_009].[co_descripcion] AS [co_descripcion], 
     [VWCXP_009].[IdCtaCble] AS [IdCtaCble], 
     [VWCXP_009].[IdCbteCbleRet] AS [IdCbteCbleRet], 
-    [VWCXP_009].[co_observacion] AS [co_observacion]
+    [VWCXP_009].[co_observacion] AS [co_observacion], 
+    [VWCXP_009].[IdSucursal] AS [IdSucursal], 
+    [VWCXP_009].[Su_Descripcion] AS [Su_Descripcion]
     FROM [web].[VWCXP_009] AS [VWCXP_009]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXP_011" EntityType="Self.VWCXP_011" store:Type="Views" store:Schema="web">
@@ -10973,6 +10977,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCbteCbleRet" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="co_observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -14198,6 +14204,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <EntitySetMapping Name="VWCXP_009">
             <EntityTypeMapping TypeName="Model_reportes.VWCXP_009">
               <MappingFragment StoreEntitySet="VWCXP_009">
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="co_observacion" ColumnName="co_observacion" />
                 <ScalarProperty Name="IdCbteCbleRet" ColumnName="IdCbteCbleRet" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />

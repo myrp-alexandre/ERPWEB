@@ -45,5 +45,7 @@ namespace Core.Erp.Data
         public string IdCtaCble { get; set; }
         public Nullable<decimal> IdCbteCbleRet { get; set; }
         public string co_observacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }
