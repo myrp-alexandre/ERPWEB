@@ -9,16 +9,19 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_007_Data
     {
-        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_agrupado)
+        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_agrupado, int IdSucursal)
         {
             try
             {
                 List<CXP_007_Info> Lista;
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
+
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPCXP_007(IdEmpresa, fecha_ini, fecha_fin, mostrar_agrupado)
+                    Lista = (from q in Context.SPCXP_007(IdEmpresa, fecha_ini, fecha_fin, mostrar_agrupado, IdSucursalIni, IdSucursalFin)
                              select new CXP_007_Info
                              {
                                  IdRow = q.IdRow,
@@ -60,7 +63,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  Documento = q.Documento,
                                  descripcion_cod_sri = q.descripcion_cod_sri,
                                  re_tipoRet = q.re_tipoRet,
-                                 Num_Autorizacion_OG = q.Num_Autorizacion_OG
+                                 Num_Autorizacion_OG = q.Num_Autorizacion_OG,
+                                 IdSucursal = q.IdSucursal,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;
