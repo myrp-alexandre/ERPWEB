@@ -30,11 +30,9 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             decimal IdCliente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
             DateTime Fecha_ini = string.IsNullOrEmpty(p_Fecha_ini.Value.ToString()) ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(p_Fecha_ini.Value).Date;
-            DateTime Fecha_fin = string.IsNullOrEmpty(p_Fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_Fecha_fin.Value).Date;
-            bool MostrarSaldo0 = string.IsNullOrEmpty(p_MostrarSaldo0.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarSaldo0.Value);
-            bool MostrarContactos = string.IsNullOrEmpty(p_MostrarContactos.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarContactos.Value);
+            DateTime Fecha_fin = string.IsNullOrEmpty(p_Fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_Fecha_fin.Value).Date;           
             FAC_005_Bus bus_rpt = new FAC_005_Bus();
-            List<FAC_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal,IdCliente, Fecha_ini, Fecha_fin, MostrarSaldo0, MostrarContactos, ref lst_resumen);
+            List<FAC_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal,IdCliente, Fecha_ini, Fecha_fin, ref lst_resumen);
             this.DataSource = lst_rpt;
         }
 
@@ -46,10 +44,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
         private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            if ((string.IsNullOrEmpty(p_MostrarContactos.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarContactos.Value)) == false)
-            {
-                e.Cancel = true;
-            }
+
         }
     }
 }

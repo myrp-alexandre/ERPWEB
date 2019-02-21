@@ -321,8 +321,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
-            report.p_MostrarSaldo0.Value = model.Check1;
-            report.p_MostrarContactos.Value = model.Check2;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
@@ -339,8 +337,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
-            report.p_MostrarSaldo0.Value = model.Check1;
-            report.p_MostrarContactos.Value = model.Check2;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);

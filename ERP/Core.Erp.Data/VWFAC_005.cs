@@ -22,20 +22,24 @@ namespace Core.Erp.Data
         public decimal IdCliente { get; set; }
         public Nullable<int> IdContacto { get; set; }
         public string NomCliente { get; set; }
-        public string NomContacto { get; set; }
         public System.DateTime vt_fecha { get; set; }
-        public double SubtotalIVA0 { get; set; }
-        public double SubtotalIVA { get; set; }
-        public double vt_iva { get; set; }
-        public double Total { get; set; }
         public double VRetenIVA { get; set; }
         public double VRetenFTE { get; set; }
-        public double ValorACobrar { get; set; }
+        public Nullable<double> ValorACobrar { get; set; }
         public double VCobrado { get; set; }
-        public double Saldo { get; set; }
+        public Nullable<double> Saldo { get; set; }
         public string TipoDocumento { get; set; }
         public Nullable<bool> EsExportacion { get; set; }
         public string Su_Descripcion { get; set; }
         public string Su_CodigoEstablecimiento { get; set; }
+        public decimal SubtotalIVASinDscto { get; set; }
+        public decimal SubtotalSinIVASinDscto { get; set; }
+        public decimal SubtotalSinDscto { get; set; }
+        public decimal Descuento { get; set; }
+        public decimal SubtotalIVAConDscto { get; set; }
+        public decimal SubtotalSinIVAConDscto { get; set; }
+        public decimal SubtotalConDscto { get; set; }
+        public decimal ValorIVA { get; set; }
+        public decimal Total { get; set; }
     }
 }
