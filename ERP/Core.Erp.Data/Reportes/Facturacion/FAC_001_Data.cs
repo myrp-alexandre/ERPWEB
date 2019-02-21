@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_001_Data
     {
-         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCliente, int IdCliente_contacto, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
+         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCliente, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
@@ -25,10 +25,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 
                 decimal IdCliente_Ini = IdCliente;
                 decimal IdCliente_Fin = IdCliente == 0 ? 999999 : IdCliente;
-
-                int IdCliente_contacto_Ini = IdCliente_contacto;
-                int IdCliente_contacto_Fin = IdCliente_contacto == 0 ? 9999 : IdCliente_contacto;
-
+                
                 decimal IdProducto_Ini = IdProducto;
                 decimal IdProducto_Fin = IdProducto == 0 ? 99999 : IdProducto;
                 
@@ -43,7 +40,6 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              && IdSucursal_Ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_Fin
                              && IdVendedor_Ini <= q.IdVendedor && q.IdVendedor <= IdVendedor_Fin
                              && IdCliente_Ini <= q.IdCliente && q.IdCliente <= IdCliente_Fin
-                             && IdCliente_contacto_Ini <= q.IdContacto && q.IdContacto <= IdCliente_contacto_Fin
                              && IdProducto_Ini <= q.IdProducto && q.IdProducto <= IdProducto_Fin
                              && fecha_ini <= q.vt_fecha && q.vt_fecha <= fecha_fin
                              select new FAC_001_Info

@@ -185,7 +185,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
             report.p_mostrar_anulados.Value = model.Check1;
@@ -204,7 +203,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
             report.p_mostrar_anulados.Value = model.Check1;
