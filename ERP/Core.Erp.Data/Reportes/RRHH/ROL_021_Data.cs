@@ -44,7 +44,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal  <= IdSucursalFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
-                                 && q.Valor > 0
+                                 && (q.Valor > 0
+                                 || q.IdRubro == info_rub_calculados.IdRubro_prov_DIII
+                                 || q.IdRubro == info_rub_calculados.IdRubro_prov_DIV)
                                  && (q.IdRubro == info_rub_calculados.IdRubro_anticipo || q.IdRubro == info_rub_calculados.IdRubro_tot_egr || q.ru_tipo == "E")
                                  select new ROL_021_Info
                                  {
@@ -100,7 +102,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
-                                 && q.Valor > 0
+                                 && (q.Valor > 0
+                                 || q.IdRubro == info_rub_calculados.IdRubro_prov_DIII
+                                 || q.IdRubro == info_rub_calculados.IdRubro_prov_DIV)
                                  && (q.IdRubro == info_rub_calculados.IdRubro_tot_ing || q.ru_tipo == "I" )
                                  select new ROL_021_Info
                                  {
@@ -154,7 +158,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
-                                 && q.Valor > 0
+                                 && ( q.Valor > 0 
+                                 || q.IdRubro== info_rub_calculados.IdRubro_prov_DIII
+                                 || q.IdRubro == info_rub_calculados.IdRubro_prov_DIV)
                                  && (
                                  (q.IdRubro == info_rub_calculados.IdRubro_tot_pagar 
                                  || q.IdRubro == info_rub_calculados.IdRubro_tot_ing 
