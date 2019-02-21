@@ -20,5 +20,7 @@ namespace Core.Erp.Info.RRHH
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public Nullable<double> CantidadHoras { get; set; }
+
     }
 }
