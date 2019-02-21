@@ -259,7 +259,8 @@ namespace Core.Erp.Data.RRHH
                         Valor_maximo_horas_vesp=info.Valor_maximo_horas_vesp,
                         DiasVacaciones = info.DiasVacaciones,
                         GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
-                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion
+                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion,
+                        IdCtaCble_x_pagar_empleado=info.IdCtaCble_x_pagar_empleado
                     };
                 }
 
@@ -367,7 +368,8 @@ namespace Core.Erp.Data.RRHH
                        
                         DiasVacaciones = info.DiasVacaciones,
                         GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
-                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion
+                        CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion,
+                        IdCtaCble_x_pagar_empleado=info.IdCtaCble_x_pagar_empleado
                         
                     };
                     Context.ro_empleado.Add(Entity);
@@ -538,7 +540,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.DiasVacaciones = info.DiasVacaciones;
                         Entity.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
                         Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
-                    Entity.CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion;
+                        Entity.CodCatalogo_Ubicacion = info.CodCatalogo_Ubicacion;
+                        Entity.IdCtaCble_x_pagar_empleado = info.IdCtaCble_x_pagar_empleado;
 
                     var lst_delete = Context.ro_empleado_x_division_x_area.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdEmpleado == info.IdEmpleado);
                     Context.ro_empleado_x_division_x_area.RemoveRange(lst_delete);

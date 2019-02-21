@@ -112,7 +112,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             else
             {
-                if(tipo_op.IdCtaCble==null || tipo_op.IdCtaCble_Credito==null)
+                if(tipo_op.IdCtaCble==null)
                 {
                     ViewBag.mensaje = "No existe cuenta contable en tipo de orden de pago";
                     cargar_combos(model.IdNomina_Tipo);
@@ -125,6 +125,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.mensaje = "No existe detalle para el pago";
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
+            }
+            else
+            {
+                foreach (var item in model.detalle)
+                {
+                    if( item.IdCtaCble_Emplea==null || item.IdCtaCble_Emplea=="" )
+                    {
+                        ViewBag.mensaje = "El empleado "+ item.pe_nombreCompleto+" no tiene cuenta contable";
+                        cargar_combos(model.IdNomina_Tipo);
+                        return View(model);
+                    }
+                }
             }
 
 

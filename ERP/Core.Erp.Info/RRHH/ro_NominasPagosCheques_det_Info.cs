@@ -37,6 +37,8 @@ namespace Core.Erp.Info.RRHH
         public double Saldo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public decimal IdPersona { get; set; }
+        public string IdCtaCble_Emplea { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
 
 
         #endregion
