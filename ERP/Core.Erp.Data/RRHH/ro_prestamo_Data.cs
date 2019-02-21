@@ -407,7 +407,7 @@ namespace Core.Erp.Data.RRHH
                             var cuenta_x_rubro = Context.ro_rubro_tipo.Where(q => q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdRubro == Entity_Prestamo.IdRubro).FirstOrDefault();
 
                             if (
-                                cuenta_x_rubro.rub_ctacon != "" && cuenta_x_rubro.rub_ctacon != null &&
+                               Entity_Empleado.IdCtaCble_x_pagar_empleado!=null &&
                                 Entity_Empleado.IdCtaCble_Emplea != null
                                 )
                             {
