@@ -37,5 +37,7 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public string NumRetencion { get; set; }
         public string co_descripcion { get; set; }
         public string IdCtaCble { get; set; }
+        public Nullable<decimal> IdCbteCbleRet { get; set; }
+        public string co_observacion { get; set; }
     }
 }

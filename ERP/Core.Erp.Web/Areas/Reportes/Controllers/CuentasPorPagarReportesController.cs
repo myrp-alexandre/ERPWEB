@@ -202,8 +202,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-            
-            report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
