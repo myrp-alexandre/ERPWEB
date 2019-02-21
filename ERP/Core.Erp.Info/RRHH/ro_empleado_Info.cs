@@ -103,6 +103,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<double> Valor_horas_brigada { get; set; }
         public Nullable<double> Valor_hora_adicionales { get; set; }
         public Nullable<double> Valor_hora_control_salida { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
 
         public string CodCatalogo_Ubicacion { get; set; }
 

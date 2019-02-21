@@ -56,6 +56,8 @@ namespace Core.Erp.Info.RRHH
         public string ru_descripcion { get; set; }
         public double Monto_aplicado { get; set; }
         public string IdCtaCble_Emplea { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
+
         public string rub_ctacon { get; set; }
 
 

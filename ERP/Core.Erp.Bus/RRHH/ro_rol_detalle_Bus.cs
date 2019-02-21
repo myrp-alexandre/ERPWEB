@@ -32,19 +32,7 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public List<ro_rol_detalle_Info> Get_lst_detalle_genear_op(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
-        {
-            try
-            {
-                return odata.Get_lst_detalle_genear_op(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+   
         public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int idEmpresa, int IdSucursal, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
         {
             try
