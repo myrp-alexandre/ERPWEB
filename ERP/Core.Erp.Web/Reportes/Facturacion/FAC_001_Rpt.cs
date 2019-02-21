@@ -29,14 +29,13 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdVendedor = string.IsNullOrEmpty(p_IdVendedor.Value.ToString()) ? 0 : Convert.ToInt32(p_IdVendedor.Value);
             decimal IdCliente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
             decimal IdProducto = string.IsNullOrEmpty(p_IdProducto.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto.Value);
-            decimal IdProducto_padre = string.IsNullOrEmpty(p_IdProducto_padre.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto_padre.Value);
             int IdCliente_contacto = string.IsNullOrEmpty(p_IdCliente_contacto.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCliente_contacto.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
             bool  mostrar_anulados = p_mostrar_anulados.Value == null ? false : Convert.ToBoolean(p_mostrar_anulados.Value);
 
             FAC_001_Bus bus_rpt = new FAC_001_Bus();
-            List<FAC_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdVendedor, IdCliente, IdCliente_contacto, IdProducto, IdProducto_padre, fecha_ini, fecha_fin, mostrar_anulados);
+            List<FAC_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdVendedor, IdCliente, IdCliente_contacto, IdProducto, fecha_ini, fecha_fin, mostrar_anulados);
             this.DataSource = lst_rpt;
         }
     }

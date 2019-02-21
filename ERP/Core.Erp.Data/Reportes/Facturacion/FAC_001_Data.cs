@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_001_Data
     {
-         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCliente, int IdCliente_contacto, decimal IdProducto, decimal IdProducto_padre, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
+         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCliente, int IdCliente_contacto, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
@@ -31,10 +31,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 
                 decimal IdProducto_Ini = IdProducto;
                 decimal IdProducto_Fin = IdProducto == 0 ? 99999 : IdProducto;
-
-                decimal IdProducto_padre_Ini = IdProducto_padre;
-                decimal IdProducto_padre_Fin = IdProducto_padre == 0 ? 999999 : IdProducto_padre;
-
+                
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
 
@@ -48,7 +45,6 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              && IdCliente_Ini <= q.IdCliente && q.IdCliente <= IdCliente_Fin
                              && IdCliente_contacto_Ini <= q.IdContacto && q.IdContacto <= IdCliente_contacto_Fin
                              && IdProducto_Ini <= q.IdProducto && q.IdProducto <= IdProducto_Fin
-                             && IdProducto_padre_Ini <= q.IdProducto_padre && q.IdProducto_padre <= IdProducto_padre_Fin
                              && fecha_ini <= q.vt_fecha && q.vt_fecha <= fecha_fin
                              select new FAC_001_Info
                              {

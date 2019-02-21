@@ -39,25 +39,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
-
-        public ActionResult CmbProductoPadre_Facturacion()
-        {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
-            return PartialView("_CmbProductoPadre_Facturacion", model);
-        }
+        
         public ActionResult CmbProductoHijo_Facturacion()
         {
             SessionFixed.IdProducto_padre_dist = (!string.IsNullOrEmpty(Request.Params["IdProductoPadre"])) ? Request.Params["IdProductoPadre"].ToString() : "-1";
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbProductoHijo_Facturacion", model);
         }
-        public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0,0);
-        }
         public List<in_Producto_Info> get_list_ProductoHijo_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS, cl_enumeradores.eModulo.INV, (string.IsNullOrEmpty(SessionFixed.IdProducto_padre_dist) ? -1 : decimal.Parse(SessionFixed.IdProducto_padre_dist)),0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL, cl_enumeradores.eModulo.INV,0,Convert.ToInt32(SessionFixed.IdSucursal));
         }
         public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -183,6 +174,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 Check1 = false
             };
 
@@ -196,11 +188,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -217,12 +207,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);
-                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
