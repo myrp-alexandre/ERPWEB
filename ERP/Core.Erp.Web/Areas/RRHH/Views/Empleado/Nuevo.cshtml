@@ -439,15 +439,22 @@ de
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="IdCtaCble_Emplea">Cuenta contable*</label>
+                                <label for="IdCtaCble_Emplea">Cuenta contable por cobrar*</label>
                                 @Html.Partial("_CmbEmpleado_CtaCon", Model.IdCtaCble_Emplea)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_Emplea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdCtaCble_x_pagar_empleado">Cuenta contable por pagar*</label>
+                                @Html.Partial("_CmbEmpleado_CtaCon_x_pagar", Model.IdCtaCble_x_pagar_empleado)
+                                @Html.ValidationMessageFor(q => q.IdCtaCble_x_pagar_empleado, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
             <div role="tabpanel" class="tab-pane" id="tb_info_nomina">
 
 

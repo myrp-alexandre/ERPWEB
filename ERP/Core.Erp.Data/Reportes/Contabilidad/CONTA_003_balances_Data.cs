@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Reportes.Contabilidad;
+﻿using Core.Erp.Data.General;
+using Core.Erp.Info.Reportes.Contabilidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace Core.Erp.Data.Reportes.Contabilidad
 {
    public class CONTA_003_balances_Data
     {
+
+        tb_sucursal_Data data_sucursal = new tb_sucursal_Data();
+        string Su_Descripcion = "";
         public List<CONTA_003_balances_Info> get_list(int IdEmpresa, int IdAnio, DateTime fechaIni, DateTime fechaFin, string IdUsuario, int IdNivel, bool mostrarSaldo0, string balance, int IdSucursal)
         {
             try
@@ -16,6 +20,18 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                 List<CONTA_003_balances_Info> Lista;
                 int IdSucursalIni = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 99999 : IdSucursal;
+                if (IdSucursalFin == IdSucursalIni)
+                {
+                    var info_sucursal = data_sucursal.get_info(IdEmpresa, IdSucursalIni);
+                    if (info_sucursal != null)
+                        Su_Descripcion = info_sucursal.Su_Descripcion;
+                }
+                else
+                {
+                    Su_Descripcion = "Todas";
+
+                }
+
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPCONTA_003_balances(IdEmpresa, IdAnio, fechaIni, fechaFin, IdUsuario, IdNivel, mostrarSaldo0, balance,IdSucursalIni,IdSucursalFin)
@@ -48,7 +64,7 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                                  SaldoDebitosNaturaleza = q.SaldoDebitosNaturaleza,
                                  SaldoFinalNaturaleza = q.SaldoFinalNaturaleza,
                                  SaldoInicialNaturaleza = q.SaldoInicialNaturaleza,
-                                 Su_Descripcion = ""
+                                 Su_Descripcion = Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

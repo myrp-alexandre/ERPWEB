@@ -28,9 +28,11 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             DateTime Fecha_ini = string.IsNullOrEmpty(p_Fecha_ini.Value.ToString()) ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(p_Fecha_ini.Value).Date;
             DateTime Fecha_fin = string.IsNullOrEmpty(p_Fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_Fecha_fin.Value).Date;
-            
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            bool mostrar_anulados = p_mostrar_anulados.Value == null ? false : Convert.ToBoolean(p_mostrar_anulados.Value);
+
             CXP_009_Bus bus_rpt = new CXP_009_Bus();
-            List<CXP_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, Fecha_ini,Fecha_fin, ref lst_resumen);
+            List<CXP_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa,  IdSucursal ,Fecha_ini,Fecha_fin, ref lst_resumen, mostrar_anulados);
             this.DataSource = lst_rpt;
         }
 
