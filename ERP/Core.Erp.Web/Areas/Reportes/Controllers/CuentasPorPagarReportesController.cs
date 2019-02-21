@@ -180,13 +180,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
-
+            cargar_combos();
             CXP_009_Rpt report = new CXP_009_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
+            report.p_mostrar_anulados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
@@ -198,12 +201,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             CXP_009_Rpt report = new CXP_009_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
+            report.p_mostrar_anulados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-            
-            report.RequestParameters = false;
+            cargar_combos();
             ViewBag.Report = report;
             return View(model);
         }
