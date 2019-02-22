@@ -3027,6 +3027,34 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_002' no tiene definida ningu
           <Property Name="NomNominaTipo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_002_detallle_prestamos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWROL_002_detallle_prestamos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPrestamo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Observacion_det" />
+            <PropertyRef Name="NumCuota" />
+            <PropertyRef Name="NumCuotas" />
+            <PropertyRef Name="TotalCuota" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ru_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPrestamo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="Observacion_det" Type="varchar(max)" Nullable="false" />
+          <Property Name="NumCuota" Type="int" Nullable="false" />
+          <Property Name="NumCuotas" Type="int" Nullable="false" />
+          <Property Name="TotalCuota" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWROL_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_003">
           <Key>
@@ -5888,6 +5916,21 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
     [VWROL_002].[NomNominaTipo] AS [NomNominaTipo]
     FROM [web].[VWROL_002] AS [VWROL_002]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWROL_002_detallle_prestamos" EntityType="Self.VWROL_002_detallle_prestamos" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWROL_002_detallle_prestamos].[IdEmpresa] AS [IdEmpresa], 
+    [VWROL_002_detallle_prestamos].[IdPrestamo] AS [IdPrestamo], 
+    [VWROL_002_detallle_prestamos].[IdEmpleado] AS [IdEmpleado], 
+    [VWROL_002_detallle_prestamos].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
+    [VWROL_002_detallle_prestamos].[FechaPago] AS [FechaPago], 
+    [VWROL_002_detallle_prestamos].[Observacion_det] AS [Observacion_det], 
+    [VWROL_002_detallle_prestamos].[NumCuota] AS [NumCuota], 
+    [VWROL_002_detallle_prestamos].[NumCuotas] AS [NumCuotas], 
+    [VWROL_002_detallle_prestamos].[TotalCuota] AS [TotalCuota], 
+    [VWROL_002_detallle_prestamos].[Estado] AS [Estado], 
+    [VWROL_002_detallle_prestamos].[ru_descripcion] AS [ru_descripcion]
+    FROM [web].[VWROL_002_detallle_prestamos] AS [VWROL_002_detallle_prestamos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWROL_003" EntityType="Self.VWROL_003" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWROL_003].[IdEmpresa] AS [IdEmpresa], 
@@ -8043,6 +8086,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
             <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWROL_002_detallle_prestamos" EntityType="Model_reportes.VWROL_002_detallle_prestamos" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -11010,6 +11054,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
         </ComplexType>
+        <EntityType Name="VWROL_002_detallle_prestamos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPrestamo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Observacion_det" />
+            <PropertyRef Name="NumCuota" />
+            <PropertyRef Name="NumCuotas" />
+            <PropertyRef Name="TotalCuota" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ru_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPrestamo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observacion_det" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumCuota" Type="Int32" Nullable="false" />
+          <Property Name="NumCuotas" Type="Int32" Nullable="false" />
+          <Property Name="TotalCuota" Type="Double" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14276,6 +14346,23 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWROL_002_detallle_prestamos">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_002_detallle_prestamos">
+              <MappingFragment StoreEntitySet="VWROL_002_detallle_prestamos">
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="TotalCuota" ColumnName="TotalCuota" />
+                <ScalarProperty Name="NumCuotas" ColumnName="NumCuotas" />
+                <ScalarProperty Name="NumCuota" ColumnName="NumCuota" />
+                <ScalarProperty Name="Observacion_det" ColumnName="Observacion_det" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

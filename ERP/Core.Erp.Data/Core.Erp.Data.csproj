@@ -2358,6 +2358,9 @@
     <Compile Include="VWROL_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWROL_002_detallle_prestamos.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWROL_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
