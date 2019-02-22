@@ -1444,6 +1444,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_007' no tiene definida ningu
             <PropertyRef Name="subtotal_sin_iva" />
             <PropertyRef Name="valor_iva" />
             <PropertyRef Name="Documento" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
           </Key>
           <Property Name="IdRow" Type="bigint" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
@@ -1485,6 +1487,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_007' no tiene definida ningu
           <Property Name="descripcion_cod_sri" Type="varchar" MaxLength="350" />
           <Property Name="re_tipoRet" Type="char" MaxLength="3" />
           <Property Name="Num_Autorizacion_OG" Type="varchar" MaxLength="50" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3873,6 +3877,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Parameter Name="Fecha_ini" Type="datetime" Mode="In" />
           <Parameter Name="Fecha_fin" Type="datetime" Mode="In" />
           <Parameter Name="Mostrar_agrupado" Type="bit" Mode="In" />
+          <Parameter Name="IdSucursalIni" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalFin" Type="int" Mode="In" />
         </Function>
         <Function Name="SPCXP_008" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="idempresa" Type="int" Mode="In" />
@@ -4928,7 +4934,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
     [VWCXP_007].[Documento] AS [Documento], 
     [VWCXP_007].[descripcion_cod_sri] AS [descripcion_cod_sri], 
     [VWCXP_007].[re_tipoRet] AS [re_tipoRet], 
-    [VWCXP_007].[Num_Autorizacion_OG] AS [Num_Autorizacion_OG]
+    [VWCXP_007].[Num_Autorizacion_OG] AS [Num_Autorizacion_OG], 
+    [VWCXP_007].[IdSucursal] AS [IdSucursal], 
+    [VWCXP_007].[Su_Descripcion] AS [Su_Descripcion]
     FROM [web].[VWCXP_007] AS [VWCXP_007]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXP_009" EntityType="Self.VWCXP_009" store:Type="Views" store:Schema="web">
@@ -6878,6 +6886,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <PropertyRef Name="subtotal_sin_iva" />
             <PropertyRef Name="valor_iva" />
             <PropertyRef Name="Documento" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
           </Key>
           <Property Name="IdRow" Type="Int64" Nullable="false" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
@@ -6919,6 +6929,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="descripcion_cod_sri" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
           <Property Name="re_tipoRet" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="Num_Autorizacion_OG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VWFAC_001">
           <Key>
@@ -7782,12 +7794,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <Parameter Name="IdContacto_fin" Mode="In" Type="Int32" />
             <Parameter Name="Fecha_corte" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="SPCXP_007" ReturnType="Collection(Model_reportes.SPCXP_007_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
-            <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
-            <Parameter Name="Mostrar_agrupado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="SPINV_003" ReturnType="Collection(Model_reportes.SPINV_003_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
@@ -8064,6 +8070,14 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           </FunctionImport>
           <EntitySet Name="VWROL_010" EntityType="Model_reportes.VWROL_010" />
           <EntitySet Name="VWCXP_009" EntityType="Model_reportes.VWCXP_009" />
+          <FunctionImport Name="SPCXP_007" ReturnType="Collection(Model_reportes.SPCXP_007_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="Mostrar_agrupado" Mode="In" Type="Boolean" />
+            <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8171,48 +8185,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Type="String" Name="cr_observacion" Nullable="true" MaxLength="700" />
           <Property Type="Int32" Name="IdContacto" Nullable="true" />
           <Property Type="String" Name="NomContacto" Nullable="true" MaxLength="1000" />
-        </ComplexType>
-        <ComplexType Name="SPCXP_007_Result">
-          <Property Type="Int64" Name="IdRow" Nullable="false" />
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdTipoCbte_Ogiro" Nullable="false" />
-          <Property Type="Decimal" Name="IdCbteCble_Ogiro" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="IdOrden_giro_Tipo" Nullable="false" MaxLength="5" />
-          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
-          <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="pr_nombre" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="serie_fact" Nullable="true" MaxLength="21" />
-          <Property Type="String" Name="num_factura" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="co_FechaFactura" Nullable="true" Precision="23" />
-          <Property Type="Double" Name="subtotal_iva" Nullable="false" />
-          <Property Type="Double" Name="subtotal_sin_iva" Nullable="false" />
-          <Property Type="Double" Name="valor_iva" Nullable="false" />
-          <Property Type="String" Name="NAutorizacion" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="serie_ret" Nullable="true" MaxLength="7" />
-          <Property Type="String" Name="NumRetencion" Nullable="true" MaxLength="20" />
-          <Property Type="Double" Name="re_baseRetencion" Nullable="true" />
-          <Property Type="Double" Name="re_Porcen_retencion" Nullable="true" />
-          <Property Type="Double" Name="re_valor_retencion" Nullable="true" />
-          <Property Type="String" Name="re_Codigo_impuesto" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="RIVA_0" Nullable="true" />
-          <Property Type="Double" Name="RIVA_10" Nullable="true" />
-          <Property Type="Double" Name="RIVA_20" Nullable="true" />
-          <Property Type="Double" Name="RIVA_30" Nullable="true" />
-          <Property Type="Double" Name="RIVA_70" Nullable="true" />
-          <Property Type="Double" Name="RIVA_100" Nullable="true" />
-          <Property Type="Double" Name="RTF_0" Nullable="true" />
-          <Property Type="Double" Name="RTF_0_1" Nullable="true" />
-          <Property Type="Double" Name="RTF_1" Nullable="true" />
-          <Property Type="Double" Name="RTF_2" Nullable="true" />
-          <Property Type="Double" Name="RTF_8" Nullable="true" />
-          <Property Type="Double" Name="RTF_10" Nullable="true" />
-          <Property Type="Double" Name="RTF_100" Nullable="true" />
-          <Property Type="String" Name="Documento" Nullable="false" MaxLength="250" />
-          <Property Type="String" Name="descripcion_cod_sri" Nullable="true" MaxLength="350" />
-          <Property Type="String" Name="re_tipoRet" Nullable="true" MaxLength="3" />
-          <Property Type="String" Name="Num_Autorizacion_OG" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="SPINV_003_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10980,6 +10952,50 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="IdSucursal" Type="Int32" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPCXP_007_Result">
+          <Property Type="Int64" Name="IdRow" Nullable="false" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoCbte_Ogiro" Nullable="false" />
+          <Property Type="Decimal" Name="IdCbteCble_Ogiro" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="IdOrden_giro_Tipo" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pr_nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="serie_fact" Nullable="true" MaxLength="21" />
+          <Property Type="String" Name="num_factura" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="co_FechaFactura" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="subtotal_iva" Nullable="false" />
+          <Property Type="Double" Name="subtotal_sin_iva" Nullable="false" />
+          <Property Type="Double" Name="valor_iva" Nullable="false" />
+          <Property Type="String" Name="NAutorizacion" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="serie_ret" Nullable="true" MaxLength="7" />
+          <Property Type="String" Name="NumRetencion" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="re_baseRetencion" Nullable="true" />
+          <Property Type="Double" Name="re_Porcen_retencion" Nullable="true" />
+          <Property Type="Double" Name="re_valor_retencion" Nullable="true" />
+          <Property Type="String" Name="re_Codigo_impuesto" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="RIVA_0" Nullable="true" />
+          <Property Type="Double" Name="RIVA_10" Nullable="true" />
+          <Property Type="Double" Name="RIVA_20" Nullable="true" />
+          <Property Type="Double" Name="RIVA_30" Nullable="true" />
+          <Property Type="Double" Name="RIVA_70" Nullable="true" />
+          <Property Type="Double" Name="RIVA_100" Nullable="true" />
+          <Property Type="Double" Name="RTF_0" Nullable="true" />
+          <Property Type="Double" Name="RTF_0_1" Nullable="true" />
+          <Property Type="Double" Name="RTF_1" Nullable="true" />
+          <Property Type="Double" Name="RTF_2" Nullable="true" />
+          <Property Type="Double" Name="RTF_8" Nullable="true" />
+          <Property Type="Double" Name="RTF_10" Nullable="true" />
+          <Property Type="Double" Name="RTF_100" Nullable="true" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="23" />
+          <Property Type="String" Name="descripcion_cod_sri" Nullable="true" MaxLength="350" />
+          <Property Type="String" Name="re_tipoRet" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Num_Autorizacion_OG" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11363,6 +11379,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <EntitySetMapping Name="VWCXP_007">
             <EntityTypeMapping TypeName="Model_reportes.VWCXP_007">
               <MappingFragment StoreEntitySet="VWCXP_007">
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdRow" ColumnName="IdRow" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
@@ -12036,52 +12054,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
                 <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
                 <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
                 <ScalarProperty Name="NomContacto" ColumnName="NomContacto" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPCXP_007" FunctionName="Model_reportes.Store.SPCXP_007">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPCXP_007_Result">
-                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
-                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
-                <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="pr_nombre" ColumnName="pr_nombre" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="serie_fact" ColumnName="serie_fact" />
-                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
-                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
-                <ScalarProperty Name="subtotal_iva" ColumnName="subtotal_iva" />
-                <ScalarProperty Name="subtotal_sin_iva" ColumnName="subtotal_sin_iva" />
-                <ScalarProperty Name="valor_iva" ColumnName="valor_iva" />
-                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
-                <ScalarProperty Name="serie_ret" ColumnName="serie_ret" />
-                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
-                <ScalarProperty Name="re_baseRetencion" ColumnName="re_baseRetencion" />
-                <ScalarProperty Name="re_Porcen_retencion" ColumnName="re_Porcen_retencion" />
-                <ScalarProperty Name="re_valor_retencion" ColumnName="re_valor_retencion" />
-                <ScalarProperty Name="re_Codigo_impuesto" ColumnName="re_Codigo_impuesto" />
-                <ScalarProperty Name="RIVA_0" ColumnName="RIVA_0" />
-                <ScalarProperty Name="RIVA_10" ColumnName="RIVA_10" />
-                <ScalarProperty Name="RIVA_20" ColumnName="RIVA_20" />
-                <ScalarProperty Name="RIVA_30" ColumnName="RIVA_30" />
-                <ScalarProperty Name="RIVA_70" ColumnName="RIVA_70" />
-                <ScalarProperty Name="RIVA_100" ColumnName="RIVA_100" />
-                <ScalarProperty Name="RTF_0" ColumnName="RTF_0" />
-                <ScalarProperty Name="RTF_0_1" ColumnName="RTF_0_1" />
-                <ScalarProperty Name="RTF_1" ColumnName="RTF_1" />
-                <ScalarProperty Name="RTF_2" ColumnName="RTF_2" />
-                <ScalarProperty Name="RTF_8" ColumnName="RTF_8" />
-                <ScalarProperty Name="RTF_10" ColumnName="RTF_10" />
-                <ScalarProperty Name="RTF_100" ColumnName="RTF_100" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="descripcion_cod_sri" ColumnName="descripcion_cod_sri" />
-                <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
-                <ScalarProperty Name="Num_Autorizacion_OG" ColumnName="Num_Autorizacion_OG" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -14240,6 +14212,54 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPCXP_007" FunctionName="Model_reportes.Store.SPCXP_007">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPCXP_007_Result">
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="pr_nombre" ColumnName="pr_nombre" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="serie_fact" ColumnName="serie_fact" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
+                <ScalarProperty Name="subtotal_iva" ColumnName="subtotal_iva" />
+                <ScalarProperty Name="subtotal_sin_iva" ColumnName="subtotal_sin_iva" />
+                <ScalarProperty Name="valor_iva" ColumnName="valor_iva" />
+                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
+                <ScalarProperty Name="serie_ret" ColumnName="serie_ret" />
+                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
+                <ScalarProperty Name="re_baseRetencion" ColumnName="re_baseRetencion" />
+                <ScalarProperty Name="re_Porcen_retencion" ColumnName="re_Porcen_retencion" />
+                <ScalarProperty Name="re_valor_retencion" ColumnName="re_valor_retencion" />
+                <ScalarProperty Name="re_Codigo_impuesto" ColumnName="re_Codigo_impuesto" />
+                <ScalarProperty Name="RIVA_0" ColumnName="RIVA_0" />
+                <ScalarProperty Name="RIVA_10" ColumnName="RIVA_10" />
+                <ScalarProperty Name="RIVA_20" ColumnName="RIVA_20" />
+                <ScalarProperty Name="RIVA_30" ColumnName="RIVA_30" />
+                <ScalarProperty Name="RIVA_70" ColumnName="RIVA_70" />
+                <ScalarProperty Name="RIVA_100" ColumnName="RIVA_100" />
+                <ScalarProperty Name="RTF_0" ColumnName="RTF_0" />
+                <ScalarProperty Name="RTF_0_1" ColumnName="RTF_0_1" />
+                <ScalarProperty Name="RTF_1" ColumnName="RTF_1" />
+                <ScalarProperty Name="RTF_2" ColumnName="RTF_2" />
+                <ScalarProperty Name="RTF_8" ColumnName="RTF_8" />
+                <ScalarProperty Name="RTF_10" ColumnName="RTF_10" />
+                <ScalarProperty Name="RTF_100" ColumnName="RTF_100" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="descripcion_cod_sri" ColumnName="descripcion_cod_sri" />
+                <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
+                <ScalarProperty Name="Num_Autorizacion_OG" ColumnName="Num_Autorizacion_OG" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

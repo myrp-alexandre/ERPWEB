@@ -117,6 +117,8 @@
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_empresa = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell121 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
@@ -246,6 +248,7 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell120 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -584,7 +587,7 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 39.87497F;
+            this.BottomMargin.HeightF = 40F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -615,8 +618,9 @@
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
+            this.xrTableRow14,
             this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(2120F, 50F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(2120F, 75F);
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
@@ -646,6 +650,23 @@
             this.xrTableCell2.Text = "CXP_007";
             this.xrTableCell2.Weight = 0.07547169811320753D;
             // 
+            // xrTableRow14
+            // 
+            this.xrTableRow14.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell121});
+            this.xrTableRow14.Name = "xrTableRow14";
+            this.xrTableRow14.Weight = 1D;
+            // 
+            // xrTableCell121
+            // 
+            this.xrTableCell121.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
+            this.xrTableCell121.Font = new System.Drawing.Font("Verdana", 10F);
+            this.xrTableCell121.Name = "xrTableCell121";
+            this.xrTableCell121.StylePriority.UseFont = false;
+            this.xrTableCell121.Text = "xrTableCell121";
+            this.xrTableCell121.Weight = 2D;
+            // 
             // xrTableRow2
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
@@ -666,7 +687,7 @@
             this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable1,
             this.xrTable3});
-            this.PageHeader.HeightF = 90F;
+            this.PageHeader.HeightF = 115.7732F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrTable3
@@ -675,7 +696,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable3.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 50F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 75.7732F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow6,
@@ -2231,6 +2252,11 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
+            // p_IdSucursal
+            // 
+            this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
+            // 
             // CXP_007_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2252,14 +2278,15 @@
             this.Font = new System.Drawing.Font("Verdana", 8F);
             this.Landscape = true;
             this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 40);
-            this.PageHeight = 1700;
+            this.PageHeight = 2200;
             this.PageWidth = 2200;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_fecha_ini,
             this.p_fecha_fin,
-            this.p_mostrar_agrupado});
+            this.p_mostrar_agrupado,
+            this.p_IdSucursal});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXP_007_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -2445,5 +2472,8 @@
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell120;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow14;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell121;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
     }
 }

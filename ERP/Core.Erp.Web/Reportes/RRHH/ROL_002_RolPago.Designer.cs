@@ -409,11 +409,11 @@
             // xrTable7
             // 
             this.xrTable7.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(561.2318F, 44.79167F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(523.8533F, 44.79167F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable7.SizeF = new System.Drawing.SizeF(215.7683F, 25F);
+            this.xrTable7.SizeF = new System.Drawing.SizeF(243.1467F, 25F);
             this.xrTable7.StylePriority.UseFont = false;
             // 
             // xrTableRow10
@@ -434,7 +434,7 @@
             this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "NETO A PAGAR:";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell17.Weight = 1D;
+            this.xrTableCell17.Weight = 0.95546723757559793D;
             // 
             // lb_liquido
             // 
@@ -449,7 +449,7 @@
             this.lb_liquido.StylePriority.UseTextAlignment = false;
             this.lb_liquido.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lb_liquido.TextFormatString = "{0:n2}";
-            this.lb_liquido.Weight = 0.61356519616168481D;
+            this.lb_liquido.Weight = 0.86283969845885689D;
             // 
             // xrTable9
             // 
@@ -487,6 +487,7 @@
             this.xrTable7,
             this.xrTable9});
             this.GroupFooter1.HeightF = 93.75F;
+            this.GroupFooter1.KeepTogether = true;
             this.GroupFooter1.Name = "GroupFooter1";
             this.GroupFooter1.PrintAtBottom = true;
             this.GroupFooter1.RepeatEveryPage = true;
