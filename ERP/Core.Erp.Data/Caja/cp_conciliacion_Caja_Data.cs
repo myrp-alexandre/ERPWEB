@@ -644,6 +644,7 @@ namespace Core.Erp.Data.Caja
             Entities_contabilidad Context_ct = new Entities_contabilidad();
             try
             {
+                
                 #region Variables
                 int Secuencia = 1;
                 decimal IdOrdenPago = 1;
@@ -1222,7 +1223,7 @@ namespace Core.Erp.Data.Caja
                 Context_cxp.Dispose();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Context_ct.Dispose();
                 Context_cxp.Dispose();

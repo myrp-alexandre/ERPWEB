@@ -337,6 +337,7 @@ namespace Core.Erp.Data.Contabilidad
 
                     var lst = from q in Context.ct_plancta
                               where q.IdCtaCblePadre == IdCtaCble_padre
+                              && q.IdEmpresa == IdEmpresa
                               select q;
 
                     string relleno = "";
