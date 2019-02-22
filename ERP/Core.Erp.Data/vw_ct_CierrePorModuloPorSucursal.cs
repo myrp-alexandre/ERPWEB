@@ -12,15 +12,16 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ct_parametro
+    public partial class vw_ct_CierrePorModuloPorSucursal
     {
         public int IdEmpresa { get; set; }
-        public int IdTipoCbte_SaldoInicial { get; set; }
-        public int IdTipoCbte_AsientoCierre_Anual { get; set; }
-        public bool P_Se_Muestra_Todas_las_ctas_en_combos { get; set; }
-        public int DiasTransaccionesAFuturo { get; set; }
-    
-        public virtual ct_cbtecble_tipo ct_cbtecble_tipo { get; set; }
-        public virtual ct_cbtecble_tipo ct_cbtecble_tipo1 { get; set; }
+        public int IdCierre { get; set; }
+        public int IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string CodModulo { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime FechaIni { get; set; }
+        public System.DateTime FechaFin { get; set; }
+        public bool Cerrado { get; set; }
     }
 }
