@@ -138,6 +138,41 @@ namespace Core.Erp.Data.Reportes.RRHH
             }
         }
 
+
+        public List<ROL_002_Info> get_list_detalle_prestamos(int IdEmpresa, int IdNominaTipo, int IdPeriodo, int IdEmpleado)
+        {
+            try
+            {
+                List<ROL_002_Info> ListaPrestamos;
+                ro_periodo_Data periodo_data = new ro_periodo_Data();
+                var info_periodo = periodo_data.get_info(IdEmpresa, IdPeriodo);
+                using (Entities_reportes Context = new Entities_reportes())
+                {
+                    ListaPrestamos = (from q in Context.VWROL_002_detallle_prestamos
+                                      where (q.IdEmpresa == IdEmpresa
+                                     && q.IdEmpleado == IdEmpleado
+                                     && q.FechaPago>= info_periodo.pe_FechaIni
+                                     && q.FechaPago <= info_periodo.pe_FechaFin
+                                     )
+                             orderby q.ru_descripcion, q.IdPrestamo
+                                      select new ROL_002_Info
+                             {
+                                 IdPrestamo = q.IdPrestamo,
+                                 ru_descripcion = q.ru_descripcion,
+                                 NumCuota = q.NumCuota,
+                                 NumCuotas = q.NumCuotas,
+                                 TotalCuota = q.TotalCuota
+                             }).ToList();
+                }
+
+                return ListaPrestamos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public string mes(int idperiodo)
         {
             try

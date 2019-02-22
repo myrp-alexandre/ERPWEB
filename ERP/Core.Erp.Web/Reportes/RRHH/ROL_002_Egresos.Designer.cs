@@ -43,11 +43,15 @@
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.SubRpte_DetallePrestamos = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdPeriodo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdNominaTipo = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -70,6 +74,7 @@
             this.xrTable1.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTable1.BorderWidth = 0F;
             this.xrTable1.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable1.Name = "xrTable1";
@@ -78,6 +83,7 @@
             this.xrTableRow1});
             this.xrTable1.SizeF = new System.Drawing.SizeF(325F, 15F);
             this.xrTable1.StylePriority.UseBorders = false;
+            this.xrTable1.StylePriority.UseBorderWidth = false;
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UsePadding = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
@@ -175,9 +181,18 @@
             // GroupFooter1
             // 
             this.GroupFooter1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.SubRpte_DetallePrestamos,
             this.xrTable2});
-            this.GroupFooter1.HeightF = 15F;
+            this.GroupFooter1.HeightF = 47.00002F;
             this.GroupFooter1.Name = "GroupFooter1";
+            // 
+            // SubRpte_DetallePrestamos
+            // 
+            this.SubRpte_DetallePrestamos.LocationFloat = new DevExpress.Utils.PointFloat(0F, 27.00001F);
+            this.SubRpte_DetallePrestamos.Name = "SubRpte_DetallePrestamos";
+            this.SubRpte_DetallePrestamos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_DetallePrestamo();
+            this.SubRpte_DetallePrestamos.SizeF = new System.Drawing.SizeF(325F, 20F);
+            this.SubRpte_DetallePrestamos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpte_DetallePrestamos_BeforePrint);
             // 
             // xrTable2
             // 
@@ -236,6 +251,21 @@
             this.p_IdEmpleado.Name = "p_IdEmpleado";
             this.p_IdEmpleado.Visible = false;
             // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
+            // 
+            // p_IdPeriodo
+            // 
+            this.p_IdPeriodo.Name = "p_IdPeriodo";
+            this.p_IdPeriodo.Visible = false;
+            // 
+            // p_IdNominaTipo
+            // 
+            this.p_IdNominaTipo.Name = "p_IdNominaTipo";
+            this.p_IdNominaTipo.Visible = false;
+            // 
             // ROL_002_Egresos
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -253,7 +283,10 @@
             this.PageWidth = 777;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
-            this.p_IdEmpleado});
+            this.p_IdEmpleado,
+            this.p_IdEmpresa,
+            this.p_IdPeriodo,
+            this.p_IdNominaTipo});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_002_Egresos_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -284,5 +317,9 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
+        private DevExpress.XtraReports.UI.XRSubreport SubRpte_DetallePrestamos;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNominaTipo;
     }
 }

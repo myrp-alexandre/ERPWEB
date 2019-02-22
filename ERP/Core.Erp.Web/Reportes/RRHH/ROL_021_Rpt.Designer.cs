@@ -153,14 +153,14 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 33.33333F;
+            this.TopMargin.HeightF = 30F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 2.083333F;
+            this.BottomMargin.HeightF = 10F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -1079,7 +1079,7 @@
             this.xrTable12.Name = "xrTable12";
             this.xrTable12.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable12.SizeF = new System.Drawing.SizeF(1050F, 20F);
+            this.xrTable12.SizeF = new System.Drawing.SizeF(1015.625F, 20F);
             this.xrTable12.StylePriority.UseBorders = false;
             this.xrTable12.StylePriority.UseFont = false;
             this.xrTable12.StylePriority.UseTextAlignment = false;
@@ -1150,7 +1150,7 @@
             this.lbl_fecha.StylePriority.UsePadding = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
             this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_fecha.Weight = 3.1865335110012745D;
+            this.lbl_fecha.Weight = 2.6580620282223824D;
             // 
             // xrTableCell117
             // 
@@ -1159,9 +1159,11 @@
             this.xrPageInfo2});
             this.xrTableCell117.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell117.Name = "xrTableCell117";
+            this.xrTableCell117.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell117.StylePriority.UseBorders = false;
             this.xrTableCell117.StylePriority.UseFont = false;
-            this.xrTableCell117.Weight = 1.8161325012024032D;
+            this.xrTableCell117.StylePriority.UsePadding = false;
+            this.xrTableCell117.Weight = 1.9538413747939307D;
             // 
             // xrPageInfo2
             // 
@@ -1170,7 +1172,7 @@
             this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(159.7637F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(171.8778F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -1192,7 +1194,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(18, 24, 33, 2);
+            this.Margins = new System.Drawing.Printing.Margins(18, 24, 30, 10);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;

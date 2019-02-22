@@ -42,5 +42,16 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public string NomNomina { get; set; }
         public string NomNominaTipo { get; set; }
+
+        #region DetallePrestamo
+        public decimal IdPrestamo { get; set; }
+        public string ru_descripcion { get; set; }
+        public int NumCuota { get; set; }
+        public int NumCuotas { get; set; }
+        public double TotalCuota { get; set; }
+        
+
+        #endregion
+
     }
 }

@@ -486,7 +486,7 @@
             this.xrTable6,
             this.xrTable7,
             this.xrTable9});
-            this.GroupFooter1.HeightF = 93.75F;
+            this.GroupFooter1.HeightF = 89.79166F;
             this.GroupFooter1.KeepTogether = true;
             this.GroupFooter1.Name = "GroupFooter1";
             this.GroupFooter1.PrintAtBottom = true;
@@ -499,7 +499,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable6.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTable6.KeepTogether = true;
-            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(0.4999399F, 73.74998F);
+            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1.000126F, 69.79166F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
