@@ -93,7 +93,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             ct_CierrePorModuloPorSucursal_Info model = new ct_CierrePorModuloPorSucursal_Info();
-            model.FechaFin = DateTime.Now;
+            model.FechaIni = DateTime.Now;
             model.FechaFin = DateTime.Now;
             cargar_combos(IdEmpresa);
             return View(model);
