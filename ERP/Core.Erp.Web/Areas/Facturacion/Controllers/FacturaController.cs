@@ -287,7 +287,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
 
             #region ValidarStock
-            /*
+            
             var lst_validar = i_validar.lst_det.Select(q => new in_Producto_Stock_Info
             {
                 IdEmpresa = i_validar.IdEmpresa,
@@ -304,7 +304,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (!bus_producto.validar_stock(lst_validar, ref msg))
             {
                 return false;
-            }*/
+            }
             #endregion
 
             return true;
