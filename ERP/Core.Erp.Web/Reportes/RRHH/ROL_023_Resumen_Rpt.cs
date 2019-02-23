@@ -44,6 +44,9 @@ namespace Core.Erp.Web.Reportes.RRHH
             lst_rpt.ForEach(q => {
                 q.FRESERVA_R = Math.Round(q.FRESERVA ?? 0, 2, MidpointRounding.AwayFromZero);
                 q.IESS_R = Math.Round(q.IESS ?? 0, 2, MidpointRounding.AwayFromZero);
+                q.TOTALI = q.SUELDO + q.OTROING + q.SOBRET + q.DECIMOC + q.DECIMOT + q.FRESERVA_R;
+                q.TOTALE = q.PRESTAMO + q.IESS_R + q.ANTICIPO + q.OTROEGR;
+                q.NETO = q.TOTALI - q.TOTALE;
             });
 
             ListaAgrupada = (from q in lst_rpt
@@ -83,12 +86,12 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  TOTALI = Resumen.Sum(q => q.TOTALI),
                                  DECIMOT = Resumen.Sum(q => q.DECIMOT),
                                  DECIMOC = Resumen.Sum(q => q.DECIMOC),
-                                 FRESERVA = Resumen.Sum(q => q.FRESERVA),
+                                 FRESERVA = Resumen.Sum(q => q.FRESERVA_R),
                                  SUELDO = Resumen.Sum(q => q.SUELDO + q.SOBRET + q.OTROING),
                                  SOBRET = Resumen.Sum(q => q.SOBRET),
                                  OTROING = Resumen.Sum(q => q.OTROING),
 
-                                 TotalResumen = Resumen.Sum(q => q.SUELDO + q.DECIMOT + q.DECIMOC + q.FRESERVA + q.SOBRET + q.OTROING)
+                                 TotalResumen = Resumen.Sum(q => q.SUELDO + q.DECIMOT + q.DECIMOC + q.FRESERVA_R + q.SOBRET + q.OTROING)
                              }).ToList();
 
 
