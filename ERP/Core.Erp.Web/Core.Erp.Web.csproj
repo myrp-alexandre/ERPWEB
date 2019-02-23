@@ -290,6 +290,7 @@
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ATSController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\CierrePorModuloPorSucursalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\GrupoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ImportacionDiariosController.cs" />
@@ -9885,6 +9886,10 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\_CmbCuenta_sueldos.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_CmbCuenta_prov.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_CmbEmpleado_CtaCon_x_pagar.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\CierrePorModuloPorSucursal\_GridViewPartial_CierrePorModuloPorSucursal.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\CierrePorModuloPorSucursal\Index.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\CierrePorModuloPorSucursal\Nuevo.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\CierrePorModuloPorSucursal\Modificar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
