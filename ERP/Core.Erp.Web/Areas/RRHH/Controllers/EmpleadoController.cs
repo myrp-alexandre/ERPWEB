@@ -207,6 +207,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+
+
+
+        public ActionResult CmbEmpleado_CtaCon_x_pagar()
+        {
+            ro_empleado_Info model = new ro_empleado_Info();
+            return PartialView("_CmbEmpleado_CtaCon_x_pagar", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_x_pagar(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_x_pagar(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #endregion
@@ -514,7 +530,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_tipo_cuenta = bus_catalogorrhh.get_list_x_tipo(9);
                 ViewBag.lst_tipo_empleado = bus_catalogorrhh.get_list_x_tipo(8);
                 ViewBag.lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-
+                ViewBag.lst_cat = bus_catalogorrhh.get_list_x_tipo(44);
 
             }
             catch (Exception)

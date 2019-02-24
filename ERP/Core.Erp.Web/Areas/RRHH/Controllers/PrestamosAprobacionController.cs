@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                     if (info_prestamo.GeneraOP)
                     {
-                        if (info_prestamo == null || (info_prestamo.IdCtaCble_Emplea == null || info_prestamo.rub_ctacon == null))
+                        if (info_prestamo == null || (info_prestamo.IdCtaCble_Emplea == null || info_prestamo.IdCtaCble_x_pagar_empleado == null  ))
                         {
                             existen_cuentas = false;
                             mensaje_aprobar = "No estan asignadas las cuentas contables de los empleados seleccionados";

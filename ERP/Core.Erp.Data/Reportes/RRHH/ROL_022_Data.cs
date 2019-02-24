@@ -69,13 +69,15 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  NomArea = q.NomArea,
                                  NomDivision = q.NomDivision,
                                  NomNomina = q.NomNomina,
-                                 NomNominaTipo = q.NomNominaTipo
-
+                                 NomNominaTipo = q.NomNominaTipo,
+                                IdRubro= q.IdRubro
+                                 
                              }).ToList();
 
 
 
                 }
+                
                 return Lista;
             }
             catch (Exception)

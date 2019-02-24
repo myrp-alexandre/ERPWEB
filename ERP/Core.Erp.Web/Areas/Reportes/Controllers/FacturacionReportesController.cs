@@ -2,6 +2,7 @@
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
@@ -20,6 +21,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         fa_factura_Bus bus_factura = new fa_factura_Bus();
+        fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
 
@@ -37,25 +39,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
-
-        public ActionResult CmbProductoPadre_Facturacion()
-        {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
-            return PartialView("_CmbProductoPadre_Facturacion", model);
-        }
+        
         public ActionResult CmbProductoHijo_Facturacion()
         {
             SessionFixed.IdProducto_padre_dist = (!string.IsNullOrEmpty(Request.Params["IdProductoPadre"])) ? Request.Params["IdProductoPadre"].ToString() : "-1";
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbProductoHijo_Facturacion", model);
         }
-        public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0,0);
-        }
         public List<in_Producto_Info> get_list_ProductoHijo_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS, cl_enumeradores.eModulo.INV, (string.IsNullOrEmpty(SessionFixed.IdProducto_padre_dist) ? -1 : decimal.Parse(SessionFixed.IdProducto_padre_dist)),0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL, cl_enumeradores.eModulo.INV,0,Convert.ToInt32(SessionFixed.IdSucursal));
         }
         public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -121,6 +114,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             });
             ViewBag.lst_sucursal = lst_sucursal;
 
+            var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);
+            lst_formapago.Add(new fa_catalogo_Info
+            {
+                IdCatalogo = "",
+                Nombre = "TODAS"
+            });
+
+            ViewBag.lst_formapago = lst_formapago;
+
         }
         private void cargar_combos(cl_filtros_facturacion_Info model)
         {
@@ -172,6 +174,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCliente = 0,
+                IdProducto = 0,
                 Check1 = false
             };
 
@@ -182,14 +187,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -203,15 +205,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);
-                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -322,8 +321,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
-            report.p_MostrarSaldo0.Value = model.Check1;
-            report.p_MostrarContactos.Value = model.Check2;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
@@ -340,8 +337,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
-            report.p_MostrarSaldo0.Value = model.Check1;
-            report.p_MostrarContactos.Value = model.Check2;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);
@@ -411,15 +406,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCatalogo_FormaPago = ""
             };
 
+            
             cargar_FAC010(model);
             FAC_010_Rpt report = new FAC_010_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdCatalogo_FormaPago.Value = model.IdCatalogo_FormaPago;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -434,6 +432,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdCatalogo_FormaPago.Value = model.IdCatalogo_FormaPago;
 
             cargar_FAC010(model);
 

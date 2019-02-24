@@ -341,11 +341,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     IdEmpleado = empleado.IdEmpleado,
                                     IdRubro = rubros.IdRubro,
                                     ru_descripcion = rubros.ru_descripcion,
-                                    ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino)
 
                                 };
+
+
+                                if(info.IdRubro==rubros_calculados.IdRubro_horas_matutina)
+                                info.ValorHora = Convert.ToDouble(empleado.Valor_horas_matutino);
+
+                                if (info.IdRubro == rubros_calculados.IdRubro_horas_vespertina)
+                                    info.ValorHora = Convert.ToDouble(empleado.Valor_horas_vespertina);
+
+                                if (info.IdRubro == rubros_calculados.IdRubro_horas_control_salida)
+                                    info.ValorHora = Convert.ToDouble(empleado.Valor_hora_control_salida);
+
+
+                                if (info.IdRubro == rubros_calculados.IdRubro_horas_brigadas)
+                                    info.ValorHora = Convert.ToDouble(empleado.Valor_horas_brigada);
+
+                                if (info.IdRubro == rubros_calculados.IdRubro_horas_adicionales)
+                                    info.ValorHora = Convert.ToDouble(empleado.Valor_hora_adicionales);
+
                                 horas_mat = info.NumHoras;
-                                info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
+                                info.Valor = Convert.ToDouble(info.ValorHora * info.NumHoras);
                                 info.Secuencia = lista_novedades.Count() + 1;
                                 if (jornada != null && jornada != "")
                                     info.IdJornada = lst_jornada.Where(v => v.codigo == jornada).FirstOrDefault().IdJornada;

@@ -14,6 +14,8 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
+
+
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -78,11 +80,9 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
         public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
-        public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
         public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
-        public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
         public DbSet<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
         public DbSet<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
@@ -101,9 +101,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_nomina_sin_percebir_sueldo> vwro_nomina_sin_percebir_sueldo { get; set; }
         public DbSet<ro_FormulaHorasRecargo> ro_FormulaHorasRecargo { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
-        public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
         public DbSet<ro_NominasPagosCheques> ro_NominasPagosCheques { get; set; }
-        public DbSet<vwRo_rol_detalle_saldo_por_pagar> vwRo_rol_detalle_saldo_por_pagar { get; set; }
         public DbSet<vwro_NominasPagosCheques> vwro_NominasPagosCheques { get; set; }
         public DbSet<ro_NominasPagosCheques_det> ro_NominasPagosCheques_det { get; set; }
         public DbSet<vwro_NominasPagosCheques_det> vwro_NominasPagosCheques_det { get; set; }
@@ -116,9 +114,7 @@ namespace Core.Erp.Data
         public DbSet<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_det> vwro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
-        public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
-        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<ro_cargo> ro_cargo { get; set; }
         public DbSet<vwro_nomina_x_horas_extras_aprobadas> vwro_nomina_x_horas_extras_aprobadas { get; set; }
         public DbSet<vwro_nomina_x_horas_extras_det> vwro_nomina_x_horas_extras_det { get; set; }
@@ -126,7 +122,6 @@ namespace Core.Erp.Data
         public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<vwro_archivos_bancos_generacion> vwro_archivos_bancos_generacion { get; set; }
         public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
-        public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public DbSet<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
         public DbSet<ro_jornada> ro_jornada { get; set; }
         public DbSet<ro_novedad_x_empleado> ro_novedad_x_empleado { get; set; }
@@ -143,7 +138,13 @@ namespace Core.Erp.Data
         public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_prestamo> ro_prestamo { get; set; }
+        public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
+        public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
+        public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
+        public DbSet<ro_empleado> ro_empleado { get; set; }
+        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
+        public DbSet<vwRo_rol_detalle_saldo_por_pagar> vwRo_rol_detalle_saldo_por_pagar { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

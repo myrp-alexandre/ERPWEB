@@ -201,7 +201,7 @@
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(70F, 75.41666F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(96.04166F, 75.41666F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable4
@@ -269,43 +269,40 @@
             this.xrTableCell7.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell7.Name = "xrTableCell7";
             this.xrTableCell7.StylePriority.UseFont = false;
-            this.xrTableCell7.Text = "Desde:";
-            this.xrTableCell7.Weight = 0.37283624072760246D;
+            this.xrTableCell7.Text = "Fecha Corte:";
+            this.xrTableCell7.Weight = 0.51154024065218218D;
             // 
             // xrTableCell19
             // 
             this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_ini]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_fin]")});
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell19.Weight = 1.4569900743065372D;
+            this.xrTableCell19.Weight = 1.3182860743819573D;
             // 
             // xrTableCell20
             // 
             this.xrTableCell20.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseFont = false;
-            this.xrTableCell20.Text = "Hasta:";
-            this.xrTableCell20.Weight = 0.61251669140027376D;
+            this.xrTableCell20.Weight = 1.3659130017553975D;
             // 
             // xrTableCell21
             // 
-            this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_fin]")});
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell21.Weight = 1.5576569935655871D;
+            this.xrTableCell21.Weight = 0.80426068321046318D;
             // 
             // xrTable1
             // 
             this.xrTable1.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(70F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(96.04166F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow6,
             this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(681F, 75F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(654.9583F, 75F);
             this.xrTable1.StylePriority.UseFont = false;
             // 
             // xrTableRow1

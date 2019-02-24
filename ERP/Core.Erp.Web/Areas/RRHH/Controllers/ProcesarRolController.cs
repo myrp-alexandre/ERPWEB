@@ -30,6 +30,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         ct_cbtecble_det_lst list_det = new ct_cbtecble_det_lst();
+        ct_cbtecble_lst_prov list_prov = new ct_cbtecble_lst_prov();
+        ct_cbtecble_tipo_Bus bus_tipo = new ct_cbtecble_tipo_Bus();
+        ro_Parametros_Bus bus_parametro = new ro_Parametros_Bus();
         #endregion
         #region Metodos ComboBox bajo demanda xueldo-prov
 
@@ -278,10 +281,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 //info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
-                info.lst_sueldo_x_pagar = list_det.get_list_cta();
-                info.lst_provisiones = list_det.get_list_cta();
+                info.lst_sueldo_x_pagar = list_det.get_list_cta(info.IdTransaccionSession);
+                info.lst_provisiones = list_prov.get_list(info.IdTransaccionSession);
                 info.UsuarioCierre = Session["IdUsuario"].ToString();
-
+                
                 foreach (var item in info.lst_sueldo_x_pagar)
                 {
                     item.IdCtaCble = item.IdCtaCble.Trim();
@@ -306,6 +309,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                 }
                 info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+              //  var param = bus_parametro.get_info(info.IdEmpresa);
+                
                     if (!bus_rol.ContabilizarPeriodo(info))
                     {
                         cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
@@ -323,26 +328,30 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult ContabilizarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdRol=0)
+        public ActionResult ContabilizarPeriodo( int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdRol=0)
         {
             try
             {
-                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
-                cargar_combo_detalle();
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
                 ro_rol_Info model = new ro_rol_Info
 
                 {
+                    IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                    IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                     lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>(),
-                    lst_provisiones = new List<ct_cbtecble_det_Info>()
+                    lst_provisiones = new List<ct_cbtecble_det_Info>(),
                 };
-                model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
-                list_det.set_list_cta(model.lst_sueldo_x_pagar);
-                list_det.set_list_cta(model.lst_provisiones);
-                //Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
-                //Session["lst_provisiones"] = model.lst_provisiones;
-
-                model.Fechacontabilizacion=DateTime.Now;
+                model = bus_rol.get_info_contabilizar(Convert.ToInt32(SessionFixed.IdEmpresa), IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
+                list_det.set_list_cta(model.lst_sueldo_x_pagar, model.IdTransaccionSession=Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                list_prov.set_list(model.lst_provisiones, model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                model.Fechacontabilizacion = DateTime.Now;
+                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
+                cargar_combo_detalle();
                 return View(model);
 
             }
@@ -447,18 +456,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_sueldo_x_pagar()
         {
-           int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ro_rol_Info model = new ro_rol_Info();
-
-            model.lst_sueldo_x_pagar = list_det.get_list_cta();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = list_det.get_list_cta(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
         }
 
         public ActionResult GridViewPartial_provisiones()
         {
-            cargar_combo_detalle();
-            ro_rol_Info model = new ro_rol_Info();
-            model.lst_provisiones = list_det.get_list_cta();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+           var model = list_prov.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_provisiones", model);
         }
 
@@ -507,16 +513,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (info_det != null)
             {
-                if (cta == null)
+                if (cta != null)
                 {
                     info_det.pc_Cuenta = cta.pc_Cuenta;
                     info_det.IdCtaCble = cta.IdCtaCble;
                 }
             }
             if (ModelState.IsValid)
-                list_det.UpdateRow(info_det);
-            ro_rol_Info model = new ro_rol_Info();
-            model.lst_sueldo_x_pagar = list_det.get_list_cta().Where(v => v.pc_Cuenta == "").ToList();
+                list_prov.UpdateRow_prov(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+           var model = list_prov.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_provisiones", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -527,42 +532,42 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
             if (info_det != null)
             {
-                if (cta == null)
+                if (cta != null)
                 {
                     info_det.pc_Cuenta = cta.pc_Cuenta;
                     info_det.IdCtaCble = cta.IdCtaCble;
                 }
             }
             if (ModelState.IsValid)
-                list_det.UpdateRow(info_det);
-            ro_rol_Info model = new ro_rol_Info();
-            model.lst_sueldo_x_pagar = list_det.get_list_cta().Where(v => v.pc_Cuenta == "").ToList();
+                list_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = list_det.get_list_cta(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
         }
     }
     public class ct_cbtecble_det_lst
     {
-        public List<ct_cbtecble_det_Info> get_list_cta()
+        string variable = "ct_cbtecble_det_Info";
+        public List<ct_cbtecble_det_Info> get_list_cta(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
 
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session["ct_cbtecble_det_Info"];
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
-        public void set_list_cta(List<ct_cbtecble_det_Info> list)
+        public void set_list_cta(List<ct_cbtecble_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
-        public void UpdateRow(ct_cbtecble_det_Info info_det)
+        public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
-            var ls = get_list_cta();
+            var ls = get_list_cta(IdTransaccionSession);
 
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
-            ct_cbtecble_det_Info edited_info = get_list_cta().Where(m => m.secuencia == info_det.secuencia).First();
+            ct_cbtecble_det_Info edited_info = get_list_cta(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             if (cta != null)
             {
                 info_det.IdCtaCble = cta.IdCtaCble ;
@@ -573,5 +578,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.IdCtaCble = info_det.IdCtaCble;
         }
     }
+    public class ct_cbtecble_lst_prov
+    {
+        string variable = "ct_cbtecble_det_Info_x";
+        public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
 
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+        public void set_list(List<ct_cbtecble_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+        }
+        public void UpdateRow_prov(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
+        {
+            var ls = get_list(IdTransaccionSession);
+
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var cta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
+            if (cta != null)
+            {
+                info_det.IdCtaCble = cta.IdCtaCble;
+                info_det.pc_Cuenta = cta.pc_Cuenta;
+            }
+
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            edited_info.IdCtaCble = info_det.IdCtaCble;
+        }
     }
+}

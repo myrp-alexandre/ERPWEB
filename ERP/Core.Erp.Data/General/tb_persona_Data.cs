@@ -104,7 +104,8 @@ namespace Core.Erp.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdCliente
+                                IdEntidad = q.IdCliente,
+                                CodPersona = q.Descripcion_tip_cliente
                             });
                         }
                         context_f.Dispose();

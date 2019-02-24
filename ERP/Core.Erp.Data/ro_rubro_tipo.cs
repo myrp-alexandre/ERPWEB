@@ -18,13 +18,13 @@ namespace Core.Erp.Data
         {
             this.ro_Acta_Finiquito_Detalle = new HashSet<ro_Acta_Finiquito_Detalle>();
             this.ro_Config_Param_contable = new HashSet<ro_Config_Param_contable>();
-            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
             this.ro_empleado_x_CuentaContable = new HashSet<ro_empleado_x_CuentaContable>();
             this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
             this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
             this.ro_EmpleadoNovedadCargaMasiva = new HashSet<ro_EmpleadoNovedadCargaMasiva>();
             this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
+            this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rubros_calculados = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados1 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados2 = new HashSet<ro_rubros_calculados>();
@@ -42,7 +42,7 @@ namespace Core.Erp.Data
             this.ro_rubros_calculados14 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados15 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados16 = new HashSet<ro_rubros_calculados>();
-            this.ro_prestamo = new HashSet<ro_prestamo>();
+            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -76,13 +76,13 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_Acta_Finiquito_Detalle> ro_Acta_Finiquito_Detalle { get; set; }
         public virtual ro_catalogo ro_catalogo { get; set; }
         public virtual ICollection<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
-        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public virtual ICollection<ro_empleado_x_CuentaContable> ro_empleado_x_CuentaContable { get; set; }
         public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
         public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
+        public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados1 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados2 { get; set; }
@@ -100,6 +100,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados14 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados15 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados16 { get; set; }
-        public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
+        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_005_Data
     {
-        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin, bool MostrarSaldo0, bool MostrarContactos, ref List<FAC_005_resumen_Info> lst_resumen)
+        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin, ref List<FAC_005_resumen_Info> lst_resumen)
         {
             try
             {
@@ -26,29 +26,27 @@ namespace Core.Erp.Data.Reportes.Facturacion
 
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPFAC_005(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdCliente_ini, IdCliente_fin, Fecha_ini, Fecha_fin, MostrarSaldo0,MostrarContactos)
+                    Lista = (from q in Context.SPFAC_005(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdCliente_ini, IdCliente_fin, Fecha_ini, Fecha_fin)
                              select new FAC_005_Info
                              {
-                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpresa = q.IdEmpresa,   
                                  IdSucursal = q.IdSucursal,
                                  IdCliente = q.IdCliente,
-                                 IdContacto = q.IdContacto,
                                  NomCliente = q.NomCliente,
-                                 NomContacto = q.NomContacto,
                                  TipoDocumento = q.TipoDocumento,
                                  EsExportacion = q.EsExportacion,
-                                 SubtotalIVA0 = q.SubtotalIVA0,
-                                 SubtotalIVA = q.SubtotalIVA,
-                                 vt_iva = q.vt_iva,
-                                 Total = q.Total,
-                                 VRetenIVA = q.VRetenIVA,
-                                 VRetenFTE = q.VRetenFTE,
-                                 ValorACobrar = q.ValorACobrar,
-                                 VCobrado = q.VCobrado,
-                                 Saldo = q.Saldo,
-                                 CantFactContacto = q.CantFactContacto,
+                                 Su_Descripcion = q.Su_Descripcion,
                                  Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
-                                 Su_Descripcion = q.Su_Descripcion
+                                 SubtotalIVASinDscto = q.SubtotalIVASinDscto,
+                                 SubtotalSinIVASinDscto = q.SubtotalSinIVASinDscto,
+                                 SubtotalSinDscto = q.SubtotalSinDscto,
+                                 Descuento = q.Descuento,
+                                 SubtotalIVAConDscto = q.SubtotalIVAConDscto,
+                                 SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
+                                 SubtotalConDscto = q.SubtotalConDscto,
+                                 ValorIVA = q.ValorIVA,
+                                 Total = q.Total,
+                                 Cantidad = q.Cantidad
                              }).ToList();
                 }
 
@@ -56,15 +54,12 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                    group Cb by new { Cb.IdSucursal, Cb.Su_Descripcion, Cb.Su_CodigoEstablecimiento }
                                        into grouping
                                    select new { grouping.Key,
+                                       CantidadPorSucursal = grouping.Sum(q => q.Cantidad),
+                                       CantidadVentasLocales = grouping.Where(q => q.EsExportacion == false).Sum(q => q.Cantidad),
+                                       CantidadExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(q => q.Cantidad),
                                        TotalPorSucursal = grouping.Sum(p => p.Total),
-                                       SaldoPorSucursal = grouping.Sum(p => p.Saldo),
-                                       CantidadPorSucursal = grouping.Sum(q => q.CantFactContacto),
-                                       CantidadVentasLocales = grouping.Where(q=>q.EsExportacion == false).Sum(q=>q.CantFactContacto),
-                                       CantidadExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(q => q.CantFactContacto),
                                        TotalVentasLocales = grouping.Where(q => q.EsExportacion == false).Sum(p => p.Total),
-                                       TotalExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(p => p.Total),
-                                       SaldoVentasLocales = grouping.Where(q => q.EsExportacion == false).Sum(p => p.Saldo),
-                                       SaldoExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(p => p.Saldo),
+                                       TotalExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(p => p.Total)
                                    };
 
                 foreach (var item in TdebitosxCta)
@@ -72,18 +67,12 @@ namespace Core.Erp.Data.Reportes.Facturacion
                     lst_resumen.Add(new FAC_005_resumen_Info
                     {
                         NomSucursal = "Total " + item.Key.Su_CodigoEstablecimiento + " - " + item.Key.Su_Descripcion,
-
+                        CantidadExportaciones = Convert.ToInt32(item.CantidadExportaciones),
+                        CantidadVentasLocales = Convert.ToInt32(item.CantidadVentasLocales),
+                        CantidadPorSucursal = Convert.ToInt32(item.CantidadPorSucursal),
                         TotalVentasLocales = item.TotalVentasLocales == null ? 0 : Convert.ToDouble(item.TotalVentasLocales),
                         TotalExportaciones = item.TotalExportaciones == null ? 0 : Convert.ToDouble(item.TotalExportaciones),
-                        TotalPorSucursal = item.TotalPorSucursal == null ? 0 : Convert.ToDouble(item.TotalPorSucursal),
-
-                        SaldoExportaciones = item.SaldoExportaciones,
-                        SaldoTotalSucursal = item.SaldoPorSucursal,
-                        SaldoVentasLocales = item.SaldoVentasLocales,
-
-                        CantidadExportaciones = item.CantidadExportaciones,
-                        CantidadVentasLocales = item.CantidadVentasLocales,
-                        CantidadPorSucursal = item.CantidadPorSucursal
+                        TotalPorSucursal = item.TotalPorSucursal == null ? 0 : Convert.ToDouble(item.TotalPorSucursal)
                     });
                 }
 

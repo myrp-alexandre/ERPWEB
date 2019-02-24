@@ -12,6 +12,7 @@
 @using (Html.BeginForm("Index", "ProcesarRol", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -56,6 +57,9 @@
                 </button>
             </div>
         </div>
+        <div class="box-body">
+            @Html.Action("GridViewPartial_ro_rol", new { IdSucursal = Model.IdSucursal })
+        </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
@@ -64,5 +68,4 @@
     </div>
 
 }
-
 

@@ -164,25 +164,25 @@ namespace Core.Erp.Bus.RRHH
                                 IdTipoCbte = Convert.ToInt32(info_tipo_op.IdTipoCbte_OP),
                                 cb_Estado = "A",
                                 IdPeriodo = Convert.ToInt32(periodo.pe_FechaFin.Year.ToString() + periodo.pe_FechaFin.Month.ToString().PadLeft(2, '0')),
-                                cb_Observacion = "Cancelación de sueldo del " + info.IdPeriodo + " ha " + item.pe_nombreCompleto,
+                                cb_Observacion = "Cancelación de sueldo del " + info.IdPeriodo + " a " + item.pe_nombreCompleto,
                                 lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>
                                 {
                                     new ct_cbtecble_det_Info
                                     {
                                         IdEmpresa=item.IdEmpresa,
                                         IdTipoCbte = Convert.ToInt32(info_tipo_op.IdTipoCbte_OP),
-                                        IdCtaCble=info_tipo_op.IdCtaCble,
+                                        IdCtaCble=item.IdCtaCble_Emplea,
                                         dc_Valor=item.Valor,
-                                        dc_Observacion="Cancelación de sueldo del "+periodo.IdPeriodo+" ha "+item.pe_nombreCompleto,
+                                        dc_Observacion="Cancelación de sueldo del "+periodo.IdPeriodo+" a "+item.pe_nombreCompleto,
                                         secuencia=1,
                                     },
                                     new ct_cbtecble_det_Info
                                     {
                                          IdEmpresa=item.IdEmpresa,
                                         IdTipoCbte = Convert.ToInt32(info_tipo_op.IdTipoCbte_OP),
-                                        IdCtaCble=info_tipo_op.IdCtaCble,
+                                        IdCtaCble=item.IdCtaCble_x_pagar_empleado,
                                         dc_Valor=item.Valor*-1,
-                                        dc_Observacion="Cancelación de sueldo del "+info.IdPeriodo+" ha "+item.pe_nombreCompleto,
+                                        dc_Observacion="Cancelación de sueldo del "+info.IdPeriodo+" a "+item.pe_nombreCompleto,
                                         secuencia=2,
                                     }
 

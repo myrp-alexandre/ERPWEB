@@ -407,7 +407,7 @@ namespace Core.Erp.Data.RRHH
                             var cuenta_x_rubro = Context.ro_rubro_tipo.Where(q => q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdRubro == Entity_Prestamo.IdRubro).FirstOrDefault();
 
                             if (
-                                cuenta_x_rubro.rub_ctacon != "" && cuenta_x_rubro.rub_ctacon != null &&
+                               Entity_Empleado.IdCtaCble_x_pagar_empleado!=null &&
                                 Entity_Empleado.IdCtaCble_Emplea != null
                                 )
                             {
@@ -457,7 +457,7 @@ namespace Core.Erp.Data.RRHH
                                     IdTipoCbte = diario.IdTipoCbte,
                                     IdCbteCble = diario.IdCbteCble,
                                     secuencia = 1,
-                                    IdCtaCble = cuenta_x_rubro.rub_ctacon,
+                                    IdCtaCble = Entity_Empleado.IdCtaCble_Emplea,
                                     dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero),
                                 };
 
@@ -469,7 +469,7 @@ namespace Core.Erp.Data.RRHH
                                     IdTipoCbte = diario.IdTipoCbte,
                                     IdCbteCble = diario.IdCbteCble,
                                     secuencia = 2,
-                                    IdCtaCble = Entity_Empleado.IdCtaCble_Emplea,
+                                    IdCtaCble = Entity_Empleado.IdCtaCble_x_pagar_empleado,
                                     dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero) * -1
                                 };
 
@@ -544,6 +544,7 @@ namespace Core.Erp.Data.RRHH
                         IdCbteCble = Entity.IdCbteCble,
                         IdOrdenPago = Entity.IdOrdenPago,
                         IdCtaCble_Emplea = Entity.IdCtaCble_Emplea,
+                        IdCtaCble_x_pagar_empleado = Entity.IdCtaCble_x_pagar_empleado,
                         rub_ctacon = Entity.rub_ctacon,
                         GeneraOP=Entity.GeneraOP
                     };

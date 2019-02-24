@@ -301,7 +301,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
                 if (info.cn_total == 0)
                 {
-                    mensaje = "El monto de la factura no puede ser cero";
+                    mensaje = "El total no puede ser cero";
                     return mensaje;
                 }
                 info.info_comrobante.lst_ct_cbtecble_det.ForEach(item =>
@@ -310,8 +310,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         mensaje = "Falta cuenta contable " + item.dc_Observacion;
                 });
 
-                if (Convert.ToDouble(info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor)) != 0)
-                    mensaje = "El diario contable esta descuadrado ";
+                if (Math.Round(Convert.ToDouble(info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor)),2,MidpointRounding.AwayFromZero) != 0)
+                    mensaje = "El diario contable esta descuadrado";
 
                
                 return mensaje;

@@ -22,5 +22,6 @@ namespace Core.Erp.Data
         public int Idtipo_cliente { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string Estado { get; set; }
+        public string Descripcion_tip_cliente { get; set; }
     }
 }

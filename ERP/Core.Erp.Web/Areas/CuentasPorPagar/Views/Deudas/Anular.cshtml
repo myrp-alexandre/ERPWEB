@@ -803,7 +803,8 @@
                     else
                     {
                         var date = moment(co_FechaFactura.GetValue(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
-                        co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
+                        co_FechaFactura_vct.SetValue(new Date(date));
+                        //co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
                     }
 
 

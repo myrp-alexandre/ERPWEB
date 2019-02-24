@@ -47,7 +47,8 @@ namespace Core.Erp.Info.Helps
         public int IdDivision { get; set; }
         public int IdDepartamento { get; set; }
         public int IdProceso { get; set; }
-
+        public string em_status { get; set; }
+        public string Ubicacion { get; set; }
         #endregion
 
         #region filtros de Presupuesto
@@ -195,11 +196,14 @@ namespace Core.Erp.Info.Helps
         public decimal IdLiquidacion { get; set; }
         public bool mostrarAnulados { get; set; }
         public bool mostrar_observacion_completa { get; set; }
+
+        public string IdCatalogo_FormaPago { get; set; }
         public cl_filtros_facturacion_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
             fecha_corte = DateTime.Now.Date;
+            IdCatalogo_FormaPago = "";
         }
     }
 

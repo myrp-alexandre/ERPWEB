@@ -32,35 +32,16 @@
             <div class="col-md-12">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="IdProductoPadre">Producto matriz</label>
-                        @Html.Partial("_CmbProductoPadre_Facturacion", Model)
-                        @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
                         <label for="IdProducto">Producto</label>
                         @Html.Partial("_CmbProductoHijo_Facturacion", Model)
                         @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
                         @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
                         @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="IdClienteContacto">Cliente contacto</label>
-                        @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
-                        @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -155,35 +136,3 @@
                 <!-- /.box-footer-->
             </div>
             }
-        <script>
-            $(function () {
-                $("#IdCliente").change(function () {
-                    cargar_cliente();
-                });
-            });
-            function cargar_cliente() {
-
-                $("#IdClienteContacto").empty();
-                var codigo = IdCliente.GetValue();
-
-                    var datos = {
-                        IdCliente: codigo
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        data: JSON.stringify(datos),
-                        url: '@Url.Action("cargar_cliente", "FacturacionReportes",new { Area = "Reportes"})',
-                        async: false,
-                        dataType: 'json',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            $.each(data, function (i, row) {
-                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
-                                $("#IdClienteContacto").val("0");
-                        });
-                    },
-                    error: function (error) {
-                    }
-                });
-            };
-            </script>

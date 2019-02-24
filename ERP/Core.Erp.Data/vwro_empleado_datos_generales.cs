@@ -88,5 +88,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdEmpleadoPAdre { get; set; }
         public Nullable<double> Valor_hora_adicionales { get; set; }
         public Nullable<double> Valor_hora_control_salida { get; set; }
+        public string CodCatalogo_Ubicacion { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
     }
 }

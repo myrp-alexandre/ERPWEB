@@ -14,7 +14,7 @@ namespace Core.Erp.Bus.Reportes.RRHH
             {
                 return odata.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdEmpleado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -27,7 +27,20 @@ namespace Core.Erp.Bus.Reportes.RRHH
             {
                 return odata.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
             }
-            catch (Exception ex)
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ROL_002_Info> get_list_detalle_prestamos(int IdEmpresa, int IdNominaTipo, int IdPeriodo, int IdEmpleado)
+        {
+            try
+            {
+                return odata.get_list_detalle_prestamos(IdEmpresa, IdNominaTipo, IdPeriodo, IdEmpleado);
+            }
+            catch (Exception)
             {
 
                 throw;

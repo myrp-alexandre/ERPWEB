@@ -386,7 +386,28 @@
                                 @Html.ValidationMessageFor(q => q.IdEmpleado_Supervisor, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="CodCatalogo_Ubicacion">Ubicación</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.CodCatalogo_Ubicacion, settings =>
+                               {
+                                   settings.Name = "CodCatalogo_Ubicacion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("CodCatalogo", "Id").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("ca_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "CodCatalogo";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "Descripción";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
+                               }).BindList(ViewBag.lst_cat).GetHtml()
+                                @Html.ValidationMessageFor(q => q.CodCatalogo_Ubicacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
 
 

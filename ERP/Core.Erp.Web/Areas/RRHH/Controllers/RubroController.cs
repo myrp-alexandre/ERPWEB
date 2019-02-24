@@ -115,8 +115,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                ro_rubro_tipo_Info model = bus_rubro.get_info(GetIdEmpresa(), IdRubro);
+                if (model == null)
+                    return RedirectToAction("Index");
+                model.rub_grupo = model.rub_grupo == null ? "" : model.rub_grupo;
+                model.rub_GrupoResumen = model.rub_GrupoResumen == null ? "" : model.rub_GrupoResumen;
                 cargar_combo();
-                return View(bus_rubro.get_info(GetIdEmpresa(), IdRubro));
+                return View(model);
+                //return View(bus_rubro.get_info(GetIdEmpresa(), IdRubro));
 
             }
             catch (Exception)

@@ -33,5 +33,7 @@ namespace Core.Erp.Data
         public string em_NumCta { get; set; }
         public string em_tipoCta { get; set; }
         public decimal IdPersona { get; set; }
+        public string IdCtaCble_Emplea { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
     }
 }

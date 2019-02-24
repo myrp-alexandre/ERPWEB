@@ -33,7 +33,7 @@ namespace Core.Erp.Data.Inventario
                                  && IdSucursalIni <= q.IdSucursal
                                  && q.IdSucursal <= IdSucursalFin
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
-                                 orderby new { q.cm_fecha } descending
+                                 orderby new {q.IdNumMovi } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -63,7 +63,7 @@ namespace Core.Erp.Data.Inventario
                                  && q.IdSucursal <= IdSucursalFin
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && q.Estado == "A"
-                                 orderby new { q.cm_fecha } descending
+                                 orderby new {q.IdNumMovi } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

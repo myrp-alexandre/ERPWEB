@@ -18,6 +18,8 @@ namespace Core.Erp.Web.Reportes.Banco
         public string usuario { get; set; }
         public string empresa { get; set; }
         public int IdSucursal { get; set; }
+        
+        List<BAN_008_Info> ListaAgrupada = new List<BAN_008_Info>();
         public BAN_008_Rpt()
         {
             InitializeComponent();
@@ -37,7 +39,6 @@ namespace Core.Erp.Web.Reportes.Banco
             BAN_008_Bus bus_rpt = new BAN_008_Bus();
             List<BAN_008_Info> lst_rpt = new List<BAN_008_Info>();
             //List<BAN_008_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, IdBanco);
-
             
             ba_Banco_Cuenta_x_tb_sucursal_Bus bus_cta_suc = new ba_Banco_Cuenta_x_tb_sucursal_Bus();
             var sucursal = bus_cta_suc.GetListSuc(IdEmpresa, IdSucursal);
@@ -46,9 +47,26 @@ namespace Core.Erp.Web.Reportes.Banco
                 foreach (var item in sucursal)
                 {
                     lst_rpt.AddRange(bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, item.IdBanco));
+
                 }
             }
             this.DataSource = lst_rpt;
+            ListaAgrupada = (from q in lst_rpt
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdBanco,
+                                 q.ba_descripcion
+                             } into Resumen
+                             select new BAN_008_Info
+                             {
+                                 IdEmpresa = Resumen.Key.IdEmpresa,
+                                 IdBanco = Resumen.Key.IdBanco,
+                                 ba_descripcion = Resumen.Key.ba_descripcion,
+                                 Valor = Resumen.Sum(q => q.Valor)
+                             }).ToList();
+
+            #region Suc / valores
 
             var suc = lst_rpt.Where(q => q.Su_Descripcion != null).FirstOrDefault();
             if(suc!=null)
@@ -71,8 +89,13 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_ND.Text = ND.ToString();
             lbl_DP.Text = DP.ToString();
             lbl_CH.Text = CH.ToString();
+            #endregion
+        }
 
-
+        private void subreport_resumen_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            //var Resumen = ListaAgrupada;
+            ((XRSubreport)sender).ReportSource.DataSource = ListaAgrupada;
         }
     }
 }

@@ -24,5 +24,6 @@ namespace Core.Erp.Data
         public string EstadoCobro { get; set; }
         public string ru_descripcion { get; set; }
         public string rub_codigo { get; set; }
+        public Nullable<double> CantidadHoras { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdOrdenPago { get; set; }
     
         public virtual ICollection<ro_Acta_Finiquito_Detalle> ro_Acta_Finiquito_Detalle { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_cargo ro_cargo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

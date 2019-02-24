@@ -47,5 +47,6 @@ namespace Core.Erp.Data
         public bool GeneraOP { get; set; }
         public Nullable<int> IdEmpresa_op { get; set; }
         public Nullable<int> IdEmpresa_dc { get; set; }
+        public string IdCtaCble_x_pagar_empleado { get; set; }
     }
 }
