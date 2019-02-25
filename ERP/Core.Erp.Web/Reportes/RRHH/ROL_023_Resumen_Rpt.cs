@@ -49,7 +49,87 @@ namespace Core.Erp.Web.Reportes.RRHH
                 q.NETO = q.TOTALI - q.TOTALE;
             });
 
-            ListaAgrupada = (from q in lst_rpt
+            lst_rpt.ForEach(q => {
+                q.FRESERVA_R = Math.Round(q.FRESERVA ?? 0, 2, MidpointRounding.AwayFromZero);
+                q.IESS_R = Math.Round(q.IESS ?? 0, 2, MidpointRounding.AwayFromZero);
+                q.TOTALI = q.SUELDO + q.OTROING + q.SOBRET + q.DECIMOC + q.DECIMOT + q.FRESERVA_R;
+                q.TOTALE = q.PRESTAMO + q.IESS_R + q.ANTICIPO + q.OTROEGR;
+                q.NETO = q.TOTALI - q.TOTALE;
+            });
+
+            var lst = (from q in lst_rpt
+                       where q.Fila != 1
+                       group q by new
+                       {
+                           q.IdEmpleado
+                       }
+                      into g
+                       select new ROL_023_Info
+                       {
+                           IdEmpleado = g.Key.IdEmpleado,
+                           IESS_2 = g.Sum(q => q.IESS_R),
+                           FRESERVA_2 = g.Sum(q => q.FRESERVA_R)
+                       }).ToList();
+
+            var lst_final = (from a in lst_rpt
+                             join b in lst on new { a.IdEmpleado } equals new { b.IdEmpleado } into c
+                             from b in c.DefaultIfEmpty()
+                             select new ROL_023_Info
+                             {
+                                 IdEmpresa = a.IdEmpresa,
+                                 IdPeriodo = a.IdPeriodo,
+                                 ANTICIPO = a.ANTICIPO,
+                                 DECIMOC = a.DECIMOC,
+                                 DECIMOT = a.DECIMOT,
+                                 DIASTRABAJADOS = a.DIASTRABAJADOS,
+                                 FRESERVA = a.FRESERVA,
+                                 IdArea = a.IdArea,
+                                 IdDepartamento = a.IdDepartamento,
+                                 IdDivision = a.IdDivision,
+                                 IdEmpleado = a.IdEmpleado,
+                                 IdNominaTipo = a.IdNominaTipo,
+                                 IdNominaTipoLiqui = a.IdNominaTipoLiqui,
+                                 IdRol = a.IdRol,
+                                 IdSucursal = a.IdSucursal,
+                                 IESS = a.IESS,
+                                 NETO = a.NETO,
+                                 NombreArea = a.NombreArea,
+                                 NombreDepartamento = a.NombreDepartamento,
+                                 NombreDivision = a.NombreDivision,
+                                 OTROEGR = a.OTROEGR,
+                                 OTROING = a.OTROING,
+                                 pe_nombreCompleto = a.pe_nombreCompleto,
+                                 PRESTAMO = a.PRESTAMO,
+                                 SOBRET = a.SOBRET,
+                                 SUELDO = a.SUELDO,
+                                 Su_Descripcion = a.Su_Descripcion,
+                                 TOTALE = a.TOTALE,
+                                 TOTALI = a.TOTALI,
+                                 Descripcion = a.Descripcion,
+                                 DescripcionProcesoNomina = a.DescripcionProcesoNomina,
+                                 JORNADA = a.JORNADA,
+                                 UBUCACION = a.UBUCACION,
+
+                                 FRESERVA_R = a.FRESERVA_R,
+                                 IESS_R = a.IESS_R,
+
+                                 FRESERVA_TOTAL = a.FRESERVA_TOTAL,
+                                 IESS_TOTAL = a.IESS_TOTAL,
+                                 Fila = a.Fila,
+
+                                 IESS_2 = b != null ? b.IESS_2 : 0,
+                                 FRESERVA_2 = b != null ? b.FRESERVA_2 : 0
+                             }).ToList();
+            lst_final.Where(q => q.Fila == 1).ToList().ForEach(q =>
+            {
+                q.FRESERVA_R += q.FRESERVA_TOTAL - (q.FRESERVA_R + (q.FRESERVA_2 ?? 0));
+                q.IESS_R += q.IESS_TOTAL - (q.IESS_R + (q.IESS_2 ?? 0));
+                q.TOTALI = q.SUELDO + q.OTROING + q.SOBRET + q.DECIMOC + q.DECIMOT + q.FRESERVA_R;
+                q.TOTALE = q.PRESTAMO + q.IESS_R + q.ANTICIPO + q.OTROEGR;
+                q.NETO = q.TOTALI - q.TOTALE;
+            });
+
+            ListaAgrupada = (from q in lst_final
                              group q by new
                              {
                                  q.IdEmpresa,
