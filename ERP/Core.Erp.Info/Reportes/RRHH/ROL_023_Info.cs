@@ -51,6 +51,11 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public Nullable<double> FRESERVA_R { get; set; }
         public Nullable<double> IESS_R { get; set; }
+        public double? IESS_TOTAL { get; set; }
+        public double? FRESERVA_TOTAL { get; set; }
+        public long? Fila { get; set; }
+        public double? IESS_2 { get; set; }
+        public double? FRESERVA_2 { get; set; }
         #endregion
     }
 }

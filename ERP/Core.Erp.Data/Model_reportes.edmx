@@ -8022,20 +8022,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <EntitySet Name="VWINV_015" EntityType="Model_reportes.VWINV_015" />
           <EntitySet Name="VWFAC_014" EntityType="Model_reportes.VWFAC_014" />
           <EntitySet Name="VWROL_021" EntityType="Model_reportes.VWROL_021" />
-          <FunctionImport Name="SPROL_023" ReturnType="Collection(Model_reportes.SPROL_023_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
-            <Parameter Name="IdNomina" Mode="In" Type="Int32" />
-            <Parameter Name="IdNominaTipoLiqui" Mode="In" Type="Int32" />
-            <Parameter Name="IdPeriodo" Mode="In" Type="Int32" />
-            <Parameter Name="IdDivisionIni" Mode="In" Type="Int32" />
-            <Parameter Name="IdDivisionFin" Mode="In" Type="Int32" />
-            <Parameter Name="IdAreaIni" Mode="In" Type="Int32" />
-            <Parameter Name="IdAreaFin" Mode="In" Type="Int32" />
-            <Parameter Name="IdDepartamentoIni" Mode="In" Type="Int32" />
-            <Parameter Name="IdDepartamentoFin" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="VWROL_002" EntityType="Model_reportes.VWROL_002" />
           <EntitySet Name="VWROL_024" EntityType="Model_reportes.VWROL_024" />
           <FunctionImport Name="SPBAN_009" ReturnType="Collection(Model_reportes.SPBAN_009_Result)">
@@ -8087,6 +8073,20 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
             <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="VWROL_002_detallle_prestamos" EntityType="Model_reportes.VWROL_002_detallle_prestamos" />
+          <FunctionImport Name="SPROL_023" ReturnType="Collection(Model_reportes.SPROL_023_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdNomina" Mode="In" Type="Int32" />
+            <Parameter Name="IdNominaTipoLiqui" Mode="In" Type="Int32" />
+            <Parameter Name="IdPeriodo" Mode="In" Type="Int32" />
+            <Parameter Name="IdDivisionIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdDivisionFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdAreaIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdAreaFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdDepartamentoIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdDepartamentoFin" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10533,43 +10533,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="Division" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <ComplexType Name="SPROL_023_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Decimal" Name="IdRol" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="IdDivision" Nullable="true" />
-          <Property Type="Int32" Name="IdArea" Nullable="true" />
-          <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="true" />
-          <Property Type="Int32" Name="IdNominaTipo" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdNominaTipoLiqui" Nullable="false" />
-          <Property Type="String" Name="DescripcionProcesoNomina" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdPeriodo" Nullable="false" />
-          <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="NombreDivision" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NombreArea" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NombreDepartamento" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="100" />
-          <Property Type="Double" Name="SUELDO" Nullable="true" />
-          <Property Type="Double" Name="ANTICIPO" Nullable="true" />
-          <Property Type="Double" Name="DECIMOC" Nullable="true" />
-          <Property Type="Double" Name="DECIMOT" Nullable="true" />
-          <Property Type="Double" Name="FRESERVA" Nullable="true" />
-          <Property Type="Double" Name="IESS" Nullable="true" />
-          <Property Type="Double" Name="PRESTAMO" Nullable="true" />
-          <Property Type="Double" Name="SOBRET" Nullable="true" />
-          <Property Type="Double" Name="TOTALE" Nullable="true" />
-          <Property Type="Double" Name="TOTALI" Nullable="true" />
-          <Property Type="Double" Name="OTROEGR" Nullable="true" />
-          <Property Type="Double" Name="OTROING" Nullable="true" />
-          <Property Type="Double" Name="DIASTRABAJADOS" Nullable="true" />
-          <Property Type="Double" Name="NETO" Nullable="true" />
-          <Property Type="String" Name="NombreCargo" Nullable="false" />
-          <Property Type="String" Name="JORNADA" Nullable="false" MaxLength="16" />
-          <Property Type="String" Name="UBUCACION" Nullable="false" MaxLength="50" />
-          <Property Type="Double" Name="Porcentaje" Nullable="false" />
-        </ComplexType>
         <EntityType Name="VWROL_002">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -11080,6 +11043,46 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPROL_023_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdRol" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdDivision" Nullable="true" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="true" />
+          <Property Type="Int32" Name="IdNominaTipo" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdNominaTipoLiqui" Nullable="false" />
+          <Property Type="String" Name="DescripcionProcesoNomina" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdPeriodo" Nullable="false" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NombreDivision" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NombreArea" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreDepartamento" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="SUELDO" Nullable="true" />
+          <Property Type="Double" Name="ANTICIPO" Nullable="true" />
+          <Property Type="Double" Name="DECIMOC" Nullable="true" />
+          <Property Type="Double" Name="DECIMOT" Nullable="true" />
+          <Property Type="Double" Name="FRESERVA" Nullable="true" />
+          <Property Type="Double" Name="IESS" Nullable="true" />
+          <Property Type="Double" Name="PRESTAMO" Nullable="true" />
+          <Property Type="Double" Name="SOBRET" Nullable="true" />
+          <Property Type="Double" Name="TOTALE" Nullable="true" />
+          <Property Type="Double" Name="TOTALI" Nullable="true" />
+          <Property Type="Double" Name="OTROEGR" Nullable="true" />
+          <Property Type="Double" Name="OTROING" Nullable="true" />
+          <Property Type="Double" Name="DIASTRABAJADOS" Nullable="true" />
+          <Property Type="Double" Name="NETO" Nullable="true" />
+          <Property Type="String" Name="NombreCargo" Nullable="false" />
+          <Property Type="String" Name="JORNADA" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="UBUCACION" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Porcentaje" Nullable="false" />
+          <Property Type="Double" Name="IESS_TOTAL" Nullable="true" />
+          <Property Type="Double" Name="FRESERVA_TOTAL" Nullable="true" />
+          <Property Type="Int64" Name="Fila" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13903,47 +13906,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPROL_023" FunctionName="Model_reportes.Store.SPROL_023">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPROL_023_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
-                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="NombreDivision" ColumnName="NombreDivision" />
-                <ScalarProperty Name="NombreArea" ColumnName="NombreArea" />
-                <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
-                <ScalarProperty Name="ANTICIPO" ColumnName="ANTICIPO" />
-                <ScalarProperty Name="DECIMOC" ColumnName="DECIMOC" />
-                <ScalarProperty Name="DECIMOT" ColumnName="DECIMOT" />
-                <ScalarProperty Name="FRESERVA" ColumnName="FRESERVA" />
-                <ScalarProperty Name="IESS" ColumnName="IESS" />
-                <ScalarProperty Name="PRESTAMO" ColumnName="PRESTAMO" />
-                <ScalarProperty Name="SOBRET" ColumnName="SOBRET" />
-                <ScalarProperty Name="TOTALE" ColumnName="TOTALE" />
-                <ScalarProperty Name="TOTALI" ColumnName="TOTALI" />
-                <ScalarProperty Name="OTROEGR" ColumnName="OTROEGR" />
-                <ScalarProperty Name="OTROING" ColumnName="OTROING" />
-                <ScalarProperty Name="DIASTRABAJADOS" ColumnName="DIASTRABAJADOS" />
-                <ScalarProperty Name="NETO" ColumnName="NETO" />
-                <ScalarProperty Name="NombreCargo" ColumnName="NombreCargo" />
-                <ScalarProperty Name="JORNADA" ColumnName="JORNADA" />
-                <ScalarProperty Name="UBUCACION" ColumnName="UBUCACION" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWROL_002">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_002">
               <MappingFragment StoreEntitySet="VWROL_002">
@@ -14363,6 +14325,50 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_024' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPROL_023" FunctionName="Model_reportes.Store.SPROL_023">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_023_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="NombreDivision" ColumnName="NombreDivision" />
+                <ScalarProperty Name="NombreArea" ColumnName="NombreArea" />
+                <ScalarProperty Name="NombreDepartamento" ColumnName="NombreDepartamento" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+                <ScalarProperty Name="ANTICIPO" ColumnName="ANTICIPO" />
+                <ScalarProperty Name="DECIMOC" ColumnName="DECIMOC" />
+                <ScalarProperty Name="DECIMOT" ColumnName="DECIMOT" />
+                <ScalarProperty Name="FRESERVA" ColumnName="FRESERVA" />
+                <ScalarProperty Name="IESS" ColumnName="IESS" />
+                <ScalarProperty Name="PRESTAMO" ColumnName="PRESTAMO" />
+                <ScalarProperty Name="SOBRET" ColumnName="SOBRET" />
+                <ScalarProperty Name="TOTALE" ColumnName="TOTALE" />
+                <ScalarProperty Name="TOTALI" ColumnName="TOTALI" />
+                <ScalarProperty Name="OTROEGR" ColumnName="OTROEGR" />
+                <ScalarProperty Name="OTROING" ColumnName="OTROING" />
+                <ScalarProperty Name="DIASTRABAJADOS" ColumnName="DIASTRABAJADOS" />
+                <ScalarProperty Name="NETO" ColumnName="NETO" />
+                <ScalarProperty Name="NombreCargo" ColumnName="NombreCargo" />
+                <ScalarProperty Name="JORNADA" ColumnName="JORNADA" />
+                <ScalarProperty Name="UBUCACION" ColumnName="UBUCACION" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IESS_TOTAL" ColumnName="IESS_TOTAL" />
+                <ScalarProperty Name="FRESERVA_TOTAL" ColumnName="FRESERVA_TOTAL" />
+                <ScalarProperty Name="Fila" ColumnName="Fila" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
