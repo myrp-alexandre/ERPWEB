@@ -1,4 +1,5 @@
-﻿-- exec [web].[SPBAN_008] 2,'01/01/2019','31/12/2019',1
+﻿
+-- exec [web].[SPBAN_008] 1,'01/01/2019','31/12/2019',1
 CREATE PROCEDURE [web].[SPBAN_008]
 (
 @IdEmpresa int,
@@ -8,7 +9,7 @@ CREATE PROCEDURE [web].[SPBAN_008]
 )
 AS
 DECLARE @i_SaldoInicial numeric(18,2),
-@i_IdCtaCbleBanco varchar(20),
+@i_IdCtaCbleBanco varchar(25),
 @i_ba_descripcion varchar(5000)
 
 select @i_IdCtaCbleBanco = IdCtaCble, @i_ba_descripcion = ba_descripcion from ba_Banco_Cuenta 
@@ -41,10 +42,10 @@ left join (
 	inner join ba_Cbte_Ban as bc on bf.IdEmpresa = bc.IdEmpresa
 	and bf.IdTipocbte = bc.IdTipocbte and bf.IdCbteCble = bc.IdCbteCble
 	inner join ba_TipoFlujo as fl on fl.IdEmpresa = bf.IdEmpresa and fl.IdTipoFlujo = bf.IdTipoFlujo
-	where bf.IdEmpresa = @IdEmpresa and bc.IdBanco = @IdBanco and bc.cb_Fecha between @FechaIni and @FechaFin
+	where bf.IdEmpresa = @IdEmpresa and bc.IdBanco = @IdBanco and bc.cb_Fecha between cast(@FechaIni as date) and cast(@FechaFin as date)
 	and bf.Secuencia = 1
 ) as PrimerFlujo on b.IdEmpresa = PrimerFlujo.IdEmpresa and b.IdTipocbte = PrimerFlujo.IdTipocbte and b.IdCbteCble = PrimerFlujo.IdCbteCble
-where c.IdEmpresa = @IdEmpresa and d.IdCtaCble = @i_IdCtaCbleBanco and c.cb_Fecha between @FechaIni and @FechaFin
+where c.IdEmpresa = @IdEmpresa and d.IdCtaCble = @i_IdCtaCbleBanco and c.cb_Fecha between cast(@FechaIni as date) and cast(@FechaFin as date)
 and not exists(
 select r.IdEmpresa from ct_cbtecble_Reversado as r
 inner join ct_cbtecble as cr on r.IdEmpresa_Anu = cr.IdEmpresa
@@ -53,12 +54,12 @@ and r.IdCbteCble_Anu = cr.IdCbteCble
 where r.idempresa = c.idempresa
 and r.idtipocbte = c.idtipocbte
 and r.idcbtecble = c.idcbtecble
-and cr.cb_Fecha <= @FechaFin
+and cr.cb_Fecha <= cast(@FechaFin as date)
 )
 UNION ALL
 SELECT @IdEmpresa, 0, 0, 0, @i_SaldoInicial, 'SALDO INICIAL',NULL,NULL,DATEADD(DAY,-1, @FechaIni), @i_SaldoInicial,
 'INGRESOS',@i_SaldoInicial,1,'S.I.', @i_ba_descripcion, @IdBanco, 'A',0,NULL, 'S.I','',1,'',null
-UNION ALL
+/*UNION ALL
 select d.IdEmpresa,d.IdTipoCbte,d.IdCbteCble,d.secuencia, @i_SaldoInicial as SaldoInicial, b.cb_Observacion, b.cb_Cheque, b.cb_giradoA,c.cb_Fecha, cast(d.dc_Valor as numeric(18,2)) as Valor,
 case when d.dc_Valor > 0 then 'INGRESOS' ELSE 'EGRESOS' END AS Tipo, abs(cast(d.dc_Valor as numeric(18,2))) as ValorAbsoluto, case when d.dc_Valor > 0 then 1 ELSE 2 END AS Orden,
 isnull(b.cb_Cheque,b.IdCbteCble) as Referencia, @i_ba_descripcion ba_descripcion, @IdBanco IdBanco, b.Estado, c.IdSucursal, s.Su_Descripcion, t.CodTipoCbte tc_TipoCbte, 'ANULADOS', 2 AS Orden,
@@ -80,6 +81,5 @@ and r.IdCbteCble_Anu = cr.IdCbteCble
 where r.idempresa = c.idempresa
 and r.idtipocbte = c.idtipocbte
 and r.idcbtecble = c.idcbtecble
-and cr.cb_Fecha <= --DATEFROMPARTS(2019,1,31)
-@FechaFin
-)
+and cr.cb_Fecha between @FechaIni and @FechaFin
+)*/

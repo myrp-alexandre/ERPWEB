@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
+﻿
+CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
 @IdEmpresa int,
 @IdNomina numeric,
 @IdNominaTipo numeric,
@@ -22,15 +23,15 @@ begin
 --@IdSucursalFin int,
 --@IdSucursalInicio int
 
---set @IdEmpresa =2
---set @IdNomina =2
+--set @IdEmpresa =1
+--set @IdNomina =1
 --set @IdNominaTipo =2
 --set @IdPEriodo= 201901
 --set @IdUsuario ='admin'
 --set @observacion= 'PERIODO'+CAST( @IdPEriodo AS varchar(15))
---set @IdRol =7
---set @IdSucursalFin=8
---set @IdSucursalInicio=8
+--set @IdRol =4
+--set @IdSucursalFin=1
+--set @IdSucursalInicio=1
 BEGIN -- variables
 declare
 @Fi date,
@@ -49,7 +50,13 @@ declare
 @IdRubro_total_pagar varchar(50),
 @IdRubro_anticipo varchar(50),
 @PorAportePersonal float,
-@SalarioBasico float
+@SalarioBasico float,
+
+@IdRubro_DIII varchar(50),
+@IdRubro_DIV varchar(50),
+@IdRubro_ProvDIII varchar(50),
+@IdRubro_ProvDIV varchar(50),
+@IdRubro_FondoReserva varchar(50)
 
 end
 
@@ -79,6 +86,7 @@ select
 -------------eliminando detalle--------------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 delete ro_rol_detalle_x_rubro_acumulado  where IdEmpresa=@IdEmpresa and IdRol=@IdRol
+
 delete ro_rol_detalle where ro_rol_detalle.IdEmpresa=@IdEmpresa and @IdRol=IdRol
 delete ro_empleado_division_area_x_rol where IdEmpresa=@IdEmpresa and IdRol= @IdRol 
 
@@ -100,8 +108,8 @@ FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
 where cont.IdEmpresa=@IdEmpresa 
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
-and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and cont.EstadoContrato<>'ECT_LIQ'
+and (emp.em_status<>'EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
 and CAST( cont.FechaInicio as date)<=@Ff
 and emp.IdSucursal =  @IdSucursalFin
 
@@ -121,9 +129,9 @@ FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
 where cont.IdEmpresa=@IdEmpresa 
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 
-and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and (emp.em_status<>'EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
 and CAST( cont.FechaInicio as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 
@@ -138,7 +146,7 @@ insert into ro_rol_detalle
 
 select 
 @IdEmpresa				,@IdRol				,emp.IdSucursal							,novc.IdEmpleado		,nov.IdRubro		,rub.ru_orden	,sum(nov.Valor)
-,1						,rub.ru_descripcion		
+,1						,rub.ru_descripcion +'('+ CAST(  SUM(ISNULL( nov.CantidadHoras,0)) as varchar(10))   +')'		
 FROM   dbo.ro_empleado AS emp INNER JOIN
 dbo.ro_empleado_Novedad AS novc ON emp.IdEmpresa = novc.IdEmpresa AND emp.IdEmpleado = novc.IdEmpleado INNER JOIN
 dbo.ro_empleado_novedad_det AS nov ON novc.IdEmpresa = nov.IdEmpresa AND novc.IdNovedad = nov.IdNovedad AND novc.IdEmpleado = novc.IdEmpleado INNER JOIN
@@ -150,11 +158,11 @@ and novc.IdNomina_TipoLiqui=@IdNominaTipo
 and nov.FechaPago between @Fi and @Ff
 and novc.Estado='A'
 and nov.EstadoCobro='PEN'
-and (emp.em_status!='EST_LIQ')
+and (emp.em_status<>'EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and ISNULL( emp.em_fechaSalida, @Fi) between @Fi and @Ff
 and emp.IdSucursal = @IdSucursalFin
-group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdSucursal
+group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdSucursal, nov.CantidadHoras
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando cuota de prestamos e insertando al rol detalle-------------------------------------------------------------------------<
@@ -174,16 +182,16 @@ FROM            dbo.ro_prestamo AS pre INNER JOIN
 and pre.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
 and pred.IdNominaTipoLiqui=@IdNominaTipo
-and pred.FechaPago between @Fi and @Ff
+and CAST(pred.FechaPago AS DATE) between @Fi and @Ff
 and pred.Estado=1
 and pred.EstadoPago='PEN'
-and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and (emp.em_status <>'EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and pred.FechaPago between  @Fi and @Ff 
 and pred.IdNominaTipoLiqui=@IdNominaTipo
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato <>'ECT_LIQ'
 group by pred.IdEmpresa,pre.IdEmpleado,emp.IdSucursal, pre.IdRubro, rub.ru_orden, rub.ru_descripcion
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando rubros fijos e insertando al rol detalle-------------------------------------------------------------------------------<
@@ -206,11 +214,11 @@ and rub_fij.IdNomina_tipo=@IdNomina
 and rub_fij.IdNomina_TipoLiqui=@IdNominaTipo
 --and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.FechaFin and @Ff between rub_fij.FechaFin and rub_fij.FechaFin))
 --and rub_fij.Estado='A'
-and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and (emp.em_status<>'EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando aporte personal------------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,40 +280,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 
 
 
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------
--------------calculando aporte patronal------------------------------------------------------------------------------------------------------<
-----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_aporte_patronal from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
-insert into ro_rol_detalle
-(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion)
-
-select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'101'			, sum(rol_det.Valor)*@por_apor_per_patr 
-,0						,'Aporte patronal'	
-FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
-                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
-                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
-                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
-
-where rol_det.IdEmpresa=@IdEmpresa
-and ro_rol.IdNominaTipo=@IdNomina
-and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
-and ro_rol.IdPeriodo=@IdPEriodo
-and rub.ru_tipo='I' 
-and rub.rub_aplica_IESS=1
-and cont.IdNomina=1
-and rol_det.IdRol=@IdRol
-and emp.IdSucursal = @IdSucursalFin
-and cont.IdNomina=@IdNomina
-group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
-
-
-
-
+update ro_rol_detalle set Valor = round(Valor,2) where IdEmpresa = @IdEmpresa and IdRol = @IdRol
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -316,7 +291,7 @@ insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,			IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
 select
-@IdEmpresa				,@IdRol			,emp.IdSucursal		,rol_det.IdEmpleado		,@IdRubro_calculado	,20			, sum(rol_det.Valor)*0.0833  --CAST( sum(rol_det.Valor)*0.0945 as numeric(8,2))
+@IdEmpresa				,@IdRol			,emp.IdSucursal		,rol_det.IdEmpleado		,@IdRubro_calculado	,20			,round(sum(rol_det.Valor)*0.0833 ,2) --CAST( sum(rol_det.Valor)*0.0945 as numeric(8,2))
 ,1						,'Fondos de reserva'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -347,7 +322,7 @@ insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal						,rol_det.IdEmpleado		,@IdRubro_calculado	,'52'			, sum(rol_det.Valor)/12
+@IdEmpresa				,@IdRol				,emp.IdSucursal						,rol_det.IdEmpleado		,@IdRubro_calculado	,'52'			, round(sum(rol_det.Valor)/12,2)
 ,1						,'Decimo tercer sueldo'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -370,7 +345,7 @@ and emp.IdEmpresa=@IdEmpresa
 )
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 
@@ -387,8 +362,8 @@ select
 FROM  dbo.ro_empleado emp, ro_contrato cont
 where emp.IdEmpresa=cont.IdEmpresa
 and emp.IdEmpleado=cont.IdEmpleado
-and cont.EstadoContrato!='ECT_LIQ'
-and (emp.em_status!='EST_LIQ')
+and cont.EstadoContrato<>'ECT_LIQ'
+and (emp.em_status<>'EST_LIQ')
 AND cont.IdNomina=@IdNomina
 and emp.IdEmpleado not in(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
 where acum.IdEmpresa= emp.IdEmpresa
@@ -435,7 +410,7 @@ insert into ro_rol_detalle
 
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'500'			,ROUND(sum(ROUND(rol_det.Valor,2)),2)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'500'			,round( sum(round(rol_det.Valor,2)),2)
 ,1						,'Total ingresos'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -449,7 +424,7 @@ and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I'
 and emp.IdSucursal = @IdSucursalFin
 	and cont.IdNomina=@IdNomina
-	and cont.EstadoContrato!='ECT_LIQ'
+	and cont.EstadoContrato<>'ECT_LIQ'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 /*
@@ -486,7 +461,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'1000'			,ROUND( sum(ROUND(rol_det.Valor,2)),2)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'1000'			,round( sum(round(rol_det.Valor,2)),2)
 ,1						,'Total Egreso'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -502,7 +477,7 @@ and (rub.ru_tipo='E' or rol_det.IdRubro=56 )
 and rol_det.IdRol=@IdRol
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 
@@ -520,7 +495,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1500'			,round( (ISNULL( [22],0) -ISNULL( [23],0)),2)
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1500'			, cast( (ISNULL( [22],0) -ISNULL( [23],0)) as numeric(12,2))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
@@ -537,7 +512,7 @@ FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
 	 and rol_det.IdRol=@IdRol
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 ) as s
 PIVOT
 (
@@ -567,31 +542,26 @@ insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,						Valor, Estado
 )
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,			 sum(rol_det.Valor)*@por_apor_per_patr,'PEN'
+@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,			CAST( sum(rol_det.Valor)*0.0833 as numeric(10,2)),'PEN'
 
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
                          dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
                          dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado INNER JOIN
+                         dbo.ro_empleado_x_rubro_acumulado AS emp_x_rub_acum ON emp.IdEmpresa = emp_x_rub_acum.IdEmpresa AND emp.IdEmpleado = emp_x_rub_acum.IdEmpleado
 where rol_det.IdEmpresa=@IdEmpresa
 and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
 and DATEDIFF(day ,emp.em_fechaIngaRol,@Ff)>360
-and  emp.IdEmpleado not in(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
-where acum.IdEmpresa= emp.IdEmpresa
-and acum.IdEmpresa=emp.IdEmpresa
-and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro=@IdRubro_Provision
-and emp.idempresa=@idempresa
-and acum.IdEmpresa=@IdEmpresa)
 and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
+and emp_x_rub_acum.IdRubro=@IdRubro_Provision
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -602,30 +572,24 @@ insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,						Valor, Estado
 )
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado				, sum(rol_det.Valor)/12,'PEN'
+@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado				,CAST( sum(rol_det.Valor)/12 as numeric(10,2)),'PEN'
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
                          dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
                          dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado INNER JOIN
+                         dbo.ro_empleado_x_rubro_acumulado AS emp_x_rub_acum ON emp.IdEmpresa = emp_x_rub_acum.IdEmpresa AND emp.IdEmpleado = emp_x_rub_acum.IdEmpleado
 where rol_det.IdEmpresa=@IdEmpresa
 and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
---and DATEDIFF(day ,emp.em_fechaIngaRol,@Ff)>360
-and  emp.IdEmpleado not in (select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
-where acum.IdEmpresa= emp.IdEmpresa
-and acum.IdEmpresa=emp.IdEmpresa
-and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro=@IdRubro_Provision
-and acum.IdEmpresa=@IdEmpresa
-and emp.IdEmpresa=@IdEmpresa)
 and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
+and emp_x_rub_acum.IdRubro=@IdRubro_Provision
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 
@@ -637,24 +601,21 @@ insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			idSucursal,						IdEmpleado,			IdRubro,						Valor,	Estado
 )
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,emp.IdEmpleado		,@IdRubro_calculado				, (@SueldoBasico/360)* dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol, emp.em_status, emp.em_fechaSalida) ,'PEN'
-FROM  dbo.ro_empleado emp, ro_contrato cont
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,emp.IdEmpleado		,@IdRubro_calculado				,cast( (@SueldoBasico/360)* dbo.calcular_dias_trabajados(@Fi,@Ff,cont.FechaFin, emp.em_status, emp.em_fechaSalida) as numeric(10,2)) ,'PEN'
+FROM            dbo.ro_empleado AS emp INNER JOIN
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado INNER JOIN
+                         dbo.ro_empleado_x_rubro_acumulado AS emp_x_rub_acum ON emp.IdEmpresa = emp_x_rub_acum.IdEmpresa AND emp.IdEmpleado = emp_x_rub_acum.IdEmpleado
 where emp.IdEmpresa=cont.IdEmpresa
 and emp.IdEmpleado=cont.IdEmpleado
-and cont.EstadoContrato!='ECT_LIQ'
-and (emp.em_status!='EST_LIQ')
-and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
-where acum.IdEmpresa= emp.IdEmpresa
-and acum.IdEmpresa=emp.IdEmpresa
-and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro=@IdRubro_Provision
-and acum.IdEmpresa=@IdEmpresa
-and emp.IdEmpresa=@IdEmpresa)
+and cont.EstadoContrato<>'ECT_LIQ'
+and (emp.em_status<>'EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
-group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status, emp.IdSucursal, emp.Pago_por_horas, emp.em_fechaIngaRol
+and cont.EstadoContrato<>'ECT_LIQ'
+and emp_x_rub_acum.IdRubro=@IdRubro_Provision
+and emp.IdEmpresa=@IdEmpresa
+group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status, emp.IdSucursal, emp.Pago_por_horas
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -665,7 +626,7 @@ insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			idSucursal,						IdEmpleado,			IdRubro,						Valor,						Estado
 )
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,rol_det.IdEmpleado		,@IdRubro_calculado				, sum(rol_det.Valor)/24, 'PEN'
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,rol_det.IdEmpleado		,@IdRubro_calculado				,CAST( sum(rol_det.Valor)/24 as numeric(10,2)), 'PEN'
 
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -681,11 +642,40 @@ and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato!='ECT_LIQ'
+and cont.EstadoContrato<>'ECT_LIQ'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal, emp.Pago_por_horas
 
 
 
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+-------------calculando aporte patronal------------------------------------------------------------------------------------------------------<
+----------------------------------------------------------------------------------------------------------------------------------------------
+select @IdRubro_calculado= IdRubro_aporte_patronal from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+insert into ro_rol_detalle_x_rubro_acumulado
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,						Valor, Estado
+)
+select
+@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,			CAST( sum(rol_det.Valor)*0.0833 as numeric(10,2)),'PEN'
+
+FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
+                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
+                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
+                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado INNER JOIN
+                         dbo.ro_empleado_x_rubro_acumulado AS emp_x_rub_acum ON emp.IdEmpresa = emp_x_rub_acum.IdEmpresa AND emp.IdEmpleado = emp_x_rub_acum.IdEmpleado
+
+where rol_det.IdEmpresa=@IdEmpresa
+and ro_rol.IdNominaTipo=@IdNomina
+and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
+and ro_rol.IdPeriodo=@IdPEriodo
+and rub.ru_tipo='I' 
+and rub.rub_aplica_IESS=1
+and cont.IdNomina=1
+and rol_det.IdRol=@IdRol
+and emp.IdSucursal = @IdSucursalFin
+and cont.IdNomina=@IdNomina
+group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 
 
@@ -702,6 +692,48 @@ WHERE ro_empleado_x_division_x_area.IdEmpresa=@IdEmpresa
 and ro_empleado.IdSucursal=@IdSucursalFin
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------
+-------------insertado gastos decimo III si no existe----------------------------------------------------------------------------------------------<
+------------------------------------------------------------------------------------------------------------------------------------------------
+declare 
+@IdEmpleado int
+
+SELECT @IdEmpleado=min(IdEmpleado)  FROM ro_rol_detalle where IdEmpresa=@IdEmpresa and IdRol=@IdRol
+
+select @IdRubro_DIII=IdRubro_DIII,@IdRubro_DIV=IdRubro_DIV,@IdRubro_ProvDIII=IdRubro_prov_DIII,@IdRubro_ProvDIV=IdRubro_prov_DIV, @IdRubro_FondoReserva=IdRubro_fondo_reserva from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+
+if((select COUNT(IdEmpresa) from ro_rol_detalle where IdEmpresa=@IdEmpresa  and IdRol=@IdRol and IdRubro=@IdRubro_DIII)=0)
+insert into ro_rol_detalle
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
+
+
+select
+@IdEmpresa				,@IdRol			,@IdSucursalInicio				,@IdEmpleado		,@IdRubro_DIII	,'52'			,0
+,1						,'Decimo tercero'	
+
+if((select COUNT(IdEmpresa) from ro_rol_detalle where IdEmpresa=@IdEmpresa  and IdRol=@IdRol and IdRubro=@IdRubro_DIV)=0)
+insert into ro_rol_detalle
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
+
+
+select
+@IdEmpresa				,@IdRol				,@IdSucursalInicio				,@IdEmpleado		,@IdRubro_DIV	,'52'			,0
+,1						,'Decimo cuarto'	
+
+if((select COUNT(IdEmpresa) from ro_rol_detalle where IdEmpresa=@IdEmpresa  and IdRol=@IdRol and IdRubro=@IdRubro_FondoReserva)=0)
+insert into ro_rol_detalle
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
+
+
+select
+@IdEmpresa				,@IdRol				,@IdSucursalInicio				,@IdEmpleado		,@IdRubro_FondoReserva	,'20'			,0
+,1						,'Fondos de Reserva'	
+
+
 update ro_rol_detalle set Valor=CAST(Valor as numeric(18,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
 update ro_rol_detalle_x_rubro_acumulado set Valor=CAST(Valor as numeric(18,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
+
 END

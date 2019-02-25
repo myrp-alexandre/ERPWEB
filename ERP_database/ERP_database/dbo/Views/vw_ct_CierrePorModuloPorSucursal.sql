@@ -1,17 +1,21 @@
-﻿CREATE VIEW web.vwfa_cliente_consulta
+﻿CREATE VIEW dbo.[vw_ct_CierrePorModuloPorSucursal]
 AS
-SELECT dbo.fa_cliente.IdEmpresa, dbo.fa_cliente.IdCliente, dbo.fa_cliente.Codigo, dbo.fa_cliente.IdPersona, dbo.tb_persona.pe_nombreCompleto, dbo.fa_cliente.Idtipo_cliente, dbo.tb_persona.pe_cedulaRuc, dbo.fa_cliente.Estado, 
-                  dbo.fa_cliente_tipo.Descripcion_tip_cliente
-FROM     dbo.tb_persona RIGHT OUTER JOIN
-                  dbo.fa_cliente ON dbo.tb_persona.IdPersona = dbo.fa_cliente.IdPersona LEFT OUTER JOIN
-                  dbo.fa_cliente_tipo ON dbo.fa_cliente.IdEmpresa = dbo.fa_cliente_tipo.IdEmpresa AND dbo.fa_cliente.Idtipo_cliente = dbo.fa_cliente_tipo.Idtipo_cliente
+SELECT        dbo.ct_CierrePorModuloPorSucursal.IdEmpresa, dbo.ct_CierrePorModuloPorSucursal.IdCierre, dbo.ct_CierrePorModuloPorSucursal.IdSucursal, dbo.tb_sucursal.Su_Descripcion, dbo.ct_CierrePorModuloPorSucursal.CodModulo, 
+                         dbo.tb_modulo.Descripcion, dbo.ct_CierrePorModuloPorSucursal.FechaIni, dbo.ct_CierrePorModuloPorSucursal.FechaFin, dbo.ct_CierrePorModuloPorSucursal.Cerrado
+FROM            dbo.tb_sucursal INNER JOIN
+                         dbo.ct_CierrePorModuloPorSucursal ON dbo.tb_sucursal.IdEmpresa = dbo.ct_CierrePorModuloPorSucursal.IdEmpresa AND dbo.tb_sucursal.IdSucursal = dbo.ct_CierrePorModuloPorSucursal.IdSucursal INNER JOIN
+                         dbo.tb_modulo ON dbo.ct_CierrePorModuloPorSucursal.CodModulo = dbo.tb_modulo.CodModulo
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_ct_CierrePorModuloPorSucursal';
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[41] 4[21] 2[15] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -77,35 +81,35 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "tb_persona"
+         Begin Table = "tb_sucursal"
             Begin Extent = 
-               Top = 7
-               Left = 48
-               Bottom = 170
-               Right = 322
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 268
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "fa_cliente"
+         Begin Table = "tb_modulo"
             Begin Extent = 
-               Top = 0
-               Left = 388
-               Bottom = 296
-               Right = 644
-            End
-            DisplayFlags = 280
-            TopColumn = 17
-         End
-         Begin Table = "fa_cliente_tipo"
-            Begin Extent = 
-               Top = 7
-               Left = 692
-               Bottom = 170
-               Right = 939
+               Top = 6
+               Left = 306
+               Bottom = 136
+               Right = 476
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "ct_CierrePorModuloPorSucursal"
+            Begin Extent = 
+               Top = 6
+               Left = 514
+               Bottom = 136
+               Right = 684
+            End
+            DisplayFlags = 280
+            TopColumn = 3
          End
       End
    End
@@ -114,41 +118,36 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 10
          Width = 284
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
       End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1176
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwfa_cliente_consulta';
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwfa_cliente_consulta';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_ct_CierrePorModuloPorSucursal';
 

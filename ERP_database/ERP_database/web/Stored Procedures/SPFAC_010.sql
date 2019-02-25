@@ -4,7 +4,8 @@
 @IdSucursalIni int, 
 @IdSucursalFin int,
 @FechaIni datetime,
-@FechaFin datetime
+@FechaFin datetime,
+@IdCatalogo_FormaPago varchar(20)
 )
 AS
 SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdCbteVta, c.vt_serie1 + '-' + c.vt_serie2 + '-' + c.vt_NumFactura AS vt_NumFactura, c.IdCliente, per.pe_nombreCompleto, cat.Nombre AS NombreFormaPago, c.IdCatalogo_FormaPago, c.Estado, 
@@ -32,4 +33,4 @@ FROM            fa_factura AS c INNER JOIN
 						 */
 						 LEFT JOIN fa_factura_resumen AS R on c.IdEmpresa = r.IdEmpresa and c.IdSucursal = r.IdSucursal and c.IdBodega = r.IdBodega and c.IdCbteVta = r.IdCbteVta
 						 where c.IdEmpresa = @IdEmpresa and c.IdSucursal between @IdSucursalIni and @IdSucursalFin and c.vt_fecha between @FechaIni and @FechaFin
-						 and c.Estado='A'
+						 and c.Estado='A' and c.IdCatalogo_FormaPago like case when @IdCatalogo_FormaPago = '' then '%'+@IdCatalogo_FormaPago+'%' else @IdCatalogo_FormaPago end

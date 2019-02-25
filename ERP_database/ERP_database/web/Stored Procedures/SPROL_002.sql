@@ -25,9 +25,11 @@ BEGIN
 	@IdRubroTotalPagar int,
 	@IdRubroVerper varchar(50),
 	@IdRubroMatutina varchar(50),
-	@IdRubroDiasTrabajados varchar(50)
+	@IdRubroDiasTrabajados varchar(50),
+	@IdRubroBrigadas varchar(50)
 
-	select @IdRubroVerper=IdRubro_horas_vespertina,@IdRubroMatutina=IdRubro_horas_matutina  from ro_rubros_calculados where IdEmpresa=@idempresa
+
+	select @IdRubroVerper=IdRubro_horas_vespertina,@IdRubroMatutina=IdRubro_horas_matutina, @IdRubroBrigadas=IdRubro_horas_brigadas  from ro_rubros_calculados where IdEmpresa=@idempresa
 	select @IdRubroTotalPagar=IdRubro_tot_pagar from ro_rubros_calculados where IdEmpresa=@idempresa
 	select @IdRubroDiasTrabajados=IdRubro_dias_trabajados from ro_rubros_calculados where IdEmpresa=@idempresa
 	delete web.ro_SPROL_002 where IdEmpresa=@idempresa --and IdPeriodo=@idperiodo
@@ -104,9 +106,23 @@ FROM            dbo.ro_HorasProfesores_det INNER JOIN
                          dbo.ro_HorasProfesores ON dbo.ro_HorasProfesores_det.IdEmpresa = dbo.ro_HorasProfesores.IdEmpresa AND dbo.ro_HorasProfesores_det.IdCarga = dbo.ro_HorasProfesores.IdCarga INNER JOIN
                          web.ro_SPROL_002 ON dbo.ro_HorasProfesores_det.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_HorasProfesores_det.IdRubro = web.ro_SPROL_002.IdRubro AND 
                          dbo.ro_HorasProfesores_det.IdEmpleado = web.ro_SPROL_002.IdEmpleado
-			where --ro_HorasProfesores_det.IdRubro in(@IdRubroMatutina,@IdRubroVerper)
-			 ro_HorasProfesores_det.IdEmpresa=@idempresa
+			where ro_HorasProfesores_det.IdRubro in(@IdRubroMatutina,@IdRubroVerper,@IdRubroBrigadas)
+			AND  ro_HorasProfesores_det.IdEmpresa=@idempresa
 			and ro_HorasProfesores.IdNomina=@idnomina_tipo
 			and ro_HorasProfesores.IdNominaTipo=@idnomina_Tipo_liq
 			and ro_HorasProfesores.IdPeriodo=@idperiodo
+
+  -- actualizando rubros horas extras
+
+			update     web.ro_SPROL_002 set ru_descripcion  = ro_rol_detalle.Observacion 
+FROM            dbo.ro_rol_detalle INNER JOIN
+                         dbo.ro_rol ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_rol.IdEmpresa AND dbo.ro_rol_detalle.IdRol = dbo.ro_rol.IdRol INNER JOIN
+                         web.ro_SPROL_002 ON dbo.ro_rol.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_rol.IdPeriodo = web.ro_SPROL_002.IdPeriodo AND dbo.ro_rol.IdNominaTipo = web.ro_SPROL_002.IdNominaTipo AND 
+                         dbo.ro_rol.IdNominaTipoLiqui = web.ro_SPROL_002.IdNominaTipoLiqui AND dbo.ro_rol_detalle.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_rol_detalle.IdEmpleado = web.ro_SPROL_002.IdEmpleado AND 
+                         dbo.ro_rol_detalle.IdRubro = web.ro_SPROL_002.IdRubro
+			where ro_rol_detalle.IdRubro in(7,8,9)
+			AND  ro_rol_detalle.IdEmpresa=@idempresa
+			and ro_rol.IdNominaTipo=@idnomina_tipo
+			and ro_rol.IdNominaTipoLiqui=@idnomina_Tipo_liq
+			and ro_rol.IdPeriodo=@idperiodo
 END

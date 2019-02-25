@@ -1,5 +1,4 @@
-﻿
---exec web.SPCONTA_002 1,410101,'2018/06/01','2018/12/31'
+﻿--exec web.SPCONTA_002 1,'0101004001','01/01/2019','01/31/2019'
 CREATE PROC [web].[SPCONTA_002]
 (
 @IdEmpresa int,
@@ -27,7 +26,7 @@ and c.IdSucursal between @IdSucursalIni and @IdSucursalFin
 
 SET @SaldoInicial = CASE WHEN @SignoOperacion < 0 THEN @SaldoInicial *-1 ELSE @SaldoInicial END	
 
-SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdTipoCbte, ct_cbtecble_det.IdCbteCble, ct_cbtecble_det.secuencia, ct_cbtecble_det.IdCtaCble, ct_plancta.pc_Cuenta, ct_cbtecble_det.dc_Valor, 
+SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdTipoCbte, ct_cbtecble_det.IdCbteCble, ct_cbtecble_det.secuencia, ct_cbtecble_det.IdCtaCble,ct_cbtecble_det.IdCtaCble+' - '+ ct_plancta.pc_Cuenta pc_Cuenta, ct_cbtecble_det.dc_Valor, 
 ISNULL(@SaldoInicial,0) AS SaldoInicial,
 CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe,
 CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber,

@@ -310,10 +310,12 @@ and IdEmpresa = @IdEmpresa
 
 END
 
+update web.ct_CONTA_003_balances Set SaldoFinal = round(SaldoFinal,2), SaldoFinalNaturaleza = round(SaldoFinalNaturaleza,2)
+
 IF(@MostrarSaldo0 = 0)
 BEGIN
 	DELETE web.ct_CONTA_003_balances
-	WHERE SaldoInicial = 0 AND SaldoDebitosCreditos = 0 AND SaldoFinal = 0
+	WHERE SaldoFinal = 0
 	and IdUsuario = @IdUsuario
 END
 

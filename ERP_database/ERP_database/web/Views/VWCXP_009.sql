@@ -1,19 +1,27 @@
-﻿CREATE VIEW web.VWCXP_009
+﻿CREATE VIEW [web].[VWCXP_009]
 AS
-SELECT dbo.cp_orden_giro.IdEmpresa, dbo.cp_orden_giro.IdCbteCble_Ogiro, dbo.cp_orden_giro.IdTipoCbte_Ogiro, dbo.cp_orden_giro.IdOrden_giro_Tipo, dbo.cp_orden_giro.IdProveedor, per.pe_nombreCompleto AS nom_proveedor, 
-                  per.pe_cedulaRuc AS ced_proveedor, pro.pr_direccion AS dir_proveedor, dbo.cp_orden_giro.co_fechaOg, dbo.cp_orden_giro.co_serie, dbo.cp_orden_giro.co_factura AS num_factura, 
-                  dbo.cp_orden_giro.co_FechaFactura, dbo.cp_orden_giro.Estado, dbo.cp_TipoDocumento.Descripcion AS TipoDocumento, dbo.cp_retencion.fecha AS fecha_retencion, YEAR(dbo.cp_retencion.fecha) AS ejercicio_fiscal, 
-                  dbo.cp_retencion_det.IdRetencion, dbo.cp_retencion_det.Idsecuencia, dbo.cp_retencion_det.re_tipoRet AS Impuesto, dbo.cp_retencion_det.re_baseRetencion AS base_retencion, dbo.cp_retencion_det.IdCodigo_SRI, 
+SELECT dbo.cp_retencion_det.IdEmpresa, dbo.cp_retencion_det.IdRetencion, dbo.cp_retencion_det.Idsecuencia, dbo.cp_orden_giro.IdCbteCble_Ogiro, dbo.cp_orden_giro.IdTipoCbte_Ogiro, dbo.cp_orden_giro.IdOrden_giro_Tipo, 
+                  dbo.cp_orden_giro.IdProveedor, per.pe_nombreCompleto AS nom_proveedor, per.pe_cedulaRuc AS ced_proveedor, pro.pr_direccion AS dir_proveedor, dbo.cp_orden_giro.co_fechaOg, dbo.cp_orden_giro.co_serie, 
+                  dbo.cp_orden_giro.co_factura AS num_factura, dbo.cp_orden_giro.co_FechaFactura, dbo.cp_retencion.Estado, dbo.cp_TipoDocumento.Descripcion AS TipoDocumento, dbo.cp_retencion.fecha AS fecha_retencion, 
+                  YEAR(dbo.cp_retencion.fecha) AS ejercicio_fiscal, dbo.cp_retencion_det.re_tipoRet AS Impuesto, dbo.cp_retencion_det.re_baseRetencion AS base_retencion, dbo.cp_retencion_det.IdCodigo_SRI, 
                   dbo.cp_codigo_SRI.codigoSRI AS cod_Impuesto_SRI, dbo.cp_codigo_SRI.co_porRetencion AS por_Retencion_SRI, dbo.cp_retencion_det.re_valor_retencion AS valor_Retenido, dbo.cp_retencion.IdEmpresa_Ogiro, 
-                  dbo.cp_retencion.serie1 + '' + dbo.cp_retencion.serie2 AS serie, dbo.cp_retencion.NumRetencion, dbo.cp_codigo_SRI.co_descripcion, dbo.cp_codigo_SRI_x_CtaCble.IdCtaCble
-FROM     dbo.cp_orden_giro INNER JOIN                  
-                  dbo.cp_TipoDocumento ON dbo.cp_orden_giro.IdOrden_giro_Tipo = dbo.cp_TipoDocumento.CodTipoDocumento INNER JOIN
-                  dbo.cp_retencion ON dbo.cp_orden_giro.IdEmpresa = dbo.cp_retencion.IdEmpresa AND dbo.cp_orden_giro.IdCbteCble_Ogiro = dbo.cp_retencion.IdCbteCble_Ogiro AND 
-                  dbo.cp_orden_giro.IdTipoCbte_Ogiro = dbo.cp_retencion.IdTipoCbte_Ogiro AND dbo.cp_orden_giro.IdEmpresa = dbo.cp_retencion.IdEmpresa_Ogiro INNER JOIN
-                  dbo.cp_retencion_det ON dbo.cp_retencion.IdEmpresa = dbo.cp_retencion_det.IdEmpresa AND dbo.cp_retencion.IdRetencion = dbo.cp_retencion_det.IdRetencion INNER JOIN
+                  dbo.cp_retencion.serie1 + '' + dbo.cp_retencion.serie2 AS serie, dbo.cp_retencion.NumRetencion, dbo.cp_codigo_SRI.co_descripcion, dbo.cp_codigo_SRI_x_CtaCble.IdCtaCble, 
+                  dbo.cp_retencion_x_ct_cbtecble.ct_IdCbteCble AS IdCbteCbleRet, ISNULL(dbo.cp_orden_giro.co_observacion, dbo.cp_retencion.observacion) AS co_observacion, dbo.ct_cbtecble.IdSucursal,
+				  su.Su_Descripcion
+FROM     dbo.cp_retencion_det INNER JOIN
+                  dbo.cp_retencion ON dbo.cp_retencion_det.IdEmpresa = dbo.cp_retencion.IdEmpresa AND dbo.cp_retencion_det.IdRetencion = dbo.cp_retencion.IdRetencion INNER JOIN
                   dbo.cp_codigo_SRI ON dbo.cp_retencion_det.IdCodigo_SRI = dbo.cp_codigo_SRI.IdCodigo_SRI LEFT OUTER JOIN
+                  dbo.cp_proveedor AS pro INNER JOIN
+                  dbo.cp_orden_giro INNER JOIN
+                  dbo.cp_TipoDocumento ON dbo.cp_orden_giro.IdOrden_giro_Tipo = dbo.cp_TipoDocumento.CodTipoDocumento ON pro.IdEmpresa = dbo.cp_orden_giro.IdEmpresa AND pro.IdProveedor = dbo.cp_orden_giro.IdProveedor INNER JOIN
+                  dbo.tb_persona AS per ON pro.IdPersona = per.IdPersona ON dbo.cp_retencion.IdCbteCble_Ogiro = dbo.cp_orden_giro.IdCbteCble_Ogiro AND dbo.cp_retencion.IdTipoCbte_Ogiro = dbo.cp_orden_giro.IdTipoCbte_Ogiro AND 
+                  dbo.cp_retencion.IdEmpresa_Ogiro = dbo.cp_orden_giro.IdEmpresa LEFT OUTER JOIN
+                  dbo.cp_retencion_x_ct_cbtecble LEFT OUTER JOIN
+                  dbo.ct_cbtecble ON dbo.cp_retencion_x_ct_cbtecble.ct_IdEmpresa = dbo.ct_cbtecble.IdEmpresa AND dbo.cp_retencion_x_ct_cbtecble.ct_IdTipoCbte = dbo.ct_cbtecble.IdTipoCbte AND 
+                  dbo.cp_retencion_x_ct_cbtecble.ct_IdCbteCble = dbo.ct_cbtecble.IdCbteCble ON dbo.cp_retencion.IdEmpresa = dbo.cp_retencion_x_ct_cbtecble.rt_IdEmpresa AND 
+                  dbo.cp_retencion.IdRetencion = dbo.cp_retencion_x_ct_cbtecble.rt_IdRetencion LEFT OUTER JOIN
                   dbo.cp_codigo_SRI_x_CtaCble ON dbo.cp_retencion_det.IdEmpresa = dbo.cp_codigo_SRI_x_CtaCble.IdEmpresa AND dbo.cp_retencion_det.IdCodigo_SRI = dbo.cp_codigo_SRI_x_CtaCble.idCodigo_SRI
-				  inner join cp_proveedor as pro on pro.IdEmpresa = cp_orden_giro.IdEmpresa and pro.IdProveedor = cp_orden_giro.IdProveedor inner join tb_persona as per on pro.IdPersona = pro.IdPersona
+				  left outer join tb_sucursal as su on ct_cbtecble.IdEmpresa = su.IdEmpresa and ct_cbtecble.IdSucursal = su.IdSucursal
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWCXP_009';
 

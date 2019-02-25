@@ -46,6 +46,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 q.IESS_R = Math.Round(q.IESS ?? 0, 2, MidpointRounding.AwayFromZero);
                 q.TOTALI = q.SUELDO + q.OTROING + q.SOBRET + q.DECIMOC + q.DECIMOT + q.FRESERVA_R;
                 q.TOTALE = q.PRESTAMO + q.IESS_R + q.ANTICIPO + q.OTROEGR;
+                q.NETO = q.TOTALI - q.TOTALE;
             });
 
             var lst = (from q in lst_rpt
